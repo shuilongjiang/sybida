@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaCompanyMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaCompany" >
+    <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="CHAR" />
+    <result column="company_end_time" property="companyEndTime" jdbcType="TIMESTAMP" />
+    <result column="company_start_time" property="companyStartTime" jdbcType="TIMESTAMP" />
+    <result column="company_study_id" property="companyStudyId" jdbcType="INTEGER" />
+    <result column="company_web" property="companyWeb" jdbcType="VARCHAR" />
+    <result column="company_address" property="companyAddress" jdbcType="VARCHAR" />
+    <result column="company_require" property="companyRequire" jdbcType="VARCHAR" />
+    <result column="company_salary" property="companySalary" jdbcType="INTEGER" />
+    <result column="company_mailbox" property="companyMailbox" jdbcType="VARCHAR" />
+    <result column="company_wechat" property="companyWechat" jdbcType="VARCHAR" />
+    <result column="company_phone" property="companyPhone" jdbcType="VARCHAR" />
+    <result column="company_introduce" property="companyIntroduce" jdbcType="VARCHAR" />
+    <result column="company_user_id" property="companyUserId" jdbcType="INTEGER" />
+    <result column="company_picture" property="companyPicture" jdbcType="VARCHAR" />
+    <result column="company_is_view" property="companyIsView" jdbcType="TINYINT" />
+    <result column="company_alter_time" property="companyAlterTime" jdbcType="TIMESTAMP" />
+    <result column="company_null1" property="companyNull1" jdbcType="VARCHAR" />
+    <result column="company_null2" property="companyNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    company_id, company_name, company_end_time, company_start_time, company_study_id, 
+    company_web, company_address, company_require, company_salary, company_mailbox, company_wechat, 
+    company_phone, company_introduce, company_user_id, company_picture, company_is_view, 
+    company_alter_time, company_null1, company_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaCompanyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectCompanySelective" parameterType="sybidaCompany" resultType="sybidaCompany">
+    select * from sybida_company
+    <trim prefix="where" prefixOverrides="and">
+      <if test="companyStudyId!=null">
+        company_study_id=#{companyStudyId}
+      </if>
+      <if test="companyUserId!=null">
+        company_user_id=#{companyUserId}
+      </if>
+      <if test="companyIsView!=null">
+        company_is_view=#{companyIsView}
+      </if>
+      <if test="companySalary!=null">
+        company_salary &gt;=#{companySalary}
+      </if>
+      order by company_start_time desc
+    </trim>
+  </select>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_company
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaCompanyExample" >
+    delete from sybida_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaCompany" >
+    insert into sybida_company (company_id, company_name, company_end_time, 
+      company_start_time, company_study_id, company_web, 
+      company_address, company_require, company_salary, 
+      company_mailbox, company_wechat, company_phone, 
+      company_introduce, company_user_id, company_picture, 
+      company_is_view, company_alter_time, company_null1, 
+      company_null2)
+    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=CHAR}, #{companyEndTime,jdbcType=TIMESTAMP}, 
+      #{companyStartTime,jdbcType=TIMESTAMP}, #{companyStudyId,jdbcType=INTEGER}, #{companyWeb,jdbcType=VARCHAR}, 
+      #{companyAddress,jdbcType=VARCHAR}, #{companyRequire,jdbcType=VARCHAR}, #{companySalary,jdbcType=INTEGER}, 
+      #{companyMailbox,jdbcType=VARCHAR}, #{companyWechat,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, 
+      #{companyIntroduce,jdbcType=VARCHAR}, #{companyUserId,jdbcType=INTEGER}, #{companyPicture,jdbcType=VARCHAR}, 
+      #{companyIsView,jdbcType=TINYINT}, #{companyAlterTime,jdbcType=TIMESTAMP}, #{companyNull1,jdbcType=VARCHAR}, 
+      #{companyNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaCompany" >
+    insert into sybida_company
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="companyEndTime != null" >
+        company_end_time,
+      </if>
+      <if test="companyStartTime != null" >
+        company_start_time,
+      </if>
+      <if test="companyStudyId != null" >
+        company_study_id,
+      </if>
+      <if test="companyWeb != null" >
+        company_web,
+      </if>
+      <if test="companyAddress != null" >
+        company_address,
+      </if>
+      <if test="companyRequire != null" >
+        company_require,
+      </if>
+      <if test="companySalary != null" >
+        company_salary,
+      </if>
+      <if test="companyMailbox != null" >
+        company_mailbox,
+      </if>
+      <if test="companyWechat != null" >
+        company_wechat,
+      </if>
+      <if test="companyPhone != null" >
+        company_phone,
+      </if>
+      <if test="companyIntroduce != null" >
+        company_introduce,
+      </if>
+      <if test="companyUserId != null" >
+        company_user_id,
+      </if>
+      <if test="companyPicture != null" >
+        company_picture,
+      </if>
+      <if test="companyIsView != null" >
+        company_is_view,
+      </if>
+      <if test="companyAlterTime != null" >
+        company_alter_time,
+      </if>
+      <if test="companyNull1 != null" >
+        company_null1,
+      </if>
+      <if test="companyNull2 != null" >
+        company_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=CHAR},
+      </if>
+      <if test="companyEndTime != null" >
+        #{companyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyStartTime != null" >
+        #{companyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyStudyId != null" >
+        #{companyStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyWeb != null" >
+        #{companyWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRequire != null" >
+        #{companyRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="companySalary != null" >
+        #{companySalary,jdbcType=INTEGER},
+      </if>
+      <if test="companyMailbox != null" >
+        #{companyMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWechat != null" >
+        #{companyWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIntroduce != null" >
+        #{companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserId != null" >
+        #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyPicture != null" >
+        #{companyPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIsView != null" >
+        #{companyIsView,jdbcType=TINYINT},
+      </if>
+      <if test="companyAlterTime != null" >
+        #{companyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNull1 != null" >
+        #{companyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNull2 != null" >
+        #{companyNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaCompanyExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_company
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_company
+    <set >
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=CHAR},
+      </if>
+      <if test="record.companyEndTime != null" >
+        company_end_time = #{record.companyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyStartTime != null" >
+        company_start_time = #{record.companyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyStudyId != null" >
+        company_study_id = #{record.companyStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyWeb != null" >
+        company_web = #{record.companyWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyAddress != null" >
+        company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyRequire != null" >
+        company_require = #{record.companyRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companySalary != null" >
+        company_salary = #{record.companySalary,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyMailbox != null" >
+        company_mailbox = #{record.companyMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyWechat != null" >
+        company_wechat = #{record.companyWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyPhone != null" >
+        company_phone = #{record.companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyIntroduce != null" >
+        company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyUserId != null" >
+        company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyPicture != null" >
+        company_picture = #{record.companyPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyIsView != null" >
+        company_is_view = #{record.companyIsView,jdbcType=TINYINT},
+      </if>
+      <if test="record.companyAlterTime != null" >
+        company_alter_time = #{record.companyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.companyNull1 != null" >
+        company_null1 = #{record.companyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyNull2 != null" >
+        company_null2 = #{record.companyNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_company
+    set company_id = #{record.companyId,jdbcType=INTEGER},
+      company_name = #{record.companyName,jdbcType=CHAR},
+      company_end_time = #{record.companyEndTime,jdbcType=TIMESTAMP},
+      company_start_time = #{record.companyStartTime,jdbcType=TIMESTAMP},
+      company_study_id = #{record.companyStudyId,jdbcType=INTEGER},
+      company_web = #{record.companyWeb,jdbcType=VARCHAR},
+      company_address = #{record.companyAddress,jdbcType=VARCHAR},
+      company_require = #{record.companyRequire,jdbcType=VARCHAR},
+      company_salary = #{record.companySalary,jdbcType=INTEGER},
+      company_mailbox = #{record.companyMailbox,jdbcType=VARCHAR},
+      company_wechat = #{record.companyWechat,jdbcType=VARCHAR},
+      company_phone = #{record.companyPhone,jdbcType=VARCHAR},
+      company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
+      company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      company_picture = #{record.companyPicture,jdbcType=VARCHAR},
+      company_is_view = #{record.companyIsView,jdbcType=TINYINT},
+      company_alter_time = #{record.companyAlterTime,jdbcType=TIMESTAMP},
+      company_null1 = #{record.companyNull1,jdbcType=VARCHAR},
+      company_null2 = #{record.companyNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaCompany" >
+    update sybida_company
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=CHAR},
+      </if>
+      <if test="companyEndTime != null" >
+        company_end_time = #{companyEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyStartTime != null" >
+        company_start_time = #{companyStartTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyStudyId != null" >
+        company_study_id = #{companyStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyWeb != null" >
+        company_web = #{companyWeb,jdbcType=VARCHAR},
+      </if>
+      <if test="companyAddress != null" >
+        company_address = #{companyAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="companyRequire != null" >
+        company_require = #{companyRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="companySalary != null" >
+        company_salary = #{companySalary,jdbcType=INTEGER},
+      </if>
+      <if test="companyMailbox != null" >
+        company_mailbox = #{companyMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="companyWechat != null" >
+        company_wechat = #{companyWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="companyPhone != null" >
+        company_phone = #{companyPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIntroduce != null" >
+        company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="companyUserId != null" >
+        company_user_id = #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyPicture != null" >
+        company_picture = #{companyPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="companyIsView != null" >
+        company_is_view = #{companyIsView,jdbcType=TINYINT},
+      </if>
+      <if test="companyAlterTime != null" >
+        company_alter_time = #{companyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="companyNull1 != null" >
+        company_null1 = #{companyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="companyNull2 != null" >
+        company_null2 = #{companyNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaCompany" >
+    update sybida_company
+    set company_name = #{companyName,jdbcType=CHAR},
+      company_end_time = #{companyEndTime,jdbcType=TIMESTAMP},
+      company_start_time = #{companyStartTime,jdbcType=TIMESTAMP},
+      company_study_id = #{companyStudyId,jdbcType=INTEGER},
+      company_web = #{companyWeb,jdbcType=VARCHAR},
+      company_address = #{companyAddress,jdbcType=VARCHAR},
+      company_require = #{companyRequire,jdbcType=VARCHAR},
+      company_salary = #{companySalary,jdbcType=INTEGER},
+      company_mailbox = #{companyMailbox,jdbcType=VARCHAR},
+      company_wechat = #{companyWechat,jdbcType=VARCHAR},
+      company_phone = #{companyPhone,jdbcType=VARCHAR},
+      company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
+      company_user_id = #{companyUserId,jdbcType=INTEGER},
+      company_picture = #{companyPicture,jdbcType=VARCHAR},
+      company_is_view = #{companyIsView,jdbcType=TINYINT},
+      company_alter_time = #{companyAlterTime,jdbcType=TIMESTAMP},
+      company_null1 = #{companyNull1,jdbcType=VARCHAR},
+      company_null2 = #{companyNull2,jdbcType=VARCHAR}
+    where company_id = #{companyId,jdbcType=INTEGER}
+  </update>
+</mapper>

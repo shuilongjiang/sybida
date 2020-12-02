@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaVitaeEvaluateMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaVitaeEvaluate" >
+    <result column="vitae_evaluate_id" property="vitaeEvaluateId" jdbcType="INTEGER" />
+    <result column="vitae_evaluate_comment" property="vitaeEvaluateComment" jdbcType="VARCHAR" />
+    <result column="vitae_evaluate_user_id" property="vitaeEvaluateUserId" jdbcType="INTEGER" />
+    <result column="vitae_evaluate_picture" property="vitaeEvaluatePicture" jdbcType="VARCHAR" />
+    <result column="vitae_evaluate_time" property="vitaeEvaluateTime" jdbcType="TIMESTAMP" />
+    <result column="vitae_evaluate_alter_time" property="vitaeEvaluateAlterTime" jdbcType="TIMESTAMP" />
+    <result column="vitae_evaluate_null1" property="vitaeEvaluateNull1" jdbcType="VARCHAR" />
+    <result column="vitae_evaluate_null2" property="vitaeEvaluateNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vitae_evaluate_id, vitae_evaluate_comment, vitae_evaluate_user_id, vitae_evaluate_picture, 
+    vitae_evaluate_time, vitae_evaluate_alter_time, vitae_evaluate_null1, vitae_evaluate_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaVitaeEvaluateExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_vitae_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaVitaeEvaluateExample" >
+    delete from sybida_vitae_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaVitaeEvaluate" >
+    insert into sybida_vitae_evaluate (vitae_evaluate_id, vitae_evaluate_comment, 
+      vitae_evaluate_user_id, vitae_evaluate_picture, 
+      vitae_evaluate_time, vitae_evaluate_alter_time, 
+      vitae_evaluate_null1, vitae_evaluate_null2)
+    values (#{vitaeEvaluateId,jdbcType=INTEGER}, #{vitaeEvaluateComment,jdbcType=VARCHAR}, 
+      #{vitaeEvaluateUserId,jdbcType=INTEGER}, #{vitaeEvaluatePicture,jdbcType=VARCHAR}, 
+      #{vitaeEvaluateTime,jdbcType=TIMESTAMP}, #{vitaeEvaluateAlterTime,jdbcType=TIMESTAMP}, 
+      #{vitaeEvaluateNull1,jdbcType=VARCHAR}, #{vitaeEvaluateNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaVitaeEvaluate" >
+    insert into sybida_vitae_evaluate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vitaeEvaluateId != null" >
+        vitae_evaluate_id,
+      </if>
+      <if test="vitaeEvaluateComment != null" >
+        vitae_evaluate_comment,
+      </if>
+      <if test="vitaeEvaluateUserId != null" >
+        vitae_evaluate_user_id,
+      </if>
+      <if test="vitaeEvaluatePicture != null" >
+        vitae_evaluate_picture,
+      </if>
+      <if test="vitaeEvaluateTime != null" >
+        vitae_evaluate_time,
+      </if>
+      <if test="vitaeEvaluateAlterTime != null" >
+        vitae_evaluate_alter_time,
+      </if>
+      <if test="vitaeEvaluateNull1 != null" >
+        vitae_evaluate_null1,
+      </if>
+      <if test="vitaeEvaluateNull2 != null" >
+        vitae_evaluate_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vitaeEvaluateId != null" >
+        #{vitaeEvaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeEvaluateComment != null" >
+        #{vitaeEvaluateComment,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeEvaluateUserId != null" >
+        #{vitaeEvaluateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeEvaluatePicture != null" >
+        #{vitaeEvaluatePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeEvaluateTime != null" >
+        #{vitaeEvaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vitaeEvaluateAlterTime != null" >
+        #{vitaeEvaluateAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vitaeEvaluateNull1 != null" >
+        #{vitaeEvaluateNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeEvaluateNull2 != null" >
+        #{vitaeEvaluateNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaVitaeEvaluateExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_vitae_evaluate
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_vitae_evaluate
+    <set >
+      <if test="record.vitaeEvaluateId != null" >
+        vitae_evaluate_id = #{record.vitaeEvaluateId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeEvaluateComment != null" >
+        vitae_evaluate_comment = #{record.vitaeEvaluateComment,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaeEvaluateUserId != null" >
+        vitae_evaluate_user_id = #{record.vitaeEvaluateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeEvaluatePicture != null" >
+        vitae_evaluate_picture = #{record.vitaeEvaluatePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaeEvaluateTime != null" >
+        vitae_evaluate_time = #{record.vitaeEvaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vitaeEvaluateAlterTime != null" >
+        vitae_evaluate_alter_time = #{record.vitaeEvaluateAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vitaeEvaluateNull1 != null" >
+        vitae_evaluate_null1 = #{record.vitaeEvaluateNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaeEvaluateNull2 != null" >
+        vitae_evaluate_null2 = #{record.vitaeEvaluateNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_vitae_evaluate
+    set vitae_evaluate_id = #{record.vitaeEvaluateId,jdbcType=INTEGER},
+      vitae_evaluate_comment = #{record.vitaeEvaluateComment,jdbcType=VARCHAR},
+      vitae_evaluate_user_id = #{record.vitaeEvaluateUserId,jdbcType=INTEGER},
+      vitae_evaluate_picture = #{record.vitaeEvaluatePicture,jdbcType=VARCHAR},
+      vitae_evaluate_time = #{record.vitaeEvaluateTime,jdbcType=TIMESTAMP},
+      vitae_evaluate_alter_time = #{record.vitaeEvaluateAlterTime,jdbcType=TIMESTAMP},
+      vitae_evaluate_null1 = #{record.vitaeEvaluateNull1,jdbcType=VARCHAR},
+      vitae_evaluate_null2 = #{record.vitaeEvaluateNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

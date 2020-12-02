@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaStudyMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaStudy" >
+    <id column="study_id" property="studyId" jdbcType="INTEGER" />
+    <result column="study_aspect" property="studyAspect" jdbcType="VARCHAR" />
+    <result column="study_introduce" property="studyIntroduce" jdbcType="VARCHAR" />
+    <result column="user_authority" property="userAuthority" jdbcType="TINYINT" />
+    <result column="study_alter_time" property="studyAlterTime" jdbcType="TIMESTAMP" />
+    <result column="study_null1" property="studyNull1" jdbcType="VARCHAR" />
+    <result column="study_null2" property="studyNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    study_id, study_aspect, study_introduce, user_authority, study_alter_time, study_null1, 
+    study_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaStudyExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_study
+    where study_id = #{studyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_study
+    where study_id = #{studyId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaStudyExample" >
+    delete from sybida_study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaStudy" >
+    insert into sybida_study (study_id, study_aspect, study_introduce, 
+      user_authority, study_alter_time, study_null1, 
+      study_null2)
+    values (#{studyId,jdbcType=INTEGER}, #{studyAspect,jdbcType=VARCHAR}, #{studyIntroduce,jdbcType=VARCHAR}, 
+      #{userAuthority,jdbcType=TINYINT}, #{studyAlterTime,jdbcType=TIMESTAMP}, #{studyNull1,jdbcType=VARCHAR}, 
+      #{studyNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaStudy" >
+    insert into sybida_study
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studyId != null" >
+        study_id,
+      </if>
+      <if test="studyAspect != null" >
+        study_aspect,
+      </if>
+      <if test="studyIntroduce != null" >
+        study_introduce,
+      </if>
+      <if test="userAuthority != null" >
+        user_authority,
+      </if>
+      <if test="studyAlterTime != null" >
+        study_alter_time,
+      </if>
+      <if test="studyNull1 != null" >
+        study_null1,
+      </if>
+      <if test="studyNull2 != null" >
+        study_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studyId != null" >
+        #{studyId,jdbcType=INTEGER},
+      </if>
+      <if test="studyAspect != null" >
+        #{studyAspect,jdbcType=VARCHAR},
+      </if>
+      <if test="studyIntroduce != null" >
+        #{studyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuthority != null" >
+        #{userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="studyAlterTime != null" >
+        #{studyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studyNull1 != null" >
+        #{studyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="studyNull2 != null" >
+        #{studyNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaStudyExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_study
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_study
+    <set >
+      <if test="record.studyId != null" >
+        study_id = #{record.studyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studyAspect != null" >
+        study_aspect = #{record.studyAspect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyIntroduce != null" >
+        study_introduce = #{record.studyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userAuthority != null" >
+        user_authority = #{record.userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="record.studyAlterTime != null" >
+        study_alter_time = #{record.studyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.studyNull1 != null" >
+        study_null1 = #{record.studyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studyNull2 != null" >
+        study_null2 = #{record.studyNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_study
+    set study_id = #{record.studyId,jdbcType=INTEGER},
+      study_aspect = #{record.studyAspect,jdbcType=VARCHAR},
+      study_introduce = #{record.studyIntroduce,jdbcType=VARCHAR},
+      user_authority = #{record.userAuthority,jdbcType=TINYINT},
+      study_alter_time = #{record.studyAlterTime,jdbcType=TIMESTAMP},
+      study_null1 = #{record.studyNull1,jdbcType=VARCHAR},
+      study_null2 = #{record.studyNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaStudy" >
+    update sybida_study
+    <set >
+      <if test="studyAspect != null" >
+        study_aspect = #{studyAspect,jdbcType=VARCHAR},
+      </if>
+      <if test="studyIntroduce != null" >
+        study_introduce = #{studyIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="userAuthority != null" >
+        user_authority = #{userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="studyAlterTime != null" >
+        study_alter_time = #{studyAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studyNull1 != null" >
+        study_null1 = #{studyNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="studyNull2 != null" >
+        study_null2 = #{studyNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where study_id = #{studyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaStudy" >
+    update sybida_study
+    set study_aspect = #{studyAspect,jdbcType=VARCHAR},
+      study_introduce = #{studyIntroduce,jdbcType=VARCHAR},
+      user_authority = #{userAuthority,jdbcType=TINYINT},
+      study_alter_time = #{studyAlterTime,jdbcType=TIMESTAMP},
+      study_null1 = #{studyNull1,jdbcType=VARCHAR},
+      study_null2 = #{studyNull2,jdbcType=VARCHAR}
+    where study_id = #{studyId,jdbcType=INTEGER}
+  </update>
+</mapper>

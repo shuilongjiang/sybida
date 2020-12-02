@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaReceiveMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaReceive" >
+    <result column="receive_id" property="receiveId" jdbcType="INTEGER" />
+    <result column="receive_user_id" property="receiveUserId" jdbcType="INTEGER" />
+    <result column="receive_is_read" property="receiveIsRead" jdbcType="TINYINT" />
+    <result column="receive_alter_time" property="receiveAlterTime" jdbcType="TIMESTAMP" />
+    <result column="receive_null1" property="receiveNull1" jdbcType="VARCHAR" />
+    <result column="receive_null2" property="receiveNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    receive_id, receive_user_id, receive_is_read, receive_alter_time, receive_null1, 
+    receive_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaReceiveExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_receive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaReceiveExample" >
+    delete from sybida_receive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaReceive" >
+    insert into sybida_receive (receive_id, receive_user_id, receive_is_read, 
+      receive_alter_time, receive_null1, receive_null2
+      )
+    values (#{receiveId,jdbcType=INTEGER}, #{receiveUserId,jdbcType=INTEGER}, #{receiveIsRead,jdbcType=TINYINT}, 
+      #{receiveAlterTime,jdbcType=TIMESTAMP}, #{receiveNull1,jdbcType=VARCHAR}, #{receiveNull2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaReceive" >
+    insert into sybida_receive
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="receiveId != null" >
+        receive_id,
+      </if>
+      <if test="receiveUserId != null" >
+        receive_user_id,
+      </if>
+      <if test="receiveIsRead != null" >
+        receive_is_read,
+      </if>
+      <if test="receiveAlterTime != null" >
+        receive_alter_time,
+      </if>
+      <if test="receiveNull1 != null" >
+        receive_null1,
+      </if>
+      <if test="receiveNull2 != null" >
+        receive_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="receiveId != null" >
+        #{receiveId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveUserId != null" >
+        #{receiveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="receiveIsRead != null" >
+        #{receiveIsRead,jdbcType=TINYINT},
+      </if>
+      <if test="receiveAlterTime != null" >
+        #{receiveAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="receiveNull1 != null" >
+        #{receiveNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="receiveNull2 != null" >
+        #{receiveNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaReceiveExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_receive
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_receive
+    <set >
+      <if test="record.receiveId != null" >
+        receive_id = #{record.receiveId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveUserId != null" >
+        receive_user_id = #{record.receiveUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.receiveIsRead != null" >
+        receive_is_read = #{record.receiveIsRead,jdbcType=TINYINT},
+      </if>
+      <if test="record.receiveAlterTime != null" >
+        receive_alter_time = #{record.receiveAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.receiveNull1 != null" >
+        receive_null1 = #{record.receiveNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.receiveNull2 != null" >
+        receive_null2 = #{record.receiveNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_receive
+    set receive_id = #{record.receiveId,jdbcType=INTEGER},
+      receive_user_id = #{record.receiveUserId,jdbcType=INTEGER},
+      receive_is_read = #{record.receiveIsRead,jdbcType=TINYINT},
+      receive_alter_time = #{record.receiveAlterTime,jdbcType=TIMESTAMP},
+      receive_null1 = #{record.receiveNull1,jdbcType=VARCHAR},
+      receive_null2 = #{record.receiveNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

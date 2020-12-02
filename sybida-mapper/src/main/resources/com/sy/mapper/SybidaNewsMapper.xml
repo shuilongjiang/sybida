@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaNews" >
+    <id column="news_id" property="newsId" jdbcType="INTEGER" />
+    <result column="news_user_id" property="newsUserId" jdbcType="INTEGER" />
+    <result column="news_test" property="newsTest" jdbcType="VARCHAR" />
+    <result column="news_picture" property="newsPicture" jdbcType="VARCHAR" />
+    <result column="news_send_time" property="newsSendTime" jdbcType="TIMESTAMP" />
+    <result column="news_read_people" property="newsReadPeople" jdbcType="INTEGER" />
+    <result column="news_alter_time" property="newsAlterTime" jdbcType="TIMESTAMP" />
+    <result column="news_null1" property="newsNull1" jdbcType="VARCHAR" />
+    <result column="news_null2" property="newsNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    news_id, news_user_id, news_test, news_picture, news_send_time, news_read_people, 
+    news_alter_time, news_null1, news_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaNewsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_news
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaNewsExample" >
+    delete from sybida_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaNews"  useGeneratedKeys="true" keyProperty="newsId">
+    insert into sybida_news (news_id, news_user_id, news_test, 
+      news_picture, news_send_time, news_read_people, 
+      news_alter_time, news_null1, news_null2
+      )
+    values (#{newsId,jdbcType=INTEGER}, #{newsUserId,jdbcType=INTEGER}, #{newsTest,jdbcType=VARCHAR}, 
+      #{newsPicture,jdbcType=VARCHAR}, #{newsSendTime,jdbcType=TIMESTAMP}, #{newsReadPeople,jdbcType=INTEGER}, 
+      #{newsAlterTime,jdbcType=TIMESTAMP}, #{newsNull1,jdbcType=VARCHAR}, #{newsNull2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <select id="selectNewsAndReceive" resultType="SybidaNewsAndReceive">
+     select * from sybida_news,sybida_receive where receive_id=news_id and receive_user_id=#{receiveId}
+  </select>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaNews" >
+    insert into sybida_news
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        news_id,
+      </if>
+      <if test="newsUserId != null" >
+        news_user_id,
+      </if>
+      <if test="newsTest != null" >
+        news_test,
+      </if>
+      <if test="newsPicture != null" >
+        news_picture,
+      </if>
+      <if test="newsSendTime != null" >
+        news_send_time,
+      </if>
+      <if test="newsReadPeople != null" >
+        news_read_people,
+      </if>
+      <if test="newsAlterTime != null" >
+        news_alter_time,
+      </if>
+      <if test="newsNull1 != null" >
+        news_null1,
+      </if>
+      <if test="newsNull2 != null" >
+        news_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="newsId != null" >
+        #{newsId,jdbcType=INTEGER},
+      </if>
+      <if test="newsUserId != null" >
+        #{newsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="newsTest != null" >
+        #{newsTest,jdbcType=VARCHAR},
+      </if>
+      <if test="newsPicture != null" >
+        #{newsPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSendTime != null" >
+        #{newsSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsReadPeople != null" >
+        #{newsReadPeople,jdbcType=INTEGER},
+      </if>
+      <if test="newsAlterTime != null" >
+        #{newsAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsNull1 != null" >
+        #{newsNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="newsNull2 != null" >
+        #{newsNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaNewsExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_news
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_news
+    <set >
+      <if test="record.newsId != null" >
+        news_id = #{record.newsId,jdbcType=INTEGER},
+      </if>
+      <if test="record.newsUserId != null" >
+        news_user_id = #{record.newsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.newsTest != null" >
+        news_test = #{record.newsTest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsPicture != null" >
+        news_picture = #{record.newsPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsSendTime != null" >
+        news_send_time = #{record.newsSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsReadPeople != null" >
+        news_read_people = #{record.newsReadPeople,jdbcType=INTEGER},
+      </if>
+      <if test="record.newsAlterTime != null" >
+        news_alter_time = #{record.newsAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.newsNull1 != null" >
+        news_null1 = #{record.newsNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.newsNull2 != null" >
+        news_null2 = #{record.newsNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_news
+    set news_id = #{record.newsId,jdbcType=INTEGER},
+      news_user_id = #{record.newsUserId,jdbcType=INTEGER},
+      news_test = #{record.newsTest,jdbcType=VARCHAR},
+      news_picture = #{record.newsPicture,jdbcType=VARCHAR},
+      news_send_time = #{record.newsSendTime,jdbcType=TIMESTAMP},
+      news_read_people = #{record.newsReadPeople,jdbcType=INTEGER},
+      news_alter_time = #{record.newsAlterTime,jdbcType=TIMESTAMP},
+      news_null1 = #{record.newsNull1,jdbcType=VARCHAR},
+      news_null2 = #{record.newsNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaNews" >
+    update sybida_news
+    <set >
+      <if test="newsUserId != null" >
+        news_user_id = #{newsUserId,jdbcType=INTEGER},
+      </if>
+      <if test="newsTest != null" >
+        news_test = #{newsTest,jdbcType=VARCHAR},
+      </if>
+      <if test="newsPicture != null" >
+        news_picture = #{newsPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="newsSendTime != null" >
+        news_send_time = #{newsSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsReadPeople != null" >
+        news_read_people = #{newsReadPeople,jdbcType=INTEGER},
+      </if>
+      <if test="newsAlterTime != null" >
+        news_alter_time = #{newsAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="newsNull1 != null" >
+        news_null1 = #{newsNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="newsNull2 != null" >
+        news_null2 = #{newsNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaNews" >
+    update sybida_news
+    set news_user_id = #{newsUserId,jdbcType=INTEGER},
+      news_test = #{newsTest,jdbcType=VARCHAR},
+      news_picture = #{newsPicture,jdbcType=VARCHAR},
+      news_send_time = #{newsSendTime,jdbcType=TIMESTAMP},
+      news_read_people = #{newsReadPeople,jdbcType=INTEGER},
+      news_alter_time = #{newsAlterTime,jdbcType=TIMESTAMP},
+      news_null1 = #{newsNull1,jdbcType=VARCHAR},
+      news_null2 = #{newsNull2,jdbcType=VARCHAR}
+    where news_id = #{newsId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaTeachMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaTeach" >
+    <id column="teach_id" property="teachId" jdbcType="INTEGER" />
+    <result column="teach_name" property="teachName" jdbcType="VARCHAR" />
+    <result column="teach_sex" property="teachSex" jdbcType="CHAR" />
+    <result column="teach_photo" property="teachPhoto" jdbcType="VARCHAR" />
+    <result column="teach_study_id" property="teachStudyId" jdbcType="INTEGER" />
+    <result column="teach_tel" property="teachTel" jdbcType="VARCHAR" />
+    <result column="teach_wechat" property="teachWechat" jdbcType="VARCHAR" />
+    <result column="teach_qq" property="teachQq" jdbcType="VARCHAR" />
+    <result column="teach_alter_time" property="teachAlterTime" jdbcType="TIMESTAMP" />
+    <result column="teach_null1" property="teachNull1" jdbcType="VARCHAR" />
+    <result column="teach_null2" property="teachNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    teach_id, teach_name, teach_sex, teach_photo, teach_study_id, teach_tel, teach_wechat, 
+    teach_qq, teach_alter_time, teach_null1, teach_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaTeachExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_teach
+    where teach_id = #{teachId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_teach
+    where teach_id = #{teachId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaTeachExample" >
+    delete from sybida_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaTeach" >
+    insert into sybida_teach (teach_id, teach_name, teach_sex, 
+      teach_photo, teach_study_id, teach_tel, 
+      teach_wechat, teach_qq, teach_alter_time, 
+      teach_null1, teach_null2)
+    values (#{teachId,jdbcType=INTEGER}, #{teachName,jdbcType=VARCHAR}, #{teachSex,jdbcType=CHAR}, 
+      #{teachPhoto,jdbcType=VARCHAR}, #{teachStudyId,jdbcType=INTEGER}, #{teachTel,jdbcType=VARCHAR}, 
+      #{teachWechat,jdbcType=VARCHAR}, #{teachQq,jdbcType=VARCHAR}, #{teachAlterTime,jdbcType=TIMESTAMP}, 
+      #{teachNull1,jdbcType=VARCHAR}, #{teachNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaTeach" >
+    insert into sybida_teach
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="teachId != null" >
+        teach_id,
+      </if>
+      <if test="teachName != null" >
+        teach_name,
+      </if>
+      <if test="teachSex != null" >
+        teach_sex,
+      </if>
+      <if test="teachPhoto != null" >
+        teach_photo,
+      </if>
+      <if test="teachStudyId != null" >
+        teach_study_id,
+      </if>
+      <if test="teachTel != null" >
+        teach_tel,
+      </if>
+      <if test="teachWechat != null" >
+        teach_wechat,
+      </if>
+      <if test="teachQq != null" >
+        teach_qq,
+      </if>
+      <if test="teachAlterTime != null" >
+        teach_alter_time,
+      </if>
+      <if test="teachNull1 != null" >
+        teach_null1,
+      </if>
+      <if test="teachNull2 != null" >
+        teach_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="teachId != null" >
+        #{teachId,jdbcType=INTEGER},
+      </if>
+      <if test="teachName != null" >
+        #{teachName,jdbcType=VARCHAR},
+      </if>
+      <if test="teachSex != null" >
+        #{teachSex,jdbcType=CHAR},
+      </if>
+      <if test="teachPhoto != null" >
+        #{teachPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="teachStudyId != null" >
+        #{teachStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="teachTel != null" >
+        #{teachTel,jdbcType=VARCHAR},
+      </if>
+      <if test="teachWechat != null" >
+        #{teachWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="teachQq != null" >
+        #{teachQq,jdbcType=VARCHAR},
+      </if>
+      <if test="teachAlterTime != null" >
+        #{teachAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teachNull1 != null" >
+        #{teachNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="teachNull2 != null" >
+        #{teachNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaTeachExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_teach
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_teach
+    <set >
+      <if test="record.teachId != null" >
+        teach_id = #{record.teachId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachName != null" >
+        teach_name = #{record.teachName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachSex != null" >
+        teach_sex = #{record.teachSex,jdbcType=CHAR},
+      </if>
+      <if test="record.teachPhoto != null" >
+        teach_photo = #{record.teachPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachStudyId != null" >
+        teach_study_id = #{record.teachStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.teachTel != null" >
+        teach_tel = #{record.teachTel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachWechat != null" >
+        teach_wechat = #{record.teachWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachQq != null" >
+        teach_qq = #{record.teachQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachAlterTime != null" >
+        teach_alter_time = #{record.teachAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.teachNull1 != null" >
+        teach_null1 = #{record.teachNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.teachNull2 != null" >
+        teach_null2 = #{record.teachNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_teach
+    set teach_id = #{record.teachId,jdbcType=INTEGER},
+      teach_name = #{record.teachName,jdbcType=VARCHAR},
+      teach_sex = #{record.teachSex,jdbcType=CHAR},
+      teach_photo = #{record.teachPhoto,jdbcType=VARCHAR},
+      teach_study_id = #{record.teachStudyId,jdbcType=INTEGER},
+      teach_tel = #{record.teachTel,jdbcType=VARCHAR},
+      teach_wechat = #{record.teachWechat,jdbcType=VARCHAR},
+      teach_qq = #{record.teachQq,jdbcType=VARCHAR},
+      teach_alter_time = #{record.teachAlterTime,jdbcType=TIMESTAMP},
+      teach_null1 = #{record.teachNull1,jdbcType=VARCHAR},
+      teach_null2 = #{record.teachNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaTeach" >
+    update sybida_teach
+    <set >
+      <if test="teachName != null" >
+        teach_name = #{teachName,jdbcType=VARCHAR},
+      </if>
+      <if test="teachSex != null" >
+        teach_sex = #{teachSex,jdbcType=CHAR},
+      </if>
+      <if test="teachPhoto != null" >
+        teach_photo = #{teachPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="teachStudyId != null" >
+        teach_study_id = #{teachStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="teachTel != null" >
+        teach_tel = #{teachTel,jdbcType=VARCHAR},
+      </if>
+      <if test="teachWechat != null" >
+        teach_wechat = #{teachWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="teachQq != null" >
+        teach_qq = #{teachQq,jdbcType=VARCHAR},
+      </if>
+      <if test="teachAlterTime != null" >
+        teach_alter_time = #{teachAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="teachNull1 != null" >
+        teach_null1 = #{teachNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="teachNull2 != null" >
+        teach_null2 = #{teachNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where teach_id = #{teachId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaTeach" >
+    update sybida_teach
+    set teach_name = #{teachName,jdbcType=VARCHAR},
+      teach_sex = #{teachSex,jdbcType=CHAR},
+      teach_photo = #{teachPhoto,jdbcType=VARCHAR},
+      teach_study_id = #{teachStudyId,jdbcType=INTEGER},
+      teach_tel = #{teachTel,jdbcType=VARCHAR},
+      teach_wechat = #{teachWechat,jdbcType=VARCHAR},
+      teach_qq = #{teachQq,jdbcType=VARCHAR},
+      teach_alter_time = #{teachAlterTime,jdbcType=TIMESTAMP},
+      teach_null1 = #{teachNull1,jdbcType=VARCHAR},
+      teach_null2 = #{teachNull2,jdbcType=VARCHAR}
+    where teach_id = #{teachId,jdbcType=INTEGER}
+  </update>
+</mapper>

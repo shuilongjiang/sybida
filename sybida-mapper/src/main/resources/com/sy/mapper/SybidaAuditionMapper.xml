@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaAuditionMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaAudition" >
+    <id column="audition_id" property="auditionId" jdbcType="INTEGER" />
+    <result column="audition_student_id" property="auditionStudentId" jdbcType="INTEGER" />
+    <result column="audition_site" property="auditionSite" jdbcType="VARCHAR" />
+    <result column="audition_time" property="auditionTime" jdbcType="TIMESTAMP" />
+    <result column="audition_situation" property="auditionSituation" jdbcType="VARCHAR" />
+    <result column="audition_study_id" property="auditionStudyId" jdbcType="INTEGER" />
+    <result column="audition_finish" property="auditionFinish" jdbcType="VARCHAR" />
+    <result column="audition_firm" property="auditionFirm" jdbcType="CHAR" />
+    <result column="audition_alter_time" property="auditionAlterTime" jdbcType="TIMESTAMP" />
+    <result column="audition_null1" property="auditionNull1" jdbcType="VARCHAR" />
+    <result column="audition_null2" property="auditionNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    audition_id, audition_student_id, audition_site, audition_time, audition_situation, 
+    audition_study_id, audition_finish, audition_firm, audition_alter_time, audition_null1, 
+    audition_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaAuditionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_audition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_audition
+    where audition_id = #{auditionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_audition
+    where audition_id = #{auditionId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaAuditionExample" >
+    delete from sybida_audition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaAudition" >
+    insert into sybida_audition (audition_id, audition_student_id, audition_site, 
+      audition_time, audition_situation, audition_study_id, 
+      audition_finish, audition_firm, audition_alter_time, 
+      audition_null1, audition_null2)
+    values (#{auditionId,jdbcType=INTEGER}, #{auditionStudentId,jdbcType=INTEGER}, #{auditionSite,jdbcType=VARCHAR}, 
+      #{auditionTime,jdbcType=TIMESTAMP}, #{auditionSituation,jdbcType=VARCHAR}, #{auditionStudyId,jdbcType=INTEGER}, 
+      #{auditionFinish,jdbcType=VARCHAR}, #{auditionFirm,jdbcType=CHAR}, #{auditionAlterTime,jdbcType=TIMESTAMP}, 
+      #{auditionNull1,jdbcType=VARCHAR}, #{auditionNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaAudition" >
+    insert into sybida_audition
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="auditionId != null" >
+        audition_id,
+      </if>
+      <if test="auditionStudentId != null" >
+        audition_student_id,
+      </if>
+      <if test="auditionSite != null" >
+        audition_site,
+      </if>
+      <if test="auditionTime != null" >
+        audition_time,
+      </if>
+      <if test="auditionSituation != null" >
+        audition_situation,
+      </if>
+      <if test="auditionStudyId != null" >
+        audition_study_id,
+      </if>
+      <if test="auditionFinish != null" >
+        audition_finish,
+      </if>
+      <if test="auditionFirm != null" >
+        audition_firm,
+      </if>
+      <if test="auditionAlterTime != null" >
+        audition_alter_time,
+      </if>
+      <if test="auditionNull1 != null" >
+        audition_null1,
+      </if>
+      <if test="auditionNull2 != null" >
+        audition_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="auditionId != null" >
+        #{auditionId,jdbcType=INTEGER},
+      </if>
+      <if test="auditionStudentId != null" >
+        #{auditionStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="auditionSite != null" >
+        #{auditionSite,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionTime != null" >
+        #{auditionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditionSituation != null" >
+        #{auditionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionStudyId != null" >
+        #{auditionStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="auditionFinish != null" >
+        #{auditionFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionFirm != null" >
+        #{auditionFirm,jdbcType=CHAR},
+      </if>
+      <if test="auditionAlterTime != null" >
+        #{auditionAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditionNull1 != null" >
+        #{auditionNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionNull2 != null" >
+        #{auditionNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaAuditionExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_audition
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_audition
+    <set >
+      <if test="record.auditionId != null" >
+        audition_id = #{record.auditionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditionStudentId != null" >
+        audition_student_id = #{record.auditionStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditionSite != null" >
+        audition_site = #{record.auditionSite,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditionTime != null" >
+        audition_time = #{record.auditionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditionSituation != null" >
+        audition_situation = #{record.auditionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditionStudyId != null" >
+        audition_study_id = #{record.auditionStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.auditionFinish != null" >
+        audition_finish = #{record.auditionFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditionFirm != null" >
+        audition_firm = #{record.auditionFirm,jdbcType=CHAR},
+      </if>
+      <if test="record.auditionAlterTime != null" >
+        audition_alter_time = #{record.auditionAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditionNull1 != null" >
+        audition_null1 = #{record.auditionNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditionNull2 != null" >
+        audition_null2 = #{record.auditionNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_audition
+    set audition_id = #{record.auditionId,jdbcType=INTEGER},
+      audition_student_id = #{record.auditionStudentId,jdbcType=INTEGER},
+      audition_site = #{record.auditionSite,jdbcType=VARCHAR},
+      audition_time = #{record.auditionTime,jdbcType=TIMESTAMP},
+      audition_situation = #{record.auditionSituation,jdbcType=VARCHAR},
+      audition_study_id = #{record.auditionStudyId,jdbcType=INTEGER},
+      audition_finish = #{record.auditionFinish,jdbcType=VARCHAR},
+      audition_firm = #{record.auditionFirm,jdbcType=CHAR},
+      audition_alter_time = #{record.auditionAlterTime,jdbcType=TIMESTAMP},
+      audition_null1 = #{record.auditionNull1,jdbcType=VARCHAR},
+      audition_null2 = #{record.auditionNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaAudition" >
+    update sybida_audition
+    <set >
+      <if test="auditionStudentId != null" >
+        audition_student_id = #{auditionStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="auditionSite != null" >
+        audition_site = #{auditionSite,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionTime != null" >
+        audition_time = #{auditionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditionSituation != null" >
+        audition_situation = #{auditionSituation,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionStudyId != null" >
+        audition_study_id = #{auditionStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="auditionFinish != null" >
+        audition_finish = #{auditionFinish,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionFirm != null" >
+        audition_firm = #{auditionFirm,jdbcType=CHAR},
+      </if>
+      <if test="auditionAlterTime != null" >
+        audition_alter_time = #{auditionAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditionNull1 != null" >
+        audition_null1 = #{auditionNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="auditionNull2 != null" >
+        audition_null2 = #{auditionNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where audition_id = #{auditionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaAudition" >
+    update sybida_audition
+    set audition_student_id = #{auditionStudentId,jdbcType=INTEGER},
+      audition_site = #{auditionSite,jdbcType=VARCHAR},
+      audition_time = #{auditionTime,jdbcType=TIMESTAMP},
+      audition_situation = #{auditionSituation,jdbcType=VARCHAR},
+      audition_study_id = #{auditionStudyId,jdbcType=INTEGER},
+      audition_finish = #{auditionFinish,jdbcType=VARCHAR},
+      audition_firm = #{auditionFirm,jdbcType=CHAR},
+      audition_alter_time = #{auditionAlterTime,jdbcType=TIMESTAMP},
+      audition_null1 = #{auditionNull1,jdbcType=VARCHAR},
+      audition_null2 = #{auditionNull2,jdbcType=VARCHAR}
+    where audition_id = #{auditionId,jdbcType=INTEGER}
+  </update>
+</mapper>

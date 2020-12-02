@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaJobMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaJob" >
+    <id column="job_id" property="jobId" jdbcType="INTEGER" />
+    <result column="job_student_id" property="jobStudentId" jdbcType="INTEGER" />
+    <result column="job_firm" property="jobFirm" jdbcType="CHAR" />
+    <result column="job_contact" property="jobContact" jdbcType="CHAR" />
+    <result column="job_weal" property="jobWeal" jdbcType="VARCHAR" />
+    <result column="job_end_time" property="jobEndTime" jdbcType="TIMESTAMP" />
+    <result column="job_study_id" property="jobStudyId" jdbcType="INTEGER" />
+    <result column="job_picture" property="jobPicture" jdbcType="VARCHAR" />
+    <result column="job_alter_time" property="jobAlterTime" jdbcType="TIMESTAMP" />
+    <result column="job_null1" property="jobNull1" jdbcType="VARCHAR" />
+    <result column="job_null2" property="jobNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    job_id, job_student_id, job_firm, job_contact, job_weal, job_end_time, job_study_id, 
+    job_picture, job_alter_time, job_null1, job_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaJobExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_job
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_job
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaJobExample" >
+    delete from sybida_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaJob" >
+    insert into sybida_job (job_id, job_student_id, job_firm, 
+      job_contact, job_weal, job_end_time, 
+      job_study_id, job_picture, job_alter_time, 
+      job_null1, job_null2)
+    values (#{jobId,jdbcType=INTEGER}, #{jobStudentId,jdbcType=INTEGER}, #{jobFirm,jdbcType=CHAR}, 
+      #{jobContact,jdbcType=CHAR}, #{jobWeal,jdbcType=VARCHAR}, #{jobEndTime,jdbcType=TIMESTAMP}, 
+      #{jobStudyId,jdbcType=INTEGER}, #{jobPicture,jdbcType=VARCHAR}, #{jobAlterTime,jdbcType=TIMESTAMP}, 
+      #{jobNull1,jdbcType=VARCHAR}, #{jobNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaJob" >
+    insert into sybida_job
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        job_id,
+      </if>
+      <if test="jobStudentId != null" >
+        job_student_id,
+      </if>
+      <if test="jobFirm != null" >
+        job_firm,
+      </if>
+      <if test="jobContact != null" >
+        job_contact,
+      </if>
+      <if test="jobWeal != null" >
+        job_weal,
+      </if>
+      <if test="jobEndTime != null" >
+        job_end_time,
+      </if>
+      <if test="jobStudyId != null" >
+        job_study_id,
+      </if>
+      <if test="jobPicture != null" >
+        job_picture,
+      </if>
+      <if test="jobAlterTime != null" >
+        job_alter_time,
+      </if>
+      <if test="jobNull1 != null" >
+        job_null1,
+      </if>
+      <if test="jobNull2 != null" >
+        job_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="jobId != null" >
+        #{jobId,jdbcType=INTEGER},
+      </if>
+      <if test="jobStudentId != null" >
+        #{jobStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFirm != null" >
+        #{jobFirm,jdbcType=CHAR},
+      </if>
+      <if test="jobContact != null" >
+        #{jobContact,jdbcType=CHAR},
+      </if>
+      <if test="jobWeal != null" >
+        #{jobWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="jobEndTime != null" >
+        #{jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobStudyId != null" >
+        #{jobStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="jobPicture != null" >
+        #{jobPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="jobAlterTime != null" >
+        #{jobAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobNull1 != null" >
+        #{jobNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNull2 != null" >
+        #{jobNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaJobExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_job
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_job
+    <set >
+      <if test="record.jobId != null" >
+        job_id = #{record.jobId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobStudentId != null" >
+        job_student_id = #{record.jobStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobFirm != null" >
+        job_firm = #{record.jobFirm,jdbcType=CHAR},
+      </if>
+      <if test="record.jobContact != null" >
+        job_contact = #{record.jobContact,jdbcType=CHAR},
+      </if>
+      <if test="record.jobWeal != null" >
+        job_weal = #{record.jobWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobEndTime != null" >
+        job_end_time = #{record.jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobStudyId != null" >
+        job_study_id = #{record.jobStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.jobPicture != null" >
+        job_picture = #{record.jobPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobAlterTime != null" >
+        job_alter_time = #{record.jobAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.jobNull1 != null" >
+        job_null1 = #{record.jobNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.jobNull2 != null" >
+        job_null2 = #{record.jobNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_job
+    set job_id = #{record.jobId,jdbcType=INTEGER},
+      job_student_id = #{record.jobStudentId,jdbcType=INTEGER},
+      job_firm = #{record.jobFirm,jdbcType=CHAR},
+      job_contact = #{record.jobContact,jdbcType=CHAR},
+      job_weal = #{record.jobWeal,jdbcType=VARCHAR},
+      job_end_time = #{record.jobEndTime,jdbcType=TIMESTAMP},
+      job_study_id = #{record.jobStudyId,jdbcType=INTEGER},
+      job_picture = #{record.jobPicture,jdbcType=VARCHAR},
+      job_alter_time = #{record.jobAlterTime,jdbcType=TIMESTAMP},
+      job_null1 = #{record.jobNull1,jdbcType=VARCHAR},
+      job_null2 = #{record.jobNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaJob" >
+    update sybida_job
+    <set >
+      <if test="jobStudentId != null" >
+        job_student_id = #{jobStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="jobFirm != null" >
+        job_firm = #{jobFirm,jdbcType=CHAR},
+      </if>
+      <if test="jobContact != null" >
+        job_contact = #{jobContact,jdbcType=CHAR},
+      </if>
+      <if test="jobWeal != null" >
+        job_weal = #{jobWeal,jdbcType=VARCHAR},
+      </if>
+      <if test="jobEndTime != null" >
+        job_end_time = #{jobEndTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobStudyId != null" >
+        job_study_id = #{jobStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="jobPicture != null" >
+        job_picture = #{jobPicture,jdbcType=VARCHAR},
+      </if>
+      <if test="jobAlterTime != null" >
+        job_alter_time = #{jobAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="jobNull1 != null" >
+        job_null1 = #{jobNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="jobNull2 != null" >
+        job_null2 = #{jobNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaJob" >
+    update sybida_job
+    set job_student_id = #{jobStudentId,jdbcType=INTEGER},
+      job_firm = #{jobFirm,jdbcType=CHAR},
+      job_contact = #{jobContact,jdbcType=CHAR},
+      job_weal = #{jobWeal,jdbcType=VARCHAR},
+      job_end_time = #{jobEndTime,jdbcType=TIMESTAMP},
+      job_study_id = #{jobStudyId,jdbcType=INTEGER},
+      job_picture = #{jobPicture,jdbcType=VARCHAR},
+      job_alter_time = #{jobAlterTime,jdbcType=TIMESTAMP},
+      job_null1 = #{jobNull1,jdbcType=VARCHAR},
+      job_null2 = #{jobNull2,jdbcType=VARCHAR}
+    where job_id = #{jobId,jdbcType=INTEGER}
+  </update>
+</mapper>

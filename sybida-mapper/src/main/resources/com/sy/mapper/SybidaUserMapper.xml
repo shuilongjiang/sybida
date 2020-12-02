@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaUserMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaUser" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="user_phone" property="userPhone" jdbcType="CHAR" />
+    <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
+    <result column="user_note" property="userNote" jdbcType="INTEGER" />
+    <result column="user_authority" property="userAuthority" jdbcType="TINYINT" />
+    <result column="user_alter_time" property="userAlterTime" jdbcType="TIMESTAMP" />
+    <result column="user_null1" property="userNull1" jdbcType="VARCHAR" />
+    <result column="user_null2" property="userNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, user_phone, user_password, user_note, user_authority, user_alter_time, 
+    user_null1, user_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaUserExample" >
+    delete from sybida_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaUser" >
+    insert into sybida_user (user_id, user_name, user_phone, 
+      user_password, user_note, user_authority, 
+      user_alter_time, user_null1, user_null2
+      )
+    values (#{userId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{userPhone,jdbcType=CHAR}, 
+      #{userPassword,jdbcType=VARCHAR}, #{userNote,jdbcType=INTEGER}, #{userAuthority,jdbcType=TINYINT}, 
+      #{userAlterTime,jdbcType=TIMESTAMP}, #{userNull1,jdbcType=VARCHAR}, #{userNull2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaUser" >
+    insert into sybida_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="userPhone != null" >
+        user_phone,
+      </if>
+      <if test="userPassword != null" >
+        user_password,
+      </if>
+      <if test="userNote != null" >
+        user_note,
+      </if>
+      <if test="userAuthority != null" >
+        user_authority,
+      </if>
+      <if test="userAlterTime != null" >
+        user_alter_time,
+      </if>
+      <if test="userNull1 != null" >
+        user_null1,
+      </if>
+      <if test="userNull2 != null" >
+        user_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null" >
+        #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNote != null" >
+        #{userNote,jdbcType=INTEGER},
+      </if>
+      <if test="userAuthority != null" >
+        #{userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="userAlterTime != null" >
+        #{userAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNull1 != null" >
+        #{userNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="userNull2 != null" >
+        #{userNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaUserExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=INTEGER},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userPhone != null" >
+        user_phone = #{record.userPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.userPassword != null" >
+        user_password = #{record.userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNote != null" >
+        user_note = #{record.userNote,jdbcType=INTEGER},
+      </if>
+      <if test="record.userAuthority != null" >
+        user_authority = #{record.userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="record.userAlterTime != null" >
+        user_alter_time = #{record.userAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.userNull1 != null" >
+        user_null1 = #{record.userNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNull2 != null" >
+        user_null2 = #{record.userNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_user
+    set user_id = #{record.userId,jdbcType=INTEGER},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      user_phone = #{record.userPhone,jdbcType=CHAR},
+      user_password = #{record.userPassword,jdbcType=VARCHAR},
+      user_note = #{record.userNote,jdbcType=INTEGER},
+      user_authority = #{record.userAuthority,jdbcType=TINYINT},
+      user_alter_time = #{record.userAlterTime,jdbcType=TIMESTAMP},
+      user_null1 = #{record.userNull1,jdbcType=VARCHAR},
+      user_null2 = #{record.userNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaUser" >
+    update sybida_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="userPhone != null" >
+        user_phone = #{userPhone,jdbcType=CHAR},
+      </if>
+      <if test="userPassword != null" >
+        user_password = #{userPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="userNote != null" >
+        user_note = #{userNote,jdbcType=INTEGER},
+      </if>
+      <if test="userAuthority != null" >
+        user_authority = #{userAuthority,jdbcType=TINYINT},
+      </if>
+      <if test="userAlterTime != null" >
+        user_alter_time = #{userAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="userNull1 != null" >
+        user_null1 = #{userNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="userNull2 != null" >
+        user_null2 = #{userNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaUser" >
+    update sybida_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      user_phone = #{userPhone,jdbcType=CHAR},
+      user_password = #{userPassword,jdbcType=VARCHAR},
+      user_note = #{userNote,jdbcType=INTEGER},
+      user_authority = #{userAuthority,jdbcType=TINYINT},
+      user_alter_time = #{userAlterTime,jdbcType=TIMESTAMP},
+      user_null1 = #{userNull1,jdbcType=VARCHAR},
+      user_null2 = #{userNull2,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaVitaeMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaVitae" >
+    <id column="vitae_id" property="vitaeId" jdbcType="INTEGER" />
+    <result column="vitae_student_id" property="vitaeStudentId" jdbcType="INTEGER" />
+    <result column="vitae_study_id" property="vitaeStudyId" jdbcType="INTEGER" />
+    <result column="vitae_level" property="vitaeLevel" jdbcType="CHAR" />
+    <result column="vitae_is_new" property="vitaeIsNew" jdbcType="INTEGER" />
+    <result column="vitae_url" property="vitaeUrl" jdbcType="VARCHAR" />
+    <result column="vitae_is_read" property="vitaeIsRead" jdbcType="TINYINT" />
+    <result column="vitae_download_frequency" property="vitaeDownloadFrequency" jdbcType="INTEGER" />
+    <result column="vitae_history_frequency" property="vitaeHistoryFrequency" jdbcType="INTEGER" />
+    <result column="vitae_alter_time" property="vitaeAlterTime" jdbcType="TIMESTAMP" />
+    <result column="vitae_null1" property="vitaeNull1" jdbcType="VARCHAR" />
+    <result column="vitae_null2" property="vitaeNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    vitae_id, vitae_student_id, vitae_study_id, vitae_level, vitae_is_new, vitae_url, 
+    vitae_is_read, vitae_download_frequency, vitae_history_frequency, vitae_alter_time, 
+    vitae_null1, vitae_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaVitaeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_vitae
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_vitae
+    where vitae_id = #{vitaeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_vitae
+    where vitae_id = #{vitaeId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaVitaeExample" >
+    delete from sybida_vitae
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaVitae" >
+    insert into sybida_vitae (vitae_id, vitae_student_id, vitae_study_id, 
+      vitae_level, vitae_is_new, vitae_url, 
+      vitae_is_read, vitae_download_frequency, vitae_history_frequency, 
+      vitae_alter_time, vitae_null1, vitae_null2
+      )
+    values (#{vitaeId,jdbcType=INTEGER}, #{vitaeStudentId,jdbcType=INTEGER}, #{vitaeStudyId,jdbcType=INTEGER}, 
+      #{vitaeLevel,jdbcType=CHAR}, #{vitaeIsNew,jdbcType=INTEGER}, #{vitaeUrl,jdbcType=VARCHAR}, 
+      #{vitaeIsRead,jdbcType=TINYINT}, #{vitaeDownloadFrequency,jdbcType=INTEGER}, #{vitaeHistoryFrequency,jdbcType=INTEGER}, 
+      #{vitaeAlterTime,jdbcType=TIMESTAMP}, #{vitaeNull1,jdbcType=VARCHAR}, #{vitaeNull2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaVitae" >
+    insert into sybida_vitae
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="vitaeId != null" >
+        vitae_id,
+      </if>
+      <if test="vitaeStudentId != null" >
+        vitae_student_id,
+      </if>
+      <if test="vitaeStudyId != null" >
+        vitae_study_id,
+      </if>
+      <if test="vitaeLevel != null" >
+        vitae_level,
+      </if>
+      <if test="vitaeIsNew != null" >
+        vitae_is_new,
+      </if>
+      <if test="vitaeUrl != null" >
+        vitae_url,
+      </if>
+      <if test="vitaeIsRead != null" >
+        vitae_is_read,
+      </if>
+      <if test="vitaeDownloadFrequency != null" >
+        vitae_download_frequency,
+      </if>
+      <if test="vitaeHistoryFrequency != null" >
+        vitae_history_frequency,
+      </if>
+      <if test="vitaeAlterTime != null" >
+        vitae_alter_time,
+      </if>
+      <if test="vitaeNull1 != null" >
+        vitae_null1,
+      </if>
+      <if test="vitaeNull2 != null" >
+        vitae_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="vitaeId != null" >
+        #{vitaeId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeStudentId != null" >
+        #{vitaeStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeStudyId != null" >
+        #{vitaeStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeLevel != null" >
+        #{vitaeLevel,jdbcType=CHAR},
+      </if>
+      <if test="vitaeIsNew != null" >
+        #{vitaeIsNew,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeUrl != null" >
+        #{vitaeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeIsRead != null" >
+        #{vitaeIsRead,jdbcType=TINYINT},
+      </if>
+      <if test="vitaeDownloadFrequency != null" >
+        #{vitaeDownloadFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeHistoryFrequency != null" >
+        #{vitaeHistoryFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeAlterTime != null" >
+        #{vitaeAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vitaeNull1 != null" >
+        #{vitaeNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeNull2 != null" >
+        #{vitaeNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaVitaeExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_vitae
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_vitae
+    <set >
+      <if test="record.vitaeId != null" >
+        vitae_id = #{record.vitaeId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeStudentId != null" >
+        vitae_student_id = #{record.vitaeStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeStudyId != null" >
+        vitae_study_id = #{record.vitaeStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeLevel != null" >
+        vitae_level = #{record.vitaeLevel,jdbcType=CHAR},
+      </if>
+      <if test="record.vitaeIsNew != null" >
+        vitae_is_new = #{record.vitaeIsNew,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeUrl != null" >
+        vitae_url = #{record.vitaeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaeIsRead != null" >
+        vitae_is_read = #{record.vitaeIsRead,jdbcType=TINYINT},
+      </if>
+      <if test="record.vitaeDownloadFrequency != null" >
+        vitae_download_frequency = #{record.vitaeDownloadFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeHistoryFrequency != null" >
+        vitae_history_frequency = #{record.vitaeHistoryFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="record.vitaeAlterTime != null" >
+        vitae_alter_time = #{record.vitaeAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.vitaeNull1 != null" >
+        vitae_null1 = #{record.vitaeNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vitaeNull2 != null" >
+        vitae_null2 = #{record.vitaeNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_vitae
+    set vitae_id = #{record.vitaeId,jdbcType=INTEGER},
+      vitae_student_id = #{record.vitaeStudentId,jdbcType=INTEGER},
+      vitae_study_id = #{record.vitaeStudyId,jdbcType=INTEGER},
+      vitae_level = #{record.vitaeLevel,jdbcType=CHAR},
+      vitae_is_new = #{record.vitaeIsNew,jdbcType=INTEGER},
+      vitae_url = #{record.vitaeUrl,jdbcType=VARCHAR},
+      vitae_is_read = #{record.vitaeIsRead,jdbcType=TINYINT},
+      vitae_download_frequency = #{record.vitaeDownloadFrequency,jdbcType=INTEGER},
+      vitae_history_frequency = #{record.vitaeHistoryFrequency,jdbcType=INTEGER},
+      vitae_alter_time = #{record.vitaeAlterTime,jdbcType=TIMESTAMP},
+      vitae_null1 = #{record.vitaeNull1,jdbcType=VARCHAR},
+      vitae_null2 = #{record.vitaeNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaVitae" >
+    update sybida_vitae
+    <set >
+      <if test="vitaeStudentId != null" >
+        vitae_student_id = #{vitaeStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeStudyId != null" >
+        vitae_study_id = #{vitaeStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeLevel != null" >
+        vitae_level = #{vitaeLevel,jdbcType=CHAR},
+      </if>
+      <if test="vitaeIsNew != null" >
+        vitae_is_new = #{vitaeIsNew,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeUrl != null" >
+        vitae_url = #{vitaeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeIsRead != null" >
+        vitae_is_read = #{vitaeIsRead,jdbcType=TINYINT},
+      </if>
+      <if test="vitaeDownloadFrequency != null" >
+        vitae_download_frequency = #{vitaeDownloadFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeHistoryFrequency != null" >
+        vitae_history_frequency = #{vitaeHistoryFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="vitaeAlterTime != null" >
+        vitae_alter_time = #{vitaeAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="vitaeNull1 != null" >
+        vitae_null1 = #{vitaeNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="vitaeNull2 != null" >
+        vitae_null2 = #{vitaeNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where vitae_id = #{vitaeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaVitae" >
+    update sybida_vitae
+    set vitae_student_id = #{vitaeStudentId,jdbcType=INTEGER},
+      vitae_study_id = #{vitaeStudyId,jdbcType=INTEGER},
+      vitae_level = #{vitaeLevel,jdbcType=CHAR},
+      vitae_is_new = #{vitaeIsNew,jdbcType=INTEGER},
+      vitae_url = #{vitaeUrl,jdbcType=VARCHAR},
+      vitae_is_read = #{vitaeIsRead,jdbcType=TINYINT},
+      vitae_download_frequency = #{vitaeDownloadFrequency,jdbcType=INTEGER},
+      vitae_history_frequency = #{vitaeHistoryFrequency,jdbcType=INTEGER},
+      vitae_alter_time = #{vitaeAlterTime,jdbcType=TIMESTAMP},
+      vitae_null1 = #{vitaeNull1,jdbcType=VARCHAR},
+      vitae_null2 = #{vitaeNull2,jdbcType=VARCHAR}
+    where vitae_id = #{vitaeId,jdbcType=INTEGER}
+  </update>
+</mapper>

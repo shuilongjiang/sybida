@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaStudentMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaStudent" >
+    <id column="student_id" property="studentId" jdbcType="INTEGER" />
+    <result column="student_name" property="studentName" jdbcType="VARCHAR" />
+    <result column="student_sex" property="studentSex" jdbcType="CHAR" />
+    <result column="student_identity" property="studentIdentity" jdbcType="CHAR" />
+    <result column="student_is_graduation" property="studentIsGraduation" jdbcType="TINYINT" />
+    <result column="student_school" property="studentSchool" jdbcType="VARCHAR" />
+    <result column="student_specialty" property="studentSpecialty" jdbcType="VARCHAR" />
+    <result column="student_wechat" property="studentWechat" jdbcType="VARCHAR" />
+    <result column="student_mailbox" property="studentMailbox" jdbcType="VARCHAR" />
+    <result column="student_study_id" property="studentStudyId" jdbcType="INTEGER" />
+    <result column="student_city" property="studentCity" jdbcType="VARCHAR" />
+    <result column="student_address" property="studentAddress" jdbcType="VARCHAR" />
+    <result column="student_parent_phone" property="studentParentPhone" jdbcType="CHAR" />
+    <result column="student_parent_name" property="studentParentName" jdbcType="VARCHAR" />
+    <result column="student_urgent" property="studentUrgent" jdbcType="CHAR" />
+    <result column="student_phone" property="studentPhone" jdbcType="CHAR" />
+    <result column="student_class_id" property="studentClassId" jdbcType="INTEGER" />
+    <result column="student_room" property="studentRoom" jdbcType="VARCHAR" />
+    <result column="student_photo" property="studentPhoto" jdbcType="VARCHAR" />
+    <result column="student_alter_time" property="studentAlterTime" jdbcType="TIMESTAMP" />
+    <result column="student_null1" property="studentNull1" jdbcType="VARCHAR" />
+    <result column="student_null2" property="studentNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    student_id, student_name, student_sex, student_identity, student_is_graduation, student_school, 
+    student_specialty, student_wechat, student_mailbox, student_study_id, student_city, 
+    student_address, student_parent_phone, student_parent_name, student_urgent, student_phone, 
+    student_class_id, student_room, student_photo, student_alter_time, student_null1, 
+    student_null2
+  </sql>
+  <select id="selectByExampleSelective" resultType="sybidaStudentAndStudyAndClass" parameterType="sybidaStudent">
+    select * from sybida_student,sybida_class,sybida_study
+    where sybida_student.student_study_id=sybida_study.study_id
+    and sybida_student.student_class_id=sybida_class.class_id
+      <if test="studentName!=null">
+        and student_name like concat('%', #{studentName},'%')
+      </if>
+      <if test="studentSex!=null">
+        and student_sex =#{studentSex}
+      </if>
+      <if test="studentStudyId!=null">
+        and student_study_id =#{studentStudyId}
+      </if>
+      <if test="studentIdentity!=null">
+        and student_identity =#{studentIdentity}
+      </if>
+      <if test="studentIsGraduation!=null">
+        and student_is_graduation =#{studentIsGraduation}
+      </if>
+      <if test="studentClassId!=null">
+        and student_class_id =#{studentClassId}
+      </if>
+      <if test="studentRoom!=null">
+        and student_room =#{studentRoom}
+      </if>
+      <if test="studentSchool!=null">
+        and student_school =#{studentSchool}
+      </if>
+
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaStudentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_student
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaStudentExample" >
+    delete from sybida_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaStudent" >
+    insert into sybida_student (student_id, student_name, student_sex, 
+      student_identity, student_is_graduation, student_school, 
+      student_specialty, student_wechat, student_mailbox, 
+      student_study_id, student_city, student_address, 
+      student_parent_phone, student_parent_name, student_urgent, 
+      student_phone, student_class_id, student_room, 
+      student_photo, student_alter_time, student_null1, 
+      student_null2)
+    values (#{studentId,jdbcType=INTEGER}, #{studentName,jdbcType=VARCHAR}, #{studentSex,jdbcType=CHAR}, 
+      #{studentIdentity,jdbcType=CHAR}, #{studentIsGraduation,jdbcType=TINYINT}, #{studentSchool,jdbcType=VARCHAR}, 
+      #{studentSpecialty,jdbcType=VARCHAR}, #{studentWechat,jdbcType=VARCHAR}, #{studentMailbox,jdbcType=VARCHAR}, 
+      #{studentStudyId,jdbcType=INTEGER}, #{studentCity,jdbcType=VARCHAR}, #{studentAddress,jdbcType=VARCHAR}, 
+      #{studentParentPhone,jdbcType=CHAR}, #{studentParentName,jdbcType=VARCHAR}, #{studentUrgent,jdbcType=CHAR}, 
+      #{studentPhone,jdbcType=CHAR}, #{studentClassId,jdbcType=INTEGER}, #{studentRoom,jdbcType=VARCHAR}, 
+      #{studentPhoto,jdbcType=VARCHAR}, #{studentAlterTime,jdbcType=TIMESTAMP}, #{studentNull1,jdbcType=VARCHAR}, 
+      #{studentNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaStudent" >
+    insert into sybida_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        student_id,
+      </if>
+      <if test="studentName != null" >
+        student_name,
+      </if>
+      <if test="studentSex != null" >
+        student_sex,
+      </if>
+      <if test="studentIdentity != null" >
+        student_identity,
+      </if>
+      <if test="studentIsGraduation != null" >
+        student_is_graduation,
+      </if>
+      <if test="studentSchool != null" >
+        student_school,
+      </if>
+      <if test="studentSpecialty != null" >
+        student_specialty,
+      </if>
+      <if test="studentWechat != null" >
+        student_wechat,
+      </if>
+      <if test="studentMailbox != null" >
+        student_mailbox,
+      </if>
+      <if test="studentStudyId != null" >
+        student_study_id,
+      </if>
+      <if test="studentCity != null" >
+        student_city,
+      </if>
+      <if test="studentAddress != null" >
+        student_address,
+      </if>
+      <if test="studentParentPhone != null" >
+        student_parent_phone,
+      </if>
+      <if test="studentParentName != null" >
+        student_parent_name,
+      </if>
+      <if test="studentUrgent != null" >
+        student_urgent,
+      </if>
+      <if test="studentPhone != null" >
+        student_phone,
+      </if>
+      <if test="studentClassId != null" >
+        student_class_id,
+      </if>
+      <if test="studentRoom != null" >
+        student_room,
+      </if>
+      <if test="studentPhoto != null" >
+        student_photo,
+      </if>
+      <if test="studentAlterTime != null" >
+        student_alter_time,
+      </if>
+      <if test="studentNull1 != null" >
+        student_null1,
+      </if>
+      <if test="studentNull2 != null" >
+        student_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="studentId != null" >
+        #{studentId,jdbcType=INTEGER},
+      </if>
+      <if test="studentName != null" >
+        #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        #{studentSex,jdbcType=CHAR},
+      </if>
+      <if test="studentIdentity != null" >
+        #{studentIdentity,jdbcType=CHAR},
+      </if>
+      <if test="studentIsGraduation != null" >
+        #{studentIsGraduation,jdbcType=TINYINT},
+      </if>
+      <if test="studentSchool != null" >
+        #{studentSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSpecialty != null" >
+        #{studentSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="studentWechat != null" >
+        #{studentWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMailbox != null" >
+        #{studentMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="studentStudyId != null" >
+        #{studentStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="studentCity != null" >
+        #{studentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentParentPhone != null" >
+        #{studentParentPhone,jdbcType=CHAR},
+      </if>
+      <if test="studentParentName != null" >
+        #{studentParentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentUrgent != null" >
+        #{studentUrgent,jdbcType=CHAR},
+      </if>
+      <if test="studentPhone != null" >
+        #{studentPhone,jdbcType=CHAR},
+      </if>
+      <if test="studentClassId != null" >
+        #{studentClassId,jdbcType=INTEGER},
+      </if>
+      <if test="studentRoom != null" >
+        #{studentRoom,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhoto != null" >
+        #{studentPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAlterTime != null" >
+        #{studentAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentNull1 != null" >
+        #{studentNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNull2 != null" >
+        #{studentNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaStudentExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_student
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_student
+    <set >
+      <if test="record.studentId != null" >
+        student_id = #{record.studentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentName != null" >
+        student_name = #{record.studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentSex != null" >
+        student_sex = #{record.studentSex,jdbcType=CHAR},
+      </if>
+      <if test="record.studentIdentity != null" >
+        student_identity = #{record.studentIdentity,jdbcType=CHAR},
+      </if>
+      <if test="record.studentIsGraduation != null" >
+        student_is_graduation = #{record.studentIsGraduation,jdbcType=TINYINT},
+      </if>
+      <if test="record.studentSchool != null" >
+        student_school = #{record.studentSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentSpecialty != null" >
+        student_specialty = #{record.studentSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentWechat != null" >
+        student_wechat = #{record.studentWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentMailbox != null" >
+        student_mailbox = #{record.studentMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentStudyId != null" >
+        student_study_id = #{record.studentStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentCity != null" >
+        student_city = #{record.studentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentAddress != null" >
+        student_address = #{record.studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentParentPhone != null" >
+        student_parent_phone = #{record.studentParentPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.studentParentName != null" >
+        student_parent_name = #{record.studentParentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentUrgent != null" >
+        student_urgent = #{record.studentUrgent,jdbcType=CHAR},
+      </if>
+      <if test="record.studentPhone != null" >
+        student_phone = #{record.studentPhone,jdbcType=CHAR},
+      </if>
+      <if test="record.studentClassId != null" >
+        student_class_id = #{record.studentClassId,jdbcType=INTEGER},
+      </if>
+      <if test="record.studentRoom != null" >
+        student_room = #{record.studentRoom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentPhoto != null" >
+        student_photo = #{record.studentPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentAlterTime != null" >
+        student_alter_time = #{record.studentAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.studentNull1 != null" >
+        student_null1 = #{record.studentNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.studentNull2 != null" >
+        student_null2 = #{record.studentNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_student
+    set student_id = #{record.studentId,jdbcType=INTEGER},
+      student_name = #{record.studentName,jdbcType=VARCHAR},
+      student_sex = #{record.studentSex,jdbcType=CHAR},
+      student_identity = #{record.studentIdentity,jdbcType=CHAR},
+      student_is_graduation = #{record.studentIsGraduation,jdbcType=TINYINT},
+      student_school = #{record.studentSchool,jdbcType=VARCHAR},
+      student_specialty = #{record.studentSpecialty,jdbcType=VARCHAR},
+      student_wechat = #{record.studentWechat,jdbcType=VARCHAR},
+      student_mailbox = #{record.studentMailbox,jdbcType=VARCHAR},
+      student_study_id = #{record.studentStudyId,jdbcType=INTEGER},
+      student_city = #{record.studentCity,jdbcType=VARCHAR},
+      student_address = #{record.studentAddress,jdbcType=VARCHAR},
+      student_parent_phone = #{record.studentParentPhone,jdbcType=CHAR},
+      student_parent_name = #{record.studentParentName,jdbcType=VARCHAR},
+      student_urgent = #{record.studentUrgent,jdbcType=CHAR},
+      student_phone = #{record.studentPhone,jdbcType=CHAR},
+      student_class_id = #{record.studentClassId,jdbcType=INTEGER},
+      student_room = #{record.studentRoom,jdbcType=VARCHAR},
+      student_photo = #{record.studentPhoto,jdbcType=VARCHAR},
+      student_alter_time = #{record.studentAlterTime,jdbcType=TIMESTAMP},
+      student_null1 = #{record.studentNull1,jdbcType=VARCHAR},
+      student_null2 = #{record.studentNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaStudent" >
+    update sybida_student
+    <set >
+      <if test="studentName != null" >
+        student_name = #{studentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSex != null" >
+        student_sex = #{studentSex,jdbcType=CHAR},
+      </if>
+      <if test="studentIdentity != null" >
+        student_identity = #{studentIdentity,jdbcType=CHAR},
+      </if>
+      <if test="studentIsGraduation != null" >
+        student_is_graduation = #{studentIsGraduation,jdbcType=TINYINT},
+      </if>
+      <if test="studentSchool != null" >
+        student_school = #{studentSchool,jdbcType=VARCHAR},
+      </if>
+      <if test="studentSpecialty != null" >
+        student_specialty = #{studentSpecialty,jdbcType=VARCHAR},
+      </if>
+      <if test="studentWechat != null" >
+        student_wechat = #{studentWechat,jdbcType=VARCHAR},
+      </if>
+      <if test="studentMailbox != null" >
+        student_mailbox = #{studentMailbox,jdbcType=VARCHAR},
+      </if>
+      <if test="studentStudyId != null" >
+        student_study_id = #{studentStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="studentCity != null" >
+        student_city = #{studentCity,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAddress != null" >
+        student_address = #{studentAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="studentParentPhone != null" >
+        student_parent_phone = #{studentParentPhone,jdbcType=CHAR},
+      </if>
+      <if test="studentParentName != null" >
+        student_parent_name = #{studentParentName,jdbcType=VARCHAR},
+      </if>
+      <if test="studentUrgent != null" >
+        student_urgent = #{studentUrgent,jdbcType=CHAR},
+      </if>
+      <if test="studentPhone != null" >
+        student_phone = #{studentPhone,jdbcType=CHAR},
+      </if>
+      <if test="studentClassId != null" >
+        student_class_id = #{studentClassId,jdbcType=INTEGER},
+      </if>
+      <if test="studentRoom != null" >
+        student_room = #{studentRoom,jdbcType=VARCHAR},
+      </if>
+      <if test="studentPhoto != null" >
+        student_photo = #{studentPhoto,jdbcType=VARCHAR},
+      </if>
+      <if test="studentAlterTime != null" >
+        student_alter_time = #{studentAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="studentNull1 != null" >
+        student_null1 = #{studentNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="studentNull2 != null" >
+        student_null2 = #{studentNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaStudent" >
+    update sybida_student
+    set student_name = #{studentName,jdbcType=VARCHAR},
+      student_sex = #{studentSex,jdbcType=CHAR},
+      student_identity = #{studentIdentity,jdbcType=CHAR},
+      student_is_graduation = #{studentIsGraduation,jdbcType=TINYINT},
+      student_school = #{studentSchool,jdbcType=VARCHAR},
+      student_specialty = #{studentSpecialty,jdbcType=VARCHAR},
+      student_wechat = #{studentWechat,jdbcType=VARCHAR},
+      student_mailbox = #{studentMailbox,jdbcType=VARCHAR},
+      student_study_id = #{studentStudyId,jdbcType=INTEGER},
+      student_city = #{studentCity,jdbcType=VARCHAR},
+      student_address = #{studentAddress,jdbcType=VARCHAR},
+      student_parent_phone = #{studentParentPhone,jdbcType=CHAR},
+      student_parent_name = #{studentParentName,jdbcType=VARCHAR},
+      student_urgent = #{studentUrgent,jdbcType=CHAR},
+      student_phone = #{studentPhone,jdbcType=CHAR},
+      student_class_id = #{studentClassId,jdbcType=INTEGER},
+      student_room = #{studentRoom,jdbcType=VARCHAR},
+      student_photo = #{studentPhoto,jdbcType=VARCHAR},
+      student_alter_time = #{studentAlterTime,jdbcType=TIMESTAMP},
+      student_null1 = #{studentNull1,jdbcType=VARCHAR},
+      student_null2 = #{studentNull2,jdbcType=VARCHAR}
+    where student_id = #{studentId,jdbcType=INTEGER}
+  </update>
+</mapper>
