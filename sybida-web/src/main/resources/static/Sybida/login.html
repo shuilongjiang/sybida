@@ -132,7 +132,7 @@
     }
     // 间隔5000获取一次
     getOnlineUser();
-    var interval = setInterval(getOnlineUser, 5000);
+    // var interval = setInterval(getOnlineUser, 5000);
     <!--验证码开始-->
     var show_num = [];
     draw(show_num);
@@ -204,10 +204,6 @@
             $body.prepend('<button class="layui-btn layui-btn-warm layui-btn-fluid">为了更好的体验请使用谷歌浏览器</button>');
  					layer.alert("您的浏览器版本过低,可能会导致部分功能异常,建议使用chrome浏览器或升级到更高版本!", 8);
         }
-
-
-
-
         $('#pc-login-btn').click(function () {
             clearTimeout(timeoutId);
             $('#qrcode-login').hide();
@@ -217,7 +213,7 @@
             $('#login-form .login-type .login-type-tips').text($('#qrcode-login-btn').attr('alt') + '>>');
         });
         var changeVerCode = function () {
-            $('.captcha').attr('src', '/yzm?d=' + new Date().getTime());
+
         };
         $body.on('click', '.captcha', changeVerCode);
         $('#L_vercode').one('focus', function () {
@@ -242,23 +238,11 @@
                     if(data.code==1){
                         layer.msg('登录成功  正在为您跳转...');
                         window.location.href = "manager/managerIndex.html";
-                        // if(data.data.userAuthority==0){
-                        //     layer.msg('登录成功  正在为您跳转...');
-                        //     window.location.href = "manager/managerIndex.html";
-                        // }else  if(data.data.userAuthority==1)
-                        // {
-                        //     layer.msg('登录成功  正在为您跳转...');
-                        //     window.location.href = "manager/managerIndex.html";
-                        // }else if(data.data.userAuthority==2){
-                        //
-                        // }
                     }else{
                             layer.alert("手机号或密码错误，请重新输入！", {icon: 2});
                             draw(show_num);
                     }
-
                 },"json");
-
             } else {
                 layer.alert("验证码错误，请重新输入！", {icon: 2});
                 draw(show_num);

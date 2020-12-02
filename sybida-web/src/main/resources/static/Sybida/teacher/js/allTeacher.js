@@ -31,10 +31,10 @@ $('#pageSizeSel').change(
     }
 )
 $("#selectButt").click(function (){
-   location.href="/web06/Sybida/teacher/allTeacher.html?pageNum=1&pageSize="+pageSize+"&teacherStudy="+teacherStudy
+   location.href="/Sybida/teacher/allTeacher.html?pageNum=1&pageSize="+pageSize+"&teacherStudy="+teacherStudy
 })
 //学习方向下拉选框
-$.getJSON("/web06/teacher/selectStudy.do",function (data){
+$.getJSON("/teacher/selectStudy",function (data){
     var htm=`<option value="-1">全部</option>`
         for (var i=0;i<data.data.length;i++){
             htm+=`<option value="${data.data[i].studyId}">${data.data[i].studyAspect}</option>`
@@ -76,7 +76,7 @@ $.getJSON("/web06/teacher/selectStudy.do",function (data){
 });
 pageshoe();
 function pageshoe(){
-    $.getJSON("/web06/teacher/selectpage.do","pageSize="+pageSize+"&pageNum="+pageNum+"&teacherStudy="+teacherStudy,function (data){
+    $.getJSON("/teacher/selectpage","pageSize="+pageSize+"&pageNum="+pageNum+"&teacherStudy="+teacherStudy,function (data){
         let html = ''
         var le=data.data.list
         for(let i = 0; i < le.length; i++){
@@ -99,7 +99,7 @@ function pageshoe(){
         </tr>`
             }else{
                 html +=` <tr class="info"><td style="width: 80px;"><input type="checkbox" name="optionAll"></td>
-            <td><img src="http://t.cn/RCzsdCq" class="img-circle" style="height: 40px"></td>
+            <td><img src="http://t.cn/RCzsdCq" class="img-rounded" style="height: 40px"></td>
             <td>${le[i].teachName}</td>
             <td>${le[i].teachSex}</td>
             <td>${le[i].teachNull1}</td>
@@ -153,20 +153,20 @@ function pageSelect(data){
 
         html+=`<li class="disabled"><a href="#" aria-label="Previous">&laquo;</a></li>`
     }else{
-        html+=`<li><a href="/web06/Sybida/teacher/allTeacher.html?pageNum=${pageNum-1}&pageSize=${pageSize}&teacherStudy=${teacherStudy}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`
+        html+=`<li><a href="/Sybida/teacher/allTeacher.html?pageNum=${pageNum-1}&pageSize=${pageSize}&teacherStudy=${teacherStudy}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>`
     }
     for(var i=data.navigateFirstPage;i<=data.navigateLastPage;i++){
         if(pageNum==i){
             html+=`<li class="active"><a href="#">${i}</a></li>`
         }else{
-            html+=`<li><a href="/web06/Sybida/teacher/allTeacher.html?pageNum=${i}&pageSize=${pageSize}&teacherStudy=${teacherStudy}">${i}</a></li>`
+            html+=`<li><a href="/Sybida/teacher/allTeacher.html?pageNum=${i}&pageSize=${pageSize}&teacherStudy=${teacherStudy}">${i}</a></li>`
         }
     }
     if((data.pages)<=pageNum){
         html+=`<li class="disabled"><a href="#">&raquo;</a></li>`
     }else{
         var pa=parseInt(pageNum)+1
-        html+=`<li><a href="/web06/Sybida/teacher/allTeacher.html?pageNum=${pa}&pageSize=${pageSize}&teacherStudy=${teacherStudy}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>`
+        html+=`<li><a href="/Sybida/teacher/allTeacher.html?pageNum=${pa}&pageSize=${pageSize}&teacherStudy=${teacherStudy}" aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>`
     }
     html+=`<span style="font-family: '微软雅黑';font-size: 15px;margin-left:200px;padding-top: 10px;line-height: 40px">共&nbsp;${data.pages}&nbsp;页</span>`
     $("#pagination").append(html)
