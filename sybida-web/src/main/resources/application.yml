@@ -1,9 +1,9 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://localhost:3306/test?characterencoding=utf-8&serverTimezone=UTC
-    username: root
-    password: 123456
+    url: jdbc:mysql://localhost:3306/sybida?characterencoding=utf-8&serverTimezone=UTC
+    username: admin
+    password: jianghaoyu-+0
     driverClassName: com.mysql.jdbc.Driver
     initialSize: 5
     minIdle: 5
