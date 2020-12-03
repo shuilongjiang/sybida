@@ -32,7 +32,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
             SybidaTeachExample sybidaTeachExample=new SybidaTeachExample();
             SybidaTeachExample.Criteria criteria=sybidaTeachExample.createCriteria();
             criteria.andTeachStudyIdEqualTo(Integer.valueOf(teacherStudy1));
-            System.out.println("++++"+Integer.valueOf(teacherStudy1));
             list = sybidaTeachMapper.selectByExample(sybidaTeachExample);
         }
         PageInfo<SybidaTeach> pageInfo=new PageInfo<>(list);

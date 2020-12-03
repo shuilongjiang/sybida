@@ -3,9 +3,10 @@ package com.sy.mapper;
 import com.sy.pojo.SybidaStudy;
 import com.sy.pojo.SybidaStudyExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SybidaStudyMapper {
     int countByExample(SybidaStudyExample example);
 

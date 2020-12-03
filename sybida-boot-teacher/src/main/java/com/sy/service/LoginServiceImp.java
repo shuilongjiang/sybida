@@ -44,6 +44,7 @@ public class LoginServiceImp implements LoginService{
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
+            request.getSession().setAttribute("userinfo",list.get(0));
         }else{
             responseResult.setCode(0);
         }

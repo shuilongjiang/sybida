@@ -12,7 +12,8 @@ spring:
 # 配置别名包
 mybatis:
   type-aliases-package: com.sy.pojo
-
+  configuration:
+    map-underscore-to-camel-case: true
 pagehelper:
   helperDialect: mysql
   reasonable: true

@@ -4,9 +4,10 @@ import com.sy.pojo.SybidaNews;
 import com.sy.pojo.SybidaNewsAndReceive;
 import com.sy.pojo.SybidaNewsExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SybidaNewsMapper {
     int countByExample(SybidaNewsExample example);
 

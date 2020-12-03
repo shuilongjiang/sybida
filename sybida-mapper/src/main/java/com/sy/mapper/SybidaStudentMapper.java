@@ -4,9 +4,10 @@ import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentAndStudyAndClass;
 import com.sy.pojo.SybidaStudentExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SybidaStudentMapper {
     int countByExample(SybidaStudentExample example);
 

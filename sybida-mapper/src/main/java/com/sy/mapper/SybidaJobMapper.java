@@ -3,9 +3,10 @@ package com.sy.mapper;
 import com.sy.pojo.SybidaJob;
 import com.sy.pojo.SybidaJobExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SybidaJobMapper {
     int countByExample(SybidaJobExample example);
 

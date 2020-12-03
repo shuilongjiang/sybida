@@ -4,9 +4,10 @@ package com.sy.mapper;
 import com.sy.pojo.SybidaVitae;
 import com.sy.pojo.SybidaVitaeExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
-
+@Repository
 public interface SybidaVitaeMapper {
     int countByExample(SybidaVitaeExample example);
 

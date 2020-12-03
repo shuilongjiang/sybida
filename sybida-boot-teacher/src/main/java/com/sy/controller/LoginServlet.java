@@ -23,9 +23,7 @@ public class LoginServlet{
 
     @RequestMapping("logincheck")
     public ResponseResult login(HttpServletRequest request,String phone , String psw){
-
        return loginService.login(request,phone,psw);
-
     }
 
 }
