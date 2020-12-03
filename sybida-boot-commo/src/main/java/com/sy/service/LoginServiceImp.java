@@ -44,10 +44,11 @@ public class LoginServiceImp implements LoginService{
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
-            request.getSession().setAttribute("userinfo",list.get(0));
+            request.getSession().setAttribute("userinfo",list);
         }else{
             responseResult.setCode(0);
         }
+
         request.getServletContext().setAttribute("num",num1);
         responseResult.setData(list);
         return responseResult;
