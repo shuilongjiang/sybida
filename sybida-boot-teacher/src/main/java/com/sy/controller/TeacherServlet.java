@@ -3,11 +3,13 @@ package com.sy.controller;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("teacher")
 @RestController
+@CrossOrigin
 public class TeacherServlet{
     @Autowired
     ResponseResult responseResult;
