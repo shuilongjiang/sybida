@@ -14,12 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 @CrossOrigin
 public class LoginServlet{
     @Autowired
-    ResponseResult responseResult;
-
-    @Autowired
     LoginService loginService;
     @RequestMapping("loginpeople")
     public ResponseResult loginpeople(HttpServletRequest request){
+
         return loginService.loginpeople(request);
     }
 
@@ -27,5 +25,12 @@ public class LoginServlet{
     public ResponseResult login(HttpServletRequest request,String phone , String psw){
        return loginService.login(request,phone,psw);
     }
-
+    @RequestMapping("changepsw")
+    public ResponseResult  changePsw(String account,String verifycode){
+        return loginService.changePsw(account,verifycode);
+    }
+    @RequestMapping("changephone")
+    public ResponseResult  changePhone(String phone){
+        return loginService.changePhone(phone);
+    }
 }
