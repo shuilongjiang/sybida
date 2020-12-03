@@ -28,8 +28,7 @@ public class LoginServiceImp implements LoginService{
     }
     @Autowired
     SybidaUserMapper sybidaUserMapper;
-    @Autowired
-    SybidaUserExample example;
+
     @Override
     public ResponseResult login(HttpServletRequest request,String phone, String psw) {
         ResponseResult responseResult=new ResponseResult();
@@ -39,6 +38,7 @@ public class LoginServiceImp implements LoginService{
         } else{
             num1++;
         }
+        SybidaUserExample example=new SybidaUserExample();
         example.createCriteria().andUserPhoneEqualTo(phone).andUserPasswordEqualTo(psw);
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
