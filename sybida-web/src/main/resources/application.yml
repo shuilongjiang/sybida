@@ -9,6 +9,15 @@ spring:
     minIdle: 5
     maxActive: 20
     maxWait: 6000
+  mvc:
+    view:
+      prefix: /WEB-INF/
+      suffix: .jsp
+    devtools:
+      remote:
+        restart:
+          enabled: true
+          additional-paths: src/main/java
 # 配置别名包
 mybatis:
   type-aliases-package: com.sy.pojo
@@ -19,3 +28,10 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+logging:
+  level:
+    com:
+      sy: debug
+# 打印SQL语句，更细一点可以配置com.cx.mapper 即dao层的包名
+# 日志框架root配置error可以纸打印sql语句日志
+#  config: classpath:logback-spring.xml

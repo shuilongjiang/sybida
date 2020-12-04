@@ -14,7 +14,7 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 //    LoginInterceptor loginInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(urlPass());
+//        registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(urlPass());
     }
 
     public List<String> urlPass(){
