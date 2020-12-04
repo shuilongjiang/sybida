@@ -1,7 +1,9 @@
 package com.sy.pojo;
 
-import java.util.Date;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
+@Component
 public class SybidaUser {
     private Integer userId;
 
