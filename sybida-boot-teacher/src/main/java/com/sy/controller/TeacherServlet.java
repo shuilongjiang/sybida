@@ -1,5 +1,6 @@
 package com.sy.controller;
 
+import com.sy.basepath.BasePath;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
