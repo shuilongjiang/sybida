@@ -2,6 +2,8 @@ package com.sy.inteceptor;
 
 import com.sy.basepath.BasePath;
 import com.sy.pojo.UserInfo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -11,9 +13,27 @@ import javax.servlet.http.HttpSession;
 
 //@Component
 public class LoginInterceptor implements HandlerInterceptor {
-
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+//        String[] strings = new String[]{
+//                "*****",
+//                "*********"
+//        };
+//
+//        for (String str : strings){
+//            if (str.equals(request.getServletPath())){
+//                //业务
+//                String userId = request.getParameter("userId");
+//                if (userId==null){
+//                    return false;
+//                }
+//            }
+//        }
+//        return true;
+        String userJsession=request.getHeader("userJsession");
+       String id= (String) redisTemplate.opsForValue().get("userJsession");
 
         HttpSession session = request.getSession();
         UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");

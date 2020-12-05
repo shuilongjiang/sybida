@@ -9,6 +9,11 @@ spring:
     minIdle: 5
     maxActive: 20
     maxWait: 6000
+  redis:
+    server:
+      host: 192.168.50.162
+      port: 6379
+      password: password
   mvc:
     view:
       prefix: /WEB-INF/
@@ -23,6 +28,7 @@ mybatis:
   type-aliases-package: com.sy.pojo
   configuration:
     map-underscore-to-camel-case: true
+
 pagehelper:
   helperDialect: mysql
   reasonable: true

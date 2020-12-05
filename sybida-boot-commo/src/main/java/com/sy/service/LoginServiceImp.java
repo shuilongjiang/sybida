@@ -6,6 +6,7 @@ import com.sy.pojo.SybidaUserExample;
 import com.sy.pojo.UserInfo;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
@@ -13,9 +14,12 @@ import org.springframework.web.context.WebApplicationContext;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginServiceImp implements LoginService{
+    @Autowired
+    private RedisTemplate<Object, Object> redisTemplate;
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
         ResponseResult responseResult=new ResponseResult();
@@ -44,14 +48,14 @@ public class LoginServiceImp implements LoginService{
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
-            SybidaUser sybidaUser=list.get(0);
-            UserInfo userInfo=new UserInfo();
-            userInfo.setId(sybidaUser.getUserId());
-            userInfo.setPower(sybidaUser.getUserAuthority());
-            userInfo.setName(sybidaUser.getUserName());
-            userInfo.setIsLoginFirst(sybidaUser.getUserNote());
-            System.out.println();
-            request.getSession().setAttribute("userInfo",userInfo);
+//            String JSession=request.getSession().getId();
+//            SybidaUser sybidaUser=list.get(0);
+//            UserInfo userInfo=new UserInfo();
+//            userInfo.setId(sybidaUser.getUserId());
+//            userInfo.setPower(sybidaUser.getUserAuthority());
+//            userInfo.setName(sybidaUser.getUserName());
+//            userInfo.setIsLoginFirst(sybidaUser.getUserNote());
+//            redisTemplate.opsForValue().set(sybidaUser.getUserId(),JSession,60, TimeUnit.MINUTES);
         }else{
             responseResult.setCode(0);
         }
@@ -84,7 +88,6 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
-
     @Override
     public ResponseResult checkPhone(String phone) {
         ResponseResult responseResult=new ResponseResult();
@@ -99,5 +102,4 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
-
 }

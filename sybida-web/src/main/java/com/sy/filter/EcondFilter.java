@@ -22,6 +22,7 @@ public class EcondFilter implements Filter {
         httpServletRequest.setCharacterEncoding("UTF-8");
         httpServletResponse.setCharacterEncoding("UTF-8");
         httpServletResponse.setContentType("text/html;charset=utf-8");
+
 //解决后端到前端的跨域问题，前提是不能使用ajax请求，要是用location.href请求
 //        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
 //        httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
