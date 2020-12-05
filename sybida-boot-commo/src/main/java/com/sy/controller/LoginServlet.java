@@ -33,8 +33,8 @@ public class LoginServlet{
         return loginService.changePsw(account,verifycode);
     }
     @Transactional
-    @RequestMapping("changephone")
-    public ResponseResult  changePhone(String phone){
-        return loginService.changePhone(phone);
+    @RequestMapping("checkphone")
+    public ResponseResult  checkPhone(String phone){
+        return loginService.checkPhone(phone);
     }
 }

@@ -3,6 +3,7 @@ package com.sy.service;
 import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaUserExample;
+import com.sy.pojo.UserInfo;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,14 @@ public class LoginServiceImp implements LoginService{
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
-            request.getSession().setAttribute("userinfo",list);
+            SybidaUser sybidaUser=list.get(0);
+            UserInfo userInfo=new UserInfo();
+            userInfo.setId(sybidaUser.getUserId());
+            userInfo.setPower(sybidaUser.getUserAuthority());
+            userInfo.setName(sybidaUser.getUserName());
+            userInfo.setIsLoginFirst(sybidaUser.getUserNote());
+            System.out.println();
+            request.getSession().setAttribute("userInfo",userInfo);
         }else{
             responseResult.setCode(0);
         }
@@ -62,6 +70,7 @@ public class LoginServiceImp implements LoginService{
             if(null!=list&&list.size()>0){
                 SybidaUser sybidaUser=new SybidaUser();
                 sybidaUser.setUserPassword("1234");
+                sybidaUser.setUserNote(1);
                 SybidaUserExample sybidaUserExample1=new SybidaUserExample();
                 SybidaUserExample.Criteria criteria1=sybidaUserExample1.createCriteria();
                 criteria1.andUserPhoneEqualTo(phone);
@@ -77,7 +86,7 @@ public class LoginServiceImp implements LoginService{
     }
 
     @Override
-    public ResponseResult changePhone(String phone) {
+    public ResponseResult checkPhone(String phone) {
         ResponseResult responseResult=new ResponseResult();
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
         SybidaUserExample.Criteria criteria=sybidaUserExample.createCriteria();

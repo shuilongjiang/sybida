@@ -7,10 +7,23 @@ public class UserInfo {
 
     private Integer id;
     private String name;
-    private String power;
+    private Byte power;
     private Integer messagenum;
     private String photoUrl;
     private Integer isLoginFirst;
+
+    @Override
+    public String toString() {
+        return "UserInfo{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", power=" + power +
+                ", messagenum=" + messagenum +
+                ", photoUrl='" + photoUrl + '\'' +
+                ", isLoginFirst=" + isLoginFirst +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }
@@ -27,11 +40,11 @@ public class UserInfo {
         this.name = name;
     }
 
-    public String getPower() {
+    public Byte getPower() {
         return power;
     }
 
-    public void setPower(String power) {
+    public void setPower(Byte power) {
         this.power = power;
     }
 
@@ -58,6 +71,4 @@ public class UserInfo {
     public void setIsLoginFirst(Integer isLoginFirst) {
         this.isLoginFirst = isLoginFirst;
     }
-
-
 }
