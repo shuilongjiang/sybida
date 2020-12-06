@@ -34,9 +34,14 @@ public class LoginServlet{
         return loginService.login(request,phone,psw);
     }
     @Transactional
-    @RequestMapping("changepsw")
-    public ResponseResult  changePsw(String account,String verifycode){
-        return loginService.changePsw(account,verifycode);
+    @RequestMapping("resetpsw")
+    public ResponseResult  resetPsw(String account,String verifycode){
+        return loginService.resetPsw(account,verifycode);
+    }
+    @Transactional
+    @RequestMapping("changepsd")
+    public  ResponseResult changePsd(String phone,String psd){
+       return loginService.changePsd(phone,psd);
     }
     @Transactional
     @RequestMapping("checkphone")

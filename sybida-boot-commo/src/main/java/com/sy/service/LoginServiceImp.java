@@ -48,6 +48,7 @@ public class LoginServiceImp implements LoginService{
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
+            responseResult.setMessage(String.valueOf(list.get(0).getUserNote()));
 //            String JSession=request.getSession().getId();
 //            SybidaUser sybidaUser=list.get(0);
 //            UserInfo userInfo=new UserInfo();
@@ -64,7 +65,7 @@ public class LoginServiceImp implements LoginService{
         return responseResult;
     }
     @Override
-    public ResponseResult changePsw(String phone, String vCode) {
+    public ResponseResult resetPsw(String phone, String vCode) {
         ResponseResult responseResult=new ResponseResult();
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
         SybidaUserExample.Criteria criteria=sybidaUserExample.createCriteria();
@@ -100,6 +101,24 @@ public class LoginServiceImp implements LoginService{
         }   else{
             responseResult.setCode(0);
         }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult changePsd(String phone, String psd) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaUser sybidaUser=new SybidaUser();
+        sybidaUser.setUserPassword(psd);
+        sybidaUser.setUserNote(0);
+        SybidaUserExample sybidaUserExample=new SybidaUserExample();
+        sybidaUserExample.createCriteria().andUserPhoneEqualTo(phone);
+        int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
+       if(row>0){
+           responseResult.setCode(1);
+
+       }   else{
+           responseResult.setCode(0);
+       }
         return responseResult;
     }
 }
