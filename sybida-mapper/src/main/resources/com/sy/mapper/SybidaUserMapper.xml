@@ -114,7 +114,7 @@
       #{userAlterTime,jdbcType=TIMESTAMP}, #{userNull1,jdbcType=VARCHAR}, #{userNull2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaUser" >
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaUser" useGeneratedKeys="true" keyProperty="userId">
     insert into sybida_user
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="userId != null" >
