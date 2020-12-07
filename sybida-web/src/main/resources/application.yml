@@ -23,6 +23,17 @@ spring:
         restart:
           enabled: true
           additional-paths: src/main/java
+
+  #配置多文件上传
+
+
+
+  servlet:
+    multipart:
+      max-file-size: 100MB #单个文件上传大小
+      max-request-size: 200MB #连续上传文件大小
+
+
 # 配置别名包
 mybatis:
   type-aliases-package: com.sy.pojo
@@ -41,3 +52,4 @@ logging:
 # 打印SQL语句，更细一点可以配置com.cx.mapper 即dao层的包名
 # 日志框架root配置error可以纸打印sql语句日志
 #  config: classpath:logback-spring.xml
+
