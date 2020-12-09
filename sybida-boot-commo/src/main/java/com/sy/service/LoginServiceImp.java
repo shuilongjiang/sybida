@@ -111,8 +111,6 @@ public class LoginServiceImp implements LoginService{
         sybidaUser.setUserPassword(psd);
         sybidaUser.setUserNote(0);
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
-        System.out.println(userId+"===========");
-        System.out.println(redisOpsUtil.get(userId)+"===========");
         sybidaUserExample.createCriteria().andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
