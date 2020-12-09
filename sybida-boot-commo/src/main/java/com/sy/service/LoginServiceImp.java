@@ -1,9 +1,11 @@
 package com.sy.service;
 
+import com.sy.MD5.MD5Utils;
 import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaUserExample;
 import com.sy.pojo.UserInfo;
+import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -18,8 +20,7 @@ import java.util.concurrent.TimeUnit;
 
 @Service
 public class LoginServiceImp implements LoginService{
-    @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
         ResponseResult responseResult=new ResponseResult();
@@ -33,7 +34,9 @@ public class LoginServiceImp implements LoginService{
     }
     @Autowired
     SybidaUserMapper sybidaUserMapper;
-
+//
+    @Autowired
+    RedisOpsUtil redisOpsUtil;
     @Override
     public ResponseResult login(HttpServletRequest request,String phone, String psw) {
         ResponseResult responseResult=new ResponseResult();
@@ -46,17 +49,14 @@ public class LoginServiceImp implements LoginService{
         SybidaUserExample example=new SybidaUserExample();
         example.createCriteria().andUserPhoneEqualTo(phone).andUserPasswordEqualTo(psw);
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
+
+
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
+            String id= String.valueOf(list.get(0).getUserId());
+            redisOpsUtil.set(MD5Utils.encrypt(id),id,60);
+            list.get(0).setUserNull2(MD5Utils.encrypt(id));
             responseResult.setMessage(String.valueOf(list.get(0).getUserNote()));
-//            String JSession=request.getSession().getId();
-//            SybidaUser sybidaUser=list.get(0);
-//            UserInfo userInfo=new UserInfo();
-//            userInfo.setId(sybidaUser.getUserId());
-//            userInfo.setPower(sybidaUser.getUserAuthority());
-//            userInfo.setName(sybidaUser.getUserName());
-//            userInfo.setIsLoginFirst(sybidaUser.getUserNote());
-//            redisTemplate.opsForValue().set(sybidaUser.getUserId(),JSession,60, TimeUnit.MINUTES);
         }else{
             responseResult.setCode(0);
         }
@@ -105,13 +105,15 @@ public class LoginServiceImp implements LoginService{
     }
 
     @Override
-    public ResponseResult changePsd(String phone, String psd) {
+    public ResponseResult changePsd(String userId, String psd) {
         ResponseResult responseResult=new ResponseResult();
         SybidaUser sybidaUser=new SybidaUser();
         sybidaUser.setUserPassword(psd);
         sybidaUser.setUserNote(0);
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
-        sybidaUserExample.createCriteria().andUserPhoneEqualTo(phone);
+        System.out.println(userId+"===========");
+        System.out.println(redisOpsUtil.get(userId)+"===========");
+        sybidaUserExample.createCriteria().andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
            responseResult.setCode(1);

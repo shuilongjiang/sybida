@@ -26,6 +26,7 @@
             <artifactId>sybida-boot-manager</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
+
         <dependency>
             <groupId>org.example</groupId>
             <artifactId>sybida-boot-commo</artifactId>

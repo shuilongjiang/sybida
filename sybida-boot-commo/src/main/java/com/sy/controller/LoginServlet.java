@@ -17,9 +17,6 @@ import java.util.concurrent.TimeUnit;
 @CrossOrigin
 public class LoginServlet{
     @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
-
-    @Autowired
     LoginService loginService;
     @Transactional
     @RequestMapping("loginpeople")
@@ -40,8 +37,8 @@ public class LoginServlet{
     }
     @Transactional
     @RequestMapping("changepsd")
-    public  ResponseResult changePsd(String phone,String psd){
-       return loginService.changePsd(phone,psd);
+    public  ResponseResult changePsd(String userId,String psd){
+       return loginService.changePsd(userId,psd);
     }
     @Transactional
     @RequestMapping("checkphone")

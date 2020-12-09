@@ -2,11 +2,13 @@ package com.sy.inteceptor;
 
 import com.sy.basepath.BasePath;
 import com.sy.pojo.UserInfo;
+import com.sy.redis.RedisOpsUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -14,10 +16,14 @@ import javax.servlet.http.HttpSession;
 //@Component
 public class LoginInterceptor implements HandlerInterceptor {
     @Autowired
-    private RedisTemplate<Object, Object> redisTemplate;
+    RedisOpsUtil redisOpsUtil;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        String[] strings = new String[]{
+
+        Cookie[] cookies = request.getCookies();
+//        System.out.println("==========redis"+redisOpsUtil.get(cookies[0].getName()));
+//        System.out.println(cookies[0].getValue());
+        //        String[] strings = new String[]{
 //                "*****",
 //                "*********"
 //        };
@@ -31,24 +37,19 @@ public class LoginInterceptor implements HandlerInterceptor {
 //                }
 //            }
 //        }
-//        return true;
-        String userJsession=request.getHeader("userJsession");
-       String id= (String) redisTemplate.opsForValue().get("userJsession");
+      return true;
 
-        HttpSession session = request.getSession();
-        UserInfo userInfo = (UserInfo) session.getAttribute("userInfo");
 
-        System.out.println(userInfo+"{}{}{]");
-        if(null == userInfo) {
+
 //            if(userInfo.getIsLoginFirst()==1){
                 //第一次登录
-                response.sendRedirect(BasePath.localhostPath+"/student/addStudent.html");
+//                response.sendRedirect(BasePath.localhostPath+"/student/addStudent.html");
 //            }
-            return false;
-        } else{
-            response.sendRedirect(BasePath.localhostPath+"/login.html");
-            return false;
-        }
+//            return false;
+//
+//            response.sendRedirect(BasePath.localhostPath+"/login.html");
+//            return false;
+//        }
 
 
     }

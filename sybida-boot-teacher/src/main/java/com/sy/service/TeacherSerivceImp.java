@@ -9,6 +9,7 @@ import com.sy.pojo.SybidaStudy;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaTeachExample;
 import com.sy.pojo.SybidaUser;
+import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,11 +24,13 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaTeachMapper sybidaTeachMapper;
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
-
-
+     @Autowired
+    RedisOpsUtil redisOpsUtil;
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum,String  teacherStudy1) {
         ResponseResult responseResult=new ResponseResult();
+
+
         List<SybidaTeach> list;
         PageHelper.startPage(pageNum,pageSize);
         if ("-1".equals(teacherStudy1)){

@@ -10,10 +10,17 @@ spring:
     maxActive: 20
     maxWait: 6000
   redis:
-    server:
-      host: 192.168.50.162
-      port: 6379
-      password: password
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    password:
+    # 连接超时时间
+    timeout: 100
+    lettuce:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 2
   mvc:
     view:
       prefix: /WEB-INF/
