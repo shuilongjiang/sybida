@@ -33,6 +33,17 @@ public class RedisOpsUtil {
             return false;
         }
     }
+    public boolean count(String key, long time) {
+        try {
+            if (time > 0) {
+
+            }
+            return true;
+        } catch (Exception e) {
+
+            return false;
+        }
+    }
     /**
      * 根据key 获取过期时间
      *

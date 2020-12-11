@@ -19,6 +19,6 @@ public interface SybidaReceiveMapper {
     List<SybidaReceive> selectByExample(SybidaReceiveExample example);
 
     int updateByExampleSelective(@Param("record") SybidaReceive record, @Param("example") SybidaReceiveExample example);
-
+    int selectNumUnreadMessage(@Param("userId")Integer userId);
     int updateByExample(@Param("record") SybidaReceive record, @Param("example") SybidaReceiveExample example);
 }

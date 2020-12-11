@@ -8,6 +8,7 @@ import com.sy.pojo.UserInfo;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.ContextLoader;
@@ -18,11 +19,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+@CacheConfig(cacheNames ="userid")
 @Service
 public class LoginServiceImp implements LoginService{
 
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
+
         ResponseResult responseResult=new ResponseResult();
         Integer num1= (Integer)request.getServletContext().getAttribute("num");
         if(null==num1){
@@ -54,8 +57,8 @@ public class LoginServiceImp implements LoginService{
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
             String id= String.valueOf(list.get(0).getUserId());
-            redisOpsUtil.set(MD5Utils.encrypt(id),id,60);
-            list.get(0).setUserNull2(MD5Utils.encrypt(id));
+            redisOpsUtil.set("userid::"+MD5Utils.encrypt(id),id,60);
+            list.get(0).setUserNull2("userid::"+MD5Utils.encrypt(id));
             responseResult.setMessage(String.valueOf(list.get(0).getUserNote()));
         }else{
             responseResult.setCode(0);

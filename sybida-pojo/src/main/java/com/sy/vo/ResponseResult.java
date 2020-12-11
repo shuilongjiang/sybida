@@ -2,8 +2,10 @@ package com.sy.vo;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 @Component
-public class ResponseResult {
+public class ResponseResult implements Serializable {
     /**
      * code 返回的标识
      * 0:失败

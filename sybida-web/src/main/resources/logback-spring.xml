@@ -175,7 +175,7 @@
 <!--        <logger name="com.cx" level="debug"/>-->
 <!--    </springProfile>-->
 
-    <root level="debug">
+    <root level="error">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="DEBUG_FILE" />
         <appender-ref ref="INFO_FILE" />

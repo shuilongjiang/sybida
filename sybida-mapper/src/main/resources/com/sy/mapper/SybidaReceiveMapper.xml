@@ -38,6 +38,9 @@
       </foreach>
     </where>
   </sql>
+  <select id="selectNumUnreadMessage" resultType="int">
+    select count(1) from sybida_receive where receive_user_id=#{userId} and receive_is_read=0
+  </select>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
       <foreach collection="example.oredCriteria" item="criteria" separator="or" >

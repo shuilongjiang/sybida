@@ -20,7 +20,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        Cookie[] cookies = request.getCookies();
+//        Cookie[] cookies = request.getCookies();
 //        System.out.println("==========redis"+redisOpsUtil.get(cookies[0].getName()));
 //        System.out.println(cookies[0].getValue());
         //        String[] strings = new String[]{

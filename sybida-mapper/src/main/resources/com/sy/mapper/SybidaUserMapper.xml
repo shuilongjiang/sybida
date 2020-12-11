@@ -74,6 +74,7 @@
     user_id, user_name, user_phone, user_password, user_note, user_authority, user_alter_time, 
     user_null1, user_null2
   </sql>
+
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaUserExample" >
     select
     <if test="distinct" >
@@ -87,6 +88,10 @@
     <if test="orderByClause != null" >
       order by ${orderByClause}
     </if>
+  </select>
+  <select id="selectStuInfo" resultType="com.sy.pojo.StudentInfo" >
+    select user_id,student_name,user_authority,student_photo
+    from sybida_user,sybida_student where user_id=student_id and user_id=#{UserId}
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
