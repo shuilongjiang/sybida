@@ -31,13 +31,8 @@ public class UserInfoServiceImp implements UserInfoService{
     @Cacheable(key="#p0")
     @Override
     public ResponseResult userInfoTeach(Integer userid) {
-
-
-
         TeacherInfo teacherInfo= sybidaUserMapper.selectTeacheInfo(userid);
-
         int num = sybidaReceiveMapper.selectNumUnreadMessage(userid);
-
         teacherInfo.setMessageNum(num);
         ResponseResult responseResult=new ResponseResult();
         responseResult.setCode(1);

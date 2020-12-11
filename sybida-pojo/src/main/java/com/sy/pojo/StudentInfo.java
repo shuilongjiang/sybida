@@ -12,11 +12,9 @@ public class StudentInfo implements Serializable {
     private Byte userAuthority;
     private String studentPhoto;
     private Integer messageNum;
-
     public Integer getUserId() {
         return userId;
     }
-
     public void setUserId(Integer userId) {
         this.userId = userId;
     }
