@@ -25,7 +25,7 @@ public class RedisOpsUtil {
     public boolean expire(String key, long time) {
         try {
             if (time > 0) {
-                redisTemplate.expire(key, time, TimeUnit.SECONDS);
+                redisTemplate.expire(key, time, TimeUnit.MINUTES);
             }
             return true;
         } catch (Exception e) {
@@ -33,11 +33,9 @@ public class RedisOpsUtil {
             return false;
         }
     }
-    public boolean count(String key, long time) {
+    public boolean count(String key) {
         try {
-            if (time > 0) {
-
-            }
+//            redisTemplate.countExistingKeys()
             return true;
         } catch (Exception e) {
 

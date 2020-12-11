@@ -37,5 +37,7 @@ public class RedisUtil {
     public Object getObj(String key) {
         return redisOpsUtil.get(key);
     }
-
+    public void expire(String key,long timeout){
+        redisOpsUtil.expire(key,timeout);
+    }
 }

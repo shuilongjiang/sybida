@@ -93,6 +93,10 @@
     select user_id,student_name,user_authority,student_photo
     from sybida_user,sybida_student where user_id=student_id and user_id=#{UserId}
   </select>
+  <select id="selectTeacheInfo" resultType="com.sy.pojo.TeacherInfo" >
+    select user_id,teach_name,user_authority,teach_photo
+    from sybida_user,sybida_teach where user_id=teach_id and user_id=#{UserId}
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />

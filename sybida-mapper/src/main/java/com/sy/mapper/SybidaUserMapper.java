@@ -1,9 +1,6 @@
 package com.sy.mapper;
 
-import com.sy.pojo.StudentInfo;
-import com.sy.pojo.SybidaUser;
-import com.sy.pojo.SybidaUserExample;
-import com.sy.pojo.UserInfo;
+import com.sy.pojo.*;
 import org.apache.ibatis.annotations.Param;
 import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.stereotype.Repository;
@@ -33,4 +30,5 @@ public interface SybidaUserMapper {
 
     int updateByPrimaryKey(SybidaUser record);
     StudentInfo selectStuInfo(@Param("UserId")Integer UserId);
+    TeacherInfo selectTeacheInfo(@Param("UserId")Integer UserId);
 }

@@ -115,6 +115,7 @@ public class LoginServiceImp implements LoginService{
         sybidaUser.setUserNote(0);
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
         sybidaUserExample.createCriteria().andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
+        redisOpsUtil.expire(userId,60);
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
            responseResult.setCode(1);

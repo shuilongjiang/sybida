@@ -26,20 +26,18 @@ public class UserInfoServlet {
     @Transactional
     @RequestMapping("userinfostu")
     public ResponseResult userInfoStu(String userid){
-        StudentInfo studentInfo=new StudentInfo();
 
         String userId = String.valueOf(redisUtil.getObj(userid));
-
-
-
+        redisUtil.expire(userId,60);
         return userInfoService.userInfoStu(Integer.valueOf(userId));
 
     }
     @Transactional
     @RequestMapping("userinfoteach")
-    public ResponseResult userInfoTeach(HttpServletRequest request){
-        UserInfo userInfo=new UserInfo();
-        return null;
+    public ResponseResult userInfoTeach(String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userId,60);
+        return userInfoService.userInfoTeach(Integer.valueOf(userId));
     }
 }
 

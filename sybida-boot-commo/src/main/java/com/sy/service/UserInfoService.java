@@ -9,4 +9,5 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface UserInfoService {
   ResponseResult userInfoStu(Integer userid);
+  ResponseResult userInfoTeach(Integer userid);
 }
