@@ -21,13 +21,11 @@ public class LoginServlet{
     @Transactional
     @RequestMapping("loginpeople")
     public ResponseResult loginpeople(HttpServletRequest request){
-
         return loginService.loginpeople(request);
     }
     @Transactional
     @RequestMapping("logincheck")
     public ResponseResult login(HttpServletRequest request,String phone , String psw){
-
         return loginService.login(request,phone,psw);
     }
     @Transactional
@@ -45,7 +43,6 @@ public class LoginServlet{
     public ResponseResult  checkPhone(String phone){
         return loginService.checkPhone(phone);
     }
-
     @RequestMapping("exitlogin")
     public void  exitLogin(String userid){
          loginService.exitLogin(userid);

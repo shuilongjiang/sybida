@@ -16,7 +16,6 @@ public class CompanyServiceImp implements CompanyService{
     public ResponseResult ecode(String userId) {
         ResponseResult responseResult=new ResponseResult();
         Date date=new Date();
-
         String key= MD5Utils.encrypt(date.toString()+userId);
         System.out.println(date.toString()+userId);
         redisOpsUtil.set(key,"ecode",60*24*7);

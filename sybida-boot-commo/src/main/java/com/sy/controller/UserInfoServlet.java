@@ -28,9 +28,7 @@ public class UserInfoServlet {
     public ResponseResult userInfoStu(String userid){
         redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
-
         return userInfoService.userInfoStu(Integer.valueOf(userId));
-
     }
     @Transactional
     @RequestMapping("userinfoteach")

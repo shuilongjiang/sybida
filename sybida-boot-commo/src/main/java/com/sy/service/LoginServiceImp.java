@@ -23,18 +23,16 @@ import java.util.concurrent.TimeUnit;
 @CacheConfig(cacheNames ="userid")
 @Service
 public class LoginServiceImp implements LoginService{
-     @Autowired
+    @Autowired
     RedisUtil redisUtil;
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
-        ;
         ResponseResult responseResult=new ResponseResult();
         responseResult.setCode(redisUtil.count("userid::*"));
         return responseResult;
     }
     @Autowired
     SybidaUserMapper sybidaUserMapper;
-//
     @Autowired
     RedisOpsUtil redisOpsUtil;
     @Override
@@ -52,7 +50,6 @@ public class LoginServiceImp implements LoginService{
         }else{
             responseResult.setCode(0);
         }
-
         responseResult.setData(list);
         return responseResult;
     }
@@ -95,7 +92,6 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
-
     @Override
     public ResponseResult changePsd(String userId, String psd) {
         ResponseResult responseResult=new ResponseResult();
@@ -108,13 +104,11 @@ public class LoginServiceImp implements LoginService{
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
            responseResult.setCode(1);
-
        }   else{
            responseResult.setCode(0);
        }
         return responseResult;
     }
-
     @Override
     public void exitLogin(String userid) {
         redisUtil.del(userid);
