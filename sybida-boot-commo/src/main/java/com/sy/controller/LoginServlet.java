@@ -45,4 +45,9 @@ public class LoginServlet{
     public ResponseResult  checkPhone(String phone){
         return loginService.checkPhone(phone);
     }
+
+    @RequestMapping("exitlogin")
+    public void  exitLogin(String userid){
+         loginService.exitLogin(userid);
+    }
 }

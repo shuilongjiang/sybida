@@ -6,6 +6,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -33,13 +34,13 @@ public class RedisOpsUtil {
             return false;
         }
     }
-    public boolean count(String key) {
+    public int count(String key) {
         try {
-//            redisTemplate.countExistingKeys()
-            return true;
+          Set set=redisTemplate.keys(key);
+            return set.size();
         } catch (Exception e) {
 
-            return false;
+            return 0;
         }
     }
     /**
