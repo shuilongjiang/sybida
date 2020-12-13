@@ -303,4 +303,17 @@
       job_null2 = #{jobNull2,jdbcType=VARCHAR}
     where job_id = #{jobId,jdbcType=INTEGER}
   </update>
+  <select id="selectStudentJob" resultType="com.sy.dto.StudentJobForTeacher">
+    select sj.*,st.student_name,st.student_city,sy.study_aspect
+    from sybida_job sj ,sybida_student st , sybida_study sy
+    where sj.job_study_id = sy.study_id
+    and sj.job_student_id = st.student_id
+  </select>
+  <select id="selectJobById" resultType="com.sy.dto.StudentJobForTeacher" parameterType="java.lang.Integer">
+    select sj.*,st.student_name,st.student_city,sy.study_aspect
+    from sybida_job sj ,sybida_student st , sybida_study sy
+    where sj.job_study_id = sy.study_id
+    and sj.job_student_id = st.student_id
+    and sj.job_student_id = #{stuID}
+  </select>
 </mapper>

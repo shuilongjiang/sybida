@@ -1,6 +1,7 @@
 package com.sy.mapper;
 
 
+import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaVitae;
 import com.sy.pojo.SybidaVitaeExample;
@@ -33,4 +34,6 @@ public interface SybidaVitaeMapper {
     int updateByPrimaryKey(SybidaVitae record);
 
     List<VitaeLevelForTeacher> selectAllVitaeForTeacher();
+
+
 }
