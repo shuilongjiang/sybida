@@ -1,5 +1,6 @@
 package com.sy.mapper;
 
+import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaTeachExample;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,5 @@ public interface SybidaTeachMapper {
     int updateByPrimaryKeySelective(SybidaTeach record);
 
     int updateByPrimaryKey(SybidaTeach record);
+
 }
