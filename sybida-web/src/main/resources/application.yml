@@ -10,12 +10,12 @@ spring:
     maxActive: 20
     maxWait: 6000
   redis:
-    database: 0
-    host: 127.0.0.1
+    database: 15
+    host: jianghaoyu.world
     port: 6379
-    password:
+    password: jianghaoyu-+0
     # 连接超时时间
-    timeout: 100
+    timeout: 300
     lettuce:
       pool:
         max-active: 8

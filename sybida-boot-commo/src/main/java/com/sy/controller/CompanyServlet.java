@@ -24,7 +24,6 @@ public class CompanyServlet {
     @Transactional
     @RequestMapping("ecode")
     public ResponseResult ecode(String userId){
-
         return companyService.ecode(userId);
     }
 }

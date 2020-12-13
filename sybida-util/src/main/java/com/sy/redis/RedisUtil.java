@@ -40,4 +40,12 @@ public class RedisUtil {
     public void expire(String key,long timeout){
         redisOpsUtil.expire(key,timeout);
     }
+    public int count(String keypattern){
+        return redisOpsUtil.count(keypattern);
+    }
+    public void del(String userIdKey){
+        if(redisOpsUtil.exists(userIdKey)){
+            redisOpsUtil.del(userIdKey);
+        }
+    }
 }

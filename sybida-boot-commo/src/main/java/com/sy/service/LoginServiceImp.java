@@ -6,6 +6,7 @@ import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaUserExample;
 import com.sy.pojo.UserInfo;
 import com.sy.redis.RedisOpsUtil;
+import com.sy.redis.RedisUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
@@ -22,38 +23,24 @@ import java.util.concurrent.TimeUnit;
 @CacheConfig(cacheNames ="userid")
 @Service
 public class LoginServiceImp implements LoginService{
-
+    @Autowired
+    RedisUtil redisUtil;
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
-
         ResponseResult responseResult=new ResponseResult();
-        Integer num1= (Integer)request.getServletContext().getAttribute("num");
-        if(null==num1){
-            num1=1;
-        } else{
-        }
-        responseResult.setCode(num1);
+        responseResult.setCode(redisUtil.count("userid::*"));
         return responseResult;
     }
     @Autowired
     SybidaUserMapper sybidaUserMapper;
-//
     @Autowired
     RedisOpsUtil redisOpsUtil;
     @Override
     public ResponseResult login(HttpServletRequest request,String phone, String psw) {
         ResponseResult responseResult=new ResponseResult();
-        Integer num1= (Integer)request.getServletContext().getAttribute("num");
-        if(null==num1){
-            num1=1;
-        } else{
-            num1++;
-        }
         SybidaUserExample example=new SybidaUserExample();
         example.createCriteria().andUserPhoneEqualTo(phone).andUserPasswordEqualTo(psw);
         List<SybidaUser> list=sybidaUserMapper.selectByExample(example);
-
-
         if(null!=list&&list.size()>0){
             responseResult.setCode(1);
             String id= String.valueOf(list.get(0).getUserId());
@@ -63,7 +50,6 @@ public class LoginServiceImp implements LoginService{
         }else{
             responseResult.setCode(0);
         }
-        request.getServletContext().setAttribute("num",num1);
         responseResult.setData(list);
         return responseResult;
     }
@@ -106,7 +92,6 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
-
     @Override
     public ResponseResult changePsd(String userId, String psd) {
         ResponseResult responseResult=new ResponseResult();
@@ -119,10 +104,13 @@ public class LoginServiceImp implements LoginService{
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
            responseResult.setCode(1);
-
        }   else{
            responseResult.setCode(0);
        }
         return responseResult;
+    }
+    @Override
+    public void exitLogin(String userid) {
+        redisUtil.del(userid);
     }
 }
