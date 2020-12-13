@@ -14,6 +14,7 @@ public interface TeacherSerivce {
     ResponseResult deleteTeacher(Integer deleteTeacher);
     ResponseResult deleteAllTeacher(List<Integer> list);
     ResponseResult selectAllVitae(int pageSize,int pageNum);
-    ResponseResult selectVitaeByStudentId(int id);
     ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate);
+    ResponseResult selectStudentJob(int pageSize,int pageNum);
+    ResponseResult selectJobByStuId(int id);
 }

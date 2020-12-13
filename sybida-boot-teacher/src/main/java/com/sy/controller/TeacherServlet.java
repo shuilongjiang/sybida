@@ -57,12 +57,6 @@ public class TeacherServlet {
         return responseResult;
     }
 
-    @RequestMapping("selectvitaebystudentid")
-    public ResponseResult selectVitaeByStudentId(int id) {
-        ResponseResult responseResult = teacherSerivce.selectVitaeByStudentId(id);
-        return responseResult;
-    }
-
     @RequestMapping("insertvitaeevaluatelevel")
     public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, int studentId) {
         String comments = (null == comment) ? "暂无评价" : comment;
@@ -74,6 +68,20 @@ public class TeacherServlet {
         sybidaVitaeEvaluate.setVitaeEvaluateUserId(studentId);
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;
+    }
+
+    @RequestMapping("selectstudentjob")
+    public ResponseResult selectStudentJob(String pageSize, String pageNum){
+        int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
+        int pageSizes = (null == pageSize) ? 8 : Integer.parseInt(pageSize);
+        ResponseResult responseResult = teacherSerivce.selectStudentJob(pageSizes, currPage);
+        return responseResult;
+    }
+    @RequestMapping("selectjobbyid")
+    public ResponseResult selectJobByStuId(int id){
+        ResponseResult responseResult = teacherSerivce.selectJobByStuId(id);
+        return  responseResult;
+
     }
 
 }

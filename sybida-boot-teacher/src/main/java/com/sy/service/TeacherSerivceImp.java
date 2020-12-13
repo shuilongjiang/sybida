@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
@@ -26,6 +27,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaVitaeEvaluateMapper sybidaVitaeEvaluateMapper;
     @Autowired
     SybidaVitaeMapper sybidaVitaeMapper;
+    @Autowired
+    SybidaJobMapper sybidaJobMapper;
 
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum, String teacherStudy1) {
@@ -136,17 +139,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
 
     }
 
-    @Override
-    public ResponseResult selectVitaeByStudentId(int id) {
-        ResponseResult responseResult = new ResponseResult();
-        SybidaVitaeExample sybidaVitaeExample = new SybidaVitaeExample();
-        sybidaVitaeExample.createCriteria().andVitaeIdEqualTo(id);
-        List<SybidaVitae> list = sybidaVitaeMapper.selectByExample(sybidaVitaeExample);
-        responseResult.setCode(1);
-        responseResult.setMessage("查到了");
-        responseResult.setData(list);
-        return responseResult;
-    }
+
 
     @Override
     public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
@@ -159,6 +152,31 @@ public class TeacherSerivceImp implements TeacherSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectStudentJob(int pageSize, int pageNum) {
+        ResponseResult responseResult = new ResponseResult();
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<StudentJobForTeacher> list = sybidaJobMapper.selectStudentJob();
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        PageInfo<StudentJobForTeacher> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功");
+        responseResult.setData(PageInfo);
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectJobByStuId(int id) {
+        ResponseResult responseResult = new ResponseResult();
+        StudentJobForTeacher studentJobForTeacher = sybidaJobMapper.selectJobById(id);
+        System.out.println(studentJobForTeacher);
+        responseResult.setData(studentJobForTeacher);
         return responseResult;
     }
 
