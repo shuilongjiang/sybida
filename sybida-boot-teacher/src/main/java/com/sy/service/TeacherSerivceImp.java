@@ -2,13 +2,9 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sy.mapper.SybidaStudyMapper;
-import com.sy.mapper.SybidaTeachMapper;
-import com.sy.mapper.SybidaUserMapper;
-import com.sy.pojo.SybidaStudy;
-import com.sy.pojo.SybidaTeach;
-import com.sy.pojo.SybidaTeachExample;
-import com.sy.pojo.SybidaUser;
+import com.sy.dto.VitaeLevelForTeacher;
+import com.sy.mapper.*;
+import com.sy.pojo.*;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,29 +20,34 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaTeachMapper sybidaTeachMapper;
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
-     @Autowired
+    @Autowired
     RedisOpsUtil redisOpsUtil;
+    @Autowired
+    SybidaVitaeEvaluateMapper sybidaVitaeEvaluateMapper;
+    @Autowired
+    SybidaVitaeMapper sybidaVitaeMapper;
+
     @Override
-    public ResponseResult selectPage(int pageSize, int pageNum,String  teacherStudy1) {
-        ResponseResult responseResult=new ResponseResult();
+    public ResponseResult selectPage(int pageSize, int pageNum, String teacherStudy1) {
+        ResponseResult responseResult = new ResponseResult();
 
 
         List<SybidaTeach> list;
-        PageHelper.startPage(pageNum,pageSize);
-        if ("-1".equals(teacherStudy1)){
-            SybidaTeachExample sybidaTeachExample=new SybidaTeachExample();
-            SybidaTeachExample.Criteria criteria=sybidaTeachExample.createCriteria();
+        PageHelper.startPage(pageNum, pageSize);
+        if ("-1".equals(teacherStudy1)) {
+            SybidaTeachExample sybidaTeachExample = new SybidaTeachExample();
+            SybidaTeachExample.Criteria criteria = sybidaTeachExample.createCriteria();
             criteria.andTeachNull1EqualTo("1");
-            list=sybidaTeachMapper.selectByExample(sybidaTeachExample);
-        }else {
-            SybidaTeachExample sybidaTeachExample=new SybidaTeachExample();
-            SybidaTeachExample.Criteria criteria=sybidaTeachExample.createCriteria();
+            list = sybidaTeachMapper.selectByExample(sybidaTeachExample);
+        } else {
+            SybidaTeachExample sybidaTeachExample = new SybidaTeachExample();
+            SybidaTeachExample.Criteria criteria = sybidaTeachExample.createCriteria();
             criteria.andTeachStudyIdEqualTo(Integer.valueOf(teacherStudy1)).andTeachNull1EqualTo("1");
             list = sybidaTeachMapper.selectByExample(sybidaTeachExample);
         }
-        PageInfo<SybidaTeach> pageInfo=new PageInfo<>(list);
-        for(int i=0;i<list.size();i++){
-            Integer id=list.get(i).getTeachStudyId();
+        PageInfo<SybidaTeach> pageInfo = new PageInfo<>(list);
+        for (int i = 0; i < list.size(); i++) {
+            Integer id = list.get(i).getTeachStudyId();
             SybidaStudy s = sybidaStudyMapper.selectByPrimaryKey(id);
             list.get(i).setTeachNull2(s.getStudyAspect());
         }
@@ -55,20 +56,20 @@ public class TeacherSerivceImp implements TeacherSerivce {
         responseResult.setMessage("查询成功！");
         return responseResult;
     }
+
     @Autowired
     SybidaStudy sybidaStudy;
 
     @Override
     public ResponseResult selectStudy() {
-        ResponseResult responseResult=new ResponseResult();
-        List<SybidaStudy> list=sybidaStudyMapper.selectByExample(null);
-        if(null!=list&&list.size()>0){
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaStudy> list = sybidaStudyMapper.selectByExample(null);
+        if (null != list && list.size() > 0) {
             responseResult.setCode(1);
-        }
-        else {
+        } else {
             responseResult.setCode(0);
         }
-        List<SybidaStudy> list1=new ArrayList<>();
+        List<SybidaStudy> list1 = new ArrayList<>();
         list1.add(list.get(0));
         list1.add(list.get(1));
         list1.add(list.get(2));
@@ -76,40 +77,90 @@ public class TeacherSerivceImp implements TeacherSerivce {
         responseResult.setData(list1);
         return responseResult;
     }
+
     @Autowired
     SybidaUserMapper sybidaUserMapper;
+
     @Override
     public ResponseResult deleteTeacher(Integer deleteTeacher) {
         sybidaUserMapper.deleteByPrimaryKey(deleteTeacher);
-        SybidaTeach sybidaTeach=new SybidaTeach();
+        SybidaTeach sybidaTeach = new SybidaTeach();
         sybidaTeach.setTeachId(deleteTeacher);
         sybidaTeach.setTeachNull1("0");
-        int row=sybidaTeachMapper.updateByPrimaryKeySelective(sybidaTeach);
-        ResponseResult responseResult=new ResponseResult();
-        if(row>0){
+        int row = sybidaTeachMapper.updateByPrimaryKeySelective(sybidaTeach);
+        ResponseResult responseResult = new ResponseResult();
+        if (row > 0) {
             responseResult.setCode(1);
-        }else{
+        } else {
             responseResult.setCode(0);
 
-        }        return responseResult;
+        }
+        return responseResult;
     }
 
     @Override
     public ResponseResult deleteAllTeacher(List<Integer> list) {
-        int row=0;
-        for(int i=0;i<list.size();i++) {
+        int row = 0;
+        for (int i = 0; i < list.size(); i++) {
             sybidaUserMapper.deleteByPrimaryKey(list.get(i));
             SybidaTeach sybidaTeach = new SybidaTeach();
             sybidaTeach.setTeachId(list.get(i));
             sybidaTeach.setTeachNull1("0");
-            row+= sybidaTeachMapper.updateByPrimaryKeySelective(sybidaTeach);
+            row += sybidaTeachMapper.updateByPrimaryKeySelective(sybidaTeach);
         }
-        ResponseResult responseResult=new ResponseResult();
-        if(row==list.size()){
+        ResponseResult responseResult = new ResponseResult();
+        if (row == list.size()) {
             responseResult.setCode(1);
-        }else{
+        } else {
             responseResult.setCode(0);
-
-        }        return responseResult;
+        }
+        return responseResult;
     }
+
+    @Override
+    public ResponseResult selectAllVitae(int pageSize, int pageNum) {
+
+        ResponseResult responseResult = new ResponseResult();
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<VitaeLevelForTeacher> list = sybidaVitaeMapper.selectAllVitaeForTeacher();
+//        List<SybidaVitae> list = sybidaVitaeMapper.selectByExample(null);
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        PageInfo<VitaeLevelForTeacher> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功");
+        responseResult.setData(PageInfo);
+        return responseResult;
+
+    }
+
+    @Override
+    public ResponseResult selectVitaeByStudentId(int id) {
+        ResponseResult responseResult = new ResponseResult();
+        SybidaVitaeExample sybidaVitaeExample = new SybidaVitaeExample();
+        sybidaVitaeExample.createCriteria().andVitaeIdEqualTo(id);
+        List<SybidaVitae> list = sybidaVitaeMapper.selectByExample(sybidaVitaeExample);
+        responseResult.setCode(1);
+        responseResult.setMessage("查到了");
+        responseResult.setData(list);
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
+        ResponseResult responseResult = new ResponseResult();
+        int affectedRows = sybidaVitaeEvaluateMapper.insert(sybidaVitaeEvaluate);
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功！");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败!");
+        }
+        return responseResult;
+    }
+
+
 }

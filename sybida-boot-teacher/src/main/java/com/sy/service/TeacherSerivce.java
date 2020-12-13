@@ -1,5 +1,7 @@
 package com.sy.service;
 
+import com.sy.mapper.SybidaVitaeEvaluateMapper;
+import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.vo.ResponseResult;
 
 import java.util.List;
@@ -11,4 +13,7 @@ public interface TeacherSerivce {
     ResponseResult selectStudy();
     ResponseResult deleteTeacher(Integer deleteTeacher);
     ResponseResult deleteAllTeacher(List<Integer> list);
+    ResponseResult selectAllVitae(int pageSize,int pageNum);
+    ResponseResult selectVitaeByStudentId(int id);
+    ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate);
 }
