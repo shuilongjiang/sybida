@@ -1,7 +1,7 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://jianghaoyu.world:3306/sybida?characterencoding=utf-8&serverTimezone=UTC
+    url: jdbc:mysql://jianghaoyu.world:3306/sybida?characterEncoding=utf-8&serverTimezone=UTC&useUnicode=true
     username: admin
     password: jianghaoyu-+0
     driverClassName: com.mysql.cj.jdbc.Driver
