@@ -22,9 +22,9 @@ public class ClassInfoServlet {
     ClassInfoService classInfoService;
     @Transactional
     @RequestMapping("selectPage")
-    public ResponseResult selectByPage(String currPage,String pageSize){
-        System.out.println(currPage+"====================");
-        responseResult=classInfoService.selectAllByPage(Integer.valueOf(currPage),Integer.valueOf(pageSize));
+    public ResponseResult selectByPage(String pageNum,String pageSize,String selectClass){
+        System.out.println(pageNum+"====================");
+        responseResult=classInfoService.selectAllByPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize), selectClass);
         return responseResult;
     }
     @Transactional
@@ -33,12 +33,12 @@ public class ClassInfoServlet {
         List<SybidaClass> listClass=classInfoService.selectClass();
         return listClass;
     }
-    @Transactional
-    @RequestMapping("selectStudy")
-    public List<SybidaStudy> selectStudy(){
-        List<SybidaStudy> listStudy=classInfoService.selectStudy();
-        return listStudy;
-    }
+//    @Transactional
+//    @RequestMapping("selectStudy")
+//    public List<SybidaStudy> selectStudy(){
+//        List<SybidaStudy> listStudy=classInfoService.selectStudy();
+//        return listStudy;
+//    }
     @Transactional
     @RequestMapping("deleteClass")
     public ResponseResult deleteClass(){

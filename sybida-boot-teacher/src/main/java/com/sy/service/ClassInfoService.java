@@ -7,7 +7,7 @@ import com.sy.vo.ResponseResult;
 import java.util.List;
 
 public interface ClassInfoService {
-    ResponseResult selectAllByPage(int currPage, int pageSize);
+    ResponseResult selectAllByPage(int pageNum, int pageSize,String selectClass);
 
     ResponseResult selectByclassName(String className);
 

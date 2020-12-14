@@ -5,7 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.sy.mapper.SybidaClassMapper;
 import com.sy.mapper.SybidaStudyMapper;
 import com.sy.pojo.SybidaClass;
+import com.sy.pojo.SybidaClassExample;
 import com.sy.pojo.SybidaStudy;
+import com.sy.pojo.SybidaTeachExample;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,14 +21,27 @@ public class ClassInfoServiceImp implements ClassInfoService{
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
     @Override
-    public ResponseResult selectAllByPage(int currPage, int pageSize) {
+    public ResponseResult selectAllByPage(int pageNum, int pageSize,String selectClass) {
         ResponseResult responseResult=new ResponseResult();
-        PageHelper.startPage(currPage,pageSize);
-        List<SybidaClass> classList= sybidaClassMapper.selectByExample(null);
-        PageInfo<SybidaClass> pageInfo=new PageInfo<>(classList);
-        //设置导航页数
-        responseResult.setData(pageInfo);
-        return responseResult;
+        List<SybidaClass> classList;
+        PageHelper.startPage(pageNum,pageSize);
+        if ("-1".equals(selectClass)) {
+            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+            criteria.andClassNull1EqualTo("1");
+             classList = sybidaClassMapper.selectByExample(sybidaClassExample);
+
+        }else {
+            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+            criteria.andClassNull1EqualTo("1");
+            criteria.andClassNumEqualTo(selectClass);
+            classList = sybidaClassMapper.selectByExample(sybidaClassExample);
+        }
+            PageInfo<SybidaClass> pageInfo = new PageInfo<>(classList);
+            //设置导航页数
+            responseResult.setData(pageInfo);
+            return responseResult;
     }
 
     @Override
