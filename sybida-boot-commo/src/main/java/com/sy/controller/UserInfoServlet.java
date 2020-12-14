@@ -23,14 +23,14 @@ public class UserInfoServlet {
     RedisUtil redisUtil;
     @Autowired
     UserInfoService userInfoService;
-    @Transactional
+
     @RequestMapping("userinfostu")
     public ResponseResult userInfoStu(String userid){
         redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         return userInfoService.userInfoStu(Integer.valueOf(userId));
     }
-    @Transactional
+
     @RequestMapping("userinfoteach")
     public ResponseResult userInfoTeach(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
