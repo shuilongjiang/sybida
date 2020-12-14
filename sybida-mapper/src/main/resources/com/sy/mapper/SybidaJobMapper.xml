@@ -316,4 +316,8 @@
     and sj.job_student_id = st.student_id
     and sj.job_student_id = #{stuID}
   </select>
+
+  <select id="selectHotList" resultType="com.sy.pojo.HotList">
+   select  student_name, job_weal from sybida_student, sybida_job where job_student_id = student_id
+  </select>
 </mapper>
