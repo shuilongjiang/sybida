@@ -30,6 +30,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Autowired
     SybidaJobMapper sybidaJobMapper;
 
+    @Transactional
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum, String teacherStudy1) {
         ResponseResult responseResult = new ResponseResult();
@@ -63,6 +64,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Autowired
     SybidaStudy sybidaStudy;
 
+    @Transactional
     @Override
     public ResponseResult selectStudy() {
         ResponseResult responseResult = new ResponseResult();
@@ -84,6 +86,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Autowired
     SybidaUserMapper sybidaUserMapper;
 
+    @Transactional
     @Override
     public ResponseResult deleteTeacher(Integer deleteTeacher) {
         sybidaUserMapper.deleteByPrimaryKey(deleteTeacher);
@@ -100,7 +103,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         }
         return responseResult;
     }
-
+    @Transactional
     @Override
     public ResponseResult deleteAllTeacher(List<Integer> list) {
         int row = 0;
@@ -120,6 +123,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return responseResult;
     }
 
+    @Transactional
     @Override
     public ResponseResult selectAllVitae(int pageSize, int pageNum) {
 

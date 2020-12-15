@@ -2,7 +2,7 @@ package com.sy.mapper;
 
 import com.sy.pojo.*;
 import org.apache.ibatis.annotations.Param;
-import org.omg.PortableInterceptor.INACTIVE;
+//import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

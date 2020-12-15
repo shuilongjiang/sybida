@@ -16,4 +16,6 @@ public interface ClassInfoService {
     List<SybidaStudy> selectStudy();
 
     ResponseResult deleteClass(String classId);
+
+    ResponseResult selectTeachId(String teachId);
 }

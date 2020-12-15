@@ -20,14 +20,14 @@ public class ClassInfoServlet {
     ResponseResult responseResult;
     @Autowired
     ClassInfoService classInfoService;
-    @Transactional
+
     @RequestMapping("selectPage")
     public ResponseResult selectByPage(String pageNum,String pageSize,String selectClass){
         System.out.println(pageNum+"====================");
         responseResult=classInfoService.selectAllByPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize), selectClass);
         return responseResult;
     }
-    @Transactional
+
     @RequestMapping("selectClass")
     public List<SybidaClass> selectClass(){
         List<SybidaClass> listClass=classInfoService.selectClass();
@@ -39,10 +39,15 @@ public class ClassInfoServlet {
 //        List<SybidaStudy> listStudy=classInfoService.selectStudy();
 //        return listStudy;
 //    }
-    @Transactional
+
     @RequestMapping("deleteClass")
     public ResponseResult deleteClass(){
 
         return responseResult;
+    }
+
+    @RequestMapping("selectTeachId")
+    public ResponseResult selectTeachId(String teachId){
+        return classInfoService.selectTeachId(teachId);
     }
 }

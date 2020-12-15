@@ -4,13 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sy.mapper.SybidaClassMapper;
 import com.sy.mapper.SybidaStudyMapper;
-import com.sy.pojo.SybidaClass;
-import com.sy.pojo.SybidaClassExample;
-import com.sy.pojo.SybidaStudy;
-import com.sy.pojo.SybidaTeachExample;
+import com.sy.mapper.SybidaTeachMapper;
+import com.sy.pojo.*;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,6 +19,9 @@ public class ClassInfoServiceImp implements ClassInfoService{
     SybidaClassMapper sybidaClassMapper;
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
+    @Autowired
+    SybidaTeachMapper sybidaTeachMapper;
+    @Transactional
     @Override
     public ResponseResult selectAllByPage(int pageNum, int pageSize,String selectClass) {
         ResponseResult responseResult=new ResponseResult();
@@ -29,7 +31,7 @@ public class ClassInfoServiceImp implements ClassInfoService{
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassNull1EqualTo("1");
-             classList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            classList = sybidaClassMapper.selectByExample(sybidaClassExample);
 
         }else {
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
@@ -43,18 +45,19 @@ public class ClassInfoServiceImp implements ClassInfoService{
             responseResult.setData(pageInfo);
             return responseResult;
     }
-
+    @Transactional
     @Override
     public ResponseResult selectByclassName(String className) {
         return null;
     }
-
+    @Transactional
     @Override
     public List<SybidaClass> selectClass() {
         List<SybidaClass> listClass=sybidaClassMapper.selectByExample(null);
         return listClass;
     }
 
+    @Transactional
     @Override
     public List<SybidaStudy> selectStudy() {
         List<SybidaStudy> listStudy= sybidaStudyMapper.selectByExample(null);
@@ -62,18 +65,31 @@ public class ClassInfoServiceImp implements ClassInfoService{
     }
 
 
-
+    @Transactional
     @Override
     public ResponseResult deleteClass(String classId) {
-          ResponseResult responseResult=new ResponseResult();
-        int row= sybidaClassMapper.deleteByPrimaryKey(Integer.valueOf(classId));
-        if (row>0){
+
+        SybidaClass sybidaClass = new SybidaClass();
+        sybidaClass.setClassId(Integer.valueOf(classId));
+        sybidaClass.setClassNull1("0");
+        int row = sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
+        System.out.println(row+"sfdfsdfsdfsdfsd");
+        ResponseResult responseResult = new ResponseResult();
+        if (row > 0) {
             responseResult.setCode(1);
-            responseResult.setMessage("删除成功");
-        }else {
+        } else {
             responseResult.setCode(0);
-            responseResult.setMessage("失败");
         }
         return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectTeachId(String teachId) {
+      SybidaTeach teacher=sybidaTeachMapper.selectByPrimaryKey(Integer.valueOf(teachId));
+       ResponseResult responseResult=new ResponseResult();
+       responseResult.setCode(1);
+       responseResult.setMessage("成功");
+       responseResult.setData(teacher);
+       return responseResult;
     }
 }
