@@ -21,7 +21,7 @@ import java.util.Date;
 public class CompanyServlet {
     @Autowired
     CompanyService companyService;
-    @Transactional
+
     @RequestMapping("ecode")
     public ResponseResult ecode(String userId){
         return companyService.ecode(userId);

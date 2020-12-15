@@ -48,7 +48,7 @@ public class TeacherServlet {
 
         return teacherSerivce.deleteAllTeacher(list);
     }
-
+    @Transactional
     @RequestMapping("selectallvitae")
     public ResponseResult selectAllVitae(String pageSize, String pageNum) {
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
@@ -56,7 +56,7 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectAllVitae(pageSizes, currPage);
         return responseResult;
     }
-
+    @Transactional
     @RequestMapping("insertvitaeevaluatelevel")
     public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, int studentId) {
         String comments = (null == comment) ? "暂无评价" : comment;
@@ -69,7 +69,7 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;
     }
-
+    @Transactional
     @RequestMapping("selectstudentjob")
     public ResponseResult selectStudentJob(String pageSize, String pageNum){
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
@@ -77,6 +77,7 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectStudentJob(pageSizes, currPage);
         return responseResult;
     }
+    @Transactional
     @RequestMapping("selectjobbyid")
     public ResponseResult selectJobByStuId(int id){
         ResponseResult responseResult = teacherSerivce.selectJobByStuId(id);

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -25,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 public class LoginServiceImp implements LoginService{
     @Autowired
     RedisUtil redisUtil;
+   @Transactional
     @Override
     public ResponseResult loginpeople(HttpServletRequest request) {
         ResponseResult responseResult=new ResponseResult();
@@ -35,6 +37,7 @@ public class LoginServiceImp implements LoginService{
     SybidaUserMapper sybidaUserMapper;
     @Autowired
     RedisOpsUtil redisOpsUtil;
+    @Transactional
     @Override
     public ResponseResult login(HttpServletRequest request,String phone, String psw) {
         ResponseResult responseResult=new ResponseResult();
@@ -53,6 +56,7 @@ public class LoginServiceImp implements LoginService{
         responseResult.setData(list);
         return responseResult;
     }
+    @Transactional
     @Override
     public ResponseResult resetPsw(String phone, String vCode) {
         ResponseResult responseResult=new ResponseResult();
@@ -78,6 +82,7 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
+    @Transactional
     @Override
     public ResponseResult checkPhone(String phone) {
         ResponseResult responseResult=new ResponseResult();
@@ -92,6 +97,7 @@ public class LoginServiceImp implements LoginService{
         }
         return responseResult;
     }
+    @Transactional
     @Override
     public ResponseResult changePsd(String userId, String psd) {
         ResponseResult responseResult=new ResponseResult();

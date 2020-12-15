@@ -18,27 +18,27 @@ import java.util.concurrent.TimeUnit;
 public class LoginServlet{
     @Autowired
     LoginService loginService;
-    @Transactional
+
     @RequestMapping("loginpeople")
     public ResponseResult loginpeople(HttpServletRequest request){
         return loginService.loginpeople(request);
     }
-    @Transactional
+
     @RequestMapping("logincheck")
     public ResponseResult login(HttpServletRequest request,String phone , String psw){
         return loginService.login(request,phone,psw);
     }
-    @Transactional
+
     @RequestMapping("resetpsw")
     public ResponseResult  resetPsw(String account,String verifycode){
         return loginService.resetPsw(account,verifycode);
     }
-    @Transactional
+
     @RequestMapping("changepsd")
     public  ResponseResult changePsd(String userId,String psd){
        return loginService.changePsd(userId,psd);
     }
-    @Transactional
+
     @RequestMapping("checkphone")
     public ResponseResult  checkPhone(String phone){
         return loginService.checkPhone(phone);
