@@ -1,7 +1,10 @@
 package com.sy.MD5;
 
+import org.springframework.stereotype.Component;
+
 import java.security.MessageDigest;
 
+@Component
 public class MD5Utils {
     //盐，用于混交md5
     private static final String slat = "&%5123***&&%%$$#!";
