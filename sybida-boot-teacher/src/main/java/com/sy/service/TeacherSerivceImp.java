@@ -29,6 +29,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaVitaeMapper sybidaVitaeMapper;
     @Autowired
     SybidaJobMapper sybidaJobMapper;
+    @Autowired
+    SybidaStudentMapper sybidaStudentMapper;
 
     @Transactional
     @Override
@@ -61,8 +63,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return responseResult;
     }
 
-    @Autowired
-    SybidaStudy sybidaStudy;
+
 
     @Transactional
     @Override
@@ -145,6 +146,10 @@ public class TeacherSerivceImp implements TeacherSerivce {
 
 
 
+    @Autowired
+    SybidaStudy sybidaStudy;
+
+
     @Override
     public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
         ResponseResult responseResult = new ResponseResult();
@@ -175,12 +180,33 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return responseResult;
     }
 
+
     @Override
     public ResponseResult selectJobByStuId(int id) {
         ResponseResult responseResult = new ResponseResult();
         StudentJobForTeacher studentJobForTeacher = sybidaJobMapper.selectJobById(id);
         System.out.println(studentJobForTeacher);
         responseResult.setData(studentJobForTeacher);
+        return responseResult;
+    }
+    @Override
+    public ResponseResult selcetAllStudent(int pageSize, int pageNum) {
+        ResponseResult responseResult = new ResponseResult();
+        PageHelper.startPage(pageNum, pageSize);
+        List<SybidaStudent> list = sybidaStudentMapper.selectByExample(null);
+        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("成功");
+        responseResult.setData(PageInfo);
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selcetStudentById(int id) {
+        ResponseResult responseResult = new ResponseResult();
+        SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
+        System.out.println(sybidaStudent);
+        responseResult.setData(sybidaStudent);
         return responseResult;
     }
 

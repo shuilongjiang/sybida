@@ -17,4 +17,9 @@ public interface TeacherSerivce {
     ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate);
     ResponseResult selectStudentJob(int pageSize,int pageNum);
     ResponseResult selectJobByStuId(int id);
+    ResponseResult selcetAllStudent(int pageSize,int pageNum);
+    ResponseResult selcetStudentById(int id);
+
+
+
 }
