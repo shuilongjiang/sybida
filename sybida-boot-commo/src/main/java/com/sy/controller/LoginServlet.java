@@ -39,6 +39,12 @@ public class LoginServlet{
        return loginService.changePsd(userId,psd);
     }
 
+    @RequestMapping("oldChangePsd")
+    public  ResponseResult oldChangePsd(String userId,String oldpsd){
+        return loginService.oldChangePsd(userId,oldpsd);
+    }
+
+
     @RequestMapping("checkphone")
     public ResponseResult  checkPhone(String phone){
         return loginService.checkPhone(phone);

@@ -115,6 +115,30 @@ public class LoginServiceImp implements LoginService{
        }
         return responseResult;
     }
+
+    @Transactional
+    @Override
+    public ResponseResult oldChangePsd(String userId, String oldpsd) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaUserExample sybidaUserExample=new SybidaUserExample();
+        SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
+        criteria.andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
+        redisOpsUtil.expire(userId,60);
+        criteria.andUserPasswordEqualTo(oldpsd);
+        List<SybidaUser> userList=sybidaUserMapper.selectByExample(sybidaUserExample);
+        if (userList.size()>0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+            responseResult.setData(userList);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+            return responseResult;
+        }
+
+    }
+
     @Override
     public void exitLogin(String userid) {
         redisUtil.del(userid);

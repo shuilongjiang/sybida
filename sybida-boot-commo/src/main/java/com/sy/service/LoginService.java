@@ -10,5 +10,6 @@ public interface LoginService {
     ResponseResult resetPsw(String phone,String vCode);
     ResponseResult checkPhone(String phone);
     ResponseResult changePsd(String phone,String psd);
+    ResponseResult oldChangePsd(String userId,String oldpsd);
     void exitLogin(String userid);
 }
