@@ -22,8 +22,6 @@ public class ClassInfoServlet {
         responseResult=classInfoService.selectAllByPage(Integer.valueOf(currPage),Integer.valueOf(pageSize));
         return responseResult;
     }
-
-
     @RequestMapping("selectallstudent")
     public ResponseResult selectAllStudent(String pageSize, String pageNum){
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
@@ -31,14 +29,10 @@ public class ClassInfoServlet {
            ResponseResult responseResult = classInfoService.selcetAllStudent(pageSizes, currPage);
            return responseResult;
     }
-
     @RequestMapping("selectstudentbyid")
     public  ResponseResult selectStudentById(int id){
         ResponseResult responseResult =  classInfoService.selcetStudentById(id);
         return  responseResult;
-
-
-
     }
 
 }
