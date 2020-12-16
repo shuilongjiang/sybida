@@ -19,8 +19,6 @@ public class ClassInfoServiceImp implements ClassInfoService{
     SybidaClassMapper sybidaClassMapper;
     @Autowired
     ResponseResult responseResult;
-
-
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
     @Override
@@ -39,24 +37,5 @@ public class ClassInfoServiceImp implements ClassInfoService{
         return null;
     }
 
-    @Override
-    public ResponseResult selcetAllStudent(int pageSize, int pageNum) {
-        ResponseResult responseResult = new ResponseResult();
-        PageHelper.startPage(pageNum, pageSize);
-        List<SybidaStudent> list = sybidaStudentMapper.selectByExample(null);
-        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
-        responseResult.setCode(1);
-        responseResult.setMessage("成功");
-        responseResult.setData(PageInfo);
-        return responseResult;
-    }
 
-    @Override
-    public ResponseResult selcetStudentById(int id) {
-        ResponseResult responseResult = new ResponseResult();
-        SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
-        System.out.println(sybidaStudent);
-        responseResult.setData(sybidaStudent);
-        return responseResult;
-    }
 }

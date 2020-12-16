@@ -7,7 +7,5 @@ public interface ClassInfoService {
 
     ResponseResult selectByclassName(String className);
 
-    ResponseResult selcetAllStudent(int pageSize,int pageNum);
 
-    ResponseResult selcetStudentById(int id);
 }
