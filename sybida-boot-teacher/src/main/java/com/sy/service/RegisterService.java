@@ -13,5 +13,7 @@ public interface RegisterService {
 
     List<SybidaTeach> selectTeacher();
 
-    ResponseResult insertSelective(RegisterExcel record, PartStudent partStudent);
+    int insertSelective(RegisterExcel record, PartStudent partStudent);
+
+    int updateClass(PartStudent partStudent);
 }

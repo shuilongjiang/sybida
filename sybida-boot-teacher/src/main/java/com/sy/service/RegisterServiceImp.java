@@ -39,35 +39,54 @@ public class RegisterServiceImp implements RegisterService {
         List<SybidaTeach> listTeacher=sybidaTeachMapper.selectByExample(null);
         return listTeacher;
     }
-    @Transactional
+    @Transactional(rollbackFor=Exception.class)//让checked例外也回滚：在整个方法前加上
     @Override
-    public ResponseResult insertSelective(RegisterExcel record, PartStudent partStudent) {
-        SybidaUser sybidaUser=new SybidaUser();
-        System.out.println(record.getName()+"++++++++++++++++++=====");
-        sybidaUser.setUserName(record.getName());
-        sybidaUser.setUserPassword("123456");
-        sybidaUser.setUserPhone(record.getPhone());
-        sybidaUser.setUserNote(1);
-        sybidaUser.setUserAuthority((byte)2);
-        sybidaUser.setUserAlterTime(new Date());
-        int row1=sybidaUserMapper.insertSelective(sybidaUser);
+    public int insertSelective(RegisterExcel record, PartStudent partStudent) {
+        ResponseResult responseResult = new ResponseResult();
+        String phone = record.getPhone().replace(",","");
+        SybidaUserExample sybidaUserExample=new SybidaUserExample();
+        SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
+        criteria.andUserNameEqualTo(record.getName());
+        criteria.andUserPhoneEqualTo(record.getPhone());
+        List<SybidaUser> listUser=sybidaUserMapper.selectByExample(sybidaUserExample);
+       if (listUser.size()>0) {
+           SybidaUser sybidaUser = new SybidaUser();
+           sybidaUser.setUserName(record.getName());
+           sybidaUser.setUserPassword("123456");
+           sybidaUser.setUserPhone(phone);
+           sybidaUser.setUserNote(1);
+           sybidaUser.setUserAuthority((byte) 2);
+           sybidaUser.setUserAlterTime(new Date());
+           int row1 = sybidaUserMapper.insertSelective(sybidaUser);
 
-            SybidaStudent sybidaStudent=new SybidaStudent();
-            sybidaStudent.setStudentId(sybidaUser.getUserId());
-            sybidaStudent.setStudentName(sybidaUser.getUserName());
-            sybidaStudent.setStudentPhone(sybidaUser.getUserPhone());
-            sybidaStudent.setStudentClassId(Integer.valueOf(partStudent.getSelectClass()));
-            sybidaStudent.setStudentStudyId(Integer.valueOf(partStudent.getSelectStudy()));
-            sybidaStudent.setStudentNull1("B");
-         int row2= sybidaStudentMapper.insertSelective(sybidaStudent);
+           SybidaStudent sybidaStudent = new SybidaStudent();
+           sybidaStudent.setStudentId(sybidaUser.getUserId());
+           sybidaStudent.setStudentName(sybidaUser.getUserName());
+           sybidaStudent.setStudentPhone(sybidaUser.getUserPhone());
+           sybidaStudent.setStudentClassId(Integer.valueOf(partStudent.getSelectClass()));
+           sybidaStudent.setStudentStudyId(Integer.valueOf(partStudent.getSelectStudy()));
+           sybidaStudent.setStudentNull1("B");
+           int row2 = sybidaStudentMapper.insertSelective(sybidaStudent);
+           if (row1 > 0 && row2 > 0) {
+               return 1;
+           } else {
 
-         SybidaClass sybidaClass=new SybidaClass();
-         sybidaClass.setClassId(Integer.valueOf(partStudent.getSelectClass()));
-         sybidaClass.setClassTeachId(Integer.valueOf(partStudent.getSelectTeacher()));
-        int row3= sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
+               return 0;
+           }
+       }
+       return 0;
+    }
 
-
-
-        return null;
+    @Override
+    public int updateClass(PartStudent partStudent) {
+        SybidaClass sybidaClass = new SybidaClass();
+        sybidaClass.setClassId(Integer.valueOf(partStudent.getSelectClass()));
+        sybidaClass.setClassTeachId(Integer.valueOf(partStudent.getSelectTeacher()));
+        sybidaClass.setClassStudyId(Integer.valueOf(partStudent.getSelectStudy()));
+        int row3 = sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
+        if (row3>0){
+            return 1;
+        }
+      return 0;
     }
 }

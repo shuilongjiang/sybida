@@ -24,20 +24,11 @@ public class RegisterServlet {
      @Autowired
      RegisterService registerService;
 
-     @RequestMapping("registerstu")
-     public ResponseResult registerStu() {
-          ResponseResult responseResult = new ResponseResult();
-          List<RegisterExcel> receive = JxcelParser.parser().parseFromFile(RegisterExcel.class, new File("E:\\youku\\xuesheng.xlsx"));
-          System.out.println(receive);
-          System.out.println(receive.size());
 
-          return null;
-     }
 
      @RequestMapping("registerstudent")
      public ResponseResult registerStudent(@RequestParam("file") MultipartFile file, PartStudent partStudent) {
           ResponseResult responseResult=new ResponseResult();
-          System.out.println(partStudent+"--------------------");
           String rdSpeed = null;
           if (!file.isEmpty()) {
                System.out.println("文件上传成功");
@@ -53,18 +44,25 @@ public class RegisterServlet {
                responseResult.setMessage("文件格式不符合要求");
                return responseResult;
           }
+          int affectedRows=0;
+          int row=0;
          for (int i=0;i<receive.size();i++){
-//              int affectedRows = registerService.insertSelective(receive.get(i),partStudent);
+               affectedRows += registerService.insertSelective(receive.get(i),partStudent);
+              if (i==receive.size()-1){
+                row=registerService.updateClass(partStudent);
+              }
          }
 
-          System.out.println(receive);
-          System.out.println(receive.size());
-               responseResult.setCode(1);
-               responseResult.setMessage("转换成功");
-               return responseResult;
-
-
-          }
+         if (affectedRows==receive.size() && row==1){
+              responseResult.setCode(1);
+              responseResult.setMessage("插入成功");
+              return responseResult;
+         }else {
+              responseResult.setCode(0);
+              responseResult.setMessage("插入失败");
+         }
+           return responseResult;
+     }
 
      @RequestMapping("selectClass")
      public List<SybidaClass> selectClass(){
