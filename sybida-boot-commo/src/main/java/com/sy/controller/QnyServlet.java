@@ -15,7 +15,6 @@ import java.util.UUID;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping("qny")
 public class QnyServlet {
     @Autowired

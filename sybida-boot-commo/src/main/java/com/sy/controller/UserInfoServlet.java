@@ -17,7 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 
 @RequestMapping("user")
 @RestController
-@CrossOrigin
 public class UserInfoServlet {
     @Autowired
     RedisUtil redisUtil;
