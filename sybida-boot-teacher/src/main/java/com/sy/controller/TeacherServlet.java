@@ -45,7 +45,6 @@ public class TeacherServlet {
 
     @RequestMapping("deleteallteacher")
     public ResponseResult deleteAllTeacher(@RequestBody List<Integer> list) {
-
         return teacherSerivce.deleteAllTeacher(list);
     }
 

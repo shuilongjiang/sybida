@@ -7,6 +7,7 @@ import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,13 +42,20 @@ public class ClassInfoServlet {
 //    }
 
     @RequestMapping("deleteClass")
-    public ResponseResult deleteClass(){
-
-        return responseResult;
+    public ResponseResult deleteClass(String classId){
+        return  classInfoService.deleteClass(classId);
     }
 
     @RequestMapping("selectTeachId")
     public ResponseResult selectTeachId(String teachId){
         return classInfoService.selectTeachId(teachId);
     }
+
+    @RequestMapping("deleteAllClass")
+    public ResponseResult deleteAllClass(@RequestBody List<Integer> list) {
+        return classInfoService.deleteAllClass(list);
+    }
+
 }
+
+

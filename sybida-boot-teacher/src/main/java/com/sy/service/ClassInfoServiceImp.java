@@ -73,12 +73,13 @@ public class ClassInfoServiceImp implements ClassInfoService{
         sybidaClass.setClassId(Integer.valueOf(classId));
         sybidaClass.setClassNull1("0");
         int row = sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
-        System.out.println(row+"sfdfsdfsdfsdfsd");
         ResponseResult responseResult = new ResponseResult();
         if (row > 0) {
             responseResult.setCode(1);
+            responseResult.setMessage("删除成功");
         } else {
             responseResult.setCode(0);
+            responseResult.setMessage("删除失败");
         }
         return responseResult;
     }
@@ -91,5 +92,25 @@ public class ClassInfoServiceImp implements ClassInfoService{
        responseResult.setMessage("成功");
        responseResult.setData(teacher);
        return responseResult;
+    }
+
+    @Override
+    public ResponseResult deleteAllClass(List<Integer> list) {
+        int row = 0;
+        for (int i = 0; i < list.size(); i++) {
+            SybidaClass sybidaClass =new SybidaClass();
+            sybidaClass.setClassId(list.get(i));
+            sybidaClass.setClassNull1("0");
+            row += sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
+        }
+        ResponseResult responseResult = new ResponseResult();
+        if (row == list.size()) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("错误");
+        }
+        return responseResult;
     }
 }

@@ -18,4 +18,6 @@ public interface ClassInfoService {
     ResponseResult deleteClass(String classId);
 
     ResponseResult selectTeachId(String teachId);
+
+    ResponseResult deleteAllClass(List<Integer> list);
 }
