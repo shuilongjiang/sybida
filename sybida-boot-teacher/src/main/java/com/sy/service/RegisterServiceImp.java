@@ -50,7 +50,7 @@ public class RegisterServiceImp implements RegisterService {
         sybidaUser.setUserNote(1);
         sybidaUser.setUserAuthority((byte)2);
         sybidaUser.setUserAlterTime(new Date());
-        int affecedRows=sybidaUserMapper.insertSelective(sybidaUser);
+        int row1=sybidaUserMapper.insertSelective(sybidaUser);
 
             SybidaStudent sybidaStudent=new SybidaStudent();
             sybidaStudent.setStudentId(sybidaUser.getUserId());
@@ -59,11 +59,12 @@ public class RegisterServiceImp implements RegisterService {
             sybidaStudent.setStudentClassId(Integer.valueOf(partStudent.getSelectClass()));
             sybidaStudent.setStudentStudyId(Integer.valueOf(partStudent.getSelectStudy()));
             sybidaStudent.setStudentNull1("B");
-         int row= sybidaStudentMapper.insertSelective(sybidaStudent);
+         int row2= sybidaStudentMapper.insertSelective(sybidaStudent);
 
          SybidaClass sybidaClass=new SybidaClass();
-
-//         sybidaClassMapper.updateByPrimaryKeySelective();
+         sybidaClass.setClassId(Integer.valueOf(partStudent.getSelectClass()));
+         sybidaClass.setClassTeachId(Integer.valueOf(partStudent.getSelectTeacher()));
+        int row3= sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
 
 
 
