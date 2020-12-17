@@ -54,7 +54,7 @@ public class RegisterServlet {
                return responseResult;
           }
          for (int i=0;i<receive.size();i++){
-              int affectedRows = registerService.insertSelective(receive.get(i),partStudent);
+//              int affectedRows = registerService.insertSelective(receive.get(i),partStudent);
          }
 
           System.out.println(receive);

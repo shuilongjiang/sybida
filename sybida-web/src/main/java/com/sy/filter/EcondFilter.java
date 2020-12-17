@@ -25,7 +25,7 @@ public class EcondFilter implements Filter {
 
 //解决后端到前端的跨域问题，前提是不能使用ajax请求，要是用location.href请求
 //        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
-//        httpServletResponse.setHeader("Access-Control-Allow-Headers", "*");
+//        httpServletResponse.setHeader("Access-Control-Allow-  Headers", "*");
 //        httpServletResponse.setHeader("Access-Control-Allow-Methods", "*");
 //        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
 //        httpServletResponse.setHeader("Access-Control-Max-Age", "3600");
