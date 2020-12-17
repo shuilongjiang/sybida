@@ -14,7 +14,6 @@ import java.util.concurrent.TimeUnit;
 
 @RequestMapping("login")
 @RestController
-@CrossOrigin
 public class LoginServlet{
     @Autowired
     LoginService loginService;

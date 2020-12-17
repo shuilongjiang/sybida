@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -94,6 +95,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         SybidaTeach sybidaTeach = new SybidaTeach();
         sybidaTeach.setTeachId(deleteTeacher);
         sybidaTeach.setTeachNull1("0");
+        sybidaTeach.setTeachAlterTime(new Date());
         int row = sybidaTeachMapper.updateByPrimaryKeySelective(sybidaTeach);
         ResponseResult responseResult = new ResponseResult();
         if (row > 0) {
