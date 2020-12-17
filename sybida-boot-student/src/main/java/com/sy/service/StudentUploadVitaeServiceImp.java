@@ -6,11 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.xml.crypto.Data;
 import java.util.Date;
 
 @Service
-public class StudentUploadVitaeImp implements StudentUploadVitae{
+public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
     @Autowired
@@ -28,6 +27,12 @@ public class StudentUploadVitaeImp implements StudentUploadVitae{
     @Transactional
     @Override
     public Integer UploadVitae(String userId, String studyId,String filename) {
+        SybidaVitaeExample sybidaVitaeExample=new SybidaVitaeExample();
+        SybidaVitaeExample.Criteria criteria = sybidaVitaeExample.createCriteria();
+        criteria.andVitaeStudentIdEqualTo(Integer.valueOf(userId));
+        SybidaVitae sybidaVitae1=new SybidaVitae();
+        sybidaVitae1.setVitaeIsNew(0);
+        sybidaVitaeMapper.updateByExampleSelective(sybidaVitae1,sybidaVitaeExample);
         sybidaStudent=sybidaStudentMapper.selectByPrimaryKey(Integer.valueOf(userId));
         sybidaClass=sybidaClassMapper.selectByPrimaryKey(sybidaStudent.getStudentClassId());
         SybidaNews sybidaNews=new SybidaNews();
@@ -48,7 +53,11 @@ public class StudentUploadVitaeImp implements StudentUploadVitae{
         SybidaVitae sybidaVitae=new SybidaVitae();
         sybidaVitae.setVitaeAlterTime(date);
         sybidaVitae.setVitaeStudentId(Integer.valueOf(userId));
-//        sybidaVitaeMapper.insert()
-        return 0;
+        sybidaVitae.setVitaeStudyId(Integer.valueOf(studyId));
+        sybidaVitae.setVitaeIsNew(1);
+        sybidaVitae.setVitaeUrl(filename);
+        sybidaVitae.setVitaeIsRead((byte) 0);
+        sybidaVitaeMapper.insert(sybidaVitae);
+        return 1;
     }
 }
