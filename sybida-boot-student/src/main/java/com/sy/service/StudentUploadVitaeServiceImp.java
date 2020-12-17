@@ -2,11 +2,13 @@ package com.sy.service;
 
 import com.sy.mapper.*;
 import com.sy.pojo.*;
+import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
@@ -61,5 +63,23 @@ public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
         sybidaVitae.setVitaeIsRead((byte) 0);
         sybidaVitaeMapper.insert(sybidaVitae);
         return 1;
+    }
+    @Transactional
+    @Override
+    public ResponseResult personalVitae(String userId, String isDelete) {
+        ResponseResult  responseResult =new ResponseResult();
+        SybidaVitaeExample sybidaVitaeExample=new SybidaVitaeExample();
+        sybidaVitaeExample.createCriteria().andVitaeStudentIdEqualTo(Integer.valueOf(userId))
+                .andVitaeIsNewEqualTo(Integer.valueOf(isDelete));
+        List<SybidaVitae> list= sybidaVitaeMapper.selectByExample(sybidaVitaeExample);
+        if(null!=list&&list.size()>0){
+            responseResult.setCode(1);
+            responseResult.setMessage(list.get(0).getVitaeUrl());
+        }else{
+            responseResult.setCode(0);
+            responseResult.setMessage("");
+        }
+
+        return responseResult;
     }
 }

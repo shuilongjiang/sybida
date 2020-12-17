@@ -25,11 +25,18 @@ public class StudentUploadVitaeServlet {
         if(filename.length()>32){
             studentUploadVitaeService.UploadVitae(userId,studyid,filename);
             responseResult.setCode(1);
-            responseResult.setMessage("上传成功"+filename);
+            responseResult.setMessage(filename);
         }else{
             responseResult.setCode(0);
             responseResult.setMessage("上传失败"+filename);
         }
         return responseResult;
+    }
+    @RequestMapping("personalvitae")
+    public ResponseResult personalVitae(String userid,String isDelete){
+        redisUtil.expire(userid,60);
+        String userId= String.valueOf(redisUtil.getObj(userid));
+
+        return studentUploadVitaeService.personalVitae(userId,isDelete);
     }
 }

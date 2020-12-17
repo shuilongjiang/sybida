@@ -19,10 +19,12 @@ import java.util.UUID;
 public class QnyServlet {
     @Autowired
     private QnyService qnyService;
+    //删除文件
     @RequestMapping("deletemp")
     public  ResponseResult deletemap(String fileKey){
        return qnyService.delete(fileKey);
     }
+    //上传文件
     @RequestMapping(value = "testUpload", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult uploadImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
