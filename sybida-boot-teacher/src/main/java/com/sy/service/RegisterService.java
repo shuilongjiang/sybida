@@ -15,5 +15,7 @@ public interface RegisterService {
 
     int insertSelective(RegisterExcel record, PartStudent partStudent);
 
-    int updateClass(PartStudent partStudent);
+    int createClass(PartStudent partStudent);
+
+    List<SybidaClass> selectClassName(String name);
 }

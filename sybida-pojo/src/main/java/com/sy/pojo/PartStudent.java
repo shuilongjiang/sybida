@@ -1,16 +1,17 @@
 package com.sy.pojo;
 
 public class PartStudent {
-   private String selectClass;
+   private String classCreate;
    private String selectStudy;
    private String selectTeacher;
+   private String insetManager;
 
-    public String getSelectClass() {
-        return selectClass;
+    public String getClassCreate() {
+        return classCreate;
     }
 
-    public void setSelectClass(String selectClass) {
-        this.selectClass = selectClass;
+    public void setClassCreate(String classCreate) {
+        this.classCreate = classCreate;
     }
 
     public String getSelectStudy() {
@@ -29,12 +30,21 @@ public class PartStudent {
         this.selectTeacher = selectTeacher;
     }
 
+    public String getInsetManager() {
+        return insetManager;
+    }
+
+    public void setInsetManager(String insetManager) {
+        this.insetManager = insetManager;
+    }
+
     @Override
     public String toString() {
         return "PartStudent{" +
-                "selectClass='" + selectClass + '\'' +
+                "classCreate='" + classCreate + '\'' +
                 ", selectStudy='" + selectStudy + '\'' +
                 ", selectTeacher='" + selectTeacher + '\'' +
+                ", insetManager='" + insetManager + '\'' +
                 '}';
     }
 }

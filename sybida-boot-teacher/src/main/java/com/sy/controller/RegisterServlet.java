@@ -3,6 +3,7 @@ package com.sy.controller;
 
 import com.jptangchina.jxcel.JxcelParser;
 import com.sy.pojo.*;
+import com.sy.redis.RedisUtil;
 import com.sy.register.IOxlsl;
 import com.sy.service.RegisterService;
 import com.sy.vo.ResponseResult;
@@ -23,6 +24,8 @@ import java.util.List;
 public class RegisterServlet {
      @Autowired
      RegisterService registerService;
+     @Autowired
+     RedisUtil redisUtil;
 
 
 
@@ -47,10 +50,10 @@ public class RegisterServlet {
           int affectedRows=0;
           int row=0;
          for (int i=0;i<receive.size();i++){
-               affectedRows += registerService.insertSelective(receive.get(i),partStudent);
-              if (i==receive.size()-1){
-                row=registerService.updateClass(partStudent);
+              if (i==0){
+                   row=registerService.createClass(partStudent);
               }
+               affectedRows += registerService.insertSelective(receive.get(i),partStudent);
          }
 
          if (affectedRows==receive.size() && row==1){
@@ -79,6 +82,39 @@ public class RegisterServlet {
      public List<SybidaTeach> selectTeacher(){
           List<SybidaTeach> listTeacher=registerService.selectTeacher();
           return listTeacher;
+     }
+     @RequestMapping("getCookValue")
+     public ResponseResult getCookValue(String userid){
+          ResponseResult responseResult=new ResponseResult();
+          String userId = String.valueOf(redisUtil.getObj(userid));
+          redisUtil.expire(userId,60);
+          if (null==userId){
+               responseResult.setCode(0);
+               responseResult.setMessage("错误");
+               return responseResult;
+          }else {
+               responseResult.setCode(1);
+               responseResult.setMessage("成功");
+               responseResult.setData(userId);
+               return responseResult;
+          }
+
+     }
+
+     @RequestMapping("selectClassName")
+     public ResponseResult selectClassName(String className){
+          ResponseResult responseResult=new ResponseResult();
+        List<SybidaClass> classList= registerService.selectClassName(className);
+          if (classList.size()==0){
+               responseResult.setCode(1);
+               responseResult.setMessage("无重复");
+               return  responseResult;
+          }else {
+               responseResult.setCode(0);
+               responseResult.setMessage("有重复");
+
+          }
+          return responseResult;
      }
 
      }

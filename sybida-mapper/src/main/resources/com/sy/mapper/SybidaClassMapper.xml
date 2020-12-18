@@ -115,7 +115,7 @@
       #{classIsGraduate,jdbcType=TINYINT}, #{classAlterTime,jdbcType=TIMESTAMP}, #{classNull1,jdbcType=VARCHAR}, 
       #{classNull2,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaClass" >
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaClass" useGeneratedKeys="true" keyProperty="classId">
     insert into sybida_class
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="classId != null" >
