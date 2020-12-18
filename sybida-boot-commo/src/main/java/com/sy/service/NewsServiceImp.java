@@ -1,5 +1,6 @@
 package com.sy.service;
 
+import com.github.pagehelper.PageHelper;
 import com.sy.mapper.SybidaNewsMapper;
 import com.sy.pojo.SybidaNews;
 import com.sy.pojo.SybidaNewsExample;
@@ -17,9 +18,10 @@ public class NewsServiceImp implements NewsService{
     SybidaNewsMapper sybidaNewsMapper;
     @Transactional
     @Override
-    public ResponseResult hadSendMessage(String userid) {
+    public ResponseResult hadSendMessage(String userid,Integer pagesize,Integer pagenum) {
         SybidaNewsExample sybidaNewsExample=new SybidaNewsExample();
         sybidaNewsExample.createCriteria().andNewsUserIdEqualTo(Integer.valueOf(userid));
+        PageHelper.startPage(pagenum,pagesize);
         List<SybidaNews> list = sybidaNewsMapper.selectByExample(sybidaNewsExample);
         ResponseResult responseResult = new ResponseResult();
         if(null!=list && list.size()>0){
