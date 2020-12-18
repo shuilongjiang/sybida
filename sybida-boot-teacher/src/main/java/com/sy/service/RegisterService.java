@@ -15,6 +15,8 @@ public interface RegisterService {
 
     int insertSelective(RegisterExcel record, PartStudent partStudent);
 
+    ResponseResult inserSelectMulTable(List<RegisterExcel> registerExcels,PartStudent partStudent) throws Exception;
+
     int createClass(PartStudent partStudent);
 
     List<SybidaClass> selectClassName(String name);
