@@ -113,4 +113,10 @@ public class ClassInfoServiceImp implements ClassInfoService{
         }
         return responseResult;
     }
+
+    @Override
+    public SybidaClass showOneClass(String classId) {
+        SybidaClass classDemo= sybidaClassMapper.selectByPrimaryKey(Integer.valueOf(classId));
+        return classDemo;
+    }
 }

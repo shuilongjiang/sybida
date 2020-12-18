@@ -42,8 +42,6 @@ public class RegisterServiceImp implements RegisterService {
     @Transactional(rollbackFor=Exception.class)//让checked例外也回滚：在整个方法前加上
     @Override
     public int insertSelective(RegisterExcel record, PartStudent partStudent) {
-        System.out.println(record+"================");
-        System.out.println(partStudent+"___________________------------");
         ResponseResult responseResult = new ResponseResult();
         String phone = record.getPhone().replace(",","");
         //查询班级中是否有重复的学生
@@ -98,6 +96,7 @@ public class RegisterServiceImp implements RegisterService {
         sybidaClass.setClassTeachId(Integer.valueOf(partStudent.getSelectTeacher()));
         sybidaClass.setClassManagerId(Integer.valueOf(partStudent.getInsetManager()));
         sybidaClass.setClassStudyId(Integer.valueOf(partStudent.getSelectStudy()));
+        sybidaClass.setClassNull1("1");
         sybidaClass.setClassAlterTime(new Date());
         int row3 = sybidaClassMapper.insertSelective(sybidaClass);
         if (row3>0){
