@@ -53,6 +53,7 @@ public class RegisterServlet {
               if (i==0){
                    row=registerService.createClass(partStudent);
               }
+
                affectedRows += registerService.insertSelective(receive.get(i),partStudent);
          }
 
