@@ -20,4 +20,6 @@ public interface ClassInfoService {
     ResponseResult selectTeachId(String teachId);
 
     ResponseResult deleteAllClass(List<Integer> list);
+
+    SybidaClass showOneClass(String classId);
 }
