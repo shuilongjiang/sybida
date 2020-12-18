@@ -100,5 +100,22 @@ public class RegisterServlet {
           }
 
      }
+
+     @RequestMapping("selectClassName")
+     public ResponseResult selectClassName(String className){
+          ResponseResult responseResult=new ResponseResult();
+        List<SybidaClass> classList= registerService.selectClassName(className);
+          if (classList.size()==0){
+               responseResult.setCode(1);
+               responseResult.setMessage("无重复");
+               return  responseResult;
+          }else {
+               responseResult.setCode(0);
+               responseResult.setMessage("有重复");
+
+          }
+          return responseResult;
+     }
+
      }
 

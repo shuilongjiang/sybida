@@ -105,4 +105,13 @@ public class RegisterServiceImp implements RegisterService {
         }
       return 0;
     }
+
+    @Override
+    public List<SybidaClass> selectClassName(String name) {
+        SybidaClassExample sybidaClassExample=new SybidaClassExample();
+        SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+        criteria.andClassNumEqualTo(name);
+        List<SybidaClass> classList= sybidaClassMapper.selectByExample(sybidaClassExample);
+        return classList;
+    }
 }
