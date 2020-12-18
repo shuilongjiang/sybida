@@ -1,5 +1,6 @@
 package com.sy.mapper;
 
+import com.sy.dto.AuditionForTeacher;
 import com.sy.pojo.SybidaAudition;
 import com.sy.pojo.SybidaAuditionExample;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +30,8 @@ public interface SybidaAuditionMapper {
     int updateByPrimaryKeySelective(SybidaAudition record);
 
     int updateByPrimaryKey(SybidaAudition record);
+
+    List<AuditionForTeacher> selectAuditionByauditionStudentIdForTeacher(Integer auditionStudentId);
+
+    AuditionForTeacher selectstudentInterviewbyauditionId(Integer auditionId);
 }
