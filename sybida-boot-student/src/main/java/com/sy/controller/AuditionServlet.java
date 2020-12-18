@@ -23,7 +23,7 @@ public class AuditionServlet {
     @RequestMapping("selectClass")
     //根据用户ID查询班级信息
     public ResponseResult selectByClass(String userid) {
-        System.out.println(userid+"=======");
+        System.out.println(userid+"=================");
         redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = auditionSerivce.selectClass(userId);
