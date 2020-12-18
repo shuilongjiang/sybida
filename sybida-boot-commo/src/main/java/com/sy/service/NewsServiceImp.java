@@ -32,4 +32,12 @@ public class NewsServiceImp implements NewsService{
         responseResult.setData(list);
         return responseResult;
     }
+    @Transactional
+    @Override
+    public ResponseResult messageSendCount(String userId) {
+        int row=sybidaNewsMapper.selectNewsCount(userId);
+        ResponseResult responseResult=new ResponseResult();
+        responseResult.setCode(row);
+        return responseResult;
+    }
 }
