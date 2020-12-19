@@ -1,7 +1,6 @@
 package com.sy.controller;
 
 
-import com.alibaba.druid.util.StringUtils;
 import com.jptangchina.jxcel.JxcelParser;
 import com.sy.pojo.*;
 import com.sy.redis.RedisUtil;
@@ -17,7 +16,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -40,22 +41,32 @@ public class RegisterServlet {
                System.out.println("文件上传成功");
           }
           List<RegisterExcel> receive = null;
+          Set<String> set = new HashSet<String>();
           try {
                File sb = IOxlsl.file(file);
                receive = JxcelParser.parser().parseFromFile(RegisterExcel.class, sb);
-
           }catch (Exception e){
                e.printStackTrace();
                responseResult.setCode(0);
                responseResult.setMessage("文件格式不符合要求");
                return responseResult;
           }
-          try {
-               responseResult=registerService.inserSelectMulTable(receive,partStudent);
-          }catch (Exception e){
-               return responseResult;
-          }
-          return responseResult;
+
+         for(int i=0;i<receive.size();i++){
+              set.add(receive.get(i).getPhone());
+         }
+         if (set.size()==receive.size()){
+              try {
+                   responseResult=registerService.inserSelectMulTable(receive,partStudent);
+              }catch (Exception e){
+                   return responseResult;
+              }
+              return responseResult;
+         }else {
+              responseResult.setCode(-1);
+              responseResult.setMessage("Excel表有中重复的电话号码");
+         }
+         return responseResult;
      }
 
      @RequestMapping("selectClass")
