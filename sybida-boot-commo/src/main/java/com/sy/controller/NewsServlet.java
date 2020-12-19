@@ -22,10 +22,23 @@ public class NewsServlet {
         return newsService.hadSendMessage(userId,Integer.valueOf(pagesize),Integer.valueOf(pagenum));
     }
 
+
     @RequestMapping("hadSendmessagecount")
     public ResponseResult messageSendCount(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
         redisUtil.expire(userId,60);
         return newsService.messageSendCount(userId);
+    }
+    @RequestMapping("receivemessagecount")
+    public ResponseResult receiveMessageCount(String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userId,60);
+        return newsService.receiveMessageCount(userId);
+    }
+    @RequestMapping("receivemessage")
+    public ResponseResult receiveMessage(String userid,String pagesize,String pagenum){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userId,60);
+        return newsService.receiveMessage(Integer.valueOf(userId),Integer.valueOf(pagesize),Integer.valueOf(pagenum));
     }
 }

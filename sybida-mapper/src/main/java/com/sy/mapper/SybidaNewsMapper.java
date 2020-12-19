@@ -32,4 +32,5 @@ public interface SybidaNewsMapper {
     int updateByPrimaryKey(SybidaNews record);
     List<SybidaNewsAndReceive> selectNewsAndReceive(Integer receiveId);
     int selectNewsCount(String userId);
+    int selectReceiveNewsCount(Integer userId);
 }
