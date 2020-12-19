@@ -56,26 +56,6 @@ public class RegisterServlet {
                return responseResult;
           }
           return responseResult;
-
-//          int affectedRows=0;
-//          int row=0;
-//         for (int i=0;i<receive.size();i++){
-//              if (i==0){
-//                   row=registerService.createClass(partStudent);
-//              }
-//
-//               affectedRows += registerService.insertSelective(receive.get(i),partStudent);
-//         }
-//
-//         if (affectedRows==receive.size() && row==1){
-//              responseResult.setCode(1);
-//              responseResult.setMessage("插入成功");
-//              return responseResult;
-//         }else {
-//              responseResult.setCode(0);
-//              responseResult.setMessage("插入失败");
-//         }
-
      }
 
      @RequestMapping("selectClass")
