@@ -12,7 +12,6 @@
         <module>sybida-boot-commo</module>
         <module>sybida-util</module>
         <module>sybida-web</module>
-        <module>testt</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>

@@ -202,13 +202,28 @@ public class TeacherSerivceImp implements TeacherSerivce {
         responseResult.setData(PageInfo);
         return responseResult;
     }
-
     @Override
     public ResponseResult selcetStudentById(int id) {
         ResponseResult responseResult = new ResponseResult();
         SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
         System.out.println(sybidaStudent);
         responseResult.setData(sybidaStudent);
+        return responseResult;
+    }
+     @Transactional
+    @Override
+    public ResponseResult updateInfoStudent(SybidaStudent object) {
+        ResponseResult responseResult = new ResponseResult();
+//        SybidaStudent sybidaStudent = new SybidaStudent();
+        int affectedRows = sybidaStudentMapper.updateStudentInfo(object);
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功！");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败!");
+        }
+        System.out.println(object);
         return responseResult;
     }
 

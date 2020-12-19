@@ -1,16 +1,19 @@
 package com.sy.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.qiniu.util.Json;
+import com.sy.QNY.Qnyutil;
 import com.sy.basepath.BasePath;
+import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RequestMapping("teacher")
@@ -19,6 +22,8 @@ import java.util.List;
 public class TeacherServlet {
     @Autowired
     TeacherSerivce teacherSerivce;
+    @Autowired
+    ResponseResult responseResult;
 
     @Transactional
     @RequestMapping("selectpage")
@@ -94,13 +99,22 @@ public class TeacherServlet {
     public  ResponseResult selectStudentById(int id){
         ResponseResult   responseResult =  teacherSerivce.selcetStudentById(id);
         return  responseResult;
-
     }
 
-//    @RequestMapping("updateinfostudent")
-//    public  ResponseResult updateInfoStudent(Object object){
-//
-//    }
+    @RequestMapping(value = "/updatestudentinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file,SybidaStudent object){
+        if (file.isEmpty()) {
+        }else{
+            Qnyutil.delete(object.getStudentPhoto());
+            String photoUrl=Qnyutil.uploadFile(file);
+            object.setStudentPhoto(photoUrl);
+        }
+        ResponseResult responseResult = teacherSerivce.updateInfoStudent(object);
+        return responseResult;
+    }
+
+
 
 
 }
