@@ -70,7 +70,6 @@ public class RegisterServiceImp implements RegisterService {
                 //查询班级中是否有重复的学生
                 SybidaUserExample sybidaUserExample = new SybidaUserExample();
                 SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
-                criteria.andUserNameEqualTo(registerExcels.get(i).getName());
                 criteria.andUserPhoneEqualTo(phone2);
                 List<SybidaUser> listUser = sybidaUserMapper.selectByExample(sybidaUserExample);
                 if (listUser.size() == 0) {
