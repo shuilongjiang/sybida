@@ -509,4 +509,31 @@
       student_null2 = #{studentNull2,jdbcType=VARCHAR}
     where student_id = #{studentId,jdbcType=INTEGER}
   </update>
+  <update id="updateStudentInfo" parameterType="com.sy.pojo.SybidaStudent">
+
+ update sybida_student set
+student_sex = #{studentSex},
+student_identity  = #{studentIdentity},
+student_is_graduation  = #{studentIsGraduation },
+student_school  = #{studentSchool},
+student_specialty  = #{studentSpecialty},
+student_wechat  = #{studentWechat},
+student_mailbox  = #{studentMailbox},
+student_study_id  = #{studentStudyId},
+student_city  = #{studentCity},
+student_address  = #{studentAddress},
+student_parent_phone  = #{studentParentPhone},
+student_parent_name = #{studentParentName},
+student_urgent  = #{studentUrgent},
+student_phone  = #{studentPhone},
+student_class_id  = #{studentClassId},
+student_room  = #{studentRoom},
+student_photo  = #{studentPhoto}
+where  student_id = #{studentId}
+
+</update>
+
+
+
+
 </mapper>

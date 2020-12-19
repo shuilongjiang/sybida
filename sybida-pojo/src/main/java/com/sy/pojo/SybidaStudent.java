@@ -224,4 +224,32 @@ public class SybidaStudent {
     public void setStudentNull2(String studentNull2) {
         this.studentNull2 = studentNull2 == null ? null : studentNull2.trim();
     }
+
+    @Override
+    public String toString() {
+        return "SybidaStudent{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", studentSex='" + studentSex + '\'' +
+                ", studentIdentity='" + studentIdentity + '\'' +
+                ", studentIsGraduation=" + studentIsGraduation +
+                ", studentSchool='" + studentSchool + '\'' +
+                ", studentSpecialty='" + studentSpecialty + '\'' +
+                ", studentWechat='" + studentWechat + '\'' +
+                ", studentMailbox='" + studentMailbox + '\'' +
+                ", studentStudyId=" + studentStudyId +
+                ", studentCity='" + studentCity + '\'' +
+                ", studentAddress='" + studentAddress + '\'' +
+                ", studentParentPhone='" + studentParentPhone + '\'' +
+                ", studentParentName='" + studentParentName + '\'' +
+                ", studentUrgent='" + studentUrgent + '\'' +
+                ", studentPhone='" + studentPhone + '\'' +
+                ", studentClassId=" + studentClassId +
+                ", studentRoom='" + studentRoom + '\'' +
+                ", studentPhoto='" + studentPhoto + '\'' +
+                ", studentAlterTime=" + studentAlterTime +
+                ", studentNull1='" + studentNull1 + '\'' +
+                ", studentNull2='" + studentNull2 + '\'' +
+                '}';
+    }
 }

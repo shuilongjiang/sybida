@@ -1,6 +1,7 @@
 package com.sy.mapper;
 
 import com.sy.dto.StudentJobForTeacher;
+
 import com.sy.pojo.HotList;
 import com.sy.pojo.SybidaJob;
 import com.sy.pojo.SybidaJobExample;

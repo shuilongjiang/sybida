@@ -29,6 +29,10 @@ public interface SybidaStudentMapper {
 
     int updateByPrimaryKeySelective(SybidaStudent record);
 
-    int updateByPrimaryKey(SybidaStudent record);
+    int updateByPrimaryKey(int record);
+
     List<SybidaStudentAndStudyAndClass> selectByExampleSelective(SybidaStudent sybidaStudent);
+
+   int updateStudentInfo(SybidaStudent object);
+
 }
