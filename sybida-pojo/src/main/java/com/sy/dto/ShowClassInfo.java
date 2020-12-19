@@ -1,19 +1,23 @@
-package com.sy.pojo;
-
-import org.springframework.stereotype.Component;
+package com.sy.dto;
 
 import java.util.Date;
-@Component
-public class SybidaClass {
+
+public class ShowClassInfo {
     private Integer classId;
 
     private String classNum;
 
     private Integer classTeachId;
 
+    private String  classTeachName;
+
     private Integer classManagerId;
 
+    private String classManagerName;
+
     private Integer classStudyId;
+
+    private String classStudyName;
 
     private Date classTime;
 
@@ -38,7 +42,7 @@ public class SybidaClass {
     }
 
     public void setClassNum(String classNum) {
-        this.classNum = classNum == null ? null : classNum.trim();
+        this.classNum = classNum;
     }
 
     public Integer getClassTeachId() {
@@ -49,12 +53,28 @@ public class SybidaClass {
         this.classTeachId = classTeachId;
     }
 
+    public String getClassTeachName() {
+        return classTeachName;
+    }
+
+    public void setClassTeachName(String classTeachName) {
+        this.classTeachName = classTeachName;
+    }
+
     public Integer getClassManagerId() {
         return classManagerId;
     }
 
     public void setClassManagerId(Integer classManagerId) {
         this.classManagerId = classManagerId;
+    }
+
+    public String getClassManagerName() {
+        return classManagerName;
+    }
+
+    public void setClassManagerName(String classManagerName) {
+        this.classManagerName = classManagerName;
     }
 
     public Integer getClassStudyId() {
@@ -94,7 +114,7 @@ public class SybidaClass {
     }
 
     public void setClassNull1(String classNull1) {
-        this.classNull1 = classNull1 == null ? null : classNull1.trim();
+        this.classNull1 = classNull1;
     }
 
     public String getClassNull2() {
@@ -102,17 +122,28 @@ public class SybidaClass {
     }
 
     public void setClassNull2(String classNull2) {
-        this.classNull2 = classNull2 == null ? null : classNull2.trim();
+        this.classNull2 = classNull2;
+    }
+
+    public String getClassStudyName() {
+        return classStudyName;
+    }
+
+    public void setClassStudyName(String classStudyName) {
+        this.classStudyName = classStudyName;
     }
 
     @Override
     public String toString() {
-        return "SybidaClass{" +
+        return "ShowClassInfo{" +
                 "classId=" + classId +
                 ", classNum='" + classNum + '\'' +
                 ", classTeachId=" + classTeachId +
+                ", classTeachName='" + classTeachName + '\'' +
                 ", classManagerId=" + classManagerId +
+                ", classManagerName='" + classManagerName + '\'' +
                 ", classStudyId=" + classStudyId +
+                ", classStudyName='" + classStudyName + '\'' +
                 ", classTime=" + classTime +
                 ", classIsGraduate=" + classIsGraduate +
                 ", classAlterTime=" + classAlterTime +
