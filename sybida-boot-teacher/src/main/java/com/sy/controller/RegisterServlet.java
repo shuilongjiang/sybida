@@ -16,7 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RequestMapping("register")
 @RestController
@@ -37,35 +41,32 @@ public class RegisterServlet {
                System.out.println("文件上传成功");
           }
           List<RegisterExcel> receive = null;
+          Set<String> set = new HashSet<String>();
           try {
                File sb = IOxlsl.file(file);
                receive = JxcelParser.parser().parseFromFile(RegisterExcel.class, sb);
-
           }catch (Exception e){
                e.printStackTrace();
                responseResult.setCode(0);
                responseResult.setMessage("文件格式不符合要求");
                return responseResult;
           }
-          int affectedRows=0;
-          int row=0;
-         for (int i=0;i<receive.size();i++){
-              if (i==0){
-                   row=registerService.createClass(partStudent);
-              }
 
-               affectedRows += registerService.insertSelective(receive.get(i),partStudent);
+         for(int i=0;i<receive.size();i++){
+              set.add(receive.get(i).getPhone());
          }
-
-         if (affectedRows==receive.size() && row==1){
-              responseResult.setCode(1);
-              responseResult.setMessage("插入成功");
+         if (set.size()==receive.size()){
+              try {
+                   responseResult=registerService.inserSelectMulTable(receive,partStudent);
+              }catch (Exception e){
+                   return responseResult;
+              }
               return responseResult;
          }else {
-              responseResult.setCode(0);
-              responseResult.setMessage("插入失败");
+              responseResult.setCode(-1);
+              responseResult.setMessage("Excel表有中重复的电话号码");
          }
-           return responseResult;
+         return responseResult;
      }
 
      @RequestMapping("selectClass")
@@ -118,5 +119,25 @@ public class RegisterServlet {
           return responseResult;
      }
 
+     @RequestMapping("testPhone")
+     public ResponseResult testPhone(String phone) {
+          ResponseResult responseResult=new ResponseResult();
+//          String phone = "13123456789";
+          String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+          if(phone.length() != 11){
+          System.out.println("手机号应为11位数");
+           }else{
+          Pattern p = Pattern.compile(regex);
+          Matcher m = p.matcher(phone);
+          boolean isMatch = m.matches();
+          if(isMatch){
+               System.out.println("您的手机号" + phone + "是正确格式@——@");
+          } else {
+               System.out.println("您的手机号" + phone + "是错误格式！！！");
+          }
+        }
+          return null;
      }
+
+}
 

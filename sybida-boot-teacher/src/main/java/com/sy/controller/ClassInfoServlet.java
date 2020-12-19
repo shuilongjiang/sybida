@@ -2,6 +2,7 @@ package com.sy.controller;
 
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaStudy;
+import com.sy.pojo.SybidaTeach;
 import com.sy.register.DateUtil;
 import com.sy.service.ClassInfoService;
 import com.sy.vo.ResponseResult;
@@ -85,6 +86,53 @@ public class ClassInfoServlet {
         Date test4=DateUtil.string2Date(str2,"yyyy/MM/dd");
         System.out.println(test4+"````````````````````````````");
 
+        return responseResult;
+    }
+
+    @RequestMapping("selectTeacherName")
+    public ResponseResult selectTeacherName(String classTeachId){
+        ResponseResult responseResult=new ResponseResult();
+        SybidaTeach sybidaTeach= classInfoService.selectTeacherName(classTeachId);
+        if (sybidaTeach!=null){
+            responseResult.setCode(1);
+            responseResult.setMessage("查询成功");
+            responseResult.setData(sybidaTeach);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("查询失败");
+        }
+        return responseResult;
+    }
+
+    @RequestMapping("selectManagerName")
+    public ResponseResult selectManagerName(String classManagerId){
+        ResponseResult responseResult=new ResponseResult();
+        SybidaTeach sybidaTeach= classInfoService.selectTeacherName(classManagerId);
+        if (sybidaTeach!=null){
+            responseResult.setCode(1);
+            responseResult.setMessage("查询成功");
+            responseResult.setData(sybidaTeach);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("查询失败");
+        }
+        return responseResult;
+    }
+
+    @RequestMapping("selectStudyName")
+    public ResponseResult selectStudyName(String classStudyId){
+       SybidaStudy sybidaStudy= classInfoService.selectStudyName(classStudyId);
+        if (sybidaStudy!=null){
+            responseResult.setCode(1);
+            responseResult.setMessage("查询成功");
+            responseResult.setData(sybidaStudy);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("查询失败");
+        }
         return responseResult;
     }
 }

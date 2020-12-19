@@ -119,4 +119,14 @@ public class ClassInfoServiceImp implements ClassInfoService{
         SybidaClass classDemo= sybidaClassMapper.selectByPrimaryKey(Integer.valueOf(classId));
         return classDemo;
     }
+
+    @Override
+    public SybidaTeach selectTeacherName(String classTeachId) {
+        return sybidaTeachMapper.selectByPrimaryKey(Integer.valueOf(classTeachId));
+    }
+
+    @Override
+    public SybidaStudy selectStudyName(String classStudyId) {
+        return  sybidaStudyMapper.selectByPrimaryKey(Integer.valueOf(classStudyId));
+    }
 }

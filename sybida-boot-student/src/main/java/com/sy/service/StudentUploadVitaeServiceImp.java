@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.sy.mapper.*;
 import com.sy.pojo.*;
+import com.sy.register.DateUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,8 @@ public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
         SybidaNews sybidaNews=new SybidaNews();
         sybidaNews.setNewsUserId(Integer.valueOf(userId));
         Date date=new Date();
-        String news="学生--"+sybidaStudent.getStudentName()+",--在"+date+"上传了一份简历请及时查看！";
+        String dateStr=DateUtil.date2String(date,"yyyy年MM月dd号HH时mm分ss秒");
+        String news="学生--"+sybidaStudent.getStudentName()+",--在"+dateStr+"上传了一份简历请及时查看！";
         sybidaNews.setNewsTest(news);
         sybidaNews.setNewsSendTime(date);
         sybidaNews.setNewsAlterTime(date);

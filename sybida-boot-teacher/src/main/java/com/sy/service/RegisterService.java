@@ -13,7 +13,7 @@ public interface RegisterService {
 
     List<SybidaTeach> selectTeacher();
 
-    int insertSelective(RegisterExcel record, PartStudent partStudent);
+    ResponseResult inserSelectMulTable(List<RegisterExcel> registerExcels,PartStudent partStudent) throws Exception;
 
     int createClass(PartStudent partStudent);
 

@@ -16,9 +16,16 @@ public class NewsServlet {
     @Autowired
     NewsService newsService;
     @RequestMapping("hadsendmessage")
-    public ResponseResult hadSendMessage(String userid,Integer pagesize,Integer pagenum){
+    public ResponseResult hadSendMessage(String userid,String pagesize,String pagenum){
         String userId = String.valueOf(redisUtil.getObj(userid));
         redisUtil.expire(userId,60);
-        return newsService.hadSendMessage(userId,pagesize,pagenum);
+        return newsService.hadSendMessage(userId,Integer.valueOf(pagesize),Integer.valueOf(pagenum));
+    }
+
+    @RequestMapping("hadSendmessagecount")
+    public ResponseResult messageSendCount(String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userId,60);
+        return newsService.messageSendCount(userId);
     }
 }
