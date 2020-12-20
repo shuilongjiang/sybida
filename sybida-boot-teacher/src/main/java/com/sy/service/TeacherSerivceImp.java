@@ -188,7 +188,12 @@ public class TeacherSerivceImp implements TeacherSerivce {
         ResponseResult responseResult = new ResponseResult();
         StudentJobForTeacher studentJobForTeacher = sybidaJobMapper.selectJobById(id);
         System.out.println(studentJobForTeacher);
-        responseResult.setData(studentJobForTeacher);
+        if (studentJobForTeacher == null){
+            responseResult.setCode(0);
+        }else {
+            responseResult.setCode(1);
+            responseResult.setData(studentJobForTeacher);
+        }
         return responseResult;
     }
     @Override
@@ -207,7 +212,14 @@ public class TeacherSerivceImp implements TeacherSerivce {
         ResponseResult responseResult = new ResponseResult();
         SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
         System.out.println(sybidaStudent);
-        responseResult.setData(sybidaStudent);
+        if (sybidaStudent==null){
+            responseResult.setCode(0);
+            responseResult.setMessage("error");
+        }else {
+            responseResult.setData(sybidaStudent);
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+        }
         return responseResult;
     }
      @Transactional
