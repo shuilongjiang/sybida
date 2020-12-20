@@ -5,8 +5,11 @@ import com.sy.service.NewsService;
 import com.sy.vo.ResponseResult;
 import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RequestMapping("news")
 @RestController
@@ -40,5 +43,27 @@ public class NewsServlet {
         String userId = String.valueOf(redisUtil.getObj(userid));
         redisUtil.expire(userId,60);
         return newsService.receiveMessage(Integer.valueOf(userId),Integer.valueOf(pagesize),Integer.valueOf(pagenum));
+    }
+
+    @RequestMapping("delectonereceive")
+    public ResponseResult delectOneReceive(String receiveId){
+        return  newsService.delectOneReceive(receiveId);
+    }
+    @RequestMapping("isread")
+    public ResponseResult isRead(String receiveId){
+     return  newsService.isRead(receiveId);
+    }
+
+    @RequestMapping("delectonesend")
+    public ResponseResult delectOneSend(String newsId){
+       return newsService.delectOneSend(newsId);
+    }
+    @RequestMapping("deleteallnews")
+    public ResponseResult deleteAllNews(@RequestBody List<Integer> list) {
+        return   newsService.deleteAllNews(list);
+    }
+    @RequestMapping("deleteallreceive")
+    public ResponseResult deleteAllReceive(@RequestBody List<Integer> list) {
+        return newsService.deleteAllReceive(list);
     }
 }
