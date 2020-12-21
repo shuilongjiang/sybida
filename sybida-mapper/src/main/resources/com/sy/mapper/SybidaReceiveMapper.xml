@@ -39,7 +39,7 @@
     </where>
   </sql>
   <select id="selectNumUnreadMessage" resultType="int">
-    select count(1) from sybida_receive where receive_user_id=#{userId} and receive_is_read=0
+    select count(1) from sybida_receive where receive_user_id=#{userId} and receive_is_read=0 and receive_null1=1
   </select>
   <sql id="Update_By_Example_Where_Clause" >
     <where >
