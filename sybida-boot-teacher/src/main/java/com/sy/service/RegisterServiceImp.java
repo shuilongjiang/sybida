@@ -136,7 +136,7 @@ public class RegisterServiceImp implements RegisterService {
             responseResult.setMessage("出现异常");
             return responseResult;
         }
-
+//重新add
 
         @Override
         public int createClass (PartStudent partStudent){
