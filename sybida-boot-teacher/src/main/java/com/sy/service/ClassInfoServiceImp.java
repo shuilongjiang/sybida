@@ -36,30 +36,6 @@ public class ClassInfoServiceImp implements ClassInfoService{
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassNull1EqualTo("1");
             classList = sybidaClassMapper.selectByExample(sybidaClassExample);
-//            System.out.println(classList+"++++++++++");
-//            System.out.println(classList.size()+"----------------------------");
-//            for (int i=0;i<classList.size();i++){
-//                SybidaTeach sybidaTeach1= sybidaTeachMapper.selectByPrimaryKey(classList.get(i).getClassManagerId());
-//                SybidaTeach sybidaTeach2=sybidaTeachMapper.selectByPrimaryKey(classInfoList.get(i).getClassTeachId());
-//                SybidaStudy sybidaStudy=sybidaStudyMapper.selectByPrimaryKey(classInfoList.get(i).getClassStudyId());
-//                ShowClassInfo showClassInfo=new ShowClassInfo();
-//                showClassInfo.setClassId(classList.get(i).getClassId());
-//                showClassInfo.setClassNum(classInfoList.get(i).getClassNum());
-//                showClassInfo.setClassTeachId(classInfoList.get(i).getClassTeachId());
-//                showClassInfo.setClassManagerId(classInfoList.get(i).getClassManagerId());
-//                showClassInfo.setClassStudyId(classInfoList.get(i).getClassStudyId());
-//                showClassInfo.setClassIsGraduate(classInfoList.get(i).getClassIsGraduate());
-//                showClassInfo.setClassTime(classInfoList.get(i).getClassTime());
-//                showClassInfo.setClassAlterTime(classInfoList.get(i).getClassAlterTime());
-//                showClassInfo.setClassNull1(classInfoList.get(i).getClassNull1());
-//                showClassInfo.setClassNull2(classInfoList.get(i).getClassNull2());
-//                showClassInfo.setClassManagerName(sybidaTeach1.getTeachName());
-//                showClassInfo.setClassTeachName(sybidaTeach2.getTeachName());
-//                showClassInfo.setClassStudyName(sybidaStudy.getStudyAspect());
-//                classInfoList.add(showClassInfo);
-//           }
-
-
         }else {
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
