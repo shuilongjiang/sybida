@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sun.org.apache.regexp.internal.RE;
 import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
@@ -32,6 +33,10 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaJobMapper sybidaJobMapper;
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
+    @Autowired
+    SybidaStudent sybidaStudent;
+    @Autowired
+    SybidaTeach sybidaTeach;
 
     @Transactional
     @Override
@@ -151,21 +156,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Autowired
     SybidaStudy sybidaStudy;
 
-
-    @Override
-    public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
-        ResponseResult responseResult = new ResponseResult();
-        int affectedRows = sybidaVitaeEvaluateMapper.insert(sybidaVitaeEvaluate);
-        if (affectedRows > 0) {
-            responseResult.setCode(1);
-            responseResult.setMessage("成功！");
-        } else {
-            responseResult.setCode(0);
-            responseResult.setMessage("失败!");
-        }
-        return responseResult;
-    }
-
     @Override
     public ResponseResult selectStudentJob(int pageSize, int pageNum) {
         ResponseResult responseResult = new ResponseResult();
@@ -227,14 +217,17 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult updateInfoStudent(SybidaStudent object) {
         ResponseResult responseResult = new ResponseResult();
 //        SybidaStudent sybidaStudent = new SybidaStudent();
+
         int affectedRows = sybidaStudentMapper.updateStudentInfo(object);
         if (affectedRows > 0) {
             responseResult.setCode(1);
             responseResult.setMessage("成功！");
+
         } else {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
+
         System.out.println(object);
         return responseResult;
     }
@@ -266,6 +259,52 @@ public class TeacherSerivceImp implements TeacherSerivce {
              responseResult.setCode(0);
         }
 
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
+        ResponseResult responseResult = new ResponseResult();
+        int affectedRows = sybidaVitaeEvaluateMapper.insert(sybidaVitaeEvaluate);
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功！");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败!");
+        }
+        sybidaVitaeEvaluate.setVitaeEvaluateAlterTime(new Date());
+        sybidaVitaeEvaluate.setVitaeEvaluateTime(new Date());
+        return responseResult;
+    }
+    @Override
+    public ResponseResult insertTeacher(SybidaUser sybidaUser) {
+         ResponseResult responseResult = new ResponseResult();
+         int affectedRows = sybidaUserMapper.insertTeacher(sybidaUser);
+         if (affectedRows > 0){
+             responseResult.setCode(1);
+             responseResult.setMessage("成功");
+             responseResult.setData(sybidaUser);
+         }else {
+             responseResult.setCode(0);
+             responseResult.setMessage("失败");
+         }
+
+         return responseResult;
+    }
+
+    @Override
+    public ResponseResult insertTeachtwo(SybidaTeach sybidaTeach) {
+        ResponseResult responseResult=new ResponseResult();
+     int row=   sybidaTeachMapper.insertSelective(sybidaTeach);
+        if (row==1){
+            responseResult.setCode(1);
+            responseResult.setMessage("存入教师表成功");
+            return responseResult;
+        }else{
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+        }
         return responseResult;
     }
 

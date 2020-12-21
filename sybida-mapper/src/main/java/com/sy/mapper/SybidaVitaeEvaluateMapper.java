@@ -21,4 +21,6 @@ public interface SybidaVitaeEvaluateMapper {
     int updateByExampleSelective(@Param("record") SybidaVitaeEvaluate record, @Param("example") SybidaVitaeEvaluateExample example);
 
     int updateByExample(@Param("record") SybidaVitaeEvaluate record, @Param("example") SybidaVitaeEvaluateExample example);
+
+
 }

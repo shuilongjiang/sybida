@@ -31,4 +31,5 @@ public interface SybidaUserMapper {
     int updateByPrimaryKey(SybidaUser record);
     StudentInfo selectStuInfo(@Param("UserId")Integer UserId);
     TeacherInfo selectTeacheInfo(@Param("UserId")Integer UserId);
+    int insertTeacher(SybidaUser sybidaUser);
 }
