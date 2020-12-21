@@ -47,6 +47,7 @@ public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
         sybidaNews.setNewsSendTime(date);
         sybidaNews.setNewsAlterTime(date);
         sybidaNews.setNewsReadPeople(0);
+        sybidaNews.setNewsNull1("1");
         SybidaReceive sybidaReceive=new SybidaReceive();
         sybidaNewsMapper.insertSelective(sybidaNews);
 
@@ -54,6 +55,7 @@ public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
         sybidaReceive.setReceiveUserId(sybidaClass.getClassTeachId());
         sybidaReceive.setReceiveAlterTime(date);
         sybidaReceive.setReceiveIsRead((byte) 0);
+        sybidaReceive.setReceiveNull1("1");
         sybidaReceiveMapper.insertSelective(sybidaReceive);
 
         SybidaVitae sybidaVitae=new SybidaVitae();

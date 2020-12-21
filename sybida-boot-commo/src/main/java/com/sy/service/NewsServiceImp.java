@@ -22,7 +22,7 @@ public class NewsServiceImp implements NewsService{
     @Override
     public ResponseResult hadSendMessage(String userId,Integer pagesize,Integer pagenum) {
         SybidaNewsExample sybidaNewsExample=new SybidaNewsExample();
-        sybidaNewsExample.createCriteria().andNewsUserIdEqualTo(Integer.valueOf(userId));
+        sybidaNewsExample.createCriteria().andNewsUserIdEqualTo(Integer.valueOf(userId)).andNewsNull1EqualTo("1");
         PageHelper.startPage(pagenum,pagesize);
         List<SybidaNews> list = sybidaNewsMapper.selectByExample(sybidaNewsExample);
         ResponseResult responseResult = new ResponseResult();

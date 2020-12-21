@@ -118,7 +118,7 @@
       )
   </insert>
   <select id="selectNewsAndReceive" resultType="SybidaNewsAndReceive">
-     select * from sybida_news,sybida_receive where receive_id=news_id and receive_user_id=#{receiveId}
+     select * from sybida_news,sybida_receive where receive_id=news_id and receive_user_id=#{receiveId} and receive_is_read=0
   </select>
   <insert id="insertSelective" parameterType="com.sy.pojo.SybidaNews" useGeneratedKeys="true" keyProperty="newsId">
     insert into sybida_news
