@@ -126,7 +126,11 @@ public class NewsServiceImp implements NewsService{
     @Override
     public ResponseResult delectOneSend(String newsId) {
         ResponseResult responseResult=new ResponseResult();
-     int row=sybidaNewsMapper.deleteByPrimaryKey(Integer.valueOf(newsId));
+//     int row=sybidaNewsMapper.deleteByPrimaryKey(Integer.valueOf(newsId));
+        SybidaNews sybidaNews=new SybidaNews();
+        sybidaNews.setNewsId(Integer.valueOf(newsId));
+        sybidaNews.setNewsNull1("0");
+       int row= sybidaNewsMapper.updateByPrimaryKeySelective(sybidaNews);
      if (row==1){
          responseResult.setCode(1);
          responseResult.setMessage("删除发件单个成功");
@@ -143,7 +147,11 @@ public class NewsServiceImp implements NewsService{
         ResponseResult responseResult=new ResponseResult();
         int row = 0;
         for (int i = 0; i < list.size(); i++) {
-         row+= sybidaNewsMapper.deleteByPrimaryKey(list.get(i));
+            SybidaNews sybidaNews=new SybidaNews();
+            sybidaNews.setNewsId(list.get(i));
+            sybidaNews.setNewsNull1("0");
+            row+=sybidaNewsMapper.updateByPrimaryKeySelective(sybidaNews);
+//         row+= sybidaNewsMapper.deleteByPrimaryKey(list.get(i));
         }
         if (row==list.size()){
             responseResult.setCode(1);
@@ -164,7 +172,13 @@ public class NewsServiceImp implements NewsService{
             SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
             SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
             criteria.andReceiveIdEqualTo(list.get(i));
-            row+= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
+            SybidaReceive sybidaReceive=new SybidaReceive();
+            sybidaReceive.setReceiveNull1("0");
+            row+=sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
+//            SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
+//            SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
+//            criteria.andReceiveIdEqualTo(list.get(i));
+//            row+= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
         }
         if (row==list.size()){
             responseResult.setCode(1);
