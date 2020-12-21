@@ -4,6 +4,8 @@ package com.sy.service;
 import com.sy.pojo.SybidaAudition;
 import com.sy.vo.ResponseResult;
 
+import java.util.List;
+
 
 public interface AuditionSerivce {
 
@@ -28,6 +30,12 @@ public interface AuditionSerivce {
 
 
     ResponseResult addSybidaAudition(SybidaAudition object);
+
+
+    ResponseResult deleteStudentAudition (Integer deleteAuditionId);
+
+
+    ResponseResult deleteAllStudentAudition(List<Integer> list);
 
 
 }

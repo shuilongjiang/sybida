@@ -305,28 +305,13 @@
     where audition_id = #{auditionId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectAllAuditionByauditionNull1ForTeacher" resultType="com.sy.dto.AuditionForTeacher">
-       select sa.*,sst.student_name,sst.student_sex,ssy.study_aspect
-       from sybida_audition sa
-       inner join sybida_student sst on sa.audition_student_id=sst.student_id
-       inner join sybida_study ssy  on sa.audition_study_id=ssy.study_id
-       where sa.audition_null1 = #{auditionNull1}
-  </select>
-
-  <select id="selectAllAuditionByauditionNull1BystudyIdForTeacher" resultType="com.sy.dto.AuditionForTeacher">
-       select sa.*,sst.student_name,sst.student_sex,ssy.study_aspect
-       from sybida_audition sa
-       inner join sybida_student sst on sa.audition_student_id=sst.student_id
-       inner join sybida_study ssy  on sa.audition_study_id=ssy.study_id
-       where sa.audition_null1 = #{auditionNull1} and sa.audition_study_id = #{auditionStudyId}
-  </select>
 
   <select id="selectAuditionByauditionStudentIdForTeacher" resultType="com.sy.dto.AuditionForTeacher">
        select sa.*,sst.student_name,sst.student_sex,sc.class_num
        from sybida_audition sa
        inner join sybida_student sst on sa.audition_student_id=sst.student_id
        inner join sybida_class sc  on sst.student_class_id=sc.class_id
-       where sa.audition_student_id = #{auditionStudentId}
+       where sa.audition_student_id = #{auditionStudentId} and sa.audition_null1 = 1
   </select>
 
   <select id="selectstudentInterviewbyauditionId" resultType="com.sy.dto.AuditionForTeacher">
@@ -336,4 +321,6 @@
        inner join sybida_class sc  on sst.student_class_id=sc.class_id
        where sa.audition_id = #{auditionId}
   </select>
+
+
 </mapper>
