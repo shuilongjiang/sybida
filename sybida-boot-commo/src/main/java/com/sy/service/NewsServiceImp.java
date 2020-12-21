@@ -65,9 +65,11 @@ public class NewsServiceImp implements NewsService{
         responseResult.setCode(row);
         return responseResult;
     }
-
+    @Transactional
     @Override
     public ResponseResult isRead(String receiveId) {
+        int num=0;
+        int row2=0;
         ResponseResult responseResult=new ResponseResult();
         SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
         SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
@@ -76,6 +78,16 @@ public class NewsServiceImp implements NewsService{
         sybidaReceive.setReceiveIsRead((byte)1);
        int row= sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
        if (row==1){
+           SybidaNews sybidaNews2=new SybidaNews();
+           SybidaNews sybidaNews= sybidaNewsMapper.selectByPrimaryKey(Integer.valueOf(receiveId));
+           num= sybidaNews.getNewsReadPeople();
+           num+=1;
+           sybidaNews2.setNewsId(Integer.valueOf(receiveId));
+           sybidaNews2.setNewsReadPeople(num);
+           row2= sybidaNewsMapper.updateByPrimaryKeySelective(sybidaNews2);
+       }
+
+       if (row2==1){
            responseResult.setCode(1);
            responseResult.setMessage("成功");
            return responseResult;
@@ -90,10 +102,16 @@ public class NewsServiceImp implements NewsService{
     @Override
     public ResponseResult delectOneReceive(String receiveId) {
         ResponseResult responseResult=new ResponseResult();
+//        SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
+//        SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
+//        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId));
+//       int row= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
         SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
         SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
         criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId));
-       int row= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
+        SybidaReceive sybidaReceive=new SybidaReceive();
+        sybidaReceive.setReceiveNull1("0");
+        int row=sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
        if (row==1){
            responseResult.setCode(1);
            responseResult.setMessage("删除一个成功");
