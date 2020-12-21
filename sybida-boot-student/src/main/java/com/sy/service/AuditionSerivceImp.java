@@ -10,8 +10,11 @@ import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -30,6 +33,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
     SybidaStudentMapper sybidaStudentMapper;
 
 
+    @Transactional
     @Override
     public ResponseResult selectClass(String userId) {
         ResponseResult responseResult = new ResponseResult();
@@ -56,11 +60,11 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
 
 
+    @Transactional
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum, String classNum, int userid) {
 
         ResponseResult responseResult = new ResponseResult();
-        System.out.println("++++++++++");
         List<SybidaStudent> studentList1 = new ArrayList<>();
         List<SybidaStudent> studentList2 = new ArrayList<>();
         List<Integer> studentIdList = new ArrayList<>();
@@ -96,10 +100,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
 
             for (int i = 0; i < studentList2.size(); i++) {
-//                SybidaAuditionExample sybidaAuditionExample = new SybidaAuditionExample();
-//                sybidaAuditionExample.createCriteria().andAuditionStudentIdEqualTo( studentList2.get(i).getStudentId());
-//                auditionList1 = sybidaAuditionMapper.selectByExample(sybidaAuditionExample);
-
                 auditionList1 = sybidaAuditionMapper.selectAuditionByauditionStudentIdForTeacher(studentList2.get(i).getStudentId());
                 for (int j = 0; j < auditionList1.size(); j++) {
                     auditionList2.add(auditionList1.get(j));
@@ -145,6 +145,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
     }
 
+    @Transactional
     @Override
     public ResponseResult selectstudentInterviewbyauditionId(int auditionId) {
         ResponseResult responseResult = new ResponseResult();
@@ -161,6 +162,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
 
 
+    @Transactional
     @Override
     public ResponseResult selectAllClass() {
         ResponseResult responseResult = new ResponseResult();
@@ -175,6 +177,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
         return responseResult;
     }
 
+    @Transactional
     @Override
     public ResponseResult selectStudentById(String userId) {
         ResponseResult responseResult = new ResponseResult();
@@ -185,6 +188,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
         return responseResult;
     }
 
+    @Transactional
     @Override
     public ResponseResult selectClassByClassId(String classId) {
         ResponseResult responseResult = new ResponseResult();
@@ -197,6 +201,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
     }
 
+    @Transactional
     @Override
     public ResponseResult addSybidaAudition(SybidaAudition object){
         ResponseResult responseResult = new ResponseResult();
@@ -212,6 +217,54 @@ public class AuditionSerivceImp implements AuditionSerivce {
         return responseResult;
     }
 
+
+    //删除单选简历
+    @Transactional
+    @Override
+    public ResponseResult deleteStudentAudition(Integer deleteAuditionId) {
+        SybidaAudition sybidaAudition = new SybidaAudition();
+        sybidaAudition.setAuditionId(deleteAuditionId);
+        sybidaAudition.setAuditionNull1("0");
+        sybidaAudition.setAuditionAlterTime(new Date());
+        int row = sybidaAuditionMapper.updateByPrimaryKeySelective(sybidaAudition);
+        ResponseResult responseResult = new ResponseResult();
+        if (row > 0) {
+            responseResult.setCode(1);
+        } else {
+            responseResult.setCode(0);
+
+        }
+        return responseResult;
+
+    }
+
+
+
+
+    //删除多选简历
+    @Transactional
+    @Override
+    public ResponseResult deleteAllStudentAudition(List<Integer> list) {
+        int row = 0;
+        for (int i = 0; i < list.size(); i++) {
+            SybidaAudition sybidaAudition = new SybidaAudition();
+
+            System.out.println(list.get(i)+"********....");
+
+            sybidaAudition.setAuditionId(list.get(i));
+            sybidaAudition.setAuditionNull1("0");
+            sybidaAudition.setAuditionAlterTime(new Date());
+            row +=sybidaAuditionMapper.updateByPrimaryKeySelective(sybidaAudition);
+        }
+
+        ResponseResult responseResult = new ResponseResult();
+        if (row == list.size()) {
+            responseResult.setCode(1);
+        } else {
+            responseResult.setCode(0);
+        }
+        return responseResult;
+    }
 
 
 

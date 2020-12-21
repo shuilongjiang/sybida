@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("audition")
 @RestController
@@ -99,9 +100,19 @@ public class AuditionServlet {
 
 
 
+    @RequestMapping("deleteStudentAudition")
+    //根据教师ID进行删除教师表，删除用户表，
+    public ResponseResult deleteStudentAudition(Integer deleteAuditionId) {
+
+        return auditionSerivce.deleteStudentAudition(deleteAuditionId);
+    }
 
 
 
+    @PostMapping("deleteAllStudentAudition")
+    public ResponseResult deleteAllStudentAudition(@RequestBody List<Integer> list) {
+        return auditionSerivce.deleteAllStudentAudition(list);
+    }
 
 
 
