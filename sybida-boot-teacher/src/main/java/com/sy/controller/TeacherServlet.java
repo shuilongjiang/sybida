@@ -74,7 +74,6 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;
     }
-
     @RequestMapping("selectstudentjob")
     public ResponseResult selectStudentJob(String pageSize, String pageNum){
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
@@ -107,7 +106,6 @@ public class TeacherServlet {
     public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file,SybidaStudent object){
         if (file.isEmpty()) {
         }else{
-            Qnyutil.delete(object.getStudentPhoto());
             String photoUrl=Qnyutil.uploadFile(file);
             object.setStudentPhoto(photoUrl);
         }
@@ -120,7 +118,7 @@ public class TeacherServlet {
     public ResponseResult updateTeacherInfo(@RequestParam("file") MultipartFile file, SybidaTeach object){
         if(file.isEmpty()){
         }else {
-            Qnyutil.delete(object.getTeachPhoto());
+
             String photoUrl=Qnyutil.uploadFile(file);
             object.setTeachPhoto(photoUrl);
         }
