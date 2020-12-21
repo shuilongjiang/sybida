@@ -31,4 +31,6 @@ public interface SybidaTeachMapper {
 
     int updateByPrimaryKey(SybidaTeach record);
 
+    int updateTeacherInfo(SybidaTeach object);
+
 }

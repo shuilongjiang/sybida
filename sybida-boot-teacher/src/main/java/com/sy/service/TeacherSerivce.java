@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.sy.mapper.SybidaVitaeEvaluateMapper;
 import com.sy.pojo.SybidaStudent;
+import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.vo.ResponseResult;
 
@@ -21,4 +22,6 @@ public interface TeacherSerivce {
     ResponseResult selcetAllStudent(int pageSize,int pageNum);
     ResponseResult selcetStudentById(int id);
     ResponseResult updateInfoStudent(SybidaStudent object);
+    ResponseResult selectTeacherById(int id);
+    ResponseResult updateTeacherInfo(SybidaTeach object);
 }

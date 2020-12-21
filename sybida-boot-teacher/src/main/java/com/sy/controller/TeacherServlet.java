@@ -5,6 +5,7 @@ import com.qiniu.util.Json;
 import com.sy.QNY.Qnyutil;
 import com.sy.basepath.BasePath;
 import com.sy.pojo.SybidaStudent;
+import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
@@ -112,6 +113,25 @@ public class TeacherServlet {
         }
         ResponseResult responseResult = teacherSerivce.updateInfoStudent(object);
         return responseResult;
+    }
+
+    @RequestMapping(value = "/updateteacherinfo", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult updateTeacherInfo(@RequestParam("file") MultipartFile file, SybidaTeach object){
+        if(file.isEmpty()){
+        }else {
+            Qnyutil.delete(object.getTeachPhoto());
+            String photoUrl=Qnyutil.uploadFile(file);
+            object.setTeachPhoto(photoUrl);
+        }
+        ResponseResult responseResult = teacherSerivce.updateTeacherInfo(object);
+        return  responseResult;
+
+    }
+    @RequestMapping("selectteacherbyid")
+    public ResponseResult selectTeacherById(int id){
+     ResponseResult responseResult = teacherSerivce.selectTeacherById(id);
+     return  responseResult;
     }
 
 
