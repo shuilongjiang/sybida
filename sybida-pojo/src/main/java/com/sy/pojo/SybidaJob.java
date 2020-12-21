@@ -1,5 +1,8 @@
 package com.sy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SybidaJob {
@@ -65,10 +68,13 @@ public class SybidaJob {
         this.jobWeal = jobWeal == null ? null : jobWeal.trim();
     }
 
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getJobEndTime() {
         return jobEndTime;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setJobEndTime(Date jobEndTime) {
         this.jobEndTime = jobEndTime;
     }

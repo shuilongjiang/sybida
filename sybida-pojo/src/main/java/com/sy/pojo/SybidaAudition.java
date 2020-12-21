@@ -1,5 +1,8 @@
 package com.sy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SybidaAudition {
@@ -48,11 +51,11 @@ public class SybidaAudition {
     public void setAuditionSite(String auditionSite) {
         this.auditionSite = auditionSite == null ? null : auditionSite.trim();
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getAuditionTime() {
         return auditionTime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setAuditionTime(Date auditionTime) {
         this.auditionTime = auditionTime;
     }
@@ -89,9 +92,11 @@ public class SybidaAudition {
         this.auditionFirm = auditionFirm == null ? null : auditionFirm.trim();
     }
 
+
     public Date getAuditionAlterTime() {
         return auditionAlterTime;
     }
+
 
     public void setAuditionAlterTime(Date auditionAlterTime) {
         this.auditionAlterTime = auditionAlterTime;
@@ -111,5 +116,22 @@ public class SybidaAudition {
 
     public void setAuditionNull2(String auditionNull2) {
         this.auditionNull2 = auditionNull2 == null ? null : auditionNull2.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SybidaAudition{" +
+                "auditionId=" + auditionId +
+                ", auditionStudentId=" + auditionStudentId +
+                ", auditionSite='" + auditionSite + '\'' +
+                ", auditionTime=" + auditionTime +
+                ", auditionSituation='" + auditionSituation + '\'' +
+                ", auditionStudyId=" + auditionStudyId +
+                ", auditionFinish='" + auditionFinish + '\'' +
+                ", auditionFirm='" + auditionFirm + '\'' +
+                ", auditionAlterTime=" + auditionAlterTime +
+                ", auditionNull1='" + auditionNull1 + '\'' +
+                ", auditionNull2='" + auditionNull2 + '\'' +
+                '}';
     }
 }

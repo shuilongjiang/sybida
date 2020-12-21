@@ -52,6 +52,10 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
 
 
+
+
+
+
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum, String classNum, int userid) {
 
@@ -153,6 +157,60 @@ public class AuditionSerivceImp implements AuditionSerivce {
 
     }
 
+
+
+
+
+    @Override
+    public ResponseResult selectAllClass() {
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaClass> list = sybidaClassMapper.selectByExample(null);
+        if (null != list && list.size() > 0) {
+            responseResult.setCode(1);
+            responseResult.setData(list);
+        } else {
+            responseResult.setCode(0);
+        }
+        System.out.println(list+"==============////////////========================");
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectStudentById(String userId) {
+        ResponseResult responseResult = new ResponseResult();
+        SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(Integer.valueOf(userId));
+        responseResult.setData(sybidaStudent);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功！");
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectClassByClassId(String classId) {
+        ResponseResult responseResult = new ResponseResult();
+        SybidaClass sybidaClass = sybidaClassMapper.selectByPrimaryKey(Integer.valueOf(classId));
+//        System.out.println(sybidaClass.getClassNum()+"=========++++++++++++++++++++");
+        responseResult.setData(sybidaClass);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功！");
+        return responseResult;
+
+    }
+
+    @Override
+    public ResponseResult addSybidaAudition(SybidaAudition object){
+        ResponseResult responseResult = new ResponseResult();
+        int affectedRows = sybidaAuditionMapper.insertSelective(object);
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功！");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败!");
+        }
+        System.out.println(object);
+        return responseResult;
+    }
 
 
 
