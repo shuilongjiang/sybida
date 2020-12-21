@@ -8,10 +8,7 @@ import com.sy.service.ClassInfoService;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -134,6 +131,11 @@ public class ClassInfoServlet {
             responseResult.setMessage("查询失败");
         }
         return responseResult;
+    }
+
+    @PostMapping("updateclassinfo")
+    public ResponseResult updateClassInfo(SybidaClass sybidaClass){
+        return   classInfoService.updateClassInfo(sybidaClass);
     }
 }
 

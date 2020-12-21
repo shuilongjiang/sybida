@@ -1,5 +1,7 @@
 package com.sy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -64,11 +66,11 @@ public class SybidaClass {
     public void setClassStudyId(Integer classStudyId) {
         this.classStudyId = classStudyId;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getClassTime() {
         return classTime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setClassTime(Date classTime) {
         this.classTime = classTime;
     }

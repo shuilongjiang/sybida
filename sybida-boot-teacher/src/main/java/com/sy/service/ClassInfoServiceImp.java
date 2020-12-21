@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -155,5 +156,21 @@ public class ClassInfoServiceImp implements ClassInfoService{
     @Override
     public SybidaStudy selectStudyName(String classStudyId) {
         return  sybidaStudyMapper.selectByPrimaryKey(Integer.valueOf(classStudyId));
+    }
+
+    @Override
+    public ResponseResult updateClassInfo(SybidaClass sybidaClass) {
+        ResponseResult responseResult=new ResponseResult();
+        sybidaClass.setClassAlterTime(new Date());
+      int row= sybidaClassMapper.updateByPrimaryKeySelective(sybidaClass);
+      if (row==1){
+          responseResult.setCode(1);
+          responseResult.setMessage("修改成功");
+          return responseResult;
+      }else {
+          responseResult.setCode(0);
+          responseResult.setMessage("修改失败");
+      }
+        return responseResult;
     }
 }
