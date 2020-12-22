@@ -35,6 +35,9 @@ public class JobServlet {
            sybidaJob.setJobPicture(photoUrl);
 
        }
+
+        sybidaJob.setJobAlterTime(new Date());
+        sybidaJob.setJobNull1("1");
         ResponseResult responseResult = jobSerivce.addSybidaJob(sybidaJob);
         return responseResult;
     }

@@ -11,7 +11,6 @@ import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -249,7 +248,7 @@ public class AuditionSerivceImp implements AuditionSerivce {
         for (int i = 0; i < list.size(); i++) {
             SybidaAudition sybidaAudition = new SybidaAudition();
 
-            System.out.println(list.get(i)+"********....");
+//            System.out.println(list.get(i)+"********....");
 
             sybidaAudition.setAuditionId(list.get(i));
             sybidaAudition.setAuditionNull1("0");
@@ -267,5 +266,44 @@ public class AuditionSerivceImp implements AuditionSerivce {
     }
 
 
+
+
+
+
+    @Override
+    public ResponseResult selectpageStudentAudition(int pageSize, int pageNum, int userid) {
+        ResponseResult responseResult = new ResponseResult();
+
+        List<AuditionForTeacher> list;
+        PageHelper.startPage(pageNum, pageSize);
+
+        list = sybidaAuditionMapper.selectAuditionByauditionStudentIdForTeacher(userid);
+
+        PageInfo<AuditionForTeacher> pageInfo = new PageInfo<>(list);
+        responseResult.setData(pageInfo);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功！");
+        return responseResult;
+    }
+
+
+
+
+    @Transactional
+    @Override
+    public ResponseResult updateSybidaAudition(SybidaAudition sybidaAudition){
+        ResponseResult responseResult = new ResponseResult();
+        int affectedRows = sybidaAuditionMapper.updateByPrimaryKeySelective(sybidaAudition);
+
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功！");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败!");
+        }
+        System.out.println(sybidaAudition);
+        return responseResult;
+    }
 
 }

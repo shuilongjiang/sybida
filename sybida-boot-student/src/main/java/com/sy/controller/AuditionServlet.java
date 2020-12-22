@@ -93,6 +93,7 @@ public class AuditionServlet {
     public ResponseResult addSybidaAudition(SybidaAudition object){
 //        object.setAuditionAlterTime(new Date());
         object.setAuditionAlterTime(new Date());
+        object.setAuditionNull1("1");
         ResponseResult responseResult = auditionSerivce.addSybidaAudition(object);
 
         return responseResult;
@@ -115,6 +116,27 @@ public class AuditionServlet {
     }
 
 
+
+    //根据学生用户id查面试经历表并进行分页
+    @RequestMapping("selectpageStudentAudition")
+    public ResponseResult selectpageStudentAudition(String pageSize, String pageNum,String userid) {
+        redisUtil.expire(userid,60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        return  auditionSerivce.selectpageStudentAudition(Integer.valueOf(pageSize), Integer.valueOf(pageNum),Integer.valueOf(userId));
+
+    }
+
+
+
+
+    @RequestMapping(value = "/updateSybidaAudition",method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseResult updateSybidaAudition(SybidaAudition audition){
+        audition.setAuditionAlterTime(new Date());
+        ResponseResult responseResult = auditionSerivce.updateSybidaAudition(audition);
+
+        return responseResult;
+    }
 
 
 }

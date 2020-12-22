@@ -38,4 +38,9 @@ public interface AuditionSerivce {
     ResponseResult deleteAllStudentAudition(List<Integer> list);
 
 
+
+    ResponseResult selectpageStudentAudition(int pageSize, int pageNum,int userid);
+
+    ResponseResult updateSybidaAudition(SybidaAudition sybidaAudition);
+
 }
