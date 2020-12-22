@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.qiniu.util.Json;
 import com.sy.QNY.Qnyutil;
 import com.sy.basepath.BasePath;
+import com.sy.dto.StudentExcel;
+import com.sy.dto.util.ExcelUtil;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaUser;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -161,6 +166,36 @@ public class TeacherServlet {
     }
     return null;
 }
+    @RequestMapping("selectstudentclassid")
+    public ResponseResult selectStudentByClassId(HttpServletResponse response,String classId) throws IOException {
+        List<StudentExcel> list = new ArrayList<>();
+        List<SybidaStudent> studentList= teacherSerivce.selectStudentByClassId(classId);
+        if (studentList.size()>0){
+            for (int i=0;i<studentList.size();i++){
+                StudentExcel studentExcel=new StudentExcel();
+                studentExcel.setStudentId(studentList.get(i).getStudentId());
+                studentExcel.setStudentName(studentList.get(i).getStudentName());
+                studentExcel.setStudentSex(studentList.get(i).getStudentSex());
+                studentExcel.setStudentIdentity(studentList.get(i).getStudentIdentity());
+                studentExcel.setStudentIsGraduation(studentList.get(i).getStudentIsGraduation());
+                studentExcel.setStudentSchool(studentList.get(i).getStudentSchool());
+                studentExcel.setStudentSpecialty(studentList.get(i).getStudentSpecialty());
+                studentExcel.setStudentWechat(studentList.get(i).getStudentWechat());
+                studentExcel.setStudentMailbox(studentList.get(i).getStudentMailbox());
+                studentExcel.setStudentStudyId(studentList.get(i).getStudentStudyId());
+                studentExcel.setStudentCity(studentList.get(i).getStudentCity());
+                studentExcel.setStudentAddress(studentList.get(i).getStudentAddress());
+                studentExcel.setStudentParentPhone(studentList.get(i).getStudentParentPhone());
+                studentExcel.setStudentParentName(studentList.get(i).getStudentParentName());
+                studentExcel.setStudentUrgent(studentList.get(i).getStudentUrgent());
+
+            }
+        }
+        response.setContentType("application/vnd.ms-excel");
+        response.setHeader("Content-Disposition", "attachment;filename=" + "test11.xlsx");
+        ExcelUtil.writeExcel(response, list);
+        return null;
+   }
 }
 
 

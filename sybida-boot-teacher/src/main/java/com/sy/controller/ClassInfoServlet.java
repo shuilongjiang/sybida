@@ -66,25 +66,7 @@ public class ClassInfoServlet {
         return  responseResult;
     }
 
-    @RequestMapping("test")
-    public ResponseResult testdate(){
-        Date date=new Date();
-        String test= DateUtil.date2String(date);
-        System.out.println(test+"==============");
 
-        String test2=DateUtil.date2String(date,"yyyy:MM:dd");
-        System.out.println(test2+"---------------------------");
-
-        String str="2020-12-11";
-        Date test3= DateUtil.string2Date(str);
-        System.out.println(test3+"===000000000000000");
-
-        String str2="2020/11/12";
-        Date test4=DateUtil.string2Date(str2,"yyyy/MM/dd");
-        System.out.println(test4+"````````````````````````````");
-
-        return responseResult;
-    }
 
     @RequestMapping("selectTeacherName")
     public ResponseResult selectTeacherName(String classTeachId){
