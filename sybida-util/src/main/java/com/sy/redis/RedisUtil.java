@@ -34,6 +34,9 @@ public class RedisUtil {
     public void setObj(String key, Object obj, long timeout) {
         redisOpsUtil.set(key,obj,timeout);
     }
+    public void setObj(String key, Object obj) {
+        redisOpsUtil.set(key,obj);
+    }
     public Object getObj(String key) {
         return redisOpsUtil.get(key);
     }

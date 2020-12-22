@@ -1,6 +1,9 @@
 package com.sy.zipdownload;
 
 import com.sy.QNY.Qnyutil;
+import com.sy.redis.RedisUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,31 +24,8 @@ https://eurecode.blog.csdn.net/article/details/72772502?utm_medium=distribute.pc
 pc_relevant_t0.none-task-blog-BlogCommendFromMachineLearnPai2-1.channel_param
  */
 
-public class  Zipdownload{
+public class ZipDownload {
 
-    // public String downloadFilesTest(HttpServletRequest request,HttpServletResponse res) throws IOException {
-    public static void main(String[] args) throws IOException {
-        String targetPath = "http://qldlxgj0k.hn-bkt.clouddn.com/muban.xlsx";
-        String targetPath1 = "http://qldlxgj0k.hn-bkt.clouddn.com/defaultpicture2.jpg";
-        //模拟文件路径下再添加个文件夹，验证穷举
-        String targetPath2 = "http://qldlxgj0k.hn-bkt.clouddn.com/defaultpicture3.jpg";
-        String targetPath3 = "http://qldlxgj0k.hn-bkt.clouddn.com/defaultpicture1.jpg";
-        String targetPath4 = "http://qldlxgj0k.hn-bkt.clouddn.com/cab72ae091fd455cb311175cda743e4c.pdf";
-        Map<String ,String> map=new HashMap<>();
-        map.put(targetPath,"李军");
-        map.put(targetPath1,"李军1");
-        map.put(targetPath2,"李军2");
-        map.put(targetPath3,"李军3");
-        map.put(targetPath4,"李军4");
-
-
-
-        downloadManyFilesToQny(map);
-//        File file=new File("E:/upload/zip/temp.zip");
-//        if(file.exists()){
-//            file.delete();
-//        }
-    }
 
     public static String downloadManyFilesToQny( Map<String ,String> map)  {
         try {
@@ -67,11 +47,12 @@ public class  Zipdownload{
                 FileInputStream inputStream = new FileInputStream(file);
                 MultipartFile multipartFile = new MockMultipartFile(file.getName(), file.getName(),null, inputStream);
                 String fileNamesQny=Qnyutil.uploadFile(multipartFile,typeFile);
-                System.out.println(fileNamesQny);
+
                 File file1=new File(zipFilePath);
                 if(file1.exists()){
                     file1.delete();
                 }
+               return fileNamesQny;
             }else{
                 File file=new File(zipFilePath);
                 if(file.exists()){
@@ -87,7 +68,6 @@ public class  Zipdownload{
     }
 
     private static Integer zipFile(Map<String ,String> map, ZipOutputStream zos)  {
-
         try {
             Iterator iterator = map.entrySet().iterator();
             while (iterator.hasNext()) {
@@ -103,7 +83,6 @@ public class  Zipdownload{
                 if(HttpResult != HttpURLConnection.HTTP_OK) {
                     return 0;
                 } else {
-
                     //创建输入流读取文件
                     BufferedInputStream bis = new BufferedInputStream(urlconn.getInputStream());
                     //将文件写入zip内，即将文件进行打包
