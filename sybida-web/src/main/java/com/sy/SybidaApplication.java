@@ -21,27 +21,7 @@ public class SybidaApplication {
    private static Logger logger = LoggerFactory.getLogger(SybidaApplication.class);
     public static void main(String[] args) {
         SpringApplication.run(SybidaApplication.class, args);
-//        Runnable runnable = new Runnable() {
-//            //run方法中是定时执行的操作
-//            @Override
-//            public void run() {
-//                System.out.println(new Date()+"我来了我来了");
-//
-//            }
-//        };
-//        ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();
-//        /*
-//         * 参数一:command：执行线程
-//         * 参数二:initialDelay：初始化延时
-//         * 参数三:period：两次开始执行最小间隔时间
-//         * 参数四:unit：计时单位
-//         */
-//        service.scheduleAtFixedRate(runnable, 0, 60, TimeUnit.SECONDS);
-
         logger.trace("启动--------------------------");
-//        logger.debug("debug--------------------------");
-//        logger.info("info--------------------------");
-//        logger.warn("warn--------------------------");
-//        logger.error("error--------------------------");
+
     }
 }
