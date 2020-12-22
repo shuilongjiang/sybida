@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaOfferMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaOffer" >
+    <id column="offer_id" property="offerId" jdbcType="INTEGER" />
+    <result column="offer_student_id" property="offerStudentId" jdbcType="INTEGER" />
+    <result column="offer_company" property="offerCompany" jdbcType="VARCHAR" />
+    <result column="offer_contact" property="offerContact" jdbcType="VARCHAR" />
+    <result column="offer_address" property="offerAddress" jdbcType="VARCHAR" />
+    <result column="offer_study_id" property="offerStudyId" jdbcType="INTEGER" />
+    <result column="offer_datetime" property="offerDatetime" jdbcType="TIMESTAMP" />
+    <result column="offer_practice_salary" property="offerPracticeSalary" jdbcType="VARCHAR" />
+    <result column="offer_really_salary" property="offerReallySalary" jdbcType="VARCHAR" />
+    <result column="offer_hiredate" property="offerHiredate" jdbcType="TIMESTAMP" />
+    <result column="offer_alter_time" property="offerAlterTime" jdbcType="TIMESTAMP" />
+    <result column="offer_null1" property="offerNull1" jdbcType="VARCHAR" />
+    <result column="offer_null2" property="offerNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    offer_id, offer_student_id, offer_company, offer_contact, offer_address, offer_study_id, 
+    offer_datetime, offer_practice_salary, offer_really_salary, offer_hiredate, offer_alter_time, 
+    offer_null1, offer_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaOfferExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_offer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_offer
+    where offer_id = #{offerId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_offer
+    where offer_id = #{offerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaOfferExample" >
+    delete from sybida_offer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaOffer" >
+    insert into sybida_offer (offer_id, offer_student_id, offer_company, 
+      offer_contact, offer_address, offer_study_id, 
+      offer_datetime, offer_practice_salary, offer_really_salary, 
+      offer_hiredate, offer_alter_time, offer_null1, 
+      offer_null2)
+    values (#{offerId,jdbcType=INTEGER}, #{offerStudentId,jdbcType=INTEGER}, #{offerCompany,jdbcType=VARCHAR}, 
+      #{offerContact,jdbcType=VARCHAR}, #{offerAddress,jdbcType=VARCHAR}, #{offerStudyId,jdbcType=INTEGER}, 
+      #{offerDatetime,jdbcType=TIMESTAMP}, #{offerPracticeSalary,jdbcType=VARCHAR}, #{offerReallySalary,jdbcType=VARCHAR}, 
+      #{offerHiredate,jdbcType=TIMESTAMP}, #{offerAlterTime,jdbcType=TIMESTAMP}, #{offerNull1,jdbcType=VARCHAR}, 
+      #{offerNull2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaOffer" >
+    insert into sybida_offer
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="offerId != null" >
+        offer_id,
+      </if>
+      <if test="offerStudentId != null" >
+        offer_student_id,
+      </if>
+      <if test="offerCompany != null" >
+        offer_company,
+      </if>
+      <if test="offerContact != null" >
+        offer_contact,
+      </if>
+      <if test="offerAddress != null" >
+        offer_address,
+      </if>
+      <if test="offerStudyId != null" >
+        offer_study_id,
+      </if>
+      <if test="offerDatetime != null" >
+        offer_datetime,
+      </if>
+      <if test="offerPracticeSalary != null" >
+        offer_practice_salary,
+      </if>
+      <if test="offerReallySalary != null" >
+        offer_really_salary,
+      </if>
+      <if test="offerHiredate != null" >
+        offer_hiredate,
+      </if>
+      <if test="offerAlterTime != null" >
+        offer_alter_time,
+      </if>
+      <if test="offerNull1 != null" >
+        offer_null1,
+      </if>
+      <if test="offerNull2 != null" >
+        offer_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="offerId != null" >
+        #{offerId,jdbcType=INTEGER},
+      </if>
+      <if test="offerStudentId != null" >
+        #{offerStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="offerCompany != null" >
+        #{offerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="offerContact != null" >
+        #{offerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="offerAddress != null" >
+        #{offerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStudyId != null" >
+        #{offerStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="offerDatetime != null" >
+        #{offerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerPracticeSalary != null" >
+        #{offerPracticeSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="offerReallySalary != null" >
+        #{offerReallySalary,jdbcType=VARCHAR},
+      </if>
+      <if test="offerHiredate != null" >
+        #{offerHiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAlterTime != null" >
+        #{offerAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerNull1 != null" >
+        #{offerNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="offerNull2 != null" >
+        #{offerNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaOfferExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_offer
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_offer
+    <set >
+      <if test="record.offerId != null" >
+        offer_id = #{record.offerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.offerStudentId != null" >
+        offer_student_id = #{record.offerStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.offerCompany != null" >
+        offer_company = #{record.offerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerContact != null" >
+        offer_contact = #{record.offerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerAddress != null" >
+        offer_address = #{record.offerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerStudyId != null" >
+        offer_study_id = #{record.offerStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.offerDatetime != null" >
+        offer_datetime = #{record.offerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerPracticeSalary != null" >
+        offer_practice_salary = #{record.offerPracticeSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerReallySalary != null" >
+        offer_really_salary = #{record.offerReallySalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerHiredate != null" >
+        offer_hiredate = #{record.offerHiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerAlterTime != null" >
+        offer_alter_time = #{record.offerAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.offerNull1 != null" >
+        offer_null1 = #{record.offerNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.offerNull2 != null" >
+        offer_null2 = #{record.offerNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_offer
+    set offer_id = #{record.offerId,jdbcType=INTEGER},
+      offer_student_id = #{record.offerStudentId,jdbcType=INTEGER},
+      offer_company = #{record.offerCompany,jdbcType=VARCHAR},
+      offer_contact = #{record.offerContact,jdbcType=VARCHAR},
+      offer_address = #{record.offerAddress,jdbcType=VARCHAR},
+      offer_study_id = #{record.offerStudyId,jdbcType=INTEGER},
+      offer_datetime = #{record.offerDatetime,jdbcType=TIMESTAMP},
+      offer_practice_salary = #{record.offerPracticeSalary,jdbcType=VARCHAR},
+      offer_really_salary = #{record.offerReallySalary,jdbcType=VARCHAR},
+      offer_hiredate = #{record.offerHiredate,jdbcType=TIMESTAMP},
+      offer_alter_time = #{record.offerAlterTime,jdbcType=TIMESTAMP},
+      offer_null1 = #{record.offerNull1,jdbcType=VARCHAR},
+      offer_null2 = #{record.offerNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaOffer" >
+    update sybida_offer
+    <set >
+      <if test="offerStudentId != null" >
+        offer_student_id = #{offerStudentId,jdbcType=INTEGER},
+      </if>
+      <if test="offerCompany != null" >
+        offer_company = #{offerCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="offerContact != null" >
+        offer_contact = #{offerContact,jdbcType=VARCHAR},
+      </if>
+      <if test="offerAddress != null" >
+        offer_address = #{offerAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="offerStudyId != null" >
+        offer_study_id = #{offerStudyId,jdbcType=INTEGER},
+      </if>
+      <if test="offerDatetime != null" >
+        offer_datetime = #{offerDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerPracticeSalary != null" >
+        offer_practice_salary = #{offerPracticeSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="offerReallySalary != null" >
+        offer_really_salary = #{offerReallySalary,jdbcType=VARCHAR},
+      </if>
+      <if test="offerHiredate != null" >
+        offer_hiredate = #{offerHiredate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerAlterTime != null" >
+        offer_alter_time = #{offerAlterTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="offerNull1 != null" >
+        offer_null1 = #{offerNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="offerNull2 != null" >
+        offer_null2 = #{offerNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where offer_id = #{offerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaOffer" >
+    update sybida_offer
+    set offer_student_id = #{offerStudentId,jdbcType=INTEGER},
+      offer_company = #{offerCompany,jdbcType=VARCHAR},
+      offer_contact = #{offerContact,jdbcType=VARCHAR},
+      offer_address = #{offerAddress,jdbcType=VARCHAR},
+      offer_study_id = #{offerStudyId,jdbcType=INTEGER},
+      offer_datetime = #{offerDatetime,jdbcType=TIMESTAMP},
+      offer_practice_salary = #{offerPracticeSalary,jdbcType=VARCHAR},
+      offer_really_salary = #{offerReallySalary,jdbcType=VARCHAR},
+      offer_hiredate = #{offerHiredate,jdbcType=TIMESTAMP},
+      offer_alter_time = #{offerAlterTime,jdbcType=TIMESTAMP},
+      offer_null1 = #{offerNull1,jdbcType=VARCHAR},
+      offer_null2 = #{offerNull2,jdbcType=VARCHAR}
+    where offer_id = #{offerId,jdbcType=INTEGER}
+  </update>
+</mapper>

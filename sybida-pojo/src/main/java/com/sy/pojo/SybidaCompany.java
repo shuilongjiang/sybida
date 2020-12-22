@@ -5,6 +5,10 @@ import java.util.Date;
 public class SybidaCompany {
     private Integer companyId;
 
+    private Integer companyUserId;
+
+    private Integer companyMarkId;
+
     private String companyName;
 
     private Date companyEndTime;
@@ -29,8 +33,6 @@ public class SybidaCompany {
 
     private String companyIntroduce;
 
-    private Integer companyUserId;
-
     private String companyPicture;
 
     private Byte companyIsView;
@@ -47,6 +49,22 @@ public class SybidaCompany {
 
     public void setCompanyId(Integer companyId) {
         this.companyId = companyId;
+    }
+
+    public Integer getCompanyUserId() {
+        return companyUserId;
+    }
+
+    public void setCompanyUserId(Integer companyUserId) {
+        this.companyUserId = companyUserId;
+    }
+
+    public Integer getCompanyMarkId() {
+        return companyMarkId;
+    }
+
+    public void setCompanyMarkId(Integer companyMarkId) {
+        this.companyMarkId = companyMarkId;
     }
 
     public String getCompanyName() {
@@ -143,14 +161,6 @@ public class SybidaCompany {
 
     public void setCompanyIntroduce(String companyIntroduce) {
         this.companyIntroduce = companyIntroduce == null ? null : companyIntroduce.trim();
-    }
-
-    public Integer getCompanyUserId() {
-        return companyUserId;
-    }
-
-    public void setCompanyUserId(Integer companyUserId) {
-        this.companyUserId = companyUserId;
     }
 
     public String getCompanyPicture() {

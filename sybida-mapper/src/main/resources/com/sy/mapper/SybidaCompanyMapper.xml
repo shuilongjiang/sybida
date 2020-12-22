@@ -3,6 +3,8 @@
 <mapper namespace="com.sy.mapper.SybidaCompanyMapper" >
   <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaCompany" >
     <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="company_user_id" property="companyUserId" jdbcType="INTEGER" />
+    <result column="company_mark_id" property="companyMarkId" jdbcType="INTEGER" />
     <result column="company_name" property="companyName" jdbcType="CHAR" />
     <result column="company_end_time" property="companyEndTime" jdbcType="TIMESTAMP" />
     <result column="company_start_time" property="companyStartTime" jdbcType="TIMESTAMP" />
@@ -15,7 +17,6 @@
     <result column="company_wechat" property="companyWechat" jdbcType="VARCHAR" />
     <result column="company_phone" property="companyPhone" jdbcType="VARCHAR" />
     <result column="company_introduce" property="companyIntroduce" jdbcType="VARCHAR" />
-    <result column="company_user_id" property="companyUserId" jdbcType="INTEGER" />
     <result column="company_picture" property="companyPicture" jdbcType="VARCHAR" />
     <result column="company_is_view" property="companyIsView" jdbcType="TINYINT" />
     <result column="company_alter_time" property="companyAlterTime" jdbcType="TIMESTAMP" />
@@ -81,10 +82,10 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    company_id, company_name, company_end_time, company_start_time, company_study_id, 
-    company_web, company_address, company_require, company_salary, company_mailbox, company_wechat, 
-    company_phone, company_introduce, company_user_id, company_picture, company_is_view, 
-    company_alter_time, company_null1, company_null2
+    company_id, company_user_id, company_mark_id, company_name, company_end_time, company_start_time, 
+    company_study_id, company_web, company_address, company_require, company_salary, 
+    company_mailbox, company_wechat, company_phone, company_introduce, company_picture, 
+    company_is_view, company_alter_time, company_null1, company_null2
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaCompanyExample" >
     select
@@ -100,25 +101,6 @@
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectCompanySelective" parameterType="sybidaCompany" resultType="sybidaCompany">
-    select * from sybida_company
-    <trim prefix="where" prefixOverrides="and">
-      <if test="companyStudyId!=null">
-        company_study_id=#{companyStudyId}
-      </if>
-      <if test="companyUserId!=null">
-        company_user_id=#{companyUserId}
-      </if>
-      <if test="companyIsView!=null">
-        company_is_view=#{companyIsView}
-      </if>
-      <if test="companySalary!=null">
-        company_salary &gt;=#{companySalary}
-      </if>
-      order by company_start_time desc
-    </trim>
-  </select>
-
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -136,26 +118,32 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sy.pojo.SybidaCompany" >
-    insert into sybida_company (company_id, company_name, company_end_time, 
-      company_start_time, company_study_id, company_web, 
-      company_address, company_require, company_salary, 
-      company_mailbox, company_wechat, company_phone, 
-      company_introduce, company_user_id, company_picture, 
-      company_is_view, company_alter_time, company_null1, 
-      company_null2)
-    values (#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=CHAR}, #{companyEndTime,jdbcType=TIMESTAMP}, 
-      #{companyStartTime,jdbcType=TIMESTAMP}, #{companyStudyId,jdbcType=INTEGER}, #{companyWeb,jdbcType=VARCHAR}, 
-      #{companyAddress,jdbcType=VARCHAR}, #{companyRequire,jdbcType=VARCHAR}, #{companySalary,jdbcType=INTEGER}, 
-      #{companyMailbox,jdbcType=VARCHAR}, #{companyWechat,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, 
-      #{companyIntroduce,jdbcType=VARCHAR}, #{companyUserId,jdbcType=INTEGER}, #{companyPicture,jdbcType=VARCHAR}, 
-      #{companyIsView,jdbcType=TINYINT}, #{companyAlterTime,jdbcType=TIMESTAMP}, #{companyNull1,jdbcType=VARCHAR}, 
-      #{companyNull2,jdbcType=VARCHAR})
+    insert into sybida_company (company_id, company_user_id, company_mark_id, 
+      company_name, company_end_time, company_start_time, 
+      company_study_id, company_web, company_address, 
+      company_require, company_salary, company_mailbox, 
+      company_wechat, company_phone, company_introduce, 
+      company_picture, company_is_view, company_alter_time, 
+      company_null1, company_null2)
+    values (#{companyId,jdbcType=INTEGER}, #{companyUserId,jdbcType=INTEGER}, #{companyMarkId,jdbcType=INTEGER}, 
+      #{companyName,jdbcType=CHAR}, #{companyEndTime,jdbcType=TIMESTAMP}, #{companyStartTime,jdbcType=TIMESTAMP}, 
+      #{companyStudyId,jdbcType=INTEGER}, #{companyWeb,jdbcType=VARCHAR}, #{companyAddress,jdbcType=VARCHAR}, 
+      #{companyRequire,jdbcType=VARCHAR}, #{companySalary,jdbcType=INTEGER}, #{companyMailbox,jdbcType=VARCHAR}, 
+      #{companyWechat,jdbcType=VARCHAR}, #{companyPhone,jdbcType=VARCHAR}, #{companyIntroduce,jdbcType=VARCHAR}, 
+      #{companyPicture,jdbcType=VARCHAR}, #{companyIsView,jdbcType=TINYINT}, #{companyAlterTime,jdbcType=TIMESTAMP}, 
+      #{companyNull1,jdbcType=VARCHAR}, #{companyNull2,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sy.pojo.SybidaCompany" >
     insert into sybida_company
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="companyId != null" >
         company_id,
+      </if>
+      <if test="companyUserId != null" >
+        company_user_id,
+      </if>
+      <if test="companyMarkId != null" >
+        company_mark_id,
       </if>
       <if test="companyName != null" >
         company_name,
@@ -193,9 +181,6 @@
       <if test="companyIntroduce != null" >
         company_introduce,
       </if>
-      <if test="companyUserId != null" >
-        company_user_id,
-      </if>
       <if test="companyPicture != null" >
         company_picture,
       </if>
@@ -215,6 +200,12 @@
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="companyId != null" >
         #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyUserId != null" >
+        #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyMarkId != null" >
+        #{companyMarkId,jdbcType=INTEGER},
       </if>
       <if test="companyName != null" >
         #{companyName,jdbcType=CHAR},
@@ -252,9 +243,6 @@
       <if test="companyIntroduce != null" >
         #{companyIntroduce,jdbcType=VARCHAR},
       </if>
-      <if test="companyUserId != null" >
-        #{companyUserId,jdbcType=INTEGER},
-      </if>
       <if test="companyPicture != null" >
         #{companyPicture,jdbcType=VARCHAR},
       </if>
@@ -283,6 +271,12 @@
     <set >
       <if test="record.companyId != null" >
         company_id = #{record.companyId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyUserId != null" >
+        company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="record.companyMarkId != null" >
+        company_mark_id = #{record.companyMarkId,jdbcType=INTEGER},
       </if>
       <if test="record.companyName != null" >
         company_name = #{record.companyName,jdbcType=CHAR},
@@ -320,9 +314,6 @@
       <if test="record.companyIntroduce != null" >
         company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
       </if>
-      <if test="record.companyUserId != null" >
-        company_user_id = #{record.companyUserId,jdbcType=INTEGER},
-      </if>
       <if test="record.companyPicture != null" >
         company_picture = #{record.companyPicture,jdbcType=VARCHAR},
       </if>
@@ -346,6 +337,8 @@
   <update id="updateByExample" parameterType="map" >
     update sybida_company
     set company_id = #{record.companyId,jdbcType=INTEGER},
+      company_user_id = #{record.companyUserId,jdbcType=INTEGER},
+      company_mark_id = #{record.companyMarkId,jdbcType=INTEGER},
       company_name = #{record.companyName,jdbcType=CHAR},
       company_end_time = #{record.companyEndTime,jdbcType=TIMESTAMP},
       company_start_time = #{record.companyStartTime,jdbcType=TIMESTAMP},
@@ -358,7 +351,6 @@
       company_wechat = #{record.companyWechat,jdbcType=VARCHAR},
       company_phone = #{record.companyPhone,jdbcType=VARCHAR},
       company_introduce = #{record.companyIntroduce,jdbcType=VARCHAR},
-      company_user_id = #{record.companyUserId,jdbcType=INTEGER},
       company_picture = #{record.companyPicture,jdbcType=VARCHAR},
       company_is_view = #{record.companyIsView,jdbcType=TINYINT},
       company_alter_time = #{record.companyAlterTime,jdbcType=TIMESTAMP},
@@ -371,6 +363,12 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaCompany" >
     update sybida_company
     <set >
+      <if test="companyUserId != null" >
+        company_user_id = #{companyUserId,jdbcType=INTEGER},
+      </if>
+      <if test="companyMarkId != null" >
+        company_mark_id = #{companyMarkId,jdbcType=INTEGER},
+      </if>
       <if test="companyName != null" >
         company_name = #{companyName,jdbcType=CHAR},
       </if>
@@ -407,9 +405,6 @@
       <if test="companyIntroduce != null" >
         company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
       </if>
-      <if test="companyUserId != null" >
-        company_user_id = #{companyUserId,jdbcType=INTEGER},
-      </if>
       <if test="companyPicture != null" >
         company_picture = #{companyPicture,jdbcType=VARCHAR},
       </if>
@@ -430,7 +425,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaCompany" >
     update sybida_company
-    set company_name = #{companyName,jdbcType=CHAR},
+    set company_user_id = #{companyUserId,jdbcType=INTEGER},
+      company_mark_id = #{companyMarkId,jdbcType=INTEGER},
+      company_name = #{companyName,jdbcType=CHAR},
       company_end_time = #{companyEndTime,jdbcType=TIMESTAMP},
       company_start_time = #{companyStartTime,jdbcType=TIMESTAMP},
       company_study_id = #{companyStudyId,jdbcType=INTEGER},
@@ -442,7 +439,6 @@
       company_wechat = #{companyWechat,jdbcType=VARCHAR},
       company_phone = #{companyPhone,jdbcType=VARCHAR},
       company_introduce = #{companyIntroduce,jdbcType=VARCHAR},
-      company_user_id = #{companyUserId,jdbcType=INTEGER},
       company_picture = #{companyPicture,jdbcType=VARCHAR},
       company_is_view = #{companyIsView,jdbcType=TINYINT},
       company_alter_time = #{companyAlterTime,jdbcType=TIMESTAMP},
