@@ -27,4 +27,8 @@ public interface ClassInfoService {
     SybidaTeach selectTeacherName(String classTeachId);
 
     SybidaStudy selectStudyName(String classStudyId);
+
+    ResponseResult updateClassInfo(SybidaClass sybidaClass);
+
+
 }
