@@ -3,6 +3,7 @@ package com.sy.mapper;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaTeachExample;
+import com.sy.pojo.SybidaUser;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -32,5 +33,7 @@ public interface SybidaTeachMapper {
     int updateByPrimaryKey(SybidaTeach record);
 
     int updateTeacherInfo(SybidaTeach object);
+
+
 
 }

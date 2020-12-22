@@ -282,4 +282,11 @@
       user_null2 = #{userNull2,jdbcType=VARCHAR}
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
+  <insert id="insertTeacher" parameterType="com.sy.pojo.SybidaUser" useGeneratedKeys="true" keyProperty="userId">
+    insert into sybida_user (user_name, user_phone,
+      user_password, user_note, user_authority)
+    values (#{userName}, #{userPhone},
+      #{userPassword}, #{userNote}, #{userAuthority}
+     )
+  </insert>
 </mapper>
