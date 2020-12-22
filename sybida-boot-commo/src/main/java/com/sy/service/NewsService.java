@@ -1,5 +1,6 @@
 package com.sy.service;
 
+import com.sy.pojo.SybidaClass;
 import com.sy.vo.ResponseResult;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -15,5 +16,6 @@ public interface NewsService {
     public ResponseResult delectOneSend(String newsId);
     public ResponseResult deleteAllNews( List<Integer> list);
     public ResponseResult deleteAllReceive(List<Integer> list);
+    List<SybidaClass> selectClass();
 
 }

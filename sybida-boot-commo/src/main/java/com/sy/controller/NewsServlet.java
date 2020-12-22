@@ -66,4 +66,13 @@ public class NewsServlet {
     public ResponseResult deleteAllReceive(@RequestBody List<Integer> list) {
         return newsService.deleteAllReceive(list);
     }
+
+
+    @RequestMapping("selectallstudentbyclass")
+    public ResponseResult selectAllStudentByClass(String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userId,60);
+
+
+    }
 }
