@@ -14,13 +14,12 @@ public class WebAppConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//      registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(urlPass());
+    registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(urlPass());
     }
 
     public List<String> urlPass(){
         List<String> list = new ArrayList<>();
         list.add("/login");
-        // 。。。。
         return list;
     }
 }

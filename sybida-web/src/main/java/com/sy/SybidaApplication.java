@@ -8,6 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cache.annotation.EnableCaching;
 
+import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 
 @SpringBootApplication
 @ServletComponentScan(basePackages = "com.sy.filter")
@@ -17,9 +22,6 @@ public class SybidaApplication {
     public static void main(String[] args) {
         SpringApplication.run(SybidaApplication.class, args);
         logger.trace("启动--------------------------");
-//        logger.debug("debug--------------------------");
-//        logger.info("info--------------------------");
-//        logger.warn("warn--------------------------");
-//        logger.error("error--------------------------");
+
     }
 }

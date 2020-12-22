@@ -3,10 +3,9 @@ package com.sy.mapper;
 import com.sy.pojo.SybidaCompany;
 import com.sy.pojo.SybidaCompanyExample;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
-@Repository
+
 public interface SybidaCompanyMapper {
     int countByExample(SybidaCompanyExample example);
 
@@ -29,6 +28,4 @@ public interface SybidaCompanyMapper {
     int updateByPrimaryKeySelective(SybidaCompany record);
 
     int updateByPrimaryKey(SybidaCompany record);
-    List<SybidaCompany> selectCompanySelective(SybidaCompany sybidaCompany);
-
 }

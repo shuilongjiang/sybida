@@ -165,6 +165,126 @@ public class SybidaCompanyExample {
             return (Criteria) this;
         }
 
+        public Criteria andCompanyUserIdIsNull() {
+            addCriterion("company_user_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdIsNotNull() {
+            addCriterion("company_user_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdEqualTo(Integer value) {
+            addCriterion("company_user_id =", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdNotEqualTo(Integer value) {
+            addCriterion("company_user_id <>", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdGreaterThan(Integer value) {
+            addCriterion("company_user_id >", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("company_user_id >=", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdLessThan(Integer value) {
+            addCriterion("company_user_id <", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdLessThanOrEqualTo(Integer value) {
+            addCriterion("company_user_id <=", value, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdIn(List<Integer> values) {
+            addCriterion("company_user_id in", values, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdNotIn(List<Integer> values) {
+            addCriterion("company_user_id not in", values, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdBetween(Integer value1, Integer value2) {
+            addCriterion("company_user_id between", value1, value2, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyUserIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("company_user_id not between", value1, value2, "companyUserId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdIsNull() {
+            addCriterion("company_mark_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdIsNotNull() {
+            addCriterion("company_mark_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdEqualTo(Integer value) {
+            addCriterion("company_mark_id =", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdNotEqualTo(Integer value) {
+            addCriterion("company_mark_id <>", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdGreaterThan(Integer value) {
+            addCriterion("company_mark_id >", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("company_mark_id >=", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdLessThan(Integer value) {
+            addCriterion("company_mark_id <", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdLessThanOrEqualTo(Integer value) {
+            addCriterion("company_mark_id <=", value, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdIn(List<Integer> values) {
+            addCriterion("company_mark_id in", values, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdNotIn(List<Integer> values) {
+            addCriterion("company_mark_id not in", values, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdBetween(Integer value1, Integer value2) {
+            addCriterion("company_mark_id between", value1, value2, "companyMarkId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyMarkIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("company_mark_id not between", value1, value2, "companyMarkId");
+            return (Criteria) this;
+        }
+
         public Criteria andCompanyNameIsNull() {
             addCriterion("company_name is null");
             return (Criteria) this;
@@ -962,66 +1082,6 @@ public class SybidaCompanyExample {
 
         public Criteria andCompanyIntroduceNotBetween(String value1, String value2) {
             addCriterion("company_introduce not between", value1, value2, "companyIntroduce");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdIsNull() {
-            addCriterion("company_user_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdIsNotNull() {
-            addCriterion("company_user_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdEqualTo(Integer value) {
-            addCriterion("company_user_id =", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdNotEqualTo(Integer value) {
-            addCriterion("company_user_id <>", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdGreaterThan(Integer value) {
-            addCriterion("company_user_id >", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("company_user_id >=", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdLessThan(Integer value) {
-            addCriterion("company_user_id <", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdLessThanOrEqualTo(Integer value) {
-            addCriterion("company_user_id <=", value, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdIn(List<Integer> values) {
-            addCriterion("company_user_id in", values, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdNotIn(List<Integer> values) {
-            addCriterion("company_user_id not in", values, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdBetween(Integer value1, Integer value2) {
-            addCriterion("company_user_id between", value1, value2, "companyUserId");
-            return (Criteria) this;
-        }
-
-        public Criteria andCompanyUserIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("company_user_id not between", value1, value2, "companyUserId");
             return (Criteria) this;
         }
 

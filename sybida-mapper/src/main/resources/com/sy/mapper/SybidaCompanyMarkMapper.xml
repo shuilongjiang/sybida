@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sy.mapper.SybidaCompanyMarkMapper" >
+  <resultMap id="BaseResultMap" type="com.sy.pojo.SybidaCompanyMark" >
+    <id column=" mark_id" property="markId" jdbcType="INTEGER" />
+    <result column="mark_teacher_id" property="markTeacherId" jdbcType="VARCHAR" />
+    <result column="mark_ercode_id" property="markErcodeId" jdbcType="VARCHAR" />
+    <result column="mark_alter_date" property="markAlterDate" jdbcType="TIMESTAMP" />
+    <result column="mark_null1" property="markNull1" jdbcType="VARCHAR" />
+    <result column="mark_null2" property="markNull2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    " mark_id", mark_teacher_id, mark_ercode_id, mark_alter_date, mark_null1, mark_null2
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaCompanyMarkExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from sybida_company_mark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sybida_company_mark
+    where " mark_id" = #{markId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sybida_company_mark
+    where " mark_id" = #{markId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sy.pojo.SybidaCompanyMarkExample" >
+    delete from sybida_company_mark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sy.pojo.SybidaCompanyMark" >
+    insert into sybida_company_mark (" mark_id", mark_teacher_id, mark_ercode_id, 
+      mark_alter_date, mark_null1, mark_null2
+      )
+    values (#{markId,jdbcType=INTEGER}, #{markTeacherId,jdbcType=VARCHAR}, #{markErcodeId,jdbcType=VARCHAR}, 
+      #{markAlterDate,jdbcType=TIMESTAMP}, #{markNull1,jdbcType=VARCHAR}, #{markNull2,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaCompanyMark" >
+    insert into sybida_company_mark
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="markId != null" >
+        " mark_id",
+      </if>
+      <if test="markTeacherId != null" >
+        mark_teacher_id,
+      </if>
+      <if test="markErcodeId != null" >
+        mark_ercode_id,
+      </if>
+      <if test="markAlterDate != null" >
+        mark_alter_date,
+      </if>
+      <if test="markNull1 != null" >
+        mark_null1,
+      </if>
+      <if test="markNull2 != null" >
+        mark_null2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="markId != null" >
+        #{markId,jdbcType=INTEGER},
+      </if>
+      <if test="markTeacherId != null" >
+        #{markTeacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="markErcodeId != null" >
+        #{markErcodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="markAlterDate != null" >
+        #{markAlterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markNull1 != null" >
+        #{markNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="markNull2 != null" >
+        #{markNull2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sy.pojo.SybidaCompanyMarkExample" resultType="java.lang.Integer" >
+    select count(*) from sybida_company_mark
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update sybida_company_mark
+    <set >
+      <if test="record.markId != null" >
+        " mark_id" = #{record.markId,jdbcType=INTEGER},
+      </if>
+      <if test="record.markTeacherId != null" >
+        mark_teacher_id = #{record.markTeacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markErcodeId != null" >
+        mark_ercode_id = #{record.markErcodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markAlterDate != null" >
+        mark_alter_date = #{record.markAlterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.markNull1 != null" >
+        mark_null1 = #{record.markNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.markNull2 != null" >
+        mark_null2 = #{record.markNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update sybida_company_mark
+    set " mark_id" = #{record.markId,jdbcType=INTEGER},
+      mark_teacher_id = #{record.markTeacherId,jdbcType=VARCHAR},
+      mark_ercode_id = #{record.markErcodeId,jdbcType=VARCHAR},
+      mark_alter_date = #{record.markAlterDate,jdbcType=TIMESTAMP},
+      mark_null1 = #{record.markNull1,jdbcType=VARCHAR},
+      mark_null2 = #{record.markNull2,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sy.pojo.SybidaCompanyMark" >
+    update sybida_company_mark
+    <set >
+      <if test="markTeacherId != null" >
+        mark_teacher_id = #{markTeacherId,jdbcType=VARCHAR},
+      </if>
+      <if test="markErcodeId != null" >
+        mark_ercode_id = #{markErcodeId,jdbcType=VARCHAR},
+      </if>
+      <if test="markAlterDate != null" >
+        mark_alter_date = #{markAlterDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="markNull1 != null" >
+        mark_null1 = #{markNull1,jdbcType=VARCHAR},
+      </if>
+      <if test="markNull2 != null" >
+        mark_null2 = #{markNull2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where " mark_id" = #{markId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sy.pojo.SybidaCompanyMark" >
+    update sybida_company_mark
+    set mark_teacher_id = #{markTeacherId,jdbcType=VARCHAR},
+      mark_ercode_id = #{markErcodeId,jdbcType=VARCHAR},
+      mark_alter_date = #{markAlterDate,jdbcType=TIMESTAMP},
+      mark_null1 = #{markNull1,jdbcType=VARCHAR},
+      mark_null2 = #{markNull2,jdbcType=VARCHAR}
+    where " mark_id" = #{markId,jdbcType=INTEGER}
+  </update>
+</mapper>

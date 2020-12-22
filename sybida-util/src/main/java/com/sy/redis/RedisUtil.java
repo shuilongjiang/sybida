@@ -3,6 +3,9 @@ package com.sy.redis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Set;
+
 /**
  * https://blog.csdn.net/zzhongcy/article/details/102584028
  *
@@ -34,6 +37,9 @@ public class RedisUtil {
     public void setObj(String key, Object obj, long timeout) {
         redisOpsUtil.set(key,obj,timeout);
     }
+    public void setObj(String key, Object obj) {
+        redisOpsUtil.set(key,obj);
+    }
     public Object getObj(String key) {
         return redisOpsUtil.get(key);
     }
@@ -48,4 +54,7 @@ public class RedisUtil {
             redisOpsUtil.del(userIdKey);
         }
     }
-}
+    public Set<String> getAllkeys(String keysStr){
+        return redisOpsUtil.getAllkeys(keysStr);
+    }
+ }
