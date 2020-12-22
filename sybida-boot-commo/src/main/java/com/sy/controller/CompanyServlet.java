@@ -2,10 +2,12 @@ package com.sy.controller;
 
 import com.sy.MD5.MD5Utils;
 import com.sy.redis.RedisOpsUtil;
+import com.sy.redis.RedisUtil;
 import com.sy.service.CompanyService;
 import com.sy.service.LoginService;
 import com.sy.service.UserInfoService;
 import com.sy.vo.ResponseResult;
+import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,9 +23,12 @@ import java.util.Date;
 public class CompanyServlet {
     @Autowired
     CompanyService companyService;
-
+    @Autowired
+    RedisUtil redisUtil;
     @RequestMapping("ecode")
-    public ResponseResult ecode(String userId){
+    public ResponseResult ecode(String userid){
+        String userId= String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userid,60);
         return companyService.ecode(userId);
     }
 }

@@ -1,6 +1,8 @@
 package com.sy.service;
 
 import com.sy.MD5.MD5Utils;
+import com.sy.mapper.SybidaCompanyMarkMapper;
+import com.sy.pojo.SybidaCompanyMark;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.register.DateUtil;
 import com.sy.vo.ResponseResult;
@@ -8,21 +10,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Service
 public class CompanyServiceImp implements CompanyService{
     @Autowired
     RedisOpsUtil redisOpsUtil;
+    @Autowired
+    SybidaCompanyMarkMapper sybidaCompanyMarkMapper;
     @Override
     public ResponseResult ecode(String userId) {
         ResponseResult responseResult=new ResponseResult();
-        Date date=new Date();
-        String key= MD5Utils.encrypt(date.toString()+userId);
-        System.out.println(date.toString()+userId);
-        redisOpsUtil.set(""+key, DateUtil.date2String(new Date()),60*24*7);
-        System.out.println(key);
-        responseResult.setCode(1);
-        responseResult.setMessage(key);
+        SybidaCompanyMark sybidaCompanyMark=new SybidaCompanyMark();
+        sybidaCompanyMark.setMarkAlterDate(new Date());
+        sybidaCompanyMark.setMarkTeacherId(userId);
+        String tCode=UUID.randomUUID().toString();
+        sybidaCompanyMark.setMarkErcodeId(tCode);
+        sybidaCompanyMark.getMarkId();
+        int row=sybidaCompanyMarkMapper.insertSelective(sybidaCompanyMark);
+        if(row>0){
+            responseResult.setCode(1);
+        }else{
+            responseResult.setCode(0);
+        }
+        responseResult.setMessage(tCode);
         return responseResult;
     }
 }
