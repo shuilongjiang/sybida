@@ -1,5 +1,8 @@
 package com.sy.controller;
 
+import com.sy.dto.ClassAndStudent;
+import com.sy.pojo.SybidaClass;
+import com.sy.pojo.SybidaStudent;
 import com.sy.redis.RedisUtil;
 import com.sy.service.NewsService;
 import com.sy.vo.ResponseResult;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @RequestMapping("news")
@@ -67,12 +72,15 @@ public class NewsServlet {
         return newsService.deleteAllReceive(list);
     }
 
-
     @RequestMapping("selectallstudentbyclass")
     public ResponseResult selectAllStudentByClass(String userid){
+
+
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
-
-
+        redisUtil.expire(userid,60);
+        List<SybidaClass> sybidaClasses = newsService.selectClass();
+        ResponseResult responseResult=new ResponseResult();
+        responseResult.setData(newsService.selectStudentOfclass(Integer.parseInt(userId),sybidaClasses));
+        return responseResult;
     }
 }

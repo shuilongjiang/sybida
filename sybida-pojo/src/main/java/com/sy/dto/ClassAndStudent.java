@@ -2,20 +2,22 @@ package com.sy.dto;
 
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class ClassAndStudent {
-    private  String id;
+    private  Integer id;
     private String title;
-    private boolean check=false;
-    private boolean spread=true;
+    private boolean checked=false;
+    private boolean spread=false;
     private String href;
-    private ClassAndStudent children;
+    private List<ClassAndStudent> children;
 
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -27,12 +29,12 @@ public class ClassAndStudent {
         this.title = title;
     }
 
-    public boolean isCheck() {
-        return check;
+    public boolean isChecked() {
+        return checked;
     }
 
-    public void setCheck(boolean check) {
-        this.check = check;
+    public void setChecked(boolean checked) {
+        this.checked = checked;
     }
 
     public boolean isSpread() {
@@ -51,11 +53,11 @@ public class ClassAndStudent {
         this.href = href;
     }
 
-    public ClassAndStudent getChildren() {
+    public List<ClassAndStudent> getChildren() {
         return children;
     }
 
-    public void setChildren(ClassAndStudent children) {
+    public void setChildren(List<ClassAndStudent> children) {
         this.children = children;
     }
 }
