@@ -2,13 +2,13 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sun.org.apache.regexp.internal.RE;
 import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
+import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,7 +70,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     }
 
 
-
     @Transactional
     @Override
     public ResponseResult selectStudy() {
@@ -111,6 +110,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         }
         return responseResult;
     }
+
     @Transactional
     @Override
     public ResponseResult deleteAllTeacher(List<Integer> list) {
@@ -152,7 +152,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     }
 
 
-
     @Autowired
     SybidaStudy sybidaStudy;
 
@@ -178,14 +177,15 @@ public class TeacherSerivceImp implements TeacherSerivce {
         ResponseResult responseResult = new ResponseResult();
         StudentJobForTeacher studentJobForTeacher = sybidaJobMapper.selectJobById(id);
         System.out.println(studentJobForTeacher);
-        if (studentJobForTeacher == null){
+        if (studentJobForTeacher == null) {
             responseResult.setCode(0);
-        }else {
+        } else {
             responseResult.setCode(1);
             responseResult.setData(studentJobForTeacher);
         }
         return responseResult;
     }
+
     @Override
     public ResponseResult selcetAllStudent(int pageSize, int pageNum) {
         ResponseResult responseResult = new ResponseResult();
@@ -197,22 +197,24 @@ public class TeacherSerivceImp implements TeacherSerivce {
         responseResult.setData(PageInfo);
         return responseResult;
     }
+
     @Override
     public ResponseResult selcetStudentById(int id) {
         ResponseResult responseResult = new ResponseResult();
         SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
         System.out.println(sybidaStudent);
-        if (sybidaStudent==null){
+        if (sybidaStudent == null) {
             responseResult.setCode(0);
             responseResult.setMessage("error");
-        }else {
+        } else {
             responseResult.setData(sybidaStudent);
             responseResult.setCode(1);
             responseResult.setMessage("成功");
         }
         return responseResult;
     }
-     @Transactional
+
+    @Transactional
     @Override
     public ResponseResult updateInfoStudent(SybidaStudent object) {
         ResponseResult responseResult = new ResponseResult();
@@ -237,10 +239,10 @@ public class TeacherSerivceImp implements TeacherSerivce {
         ResponseResult responseResult = new ResponseResult();
         SybidaTeach sybidaTeach = sybidaTeachMapper.selectByPrimaryKey(id);
         System.out.println(sybidaTeach);
-        if(sybidaTeach == null){
+        if (sybidaTeach == null) {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
-         } else  {
+        } else {
             responseResult.setCode(1);
             responseResult.setMessage("成功");
             responseResult.setData(sybidaTeach);
@@ -252,11 +254,12 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult updateTeacherInfo(SybidaTeach object) {
         ResponseResult responseResult = new ResponseResult();
         int affectedRows = sybidaTeachMapper.updateTeacherInfo(object);
-         if (affectedRows > 0){
-             responseResult.setMessage("成功");
-             responseResult.setCode(1);
-         }{
-             responseResult.setCode(0);
+        if (affectedRows > 0) {
+            responseResult.setMessage("成功");
+            responseResult.setCode(1);
+        }
+        {
+            responseResult.setCode(0);
         }
 
         return responseResult;
@@ -277,36 +280,44 @@ public class TeacherSerivceImp implements TeacherSerivce {
         sybidaVitaeEvaluate.setVitaeEvaluateTime(new Date());
         return responseResult;
     }
+
     @Override
     public ResponseResult insertTeacher(SybidaUser sybidaUser) {
-         ResponseResult responseResult = new ResponseResult();
-         int affectedRows = sybidaUserMapper.insertTeacher(sybidaUser);
-         if (affectedRows > 0){
-             responseResult.setCode(1);
-             responseResult.setMessage("成功");
-             responseResult.setData(sybidaUser);
-         }else {
-             responseResult.setCode(0);
-             responseResult.setMessage("失败");
-         }
+        ResponseResult responseResult = new ResponseResult();
+        int affectedRows = sybidaUserMapper.insertTeacher(sybidaUser);
+        if (affectedRows > 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+            responseResult.setData(sybidaUser);
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+        }
 
-         return responseResult;
+        return responseResult;
     }
 
     @Override
     public ResponseResult insertTeachtwo(SybidaTeach sybidaTeach) {
-        ResponseResult responseResult=new ResponseResult();
-     int row=   sybidaTeachMapper.insertSelective(sybidaTeach);
-        if (row==1){
+        ResponseResult responseResult = new ResponseResult();
+        int row = sybidaTeachMapper.insertSelective(sybidaTeach);
+        if (row == 1) {
             responseResult.setCode(1);
             responseResult.setMessage("存入教师表成功");
             return responseResult;
-        }else{
+        } else {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
         }
         return responseResult;
     }
 
-
+    @Override
+    public List<SybidaStudent> selectStudentByClassId(String classId) {
+        ResponseResult responseResult = new ResponseResult();
+        SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+        SybidaStudentExample.Criteria criteria = sybidaStudentExample.createCriteria();
+        criteria.andStudentClassIdEqualTo(Integer.valueOf(classId));
+        return sybidaStudentMapper.selectByExample(sybidaStudentExample);
+    }
 }

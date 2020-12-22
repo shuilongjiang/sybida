@@ -27,4 +27,6 @@ public interface TeacherSerivce {
     ResponseResult updateTeacherInfo(SybidaTeach object);
     ResponseResult insertTeacher(SybidaUser sybidaUser);
     ResponseResult insertTeachtwo(SybidaTeach sybidaTeach);
+    List<SybidaStudent> selectStudentByClassId(String classId);
+
 }

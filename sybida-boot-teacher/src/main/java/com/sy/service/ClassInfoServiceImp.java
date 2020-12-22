@@ -57,7 +57,10 @@ public class ClassInfoServiceImp implements ClassInfoService{
     @Transactional
     @Override
     public List<SybidaClass> selectClass() {
-        List<SybidaClass> listClass=sybidaClassMapper.selectByExample(null);
+        SybidaClassExample sybidaClassExample=new SybidaClassExample();
+        SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+        criteria.andClassNull1EqualTo("1");
+        List<SybidaClass> listClass=sybidaClassMapper.selectByExample(sybidaClassExample);
         return listClass;
     }
 

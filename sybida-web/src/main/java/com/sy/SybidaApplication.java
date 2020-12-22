@@ -26,7 +26,6 @@ public class SybidaApplication {
             @Override
             public void run() {
                 System.out.println(new Date()+"我来了我来了");
-
             }
         };
         ScheduledExecutorService service = Executors.newSingleThreadScheduledExecutor();

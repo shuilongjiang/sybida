@@ -21,9 +21,6 @@ public class StudyInfoServlet {
 
     @RequestMapping("selectPage")
     public ResponseResult selectByPage(String pageNum, String pageSize, String selectStudy){
-        System.out.println(pageNum+"=====================");
-        System.out.println(pageSize+"=====================");
-        System.out.println(selectStudy+"=====================");
         responseResult=studyInfoService.selectAllByPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize), selectStudy);
         return responseResult;
     }
