@@ -6,6 +6,7 @@ import com.sy.QNY.Qnyutil;
 import com.sy.basepath.BasePath;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaTeach;
+import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.List;
 
 @RequestMapping("teacher")
@@ -25,6 +27,8 @@ public class TeacherServlet {
     TeacherSerivce teacherSerivce;
     @Autowired
     ResponseResult responseResult;
+    @Autowired
+    SybidaTeach sybidaTeach;
 
     @Transactional
     @RequestMapping("selectpage")
@@ -61,6 +65,7 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectAllVitae(pageSizes, currPage);
         return responseResult;
     }
+
 
     @RequestMapping("insertvitaeevaluatelevel")
     public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, int studentId) {
@@ -104,6 +109,7 @@ public class TeacherServlet {
     @RequestMapping(value = "/updatestudentinfo", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file,SybidaStudent object){
+        object.setStudentAlterTime(new Date());
         if (file.isEmpty()) {
         }else{
             String photoUrl=Qnyutil.uploadFile(file);
@@ -112,6 +118,7 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.updateInfoStudent(object);
         return responseResult;
     }
+
 
     @RequestMapping(value = "/updateteacherinfo", method = RequestMethod.POST)
     @ResponseBody
@@ -132,7 +139,30 @@ public class TeacherServlet {
      return  responseResult;
     }
 
+@RequestMapping("insertteacher")
+    public ResponseResult insertTeacher(String userName,String userPhone,String  userPassword,int userNote,Byte userAuthority) {
+    SybidaUser sybidaUser = new SybidaUser();
+    sybidaUser.setUserName(userName);
+    sybidaUser.setUserPhone(userPhone);
+    sybidaUser.setUserPassword(userPassword);
+    sybidaUser.setUserNote(userNote);
+    sybidaUser.setUserAuthority(userAuthority);
+    ResponseResult responseResult = teacherSerivce.insertTeacher(sybidaUser);
+    System.out.println(sybidaUser);
 
 
-
+    System.out.println(sybidaUser.getUserId()+"================================");
+    if (responseResult.getCode()==1){
+        SybidaTeach sybidaTeach=new SybidaTeach();
+        sybidaTeach.setTeachId(sybidaUser.getUserId());
+        sybidaTeach.setTeachName(sybidaUser.getUserName());
+        sybidaTeach.setTeachTel(sybidaUser.getUserPhone());
+        return  teacherSerivce.insertTeachtwo(sybidaTeach);
+    }
+    return null;
 }
+}
+
+
+
+
