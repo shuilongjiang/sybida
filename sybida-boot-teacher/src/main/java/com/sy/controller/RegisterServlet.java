@@ -47,6 +47,7 @@ public class RegisterServlet {
                receive = JxcelParser.parser().parseFromFile(RegisterExcel.class, sb);
           }catch (Exception e){
                e.printStackTrace();
+               IOxlsl.deleteFile();
                responseResult.setCode(0);
                responseResult.setMessage("文件格式不符合要求");
                return responseResult;
@@ -59,10 +60,12 @@ public class RegisterServlet {
               try {
                    responseResult=registerService.inserSelectMulTable(receive,partStudent);
               }catch (Exception e){
+
                    return responseResult;
               }
               return responseResult;
          }else {
+              IOxlsl.deleteFile();
               responseResult.setCode(-1);
               responseResult.setMessage("Excel表有中重复的电话号码");
          }

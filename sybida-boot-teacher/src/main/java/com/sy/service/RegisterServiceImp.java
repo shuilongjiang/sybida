@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.sy.mapper.*;
 import com.sy.pojo.*;
+import com.sy.register.IOxlsl;
 import com.sy.register.RegularUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,7 @@ public class RegisterServiceImp implements RegisterService {
             String phone = registerExcels.get(j).getPhone().replace(",", "");
             int phone1 = RegularUtil.regularPhone(registerExcels.get(j).getName(),phone);
             if (phone1 == 0) {
+                IOxlsl.deleteFile();
                 responseResult.setCode(100000);
                 int n = j + 1;
                 responseResult.setMessage("第" + n + "条姓名或手机号错误");
@@ -94,6 +96,7 @@ public class RegisterServiceImp implements RegisterService {
                         responseResult.setData(registerExcels.get(i));
                         return responseResult;
                     } finally {
+                        IOxlsl.deleteFile();
                         int ww = 10 / 0;
                     }
                 }
@@ -128,6 +131,8 @@ public class RegisterServiceImp implements RegisterService {
                 }
             }
             if (row3 == registerExcels.size()) {
+                //删除文件
+                IOxlsl.deleteFile();
                 responseResult.setCode(666);
                 responseResult.setMessage("所有表插入成功");
                 return responseResult;

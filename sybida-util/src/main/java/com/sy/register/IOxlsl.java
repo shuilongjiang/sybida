@@ -8,12 +8,17 @@ import java.io.IOException;
 
 public class IOxlsl {
     public static File file(MultipartFile f){
-        File file = new File("E:\\youku\\img\\Copy.xlsx");
+        File file = new File("E:\\upload\\download\\Copy.xlsx");
         try {
             FileUtils.copyInputStreamToFile(f.getInputStream(), file);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return file;
+    }
+
+    public static void deleteFile(){
+        File file = new File("E:\\upload\\download\\Copy.xlsx");
+        file.delete();
     }
 }
