@@ -27,10 +27,10 @@ public class ScheduledService {
 //    }
     @Autowired
     RedisUtil redisUtil;
-    @Scheduled(fixedDelay = 1000*60)
+    @Scheduled(fixedDelay = 1000*60*10)
     public void scheduled2() {
         System.out.println("定时删除开启"+ System.currentTimeMillis());
-        DeleteFileAndPackage.deleteDir("E:\\upload\\zip");
+        DeleteFileAndPackage.deleteDir("D:\\upload\\zip");
         Set<String> keys = redisUtil.getAllkeys("zipdownload::*");
         for(String key : keys){
             System.out.println("定时删除七牛云"+key.substring(13));

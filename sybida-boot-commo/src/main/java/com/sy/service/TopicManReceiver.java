@@ -49,7 +49,7 @@ public class TopicManReceiver {
         for (int i = 0; i <list.size() ; i++) {
             SybidaReceive sybidaReceive=new SybidaReceive();
             sybidaReceive.setReceiveNull1("1");
-            sybidaReceive.setReceiveIsRead((byte) 0);
+            sybidaReceive.setReceiveIsRead((byte) 1);
             sybidaReceive.setReceiveUserId(list.get(i));
             sybidaReceive.setReceiveAlterTime(data);
 
