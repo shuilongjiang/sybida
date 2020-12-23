@@ -48,7 +48,7 @@ public class AuditionServlet {
 
     @Transactional
     @RequestMapping("selectstudentInterviewbyauditionId")
-    //按用户id和班级id查询学生的面试登记，并进行分页
+    //按auditionId查询学生的面试登记，并进行分页
     public ResponseResult selectstudentInterviewbyauditionId(String auditionId) {
 
         return  auditionSerivce.selectstudentInterviewbyauditionId(Integer.valueOf(auditionId));
