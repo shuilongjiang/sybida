@@ -219,7 +219,6 @@ public class NewsServiceImp implements NewsService{
                 classAndStudent.setChecked(true);
                 classAndStudent.setSpread(true);
             }
-
             SybidaStudentExample sybidaStudentExample=new SybidaStudentExample();
             sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(sybidaClasses.get(i).getClassId());
             List<SybidaStudent> stuList=sybidaStudentMapper.selectByExample(sybidaStudentExample);
@@ -234,14 +233,5 @@ public class NewsServiceImp implements NewsService{
             list.add(classAndStudent);
         }
         return list;
-
-
-
-
-
-
-
-
-
     }
 }

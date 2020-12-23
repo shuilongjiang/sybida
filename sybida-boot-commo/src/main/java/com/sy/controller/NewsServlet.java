@@ -8,6 +8,7 @@ import com.sy.redis.RedisUtil;
 import com.sy.service.NewsService;
 import com.sy.vo.ResponseResult;
 import org.checkerframework.checker.units.qual.A;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -83,10 +84,13 @@ public class NewsServlet {
         responseResult.setData(newsService.selectStudentOfclass(Integer.parseInt(userId),sybidaClasses));
         return responseResult;
     }
+    @Autowired
+    RabbitTemplate rabbitTemplate;
     @RequestMapping("sendmessagetomanypeople")
     public ResponseResult SendMessageToManyPeople(@RequestBody MessageInfo messageInfo){
-        System.out.println(messageInfo);
-
-        return null;
+        ResponseResult responseResult=new ResponseResult();
+        responseResult.setCode(1);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", messageInfo);
+        return responseResult;
     }
 }
