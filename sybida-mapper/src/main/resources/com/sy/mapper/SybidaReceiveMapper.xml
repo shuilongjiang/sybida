@@ -189,4 +189,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+  <insert id="insertManyMessage" parameterType="java.util.List">
+    INSERT INTO sybida_receive(receive_id, receive_user_id,receive_is_read,receive_alter_time,receive_null1)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+    (#{item.receiveId},#{item.receiveUserId},#{item.receiveIsRead},#{item.receiveAlterTime},#{item.receiveNull1})
+    </foreach>
+  </insert>
 </mapper>

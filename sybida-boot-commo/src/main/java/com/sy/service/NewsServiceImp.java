@@ -1,8 +1,11 @@
 package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
+import com.sy.dto.ClassAndStudent;
+import com.sy.mapper.SybidaClassMapper;
 import com.sy.mapper.SybidaNewsMapper;
 import com.sy.mapper.SybidaReceiveMapper;
+import com.sy.mapper.SybidaStudentMapper;
 import com.sy.pojo.*;
 import com.sy.vo.ResponseResult;
 import org.checkerframework.checker.units.qual.A;
@@ -10,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -189,5 +193,45 @@ public class NewsServiceImp implements NewsService{
             responseResult.setMessage("删除多个收信失败");
         }
         return responseResult;
+    }
+    @Autowired
+    SybidaClassMapper sybidaClassMapper;
+    @Transactional
+    @Override
+    public List<SybidaClass> selectClass() {
+        SybidaClassExample sybidaClassExample=new SybidaClassExample();
+        SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+        criteria.andClassNull1EqualTo("1");
+        List<SybidaClass> listClass=sybidaClassMapper.selectByExample(sybidaClassExample);
+        return listClass;
+    }
+    @Autowired
+    SybidaStudentMapper sybidaStudentMapper;
+    @Transactional
+    @Override
+    public List<ClassAndStudent>selectStudentOfclass(Integer userId,List<SybidaClass> sybidaClasses) {
+        List<ClassAndStudent> list=new ArrayList<>();
+        for (int i = 0; i <sybidaClasses.size(); i++) {
+            ClassAndStudent classAndStudent=new ClassAndStudent();
+            classAndStudent.setId(sybidaClasses.get(i).getClassId());
+            classAndStudent.setTitle(sybidaClasses.get(i).getClassNum());
+            if(sybidaClasses.get(i).getClassTeachId().equals(userId)||sybidaClasses.get(i).getClassManagerId().equals(userId)){
+                classAndStudent.setChecked(true);
+                classAndStudent.setSpread(true);
+            }
+            SybidaStudentExample sybidaStudentExample=new SybidaStudentExample();
+            sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(sybidaClasses.get(i).getClassId());
+            List<SybidaStudent> stuList=sybidaStudentMapper.selectByExample(sybidaStudentExample);
+            List<ClassAndStudent> listStu=new ArrayList<>();
+            for (int j = 0; j <stuList.size(); j++) {
+                ClassAndStudent classAndStudent1=new ClassAndStudent();
+                classAndStudent1.setId(stuList.get(j).getStudentId());
+                classAndStudent1.setTitle(stuList.get(j).getStudentName());
+                listStu.add(classAndStudent1);
+            }
+            classAndStudent.setChildren(listStu);
+            list.add(classAndStudent);
+        }
+        return list;
     }
 }

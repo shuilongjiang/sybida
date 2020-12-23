@@ -3,9 +3,10 @@ package com.sy.mapper;
 import com.sy.pojo.SybidaCompanyMark;
 import com.sy.pojo.SybidaCompanyMarkExample;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface SybidaCompanyMarkMapper {
     int countByExample(SybidaCompanyMarkExample example);
 

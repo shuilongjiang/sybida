@@ -31,7 +31,7 @@ public class UserInfoServlet {
     @RequestMapping("userinfoteach")
     public ResponseResult userInfoTeach(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
+        redisUtil.expire(userid,60);
         return userInfoService.userInfoTeach(Integer.valueOf(userId));
     }
 }
