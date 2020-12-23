@@ -1,18 +1,21 @@
 package com.sy.controller;
 
 import com.sy.dto.ClassAndStudent;
+import com.sy.dto.MessageInfo;
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaStudent;
 import com.sy.redis.RedisUtil;
 import com.sy.service.NewsService;
 import com.sy.vo.ResponseResult;
 import org.checkerframework.checker.units.qual.A;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.swing.*;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,13 +77,20 @@ public class NewsServlet {
 
     @RequestMapping("selectallstudentbyclass")
     public ResponseResult selectAllStudentByClass(String userid){
-
-
         String userId = String.valueOf(redisUtil.getObj(userid));
         redisUtil.expire(userid,60);
         List<SybidaClass> sybidaClasses = newsService.selectClass();
         ResponseResult responseResult=new ResponseResult();
         responseResult.setData(newsService.selectStudentOfclass(Integer.parseInt(userId),sybidaClasses));
+        return responseResult;
+    }
+    @Autowired
+    RabbitTemplate rabbitTemplate;
+    @RequestMapping("sendmessagetomanypeople")
+    public ResponseResult SendMessageToManyPeople(@RequestBody MessageInfo messageInfo){
+        ResponseResult responseResult=new ResponseResult();
+        responseResult.setCode(1);
+        rabbitTemplate.convertAndSend("topicExchange", "topic.man", messageInfo);
         return responseResult;
     }
 }
