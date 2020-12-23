@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sy.dto.ShowClassInfo;
 import com.sy.mapper.SybidaClassMapper;
+import com.sy.mapper.SybidaStudentMapper;
 import com.sy.mapper.SybidaStudyMapper;
 import com.sy.mapper.SybidaTeachMapper;
 import com.sy.pojo.*;
@@ -24,6 +25,8 @@ public class ClassInfoServiceImp implements ClassInfoService{
     SybidaStudyMapper sybidaStudyMapper;
     @Autowired
     SybidaTeachMapper sybidaTeachMapper;
+    @Autowired
+    SybidaStudentMapper sybidaStudentMapper;
     @Transactional
     @Override
     public ResponseResult selectAllByPage(int pageNum, int pageSize,String selectClass) {
@@ -44,7 +47,6 @@ public class ClassInfoServiceImp implements ClassInfoService{
             classList = sybidaClassMapper.selectByExample(sybidaClassExample);
         }
              PageInfo<SybidaClass> pageInfo = new PageInfo<>(classList);
-//            PageInfo<ShowClassInfo> pageInfo = new PageInfo<>(classInfoList);
             //设置导航页数
             responseResult.setData(pageInfo);
             return responseResult;
@@ -150,6 +152,35 @@ public class ClassInfoServiceImp implements ClassInfoService{
           responseResult.setCode(0);
           responseResult.setMessage("修改失败");
       }
+        return responseResult;
+    }
+
+    @Transactional
+    @Override
+    public ResponseResult teacherIdFindClass(String pageSize,String pageNum,String classManagerId) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaClassExample sybidaClassExample=new SybidaClassExample();
+        SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+        criteria.andClassManagerIdEqualTo(Integer.valueOf(classManagerId));
+        List<SybidaClass> sybidaClassList= sybidaClassMapper.selectByExample(sybidaClassExample);
+
+        PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+        SybidaStudentExample sybidaStudentExample=new SybidaStudentExample();
+        SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+        criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+        List<SybidaStudent>  studentList= sybidaStudentMapper.selectByExample(sybidaStudentExample);
+
+        PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+
+        if (studentList.size()>0){
+            responseResult.setCode(1);
+            responseResult.setMessage("查询成功");
+            responseResult.setData(pageInfo);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("查询失败");
+        }
         return responseResult;
     }
 }

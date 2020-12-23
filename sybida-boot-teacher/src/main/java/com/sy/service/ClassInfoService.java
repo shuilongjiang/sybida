@@ -30,5 +30,7 @@ public interface ClassInfoService {
 
     ResponseResult updateClassInfo(SybidaClass sybidaClass);
 
+    ResponseResult teacherIdFindClass(String pageSize,String pageNum,String classManagerId);
+
 
 }

@@ -3,6 +3,7 @@ package com.sy.controller;
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaStudy;
 import com.sy.pojo.SybidaTeach;
+import com.sy.redis.RedisUtil;
 import com.sy.register.DateUtil;
 import com.sy.service.ClassInfoService;
 import com.sy.vo.ResponseResult;
@@ -21,7 +22,8 @@ public class ClassInfoServlet {
     ResponseResult responseResult;
     @Autowired
     ClassInfoService classInfoService;
-
+    @Autowired
+    RedisUtil redisUtil;
     @RequestMapping("selectPage")
     public ResponseResult selectByPage(String pageNum,String pageSize,String selectClass){
         responseResult=classInfoService.selectAllByPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize), selectClass);
@@ -118,6 +120,17 @@ public class ClassInfoServlet {
     @PostMapping("updateclassinfo")
     public ResponseResult updateClassInfo(SybidaClass sybidaClass){
         return   classInfoService.updateClassInfo(sybidaClass);
+    }
+
+    @RequestMapping("teacheridfindclass")
+    public ResponseResult teacherIdFindClass(String pageSize,String pageNum,String userId){
+        System.out.println(pageNum+"//////////////////////////");
+        System.out.println(pageSize+"````````````````````````````````````````````````");
+        System.out.println(userId+"----------------------------------");
+        redisUtil.expire(userId,60);
+        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+        System.out.println(classManagerId+"================================");
+        return  classInfoService.teacherIdFindClass(pageSize,pageNum,classManagerId);
     }
 }
 

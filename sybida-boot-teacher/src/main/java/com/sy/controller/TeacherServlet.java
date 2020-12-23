@@ -155,8 +155,6 @@ public class TeacherServlet {
     ResponseResult responseResult = teacherSerivce.insertTeacher(sybidaUser);
     System.out.println(sybidaUser);
 
-
-    System.out.println(sybidaUser.getUserId()+"================================");
     if (responseResult.getCode()==1){
         SybidaTeach sybidaTeach=new SybidaTeach();
         sybidaTeach.setTeachId(sybidaUser.getUserId());
@@ -168,6 +166,7 @@ public class TeacherServlet {
 }
     @RequestMapping("selectstudentclassid")
     public ResponseResult selectStudentByClassId(HttpServletResponse response,String classId) throws IOException {
+        ResponseResult responseResult=new ResponseResult();
         List<StudentExcel> list = new ArrayList<>();
         List<SybidaStudent> studentList= teacherSerivce.selectStudentByClassId(classId);
         if (studentList.size()>0){
@@ -188,13 +187,31 @@ public class TeacherServlet {
                 studentExcel.setStudentParentPhone(studentList.get(i).getStudentParentPhone());
                 studentExcel.setStudentParentName(studentList.get(i).getStudentParentName());
                 studentExcel.setStudentUrgent(studentList.get(i).getStudentUrgent());
-
+                studentExcel.setStudentPhone(studentList.get(i).getStudentPhone());
+                studentExcel.setStudentClassId(studentList.get(i).getStudentClassId());
+                studentExcel.setStudentRoom(studentList.get(i).getStudentRoom());
+                studentExcel.setStudentPhoto(studentList.get(i).getStudentPhoto());
+                studentExcel.setStudentAlterTime(studentList.get(i).getStudentAlterTime());
+                studentExcel.setStudentNull1(studentList.get(i).getStudentNull1());
+                studentExcel.setStudentNull2(studentList.get(i).getStudentNull2());
+                list.add(studentExcel);
             }
         }
-        response.setContentType("application/vnd.ms-excel");
-        response.setHeader("Content-Disposition", "attachment;filename=" + "test11.xlsx");
+
+        response.setContentType("application/vnd.ms-excel;");
+        response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
         ExcelUtil.writeExcel(response, list);
-        return null;
+        System.out.println("能看到我吗===========================");
+        if (studentList.size()>0){
+            responseResult.setCode(1);
+            responseResult.setMessage("下载成功");
+            return  responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("下载失败");
+        }
+        responseResult.setData(list);
+        return responseResult;
    }
 }
 
