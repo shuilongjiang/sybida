@@ -336,4 +336,27 @@
       offer_null2 = #{offerNull2,jdbcType=VARCHAR}
     where offer_id = #{offerId,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="selectAuditionByofferStudentIdForTeacher" resultType="com.sy.dto.OfferForTeacher">
+       select so.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_offer so
+       inner join sybida_student sst on so.offer_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where so.offer_student_id = #{offerStudentId} and so.offer_null1 = 1
+  </select>
+
+
+  <select id="selectstudentOfferbyOfferId" resultType="com.sy.dto.OfferForTeacher">
+       select so.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_offer so
+       inner join sybida_student sst on so.offer_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where so.offer_id = #{offerId}
+  </select>
+
+
+
+
 </mapper>
