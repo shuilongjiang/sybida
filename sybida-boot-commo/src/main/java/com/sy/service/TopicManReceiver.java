@@ -31,31 +31,32 @@ public class TopicManReceiver {
     SybidaReceiveMapper sybidaReceiveMapper;
     @RabbitHandler
     public void process(MessageInfo messageInfo) {
-
         System.out.println("我是消息队列");
-//        Date data = new Date();
-//        String UserId= String.valueOf(redisUtil.getObj(messageInfo.getUserId()));
-//        redisUtil.expire(messageInfo.getUserId(),60);
-//        SybidaNews sybidaNews=new SybidaNews();
-//        sybidaNews.setNewsNull1("1");
-//        sybidaNews.setNewsReadPeople(0);
-//        sybidaNews.setNewsTest(messageInfo.getMessageInfo());
-//        sybidaNews.setNewsAlterTime(data);
-//        sybidaNews.setNewsSendTime(data);
-//        sybidaNews.setNewsUserId(Integer.valueOf(UserId));
-//        sybidaNewsMapper.insertSelective(sybidaNews);
-//        SybidaReceive sybidaReceive=new SybidaReceive();
-//        sybidaReceive.setReceiveNull1("1");
-//        sybidaReceive.setReceiveIsRead((byte) 0);
-//        sybidaReceive.setReceiveId(sybidaNews.getNewsId());
-//        sybidaReceive.setReceiveAlterTime(data);
-//        List<Integer> list=messageInfo.getList();
-//        List<SybidaReceive> listRE=new ArrayList<>();
-//        for (int i = 0; i <list.size() ; i++) {
-//            sybidaReceive.setReceiveId(list.get(i));
-//            listRE.add(sybidaReceive);
-//        }
-//        sybidaReceiveMapper.insertManyMessage(listRE);
-//        System.out.println("信息插入成功");
+        Date data = new Date();
+        String UserId= String.valueOf(redisUtil.getObj(messageInfo.getUserId()));
+        redisUtil.expire(messageInfo.getUserId(),60);
+        SybidaNews sybidaNews=new SybidaNews();
+        sybidaNews.setNewsNull1("1");
+        sybidaNews.setNewsReadPeople(0);
+        sybidaNews.setNewsTest(messageInfo.getMessageInfo());
+        sybidaNews.setNewsAlterTime(data);
+        sybidaNews.setNewsSendTime(data);
+        sybidaNews.setNewsUserId(Integer.valueOf(UserId));
+        sybidaNewsMapper.insertSelective(sybidaNews);
+
+        List<Integer> list=messageInfo.getList();
+        List<SybidaReceive> listRE=new ArrayList<>();
+        for (int i = 0; i <list.size() ; i++) {
+            SybidaReceive sybidaReceive=new SybidaReceive();
+            sybidaReceive.setReceiveNull1("1");
+            sybidaReceive.setReceiveIsRead((byte) 0);
+            sybidaReceive.setReceiveUserId(list.get(i));
+            sybidaReceive.setReceiveAlterTime(data);
+
+            sybidaReceive.setReceiveId(sybidaNews.getNewsId());
+            listRE.add(sybidaReceive);
+        }
+        sybidaReceiveMapper.insertManyMessage(listRE);
+        System.out.println("信息插入成功--->我是消息队列");
     }
 }
