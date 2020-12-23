@@ -168,13 +168,15 @@ public class ClassInfoServiceImp implements ClassInfoService{
         SybidaStudentExample sybidaStudentExample=new SybidaStudentExample();
         SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
         criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+        criteria1.andStudentNull2EqualTo("1");
         List<SybidaStudent>  studentList= sybidaStudentMapper.selectByExample(sybidaStudentExample);
 
         PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
 
+        String classId= String.valueOf(sybidaClassList.get(0).getClassId());
         if (studentList.size()>0){
             responseResult.setCode(1);
-            responseResult.setMessage("查询成功");
+            responseResult.setMessage(classId);
             responseResult.setData(pageInfo);
             return responseResult;
         }else {

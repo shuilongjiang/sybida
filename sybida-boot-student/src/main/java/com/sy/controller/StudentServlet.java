@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("student")
 @RestController
@@ -29,7 +30,19 @@ public class StudentServlet {
         return  responseResult;
     }
 
+    @RequestMapping("deleteonestudent")
+    public ResponseResult deleteOneStudent(String studentId){
+        return studentSerivce.deleteOneStudent(studentId);
+    }
 
+    @RequestMapping("deleteallstudent")
+    public ResponseResult deleteAllStudent(@RequestBody List<Integer> list){
+     return  studentSerivce.deleteAllStudent(list);
+    }
 
+    @RequestMapping("selectstudentbyname")
+    public ResponseResult selectStudentByName(String stuName,String classId){
+        return studentSerivce.selectStudentByName(stuName,classId);
+    }
 
 }
