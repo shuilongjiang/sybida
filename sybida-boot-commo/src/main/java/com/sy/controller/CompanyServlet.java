@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("company")
 @RestController
@@ -36,8 +37,6 @@ public class CompanyServlet {
     @RequestMapping(value ="insertcompany",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult insertCompany(@RequestParam("file") MultipartFile file, SybidaCompany sybidaCompany){
-        System.out.println(sybidaCompany+"========================");
-        System.out.println(file+"=================");
         if(file.isEmpty()){
         }else {
             System.out.println("上传成功");
@@ -45,8 +44,26 @@ public class CompanyServlet {
             sybidaCompany.setCompanyPicture(photoUrl);
         }
         sybidaCompany.setCompanyAlterTime(new Date());
+        sybidaCompany.setCompanyNull1("1");
         return companyService.insertCompany(sybidaCompany);
     }
 
+    @RequestMapping("selectcompanyinfo")
+    public ResponseResult selectCompanyInfo(String pageSize,String pageNum){
+        return companyService.selectCompanyInfo(pageNum,pageSize);
+    }
 
+    @RequestMapping("deleteonecompany")
+    public ResponseResult deleteOneCompany(String companyId){
+        return companyService.deleteOneCompany(companyId);
+    }
+
+    @RequestMapping("deleteallcompany")
+    public ResponseResult deleteAllCompany(@RequestBody List<Integer> list){
+        return  companyService.deleteAllCompany(list);
+    }
+    @RequestMapping("selectteachername")
+    public ResponseResult selectTeacherName(String companyUserId){
+       return companyService.selectTeacherName(companyUserId);
+    }
 }
