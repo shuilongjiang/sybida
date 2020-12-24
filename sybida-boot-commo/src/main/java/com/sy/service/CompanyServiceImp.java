@@ -26,14 +26,13 @@ public class CompanyServiceImp implements CompanyService{
         sybidaCompanyMark.setMarkTeacherId(userId);
         String tCode=UUID.randomUUID().toString();
         sybidaCompanyMark.setMarkErcodeId(tCode);
-        sybidaCompanyMark.getMarkId();
         int row=sybidaCompanyMarkMapper.insertSelective(sybidaCompanyMark);
         if(row>0){
             responseResult.setCode(1);
         }else{
             responseResult.setCode(0);
         }
-        responseResult.setMessage(tCode);
+        responseResult.setMessage(String.valueOf(sybidaCompanyMark.getMarkId()));
         return responseResult;
     }
 }

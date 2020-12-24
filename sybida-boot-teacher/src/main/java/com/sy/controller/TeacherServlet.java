@@ -151,6 +151,12 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectTeacherById(Integer.valueOf(userId));
         return responseResult;
     }
+    @RequestMapping("selectteacherbyidone")
+    public ResponseResult selectStudentByIdOne(Integer userid) {
+
+        ResponseResult responseResult = teacherSerivce.selectTeacherById(userid);
+        return responseResult;
+    }
 
     @RequestMapping("insertteacher")
     public ResponseResult insertTeacher(String userName, String userPhone, String userPassword, int userNote, Byte userAuthority) {

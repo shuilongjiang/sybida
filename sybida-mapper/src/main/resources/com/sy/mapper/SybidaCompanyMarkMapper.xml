@@ -108,7 +108,7 @@
       #{markAlterDate,jdbcType=TIMESTAMP}, #{markNull1,jdbcType=VARCHAR}, #{markNull2,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaCompanyMark" >
+  <insert id="insertSelective" parameterType="com.sy.pojo.SybidaCompanyMark"  useGeneratedKeys="true" keyProperty="markId">
     insert into sybida_company_mark
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="markId != null" >

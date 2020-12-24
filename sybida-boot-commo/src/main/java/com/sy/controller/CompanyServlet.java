@@ -29,6 +29,8 @@ public class CompanyServlet {
     public ResponseResult ecode(String userid){
         String userId= String.valueOf(redisUtil.getObj(userid));
         redisUtil.expire(userid,60);
-        return companyService.ecode(userId);
+        ResponseResult responseResult=companyService.ecode(userId);
+        redisUtil.setObj("TwoCode::"+responseResult.getMessage(),"二维码",60*24*7);
+        return  responseResult;
     }
 }

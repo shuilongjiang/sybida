@@ -25,7 +25,6 @@ public class HotServlet {
    //   ResponseResult responseResult= hotPanService.selectSybidaJob();
    //        redisUtil.expire(userId,60);
    //        String userId = String.valueOf(redisUtil.getObj(userid));
-        System.out.println("=====================");
         return hotPanService.selectHotList("key");
     }
 //    @RequestMapping("hotpan1")
