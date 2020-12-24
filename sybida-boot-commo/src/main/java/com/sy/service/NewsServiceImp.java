@@ -72,7 +72,7 @@ public class NewsServiceImp implements NewsService{
     @Transactional
     @Override
     public ResponseResult isRead(String receiveId) {
-
+        int num=0;
         int row2=0;
         ResponseResult responseResult=new ResponseResult();
         SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();

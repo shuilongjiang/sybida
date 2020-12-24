@@ -201,7 +201,6 @@ public class TeacherServlet {
         response.setContentType("application/vnd.ms-excel;");
         response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
         ExcelUtil.writeExcel(response, list);
-        System.out.println("能看到我吗===========================");
         if (studentList.size()>0){
             responseResult.setCode(1);
             responseResult.setMessage("下载成功");

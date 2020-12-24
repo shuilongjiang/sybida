@@ -1,7 +1,9 @@
 package com.sy.service;
 
 import com.sy.MD5.MD5Utils;
+import com.sy.mapper.SybidaCompanyMapper;
 import com.sy.mapper.SybidaCompanyMarkMapper;
+import com.sy.pojo.SybidaCompany;
 import com.sy.pojo.SybidaCompanyMark;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.register.DateUtil;
@@ -18,6 +20,9 @@ public class CompanyServiceImp implements CompanyService{
     RedisOpsUtil redisOpsUtil;
     @Autowired
     SybidaCompanyMarkMapper sybidaCompanyMarkMapper;
+    @Autowired
+    SybidaCompanyMapper sybidaCompanyMapper;
+
     @Override
     public ResponseResult ecode(String userId) {
         ResponseResult responseResult=new ResponseResult();
@@ -34,6 +39,21 @@ public class CompanyServiceImp implements CompanyService{
             responseResult.setCode(0);
         }
         responseResult.setMessage(tCode);
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult insertCompany(SybidaCompany sybidaCompany) {
+        ResponseResult responseResult=new ResponseResult();
+       int row= sybidaCompanyMapper.insertSelective(sybidaCompany);
+       if (row==1){
+           responseResult.setCode(1);
+           responseResult.setMessage("插入成功");
+           return responseResult;
+       }else {
+           responseResult.setCode(0);
+           responseResult.setMessage("插入失败");
+       }
         return responseResult;
     }
 }
