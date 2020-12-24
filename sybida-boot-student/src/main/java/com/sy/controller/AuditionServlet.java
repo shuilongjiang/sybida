@@ -41,7 +41,6 @@ public class AuditionServlet {
     public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
         redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
-
         return  auditionSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
 
     }
