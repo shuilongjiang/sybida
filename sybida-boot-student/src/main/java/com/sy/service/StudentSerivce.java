@@ -19,6 +19,6 @@ public interface StudentSerivce {
 
     ResponseResult selectStudentByName(String stuName,String classId);
 
-    ResponseResult selcetStudentVitaeById(int pageSize,int pageNum,Integer studentId);
+    ResponseResult selcetStudentVitaeById(int userid);
 
 }

@@ -5,6 +5,7 @@ import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentAndStudyAndClass;
 import com.sy.pojo.SybidaStudentExample;
+import com.sy.pojo.SybidaVitae;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -37,6 +38,6 @@ public interface SybidaStudentMapper {
 
    int updateStudentInfo(SybidaStudent object);
 
-    List<StudentVitae> selectStudentVitaeById(Integer studentId);
+    List<StudentVitae> selcetStudentVitaeById(Integer vitaeStudentId);
 
 }
