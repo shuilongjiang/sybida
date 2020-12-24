@@ -29,7 +29,7 @@ public class ZipDownload {
 
     public static String downloadManyFilesToQny( Map<String ,String> map)  {
         try {
-            String zipBasePath = "E:/upload/zip";
+            String zipBasePath = "D:/upload/zip";
             String zipName = "temp"+UUID.randomUUID().toString()+".zip";
             String zipFilePath = zipBasePath + File.separator + zipName;
             //压缩文件

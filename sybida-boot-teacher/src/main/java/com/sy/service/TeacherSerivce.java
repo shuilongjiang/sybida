@@ -23,10 +23,13 @@ public interface TeacherSerivce {
     ResponseResult selcetAllStudent(int pageSize,int pageNum);
     ResponseResult selcetStudentById(int id);
     ResponseResult updateInfoStudent(SybidaStudent object);
-    ResponseResult selectTeacherById(int id);
+    ResponseResult selectTeacherById(int userid);
     ResponseResult updateTeacherInfo(SybidaTeach object);
     ResponseResult insertTeacher(SybidaUser sybidaUser);
     ResponseResult insertTeachtwo(SybidaTeach sybidaTeach);
     List<SybidaStudent> selectStudentByClassId(String classId);
+
+
+
 
 }

@@ -1,5 +1,7 @@
 package com.sy.mapper;
 
+import com.sy.dto.StudentVitae;
+import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentAndStudyAndClass;
 import com.sy.pojo.SybidaStudentExample;
@@ -34,5 +36,7 @@ public interface SybidaStudentMapper {
     List<SybidaStudentAndStudyAndClass> selectByExampleSelective(SybidaStudent sybidaStudent);
 
    int updateStudentInfo(SybidaStudent object);
+
+    List<StudentVitae> selectStudentVitaeById(Integer studentId);
 
 }

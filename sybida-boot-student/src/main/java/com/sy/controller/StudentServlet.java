@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("student")
 @RestController
@@ -29,7 +30,29 @@ public class StudentServlet {
         return  responseResult;
     }
 
+    @RequestMapping("deleteonestudent")
+    public ResponseResult deleteOneStudent(String studentId){
+        return studentSerivce.deleteOneStudent(studentId);
+    }
 
+    @RequestMapping("deleteallstudent")
+    public ResponseResult deleteAllStudent(@RequestBody List<Integer> list){
+     return  studentSerivce.deleteAllStudent(list);
+    }
 
+    @RequestMapping("selectstudentbyname")
+    public ResponseResult selectStudentByName(String stuName,String classId){
+        return studentSerivce.selectStudentByName(stuName,classId);
+    }
+
+    @RequestMapping("selectstudentvitae")
+    public ResponseResult selectStudentVitae(String pageSize, String pageNum,String userid){
+        redisUtil.expire(userid,60);
+        String studentId = String.valueOf(redisUtil.getObj(userid));
+        int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
+        int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
+        ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(pageSizes, currPage,Integer.valueOf(studentId));
+        return responseResult;
+    }
 
 }

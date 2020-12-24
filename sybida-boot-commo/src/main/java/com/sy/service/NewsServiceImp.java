@@ -185,6 +185,7 @@ public class NewsServiceImp implements NewsService{
 //            row+= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
         }
         if (row==list.size()){
+
             responseResult.setCode(1);
             responseResult.setMessage("删除多个收信成功");
             return responseResult;

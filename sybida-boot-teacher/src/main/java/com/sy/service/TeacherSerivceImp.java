@@ -235,17 +235,17 @@ public class TeacherSerivceImp implements TeacherSerivce {
     }
 
     @Override
-    public ResponseResult selectTeacherById(int id) {
+    public ResponseResult selectTeacherById(int userid) {
         ResponseResult responseResult = new ResponseResult();
-        SybidaTeach sybidaTeach = sybidaTeachMapper.selectByPrimaryKey(id);
+        SybidaTeach sybidaTeach = sybidaTeachMapper.selectByPrimaryKey(userid);
         System.out.println(sybidaTeach);
         if (sybidaTeach == null) {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
         } else {
             responseResult.setCode(1);
-            responseResult.setMessage("成功");
             responseResult.setData(sybidaTeach);
+            responseResult.setMessage("成功");
         }
         return responseResult;
     }
@@ -320,4 +320,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         criteria.andStudentClassIdEqualTo(Integer.valueOf(classId));
         return sybidaStudentMapper.selectByExample(sybidaStudentExample);
     }
+
+
+
 }
