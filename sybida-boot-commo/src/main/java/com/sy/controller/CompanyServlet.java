@@ -27,6 +27,18 @@ public class CompanyServlet {
     CompanyService companyService;
     @Autowired
     RedisUtil redisUtil;
+    @RequestMapping("codeisenable")
+    public ResponseResult codeIsEnable(String codeId){
+        ResponseResult responseResult=new ResponseResult();
+        Object code=redisUtil.getObj("TwoCode::"+codeId);
+        if(null==code){
+            responseResult.setCode(0);
+        }else {
+            responseResult.setCode(1);
+
+        }
+    return responseResult;
+    }
     @RequestMapping("ecode")
     public ResponseResult ecode(String userid){
         String userId= String.valueOf(redisUtil.getObj(userid));
