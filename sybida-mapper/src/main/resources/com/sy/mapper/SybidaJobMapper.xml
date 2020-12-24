@@ -320,4 +320,14 @@
   <select id="selectHotList" resultType="com.sy.pojo.HotList">
    select  student_name, job_weal from sybida_student, sybida_job where job_student_id = student_id
   </select>
+
+
+
+  <select id="selectstudentJobbyJobStudentId" resultType="com.sy.dto.JobForTeacher">
+       select sj.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_job sj
+       inner join sybida_student sst on sj.job_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where sj.job_student_id = #{jobStudentId}
+  </select>
 </mapper>
