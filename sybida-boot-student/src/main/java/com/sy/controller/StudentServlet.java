@@ -45,4 +45,14 @@ public class StudentServlet {
         return studentSerivce.selectStudentByName(stuName,classId);
     }
 
+    @RequestMapping("selectstudentvitae")
+    public ResponseResult selectStudentVitae(String pageSize, String pageNum,String userid){
+        redisUtil.expire(userid,60);
+        String studentId = String.valueOf(redisUtil.getObj(userid));
+        int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
+        int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
+        ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(pageSizes, currPage,Integer.valueOf(studentId));
+        return responseResult;
+    }
+
 }

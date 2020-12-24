@@ -34,6 +34,4 @@ public interface SybidaTeachMapper {
 
     int updateTeacherInfo(SybidaTeach object);
 
-
-
 }

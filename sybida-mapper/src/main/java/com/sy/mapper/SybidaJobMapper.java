@@ -1,5 +1,7 @@
 package com.sy.mapper;
 
+import com.sy.dto.JobForTeacher;
+import com.sy.dto.OfferForTeacher;
 import com.sy.dto.StudentJobForTeacher;
 
 import com.sy.pojo.HotList;
@@ -38,5 +40,7 @@ public interface SybidaJobMapper {
     List<StudentJobForTeacher> selectStudentJob();
 
     StudentJobForTeacher selectJobById(@Param("stuID") Integer id);
+
+    JobForTeacher selectstudentJobbyJobStudentId(Integer jobStudentId);
 
 }

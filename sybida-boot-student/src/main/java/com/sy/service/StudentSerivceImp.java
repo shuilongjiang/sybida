@@ -1,6 +1,10 @@
 package com.sy.service;
 
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sy.dto.StudentVitae;
+import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.SybidaStudentMapper;
 import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.SybidaClass;
@@ -99,6 +103,23 @@ public class StudentSerivceImp implements StudentSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("查询失败");
         }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selcetStudentVitaeById(int pageSize,int pageNum,Integer studentId) {
+        ResponseResult responseResult = new ResponseResult();
+        PageHelper.startPage(pageNum, pageSize);
+
+        List<StudentVitae> list = sybidaStudentMapper.selectStudentVitaeById(studentId);
+
+        for (int i = 0; i < list.size(); i++) {
+            System.out.println(list.get(i));
+        }
+        PageInfo<StudentVitae> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功");
+        responseResult.setData(PageInfo);
         return responseResult;
     }
 }
