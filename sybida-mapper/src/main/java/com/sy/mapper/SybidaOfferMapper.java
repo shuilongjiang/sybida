@@ -32,7 +32,7 @@ public interface SybidaOfferMapper {
 
     int updateByPrimaryKey(SybidaOffer record);
 
-    List<OfferForTeacher> selectAuditionByofferStudentIdForTeacher(Integer offerStudentId);
+    List<OfferForTeacher> selectOfferByofferStudentIdForTeacher(Integer offerStudentId);
 
     OfferForTeacher selectstudentOfferbyOfferId(Integer offerId);
 }

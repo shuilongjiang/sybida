@@ -28,5 +28,6 @@ public interface OfferSerivce {
     ResponseResult deleteAllStudentOffer(List<Integer> list);
 
 
+    ResponseResult selectPage(int pageSize, int pageNum, String classNum,int userid);
 
 }

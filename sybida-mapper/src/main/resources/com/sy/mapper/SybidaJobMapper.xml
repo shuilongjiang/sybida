@@ -328,6 +328,29 @@
        from sybida_job sj
        inner join sybida_student sst on sj.job_student_id=sst.student_id
        inner join sybida_class sc  on sst.student_class_id=sc.class_id
-       where sj.job_student_id = #{jobStudentId}
+       where sj.job_student_id = #{jobStudentId} and sj.job_null1 = 1
   </select>
+
+  <select id="selectJobByJobStudentIdForTeacher" resultType="com.sy.dto.JobForTeacher">
+       select sj.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_job sj
+       inner join sybida_student sst on sj.job_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where sj.job_student_id = #{jobStudentId} and sj.job_null1 = 1
+  </select>
+
+
+
+
+  <select id="selectstudentJobbyJobId" resultType="com.sy.dto.JobForTeacher">
+       select sj.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_job sj
+       inner join sybida_student sst on sj.job_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where sj.job_id = #{jobId}
+  </select>
+
+
+
+
 </mapper>

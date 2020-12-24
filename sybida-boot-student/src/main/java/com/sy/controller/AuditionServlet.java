@@ -23,7 +23,7 @@ public class AuditionServlet {
     RedisUtil redisUtil;
 
 
-    @Transactional
+
     @RequestMapping("selectClass")
     //根据用户ID查询班级信息
     public ResponseResult selectByClass(String userid) {
@@ -35,7 +35,7 @@ public class AuditionServlet {
     }
 
 
-    @Transactional
+
     @RequestMapping("selectpage")
     //按用户id和班级id查询学生的面试登记，并进行分页
     public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
@@ -45,7 +45,7 @@ public class AuditionServlet {
 
     }
 
-    @Transactional
+
     @RequestMapping("selectstudentInterviewbyauditionId")
     //按auditionId查询学生的面试登记，并进行分页
     public ResponseResult selectstudentInterviewbyauditionId(String auditionId) {
@@ -56,7 +56,7 @@ public class AuditionServlet {
 
 
 
-    @Transactional
+
     @RequestMapping("selectAllClass")
     //根据用户ID查询班级信息
     public ResponseResult selectAllClass() {
@@ -65,7 +65,7 @@ public class AuditionServlet {
     }
 
 
-    @Transactional
+
     @RequestMapping("selectStudentById")
     public ResponseResult selectStudentById(String userid) {
 //        System.out.println(userid+"===============");
@@ -76,7 +76,7 @@ public class AuditionServlet {
     }
 
 
-    @Transactional
+
     @RequestMapping("selectClassByClassId")
     public ResponseResult selectClassByClassId(String classId) {
         System.out.println(classId);
