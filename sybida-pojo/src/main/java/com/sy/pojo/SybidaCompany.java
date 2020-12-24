@@ -1,5 +1,8 @@
 package com.sy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SybidaCompany {
@@ -75,18 +78,20 @@ public class SybidaCompany {
         this.companyName = companyName == null ? null : companyName.trim();
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCompanyEndTime() {
         return companyEndTime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setCompanyEndTime(Date companyEndTime) {
         this.companyEndTime = companyEndTime;
     }
 
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCompanyStartTime() {
         return companyStartTime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setCompanyStartTime(Date companyStartTime) {
         this.companyStartTime = companyStartTime;
     }

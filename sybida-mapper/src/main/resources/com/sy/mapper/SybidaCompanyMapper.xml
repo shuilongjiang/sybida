@@ -446,4 +446,8 @@
       company_null2 = #{companyNull2,jdbcType=VARCHAR}
     where company_id = #{companyId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectCompanyAndTeach" resultType="com.sy.dto.CompanyAndTeach"  >
+    select * from sybida_teach,sybida_company where company_user_id=teach_id and company_null1=1
+  </select>
 </mapper>
