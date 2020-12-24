@@ -71,13 +71,13 @@ public class NewsServiceImp implements NewsService{
     }
     @Transactional
     @Override
-    public ResponseResult isRead(String receiveId) {
+    public ResponseResult isRead(String receiveId,String userId) {
         int num=0;
         int row2=0;
         ResponseResult responseResult=new ResponseResult();
         SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
         SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
-        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId));
+        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId)).andReceiveUserIdEqualTo(Integer.valueOf(userId));
         SybidaReceive sybidaReceive=new SybidaReceive();
         sybidaReceive.setReceiveIsRead((byte)1);
        int row= sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
@@ -104,15 +104,11 @@ public class NewsServiceImp implements NewsService{
     }
 
     @Override
-    public ResponseResult delectOneReceive(String receiveId) {
+    public ResponseResult delectOneReceive(String receiveId,String userId) {
         ResponseResult responseResult=new ResponseResult();
-//        SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
-//        SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
-//        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId));
-//       int row= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
         SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
         SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
-        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId));
+        criteria.andReceiveIdEqualTo(Integer.valueOf(receiveId)).andReceiveUserIdEqualTo(Integer.valueOf(userId));
         SybidaReceive sybidaReceive=new SybidaReceive();
         sybidaReceive.setReceiveNull1("0");
         int row=sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
@@ -169,23 +165,18 @@ public class NewsServiceImp implements NewsService{
     }
 
     @Override
-    public ResponseResult deleteAllReceive(List<Integer> list) {
+    public ResponseResult deleteAllReceive(List<Integer> list,String userId) {
         ResponseResult responseResult=new ResponseResult();
         int row = 0;
         for (int i = 0; i < list.size(); i++) {
             SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
             SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
-            criteria.andReceiveIdEqualTo(list.get(i));
+            criteria.andReceiveIdEqualTo(list.get(i)).andReceiveUserIdEqualTo(Integer.valueOf(userId));
             SybidaReceive sybidaReceive=new SybidaReceive();
             sybidaReceive.setReceiveNull1("0");
             row+=sybidaReceiveMapper.updateByExampleSelective(sybidaReceive,sybidaReceiveExample);
-//            SybidaReceiveExample sybidaReceiveExample=new SybidaReceiveExample();
-//            SybidaReceiveExample.Criteria criteria = sybidaReceiveExample.createCriteria();
-//            criteria.andReceiveIdEqualTo(list.get(i));
-//            row+= sybidaReceiveMapper.deleteByExample(sybidaReceiveExample);
         }
         if (row==list.size()){
-
             responseResult.setCode(1);
             responseResult.setMessage("删除多个收信成功");
             return responseResult;

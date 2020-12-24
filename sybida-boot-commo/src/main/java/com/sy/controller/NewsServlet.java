@@ -8,6 +8,7 @@ import com.sy.redis.RedisUtil;
 import com.sy.service.NewsService;
 import com.sy.vo.ResponseResult;
 import org.checkerframework.checker.units.qual.A;
+import org.omg.PortableInterceptor.INACTIVE;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -54,12 +55,16 @@ public class NewsServlet {
     }
 
     @RequestMapping("delectonereceive")
-    public ResponseResult delectOneReceive(String receiveId){
-        return  newsService.delectOneReceive(receiveId);
+    public ResponseResult delectOneReceive(String receiveId,String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userid,60);
+        return  newsService.delectOneReceive(receiveId,userId);
     }
     @RequestMapping("isread")
-    public ResponseResult isRead(String receiveId){
-     return  newsService.isRead(receiveId);
+    public ResponseResult isRead(String receiveId,String userid){
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userid,60);
+        return  newsService.isRead(receiveId,userId);
     }
 
     @RequestMapping("delectonesend")
@@ -71,8 +76,12 @@ public class NewsServlet {
         return   newsService.deleteAllNews(list);
     }
     @RequestMapping("deleteallreceive")
-    public ResponseResult deleteAllReceive(@RequestBody List<Integer> list) {
-        return newsService.deleteAllReceive(list);
+    public ResponseResult deleteAllReceive(@RequestBody MessageInfo messageInfo) {
+        String userid=messageInfo.getUserId();
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        redisUtil.expire(userid,60);
+        List<Integer> list=messageInfo.getList();
+        return newsService.deleteAllReceive(list,userId);
     }
 
     @RequestMapping("selectallstudentbyclass")
