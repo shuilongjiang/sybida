@@ -134,7 +134,6 @@ public class AuditionServlet {
     public ResponseResult updateSybidaAudition(SybidaAudition audition){
         audition.setAuditionAlterTime(new Date());
         ResponseResult responseResult = auditionSerivce.updateSybidaAudition(audition);
-
         return responseResult;
     }
 

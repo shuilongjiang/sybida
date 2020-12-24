@@ -3,6 +3,7 @@ package com.sy.pojo;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
 @Component
 public class SybidaTeach {
     private Integer teachId;
@@ -113,5 +114,22 @@ public class SybidaTeach {
 
     public void setTeachNull2(String teachNull2) {
         this.teachNull2 = teachNull2 == null ? null : teachNull2.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "SybidaTeach{" +
+                "teachId=" + teachId +
+                ", teachName='" + teachName + '\'' +
+                ", teachSex='" + teachSex + '\'' +
+                ", teachPhoto='" + teachPhoto + '\'' +
+                ", teachStudyId=" + teachStudyId +
+                ", teachTel='" + teachTel + '\'' +
+                ", teachWechat='" + teachWechat + '\'' +
+                ", teachQq='" + teachQq + '\'' +
+                ", teachAlterTime=" + teachAlterTime +
+                ", teachNull1='" + teachNull1 + '\'' +
+                ", teachNull2='" + teachNull2 + '\'' +
+                '}';
     }
 }

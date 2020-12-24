@@ -10,6 +10,7 @@ import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaVitaeEvaluate;
+import com.sy.redis.RedisUtil;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ public class TeacherServlet {
     ResponseResult responseResult;
     @Autowired
     SybidaTeach sybidaTeach;
+    @Autowired
+    RedisUtil redisUtil;
 
     @Transactional
     @RequestMapping("selectpage")
@@ -84,8 +87,9 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;
     }
+
     @RequestMapping("selectstudentjob")
-    public ResponseResult selectStudentJob(String pageSize, String pageNum){
+    public ResponseResult selectStudentJob(String pageSize, String pageNum) {
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
         int pageSizes = (null == pageSize) ? 8 : Integer.parseInt(pageSize);
         ResponseResult responseResult = teacherSerivce.selectStudentJob(pageSizes, currPage);
@@ -93,31 +97,32 @@ public class TeacherServlet {
     }
 
     @RequestMapping("selectjobbyid")
-    public ResponseResult selectJobByStuId(int id){
+    public ResponseResult selectJobByStuId(int id) {
         ResponseResult responseResult = teacherSerivce.selectJobByStuId(id);
-        return  responseResult;
+        return responseResult;
     }
+
     @RequestMapping("selectallstudent")
-    public ResponseResult selectAllStudent(String pageSize, String pageNum){
+    public ResponseResult selectAllStudent(String pageSize, String pageNum) {
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
         int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
-        ResponseResult   responseResult = teacherSerivce.selcetAllStudent(pageSizes, currPage);
+        ResponseResult responseResult = teacherSerivce.selcetAllStudent(pageSizes, currPage);
         return responseResult;
     }
 
     @RequestMapping("selectstudentbyid")
-    public  ResponseResult selectStudentById(int id){
-        ResponseResult   responseResult =  teacherSerivce.selcetStudentById(id);
-        return  responseResult;
+    public ResponseResult selectStudentById(int id) {
+        ResponseResult responseResult = teacherSerivce.selcetStudentById(id);
+        return responseResult;
     }
 
     @RequestMapping(value = "/updatestudentinfo", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file,SybidaStudent object){
+    public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file, SybidaStudent object) {
         object.setStudentAlterTime(new Date());
         if (file.isEmpty()) {
-        }else{
-            String photoUrl=Qnyutil.uploadFile(file);
+        } else {
+            String photoUrl = Qnyutil.uploadFile(file);
             object.setStudentPhoto(photoUrl);
         }
         ResponseResult responseResult = teacherSerivce.updateInfoStudent(object);
@@ -127,51 +132,55 @@ public class TeacherServlet {
 
     @RequestMapping(value = "/updateteacherinfo", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseResult updateTeacherInfo(@RequestParam("file") MultipartFile file, SybidaTeach object){
-        if(file.isEmpty()){
-        }else {
+    public ResponseResult updateTeacherInfo(@RequestParam("file") MultipartFile file, SybidaTeach object) {
+        if (file.isEmpty()) {
+        } else {
 
-            String photoUrl=Qnyutil.uploadFile(file);
+            String photoUrl = Qnyutil.uploadFile(file);
             object.setTeachPhoto(photoUrl);
         }
         ResponseResult responseResult = teacherSerivce.updateTeacherInfo(object);
-        return  responseResult;
+        return responseResult;
 
     }
+
     @RequestMapping("selectteacherbyid")
-    public ResponseResult selectTeacherById(int id){
-     ResponseResult responseResult = teacherSerivce.selectTeacherById(id);
-     return  responseResult;
+    public ResponseResult selectStudentById(String userid) {
+        redisUtil.expire(userid, 60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        ResponseResult responseResult = teacherSerivce.selectTeacherById(Integer.valueOf(userId));
+        return responseResult;
     }
 
-@RequestMapping("insertteacher")
-    public ResponseResult insertTeacher(String userName,String userPhone,String  userPassword,int userNote,Byte userAuthority) {
-    SybidaUser sybidaUser = new SybidaUser();
-    sybidaUser.setUserName(userName);
-    sybidaUser.setUserPhone(userPhone);
-    sybidaUser.setUserPassword(userPassword);
-    sybidaUser.setUserNote(userNote);
-    sybidaUser.setUserAuthority(userAuthority);
-    ResponseResult responseResult = teacherSerivce.insertTeacher(sybidaUser);
-    System.out.println(sybidaUser);
+    @RequestMapping("insertteacher")
+    public ResponseResult insertTeacher(String userName, String userPhone, String userPassword, int userNote, Byte userAuthority) {
+        SybidaUser sybidaUser = new SybidaUser();
+        sybidaUser.setUserName(userName);
+        sybidaUser.setUserPhone(userPhone);
+        sybidaUser.setUserPassword(userPassword);
+        sybidaUser.setUserNote(userNote);
+        sybidaUser.setUserAuthority(userAuthority);
+        ResponseResult responseResult = teacherSerivce.insertTeacher(sybidaUser);
+        System.out.println(sybidaUser);
 
-    if (responseResult.getCode()==1){
-        SybidaTeach sybidaTeach=new SybidaTeach();
-        sybidaTeach.setTeachId(sybidaUser.getUserId());
-        sybidaTeach.setTeachName(sybidaUser.getUserName());
-        sybidaTeach.setTeachTel(sybidaUser.getUserPhone());
-        return  teacherSerivce.insertTeachtwo(sybidaTeach);
+        if (responseResult.getCode() == 1) {
+            SybidaTeach sybidaTeach = new SybidaTeach();
+            sybidaTeach.setTeachId(sybidaUser.getUserId());
+            sybidaTeach.setTeachName(sybidaUser.getUserName());
+            sybidaTeach.setTeachTel(sybidaUser.getUserPhone());
+            return teacherSerivce.insertTeachtwo(sybidaTeach);
+        }
+        return null;
     }
-    return null;
-}
+
     @RequestMapping("selectstudentclassid")
-    public ResponseResult selectStudentByClassId(HttpServletResponse response,String classId) throws IOException {
-        ResponseResult responseResult=new ResponseResult();
+    public ResponseResult selectStudentByClassId(HttpServletResponse response, String classId) throws IOException {
+        ResponseResult responseResult = new ResponseResult();
         List<StudentExcel> list = new ArrayList<>();
-        List<SybidaStudent> studentList= teacherSerivce.selectStudentByClassId(classId);
-        if (studentList.size()>0){
-            for (int i=0;i<studentList.size();i++){
-                StudentExcel studentExcel=new StudentExcel();
+        List<SybidaStudent> studentList = teacherSerivce.selectStudentByClassId(classId);
+        if (studentList.size() > 0) {
+            for (int i = 0; i < studentList.size(); i++) {
+                StudentExcel studentExcel = new StudentExcel();
                 studentExcel.setStudentId(studentList.get(i).getStudentId());
                 studentExcel.setStudentName(studentList.get(i).getStudentName());
                 studentExcel.setStudentSex(studentList.get(i).getStudentSex());
@@ -202,17 +211,19 @@ public class TeacherServlet {
         response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
         ExcelUtil.writeExcel(response, list);
         System.out.println("能看到我吗===========================");
-        if (studentList.size()>0){
+        if (studentList.size() > 0) {
             responseResult.setCode(1);
             responseResult.setMessage("下载成功");
-            return  responseResult;
-        }else {
+            return responseResult;
+        } else {
             responseResult.setCode(0);
             responseResult.setMessage("下载失败");
         }
         responseResult.setData(list);
         return responseResult;
-   }
+    }
+
+
 }
 
 

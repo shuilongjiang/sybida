@@ -18,4 +18,7 @@ public interface StudentSerivce {
     ResponseResult deleteAllStudent(List<Integer> list);
 
     ResponseResult selectStudentByName(String stuName,String classId);
+
+    ResponseResult selcetStudentVitaeById(int pageSize,int pageNum,Integer studentId);
+
 }
