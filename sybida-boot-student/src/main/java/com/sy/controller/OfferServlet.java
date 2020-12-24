@@ -80,4 +80,14 @@ public class OfferServlet {
     public ResponseResult deleteAllStudentOffer(@RequestBody List<Integer> list) {
         return offerSerivce.deleteAllStudentOffer(list);
     }
+
+
+    @RequestMapping("selectpage")
+    //按用户id和班级id查询学生的offer登记，并进行分页
+    public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
+        redisUtil.expire(userid,60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        return  offerSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
+
+    }
 }

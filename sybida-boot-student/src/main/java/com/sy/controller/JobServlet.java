@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @RequestMapping("job")
 @RestController
@@ -84,5 +85,41 @@ public class JobServlet {
         ResponseResult responseResult = jobSerivce.updateSybidaJob(sybidaJob);
         return responseResult;
     }
+
+
+    @RequestMapping("selectpage")
+    //按用户id和班级id查询学生的offer登记，并进行分页
+    public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
+        redisUtil.expire(userid,60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        return  jobSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
+
+    }
+
+
+    @RequestMapping("deleteStudentJob")
+    //根据教师ID进行删除教师表，删除用户表，
+    public ResponseResult deleteStudentJob(Integer deleteJobId) {
+
+        return jobSerivce.deleteStudentJob(deleteJobId);
+    }
+
+
+    @PostMapping("deleteAllStudentJob")
+    public ResponseResult deleteAllStudentJob(@RequestBody List<Integer> list) {
+        return jobSerivce.deleteAllStudentJob(list);
+    }
+
+
+
+    @Transactional
+    @RequestMapping("selectstudentJobbyJobId")
+    //按offerid查询学生的offer登记，并进行分页
+    public ResponseResult selectstudentJobbyJobId(String jobId) {
+
+        return  jobSerivce.selectstudentJobbyJobId(Integer.valueOf(jobId));
+
+    }
+
 
 }

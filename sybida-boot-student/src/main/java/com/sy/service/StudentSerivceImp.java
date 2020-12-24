@@ -10,6 +10,7 @@ import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentExample;
+import com.sy.pojo.SybidaVitae;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,19 +108,13 @@ public class StudentSerivceImp implements StudentSerivce {
     }
 
     @Override
-    public ResponseResult selcetStudentVitaeById(int pageSize,int pageNum,Integer studentId) {
+    public ResponseResult selcetStudentVitaeById(int userid) {
         ResponseResult responseResult = new ResponseResult();
-        PageHelper.startPage(pageNum, pageSize);
+        List<StudentVitae> studentVitae = sybidaStudentMapper.selcetStudentVitaeById(userid);
 
-        List<StudentVitae> list = sybidaStudentMapper.selectStudentVitaeById(studentId);
-
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
-        PageInfo<StudentVitae> PageInfo = new PageInfo<>(list);
+        responseResult.setData(studentVitae);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功");
-        responseResult.setData(PageInfo);
         return responseResult;
     }
 }

@@ -531,10 +531,9 @@ student_room  = #{studentRoom},
 student_photo  = #{studentPhoto}
 where  student_id = #{studentId}
 </update>
-<select id="selectStudentVitaeById" resultType="com.sy.dto.StudentVitae" >
+<select id="selcetStudentVitaeById" resultType="com.sy.dto.StudentVitae" >
   select vitae_evaluate_id,vitae_evaluate_user_id,vitae_evaluate_comment,vitae_evaluate_picture
   from sybida_vitae_evaluate
-  where vitae_evaluate_id = any(select vitae_id from sybida_vitae where vitae_student_id= #{studentId})
+  where vitae_evaluate_id = any(select vitae_id from sybida_vitae where vitae_student_id= #{vitaeStudentId})
 </select>
-
 </mapper>

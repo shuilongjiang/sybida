@@ -43,4 +43,8 @@ public interface SybidaJobMapper {
 
     JobForTeacher selectstudentJobbyJobStudentId(Integer jobStudentId);
 
+    JobForTeacher selectstudentJobbyJobId(Integer jobId);
+
+    List<JobForTeacher> selectJobByJobStudentIdForTeacher(Integer jobStudentId);
+
 }

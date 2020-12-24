@@ -46,13 +46,13 @@ public class StudentServlet {
     }
 
     @RequestMapping("selectstudentvitae")
-    public ResponseResult selectStudentVitae(String pageSize, String pageNum,String userid){
-        redisUtil.expire(userid,60);
-        String studentId = String.valueOf(redisUtil.getObj(userid));
-        int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
-        int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
-        ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(pageSizes, currPage,Integer.valueOf(studentId));
+    public ResponseResult selectStudentVitae(String userid){
+        System.out.println("==="+userid);
+        redisUtil.expire(userid, 60);
+
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        System.out.println("------"+userId);
+        ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(Integer.valueOf(userId));
         return responseResult;
     }
-
 }
