@@ -11,15 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 @Configuration
 public class WebAppConfigurer implements WebMvcConfigurer {
-
+    @Autowired
+    LoginInterceptor loginInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(new LoginInterceptor()).addPathPatterns("/**").excludePathPatterns(urlPass());
+    registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(urlPass());
     }
 
     public List<String> urlPass(){
         List<String> list = new ArrayList<>();
-        list.add("/login");
+        list.add("/login/**");
+        list.add("/company/codeisenable");
+        list.add("/company/insertcompany");
         return list;
     }
 }
