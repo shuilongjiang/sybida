@@ -8,7 +8,7 @@ public class RegularUtil {
         if ("".equals(name) || name.length()>10){
             return 0;
         }
-        String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
+        String regex = "^1[3|4|5|6|7|8|9]\\d{9}$";
         if(phone.length() != 11){
             System.out.println("手机号应为11位数");
             return 0;
