@@ -13,11 +13,11 @@ public interface NewsService {
     public ResponseResult receiveMessage(Integer userId,Integer pagesize,Integer pagenum);
     public ResponseResult messageSendCount(String userId);
     public ResponseResult receiveMessageCount(String userId);
-    public ResponseResult isRead(String receiveId);
-    public ResponseResult delectOneReceive(String receiveId);
+    public ResponseResult isRead(String receiveId,String userId);
+    public ResponseResult delectOneReceive(String receiveId,String userId);
     public ResponseResult delectOneSend(String newsId);
     public ResponseResult deleteAllNews( List<Integer> list);
-    public ResponseResult deleteAllReceive(List<Integer> list);
+    public ResponseResult deleteAllReceive(List<Integer> list,String uerID);
     List<SybidaClass> selectClass();
     List<ClassAndStudent> selectStudentOfclass(Integer userId,List<SybidaClass> sybidaClasses);
 }
