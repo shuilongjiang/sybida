@@ -21,9 +21,6 @@ public class AuditionServlet {
     AuditionSerivce auditionSerivce;
     @Autowired
     RedisUtil redisUtil;
-
-
-
     @RequestMapping("selectClass")
     //根据用户ID查询班级信息
     public ResponseResult selectByClass(String userid) {
