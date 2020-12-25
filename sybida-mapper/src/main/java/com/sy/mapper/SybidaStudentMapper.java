@@ -40,4 +40,6 @@ public interface SybidaStudentMapper {
 
     List<StudentVitae> selcetStudentVitaeById(Integer vitaeStudentId);
 
+    List<StudentVitae> selectEvaluateByVitaeId(Integer vitaeId);
+
 }

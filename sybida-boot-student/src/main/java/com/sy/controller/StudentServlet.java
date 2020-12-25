@@ -47,12 +47,16 @@ public class StudentServlet {
 
     @RequestMapping("selectstudentvitae")
     public ResponseResult selectStudentVitae(String userid){
-        System.out.println("==="+userid);
         redisUtil.expire(userid, 60);
-
         String userId = String.valueOf(redisUtil.getObj(userid));
-        System.out.println("------"+userId);
         ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(Integer.valueOf(userId));
         return responseResult;
     }
+
+    @RequestMapping("selectevaluatebyvitaeid")
+    public ResponseResult selectEvaluateByVitaeId(Integer vitaeId){
+        ResponseResult responseResult = studentSerivce.selectEvaluateByVitaeId(vitaeId);
+        return responseResult;
+    }
+
 }
