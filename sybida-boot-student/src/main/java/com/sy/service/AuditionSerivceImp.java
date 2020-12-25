@@ -31,14 +31,31 @@ public class AuditionSerivceImp implements AuditionSerivce {
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
 
+    @Autowired
+    SybidaUserMapper sybidaUserMapper;
+
 
     @Transactional
     @Override
     public ResponseResult selectClass(String userId) {
+
+        List<SybidaClass> list = null;
         ResponseResult responseResult = new ResponseResult();
-        SybidaClassExample sybidaClassExample = new SybidaClassExample();
-        sybidaClassExample.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userId));
-        List<SybidaClass> list = sybidaClassMapper.selectByExample(sybidaClassExample);
+
+        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(userId));
+        Byte userAuthority = sybidaUser.getUserAuthority();
+        if (1 == userAuthority){
+            SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
+            sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userId));
+            list = sybidaClassMapper.selectByExample(sybidaClassExample1);
+
+        } else if (0 == userAuthority){
+            SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
+            sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(Integer.valueOf(userId));
+            list = sybidaClassMapper.selectByExample(sybidaClassExample2);
+
+        }
+
         if (null != list && list.size() > 0) {
             responseResult.setCode(1);
         } else {
@@ -64,22 +81,30 @@ public class AuditionSerivceImp implements AuditionSerivce {
     public ResponseResult selectPage(int pageSize, int pageNum, String classNum, int userid) {
 
         ResponseResult responseResult = new ResponseResult();
-        List<SybidaStudent> studentList1 = new ArrayList<>();
+        List<SybidaStudent> studentList1 = null;
         List<SybidaStudent> studentList2 = new ArrayList<>();
-        List<Integer> studentIdList = new ArrayList<>();
-        List<SybidaClass> classlist1 = new ArrayList<>();
-        List<AuditionForTeacher> auditionList1 = new ArrayList<>();
+        List<SybidaClass> classlist1 = null;
+        List<AuditionForTeacher> auditionList1 = null;
         List<AuditionForTeacher> auditionList2 = new ArrayList<>();
 
         PageHelper.startPage(pageNum, pageSize);
 
 
         if ("-1".equals(classNum)) {
-            System.out.println("======");
-            SybidaClassExample sybidaClassExample = new SybidaClassExample();
-            sybidaClassExample.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userid));
-            classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample);
-            System.out.println(classlist1);
+            SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(userid);
+            Byte userAuthority = sybidaUser.getUserAuthority();
+            if (1 == userAuthority){
+                SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
+                sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample1);
+
+            } else if (0 == userAuthority){
+                SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
+                sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
+
+            }
+
             if (null != classlist1 && classlist1.size() > 0) {
                 responseResult.setCode(1);
             } else {
