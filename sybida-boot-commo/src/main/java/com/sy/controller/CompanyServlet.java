@@ -51,6 +51,7 @@ public class CompanyServlet {
     @RequestMapping(value ="insertcompany",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult insertCompany(@RequestParam("file") MultipartFile file, SybidaCompany sybidaCompany){
+
         if(file.isEmpty()){
         }else {
             System.out.println("上传成功");
