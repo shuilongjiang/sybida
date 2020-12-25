@@ -3,10 +3,7 @@ package com.sy.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sy.dto.ShowClassInfo;
-import com.sy.mapper.SybidaClassMapper;
-import com.sy.mapper.SybidaStudentMapper;
-import com.sy.mapper.SybidaStudyMapper;
-import com.sy.mapper.SybidaTeachMapper;
+import com.sy.mapper.*;
 import com.sy.pojo.*;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class ClassInfoServiceImp implements ClassInfoService{
     SybidaTeachMapper sybidaTeachMapper;
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
+    @Autowired
+    SybidaUserMapper sybidaUserMapper;
     @Transactional
     @Override
     public ResponseResult selectAllByPage(int pageNum, int pageSize,String selectClass) {
@@ -184,5 +183,68 @@ public class ClassInfoServiceImp implements ClassInfoService{
             responseResult.setMessage("查询失败");
         }
         return responseResult;
+    }
+
+    @Transactional
+    @Override
+    public ResponseResult teacherIdFindClass2(String pageSize, String pageNum, String classManagerId) {
+        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(classManagerId));
+        Byte userAuthority = sybidaUser.getUserAuthority();
+        ResponseResult responseResult = new ResponseResult();
+        if (userAuthority == 0) {
+            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+            criteria.andClassManagerIdEqualTo(Integer.valueOf(classManagerId));
+            criteria.andClassNull1EqualTo("1");
+            List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+
+            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+            criteria1.andStudentNull2EqualTo("1");
+            List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+
+            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
+
+            if (studentList.size() > 0) {
+                responseResult.setCode(1);
+                responseResult.setMessage(classId);
+                responseResult.setData(pageInfo);
+                return responseResult;
+            } else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+            }
+            return responseResult;
+        }else if (userAuthority==1){
+            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+            criteria.andClassTeachIdEqualTo(Integer.valueOf(classManagerId));
+            criteria.andClassNull1EqualTo("1");
+            List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+            criteria1.andStudentNull2EqualTo("1");
+            List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+
+            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
+
+            if (studentList.size() > 0) {
+                responseResult.setCode(1);
+                responseResult.setMessage(classId);
+                responseResult.setData(pageInfo);
+                return responseResult;
+            } else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+            }
+            return responseResult;
+        }
+        return null;
     }
 }
