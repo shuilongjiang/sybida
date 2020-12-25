@@ -19,9 +19,39 @@ public class StudentVitae {
 
     private String vitaeEvaluateNull2;
 
+    private Integer teachId;
+
+    private String teachName;
+
+    public Integer getTeachId() {
+        return teachId;
+    }
+
+    public void setTeachId(Integer teachId) {
+        this.teachId = teachId;
+    }
+
+    public String getTeachName() {
+        return teachName;
+    }
+
+    public void setTeachName(String teachName) {
+        this.teachName = teachName;
+    }
+
+    public String getStudyAspect() {
+        return studyAspect;
+    }
+
+    public void setStudyAspect(String studyAspect) {
+        this.studyAspect = studyAspect;
+    }
+
     private Integer vitaeId;
 
     private Integer vitaeStudentId;
+
+    private String studyAspect;
 
     public Integer getVitaeEvaluateId() {
         return vitaeEvaluateId;

@@ -126,6 +126,7 @@ public class RegisterServiceImp implements RegisterService {
                     sybidaStudent.setStudentStudyId(Integer.valueOf(partStudent.getSelectStudy()));
                     sybidaStudent.setStudentPhoto("defaultpicture4.jpg");
                     sybidaStudent.setStudentNull1("B");
+                    sybidaStudent.setStudentNull2("1");
                     sybidaStudent.setStudentAlterTime(new Date());
                     row3 += sybidaStudentMapper.insertSelective(sybidaStudent);
                 }

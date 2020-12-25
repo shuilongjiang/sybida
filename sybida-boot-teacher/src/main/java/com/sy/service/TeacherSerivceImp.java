@@ -293,7 +293,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
         }
-
         return responseResult;
     }
 

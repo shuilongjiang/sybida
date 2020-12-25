@@ -32,5 +32,5 @@ public interface ClassInfoService {
 
     ResponseResult teacherIdFindClass(String pageSize,String pageNum,String classManagerId);
 
-
+    ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String classManagerId);
 }

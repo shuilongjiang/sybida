@@ -1,5 +1,6 @@
 package com.sy.controller;
 
+import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaStudy;
 import com.sy.pojo.SybidaTeach;
@@ -132,6 +133,18 @@ public class ClassInfoServlet {
         System.out.println(classManagerId+"================================");
         return  classInfoService.teacherIdFindClass(pageSize,pageNum,classManagerId);
     }
+
+    @RequestMapping("teacheridfindclass2")
+    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String userId){
+        System.out.println(pageNum+"//////////////////////////");
+        System.out.println(pageSize+"````````````````````````````````````````````````");
+        System.out.println(userId+"----------------------------------");
+        redisUtil.expire(userId,60);
+        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+        System.out.println(classManagerId+"================================");
+        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
+    }
+
 }
 
 
