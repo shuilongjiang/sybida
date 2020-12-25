@@ -9,6 +9,7 @@ import com.sy.dto.OfferForTeacher;
 import com.sy.mapper.SybidaClassMapper;
 import com.sy.mapper.SybidaOfferMapper;
 import com.sy.mapper.SybidaStudentMapper;
+import com.sy.mapper.SybidaUserMapper;
 import com.sy.pojo.*;
 import com.sy.redis.RedisOpsUtil;
 import com.sy.vo.ResponseResult;
@@ -33,6 +34,9 @@ public class OfferSerivceImp implements OfferSerivce {
 
     @Autowired
     SybidaStudentMapper sybidaStudentMapper;
+
+    @Autowired
+    SybidaUserMapper sybidaUserMapper;
 
     @Transactional
     @Override
@@ -155,22 +159,31 @@ public class OfferSerivceImp implements OfferSerivce {
     public ResponseResult selectPage(int pageSize, int pageNum, String classNum, int userid) {
 
         ResponseResult responseResult = new ResponseResult();
-        List<SybidaStudent> studentList1 = new ArrayList<>();
+        List<SybidaStudent> studentList1 = null;
         List<SybidaStudent> studentList2 = new ArrayList<>();
-        List<Integer> studentIdList = new ArrayList<>();
-        List<SybidaClass> classlist1 = new ArrayList<>();
-        List<OfferForTeacher> offerList1 = new ArrayList<>();
+        List<SybidaClass> classlist1 = null;
+        List<OfferForTeacher> offerList1 = null;
         List<OfferForTeacher> offerList2 = new ArrayList<>();
 
         PageHelper.startPage(pageNum, pageSize);
 
 
         if ("-1".equals(classNum)) {
-            System.out.println("======");
-            SybidaClassExample sybidaClassExample = new SybidaClassExample();
-            sybidaClassExample.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userid));
-            classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample);
-            System.out.println(classlist1);
+            SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(userid);
+            Byte userAuthority = sybidaUser.getUserAuthority();
+            if (1 == userAuthority){
+                SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
+                sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample1);
+
+            } else if (0 == userAuthority){
+                SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
+                sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
+
+            }
+
+
             if (null != classlist1 && classlist1.size() > 0) {
                 responseResult.setCode(1);
             } else {
