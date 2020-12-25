@@ -29,4 +29,6 @@ public interface SybidaCompanyMarkMapper {
     int updateByPrimaryKeySelective(SybidaCompanyMark record);
 
     int updateByPrimaryKey(SybidaCompanyMark record);
+
+    SybidaCompanyMark selectMark(Integer markId);
 }

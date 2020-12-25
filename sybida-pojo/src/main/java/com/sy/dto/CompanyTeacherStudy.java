@@ -2,29 +2,7 @@ package com.sy.dto;
 
 import java.util.Date;
 
-public class CompanyAndTeach {
-    private Integer teachId;
-
-    private String teachName;
-
-    private String teachSex;
-
-    private String teachPhoto;
-
-    private Integer teachStudyId;
-
-    private String teachTel;
-
-    private String teachWechat;
-
-    private String teachQq;
-
-    private Date teachAlterTime;
-
-    private String teachNull1;
-
-    private String teachNull2;
-
+public class CompanyTeacherStudy {
     private Integer companyId;
 
     private Integer companyUserId;
@@ -65,113 +43,9 @@ public class CompanyAndTeach {
 
     private String companyNull2;
 
-    private Integer studyId;
-
     private String studyAspect;
 
-    public Integer getStudyId() {
-        return studyId;
-    }
-
-    public void setStudyId(Integer studyId) {
-        this.studyId = studyId;
-    }
-
-    public String getStudyAspect() {
-        return studyAspect;
-    }
-
-    public void setStudyAspect(String studyAspect) {
-        this.studyAspect = studyAspect;
-    }
-
-    public Integer getTeachId() {
-        return teachId;
-    }
-
-    public void setTeachId(Integer teachId) {
-        this.teachId = teachId;
-    }
-
-    public String getTeachName() {
-        return teachName;
-    }
-
-    public void setTeachName(String teachName) {
-        this.teachName = teachName;
-    }
-
-    public String getTeachSex() {
-        return teachSex;
-    }
-
-    public void setTeachSex(String teachSex) {
-        this.teachSex = teachSex;
-    }
-
-    public String getTeachPhoto() {
-        return teachPhoto;
-    }
-
-    public void setTeachPhoto(String teachPhoto) {
-        this.teachPhoto = teachPhoto;
-    }
-
-    public Integer getTeachStudyId() {
-        return teachStudyId;
-    }
-
-    public void setTeachStudyId(Integer teachStudyId) {
-        this.teachStudyId = teachStudyId;
-    }
-
-    public String getTeachTel() {
-        return teachTel;
-    }
-
-    public void setTeachTel(String teachTel) {
-        this.teachTel = teachTel;
-    }
-
-    public String getTeachWechat() {
-        return teachWechat;
-    }
-
-    public void setTeachWechat(String teachWechat) {
-        this.teachWechat = teachWechat;
-    }
-
-    public String getTeachQq() {
-        return teachQq;
-    }
-
-    public void setTeachQq(String teachQq) {
-        this.teachQq = teachQq;
-    }
-
-    public Date getTeachAlterTime() {
-        return teachAlterTime;
-    }
-
-    public void setTeachAlterTime(Date teachAlterTime) {
-        this.teachAlterTime = teachAlterTime;
-    }
-
-    public String getTeachNull1() {
-        return teachNull1;
-    }
-
-    public void setTeachNull1(String teachNull1) {
-        this.teachNull1 = teachNull1;
-    }
-
-    public String getTeachNull2() {
-        return teachNull2;
-    }
-
-    public void setTeachNull2(String teachNull2) {
-        this.teachNull2 = teachNull2;
-    }
+    private String teachName;
 
     public Integer getCompanyId() {
         return companyId;
@@ -333,42 +207,19 @@ public class CompanyAndTeach {
         this.companyNull2 = companyNull2;
     }
 
-    @Override
-    public String toString() {
-        return "CompanyAndTeach{" +
-                "teachId=" + teachId +
-                ", teachName='" + teachName + '\'' +
-                ", teachSex='" + teachSex + '\'' +
-                ", teachPhoto='" + teachPhoto + '\'' +
-                ", teachStudyId=" + teachStudyId +
-                ", teachTel='" + teachTel + '\'' +
-                ", teachWechat='" + teachWechat + '\'' +
-                ", teachQq='" + teachQq + '\'' +
-                ", teachAlterTime=" + teachAlterTime +
-                ", teachNull1='" + teachNull1 + '\'' +
-                ", teachNull2='" + teachNull2 + '\'' +
-                ", companyId=" + companyId +
-                ", companyUserId=" + companyUserId +
-                ", companyMarkId=" + companyMarkId +
-                ", companyName='" + companyName + '\'' +
-                ", companyEndTime=" + companyEndTime +
-                ", companyStartTime=" + companyStartTime +
-                ", companyStudyId=" + companyStudyId +
-                ", companyWeb='" + companyWeb + '\'' +
-                ", companyAddress='" + companyAddress + '\'' +
-                ", companyRequire='" + companyRequire + '\'' +
-                ", companySalary=" + companySalary +
-                ", companyMailbox='" + companyMailbox + '\'' +
-                ", companyWechat='" + companyWechat + '\'' +
-                ", companyPhone='" + companyPhone + '\'' +
-                ", companyIntroduce='" + companyIntroduce + '\'' +
-                ", companyPicture='" + companyPicture + '\'' +
-                ", companyIsView=" + companyIsView +
-                ", companyAlterTime=" + companyAlterTime +
-                ", companyNull1='" + companyNull1 + '\'' +
-                ", companyNull2='" + companyNull2 + '\'' +
-                ", studyId=" + studyId +
-                ", studyAspect='" + studyAspect + '\'' +
-                '}';
+    public String getStudyAspect() {
+        return studyAspect;
+    }
+
+    public void setStudyAspect(String studyAspect) {
+        this.studyAspect = studyAspect;
+    }
+
+    public String getTeachName() {
+        return teachName;
+    }
+
+    public void setTeachName(String teachName) {
+        this.teachName = teachName;
     }
 }

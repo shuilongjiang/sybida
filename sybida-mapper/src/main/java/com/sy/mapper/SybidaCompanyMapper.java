@@ -1,6 +1,7 @@
 package com.sy.mapper;
 
 import com.sy.dto.CompanyAndTeach;
+import com.sy.dto.CompanyTeacherStudy;
 import com.sy.pojo.SybidaCompany;
 import com.sy.pojo.SybidaCompanyExample;
 import org.apache.ibatis.annotations.Param;
@@ -32,4 +33,6 @@ public interface SybidaCompanyMapper {
     int updateByPrimaryKey(SybidaCompany record);
 
     List<CompanyAndTeach>selectCompanyAndTeach();
+
+    CompanyTeacherStudy selectCompanyByCompanyId(Integer companyId);
 }
