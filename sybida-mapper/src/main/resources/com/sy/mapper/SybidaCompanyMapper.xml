@@ -447,7 +447,25 @@
     where company_id = #{companyId,jdbcType=INTEGER}
   </update>
 
-  <select id="selectCompanyAndTeach" resultType="com.sy.dto.CompanyAndTeach"  >
-    select * from sybida_teach,sybida_company where company_user_id=teach_id and company_null1=1
+  <select id="selectCompanyAndTeach" resultType="com.sy.dto.CompanyAndTeach">
+   select ssc.*,st.teach_name
+from(select sc.*,study_aspect
+     from sybida_company sc
+     inner join sybida_study ss  on sc.company_study_id = ss.study_id
+		 where company_null1=1) ssc
+inner join sybida_teach st  on ssc.company_user_id=st.teach_id
+where company_null1=1
   </select>
+
+
+  <select id="selectCompanyByCompanyId" resultType="com.sy.dto.CompanyTeacherStudy">
+    select ssc.*,st.teach_name
+    from(select sc.*,study_aspect
+         from sybida_company sc
+         inner join sybida_study ss  on sc.company_study_id = ss.study_id
+		 where company_null1=1) ssc
+     inner join sybida_teach st  on ssc.company_user_id=st.teach_id
+     where company_null1=1 and ssc.company_id = #{companyId}
+  </select>
+
 </mapper>

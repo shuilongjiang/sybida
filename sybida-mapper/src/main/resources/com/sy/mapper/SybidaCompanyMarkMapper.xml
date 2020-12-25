@@ -225,4 +225,8 @@
       mark_null2 = #{markNull2,jdbcType=VARCHAR}
     where " mark_id" = #{markId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectMark" resultType="com.sy.pojo.SybidaCompanyMark" parameterType="java.lang.Integer" >
+   select * from sybida_company_mark where ` mark_id` = #{markId}
+  </select>
 </mapper>

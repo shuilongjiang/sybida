@@ -65,6 +65,26 @@ public class CompanyAndTeach {
 
     private String companyNull2;
 
+    private Integer studyId;
+
+    private String studyAspect;
+
+    public Integer getStudyId() {
+        return studyId;
+    }
+
+    public void setStudyId(Integer studyId) {
+        this.studyId = studyId;
+    }
+
+    public String getStudyAspect() {
+        return studyAspect;
+    }
+
+    public void setStudyAspect(String studyAspect) {
+        this.studyAspect = studyAspect;
+    }
+
     public Integer getTeachId() {
         return teachId;
     }
@@ -347,6 +367,8 @@ public class CompanyAndTeach {
                 ", companyAlterTime=" + companyAlterTime +
                 ", companyNull1='" + companyNull1 + '\'' +
                 ", companyNull2='" + companyNull2 + '\'' +
+                ", studyId=" + studyId +
+                ", studyAspect='" + studyAspect + '\'' +
                 '}';
     }
 }

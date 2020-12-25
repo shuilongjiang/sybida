@@ -58,6 +58,9 @@ public class CompanyServlet {
             String photoUrl= Qnyutil.uploadFile(file);
             sybidaCompany.setCompanyPicture(photoUrl);
         }
+
+
+
         sybidaCompany.setCompanyAlterTime(new Date());
         sybidaCompany.setCompanyNull1("1");
         return companyService.insertCompany(sybidaCompany);
@@ -80,5 +83,16 @@ public class CompanyServlet {
     @RequestMapping("selectteachername")
     public ResponseResult selectTeacherName(String companyUserId){
        return companyService.selectTeacherName(companyUserId);
+    }
+
+
+    @RequestMapping("selectCompanyByCompanyId")
+    public ResponseResult selectCompanyByCompanyId(String companyId){
+        return companyService.selectCompanyByCompanyId(Integer.valueOf(companyId));
+    }
+
+    @RequestMapping("selectbycompanyname")
+    public ResponseResult selectByCompanyName(String stuName){
+        return  companyService.selectByCompanyName(stuName);
     }
 }
