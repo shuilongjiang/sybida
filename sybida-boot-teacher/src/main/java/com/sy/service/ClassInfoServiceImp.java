@@ -190,6 +190,7 @@ public class ClassInfoServiceImp implements ClassInfoService{
     public ResponseResult teacherIdFindClass2(String pageSize, String pageNum, String classManagerId) {
         SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(classManagerId));
         Byte userAuthority = sybidaUser.getUserAuthority();
+        System.out.println(userAuthority+"用户权限=========================================");
         ResponseResult responseResult = new ResponseResult();
         if (userAuthority == 0) {
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
@@ -197,10 +198,11 @@ public class ClassInfoServiceImp implements ClassInfoService{
             criteria.andClassManagerIdEqualTo(Integer.valueOf(classManagerId));
             criteria.andClassNull1EqualTo("1");
             List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
-
+            System.out.println(sybidaClassList+"符合条件班级==============");
             PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+            System.out.println(sybidaClassList.get(0).getClassId()+"====================");
             criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
             criteria1.andStudentNull2EqualTo("1");
             List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
@@ -216,21 +218,29 @@ public class ClassInfoServiceImp implements ClassInfoService{
             } else {
                 responseResult.setCode(0);
                 responseResult.setMessage("查询失败");
+                return responseResult;
             }
-            return responseResult;
+
         }else if (userAuthority==1){
+
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassTeachIdEqualTo(Integer.valueOf(classManagerId));
             criteria.andClassNull1EqualTo("1");
             List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            System.out.println(sybidaClassList+"符合条件班级老师==============");
+
+            List<SybidaStudent> studentList=new ArrayList<>();
+
+            for (int i=0;i<sybidaClassList.size();i++){
             PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
-            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+            System.out.println(sybidaClassList.get(i).getClassId()+"===============老师=====");
+            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(i).getClassId());
             criteria1.andStudentNull2EqualTo("1");
-            List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-
+             studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+            }
             PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
             String classId = String.valueOf(sybidaClassList.get(0).getClassId());
 

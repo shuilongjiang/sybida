@@ -142,7 +142,7 @@ public class ClassInfoServlet {
         redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
         System.out.println(classManagerId+"================================");
-        return  classInfoService.teacherIdFindClass(pageSize,pageNum,classManagerId);
+        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
     }
 
 }
