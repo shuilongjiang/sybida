@@ -76,7 +76,7 @@ public class JobSerivceImp implements JobSerivce {
     public ResponseResult selectstudentJobbyJobStudentId(Integer jobStudentId) {
         ResponseResult responseResult = new ResponseResult();
         JobForTeacher jobForTeacher = sybidaJobMapper.selectstudentJobbyJobStudentId(jobStudentId);
-        System.out.println(jobForTeacher);
+        System.out.println(jobForTeacher+"+-+-+-");
         responseResult.setData(jobForTeacher);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");

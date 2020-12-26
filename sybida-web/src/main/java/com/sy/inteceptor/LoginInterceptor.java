@@ -45,6 +45,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             response.getOutputStream().print("-1000");
             return false;
         }
+//        return true;
 
     }
 

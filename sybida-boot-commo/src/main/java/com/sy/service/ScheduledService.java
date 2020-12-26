@@ -27,7 +27,7 @@ public class ScheduledService {
 //    }
     @Autowired
     RedisUtil redisUtil;
-    @Scheduled(fixedDelay = 1000*60*10)
+    @Scheduled(fixedDelay = 1000*60*60*24*7)
     public void scheduled2() {
         System.out.println("定时删除开启"+ System.currentTimeMillis());
         DeleteFileAndPackage.deleteDir("D:\\upload\\zip");
