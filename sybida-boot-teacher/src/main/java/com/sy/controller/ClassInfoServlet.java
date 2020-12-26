@@ -134,15 +134,29 @@ public class ClassInfoServlet {
         return  classInfoService.teacherIdFindClass(pageSize,pageNum,classManagerId);
     }
 
-    @RequestMapping("teacheridfindclass2")
-    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String userId){
-        System.out.println(pageNum+"//////////////////////////");
-        System.out.println(pageSize+"````````````````````````````````````````````````");
-        System.out.println(userId+"----------------------------------");
+//    @RequestMapping("teacheridfindclass2")
+//    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String userId){
+//        System.out.println(pageNum+"//////////////////////////");
+//        System.out.println(pageSize+"````````````````````````````````````````````````");
+//        System.out.println(userId+"----------------------------------");
+//        redisUtil.expire(userId,60);
+//        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+//        System.out.println(classManagerId+"================================");
+//        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
+//    }
+
+        @RequestMapping("teacheridfindclass2")
+    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String classId){
+        System.out.println(classId+"================================");
+        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classId);
+    }
+
+    @RequestMapping("selectteachermuticlass")
+    public ResponseResult selectTeacherMutiClass(String userId){
         redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
-        System.out.println(classManagerId+"================================");
-        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
+        System.out.println(classManagerId+"999999999999999999999999999999");
+        return classInfoService.selectTeacherMutiClass(classManagerId);
     }
 
 }

@@ -187,74 +187,136 @@ public class ClassInfoServiceImp implements ClassInfoService{
 
     @Transactional
     @Override
-    public ResponseResult teacherIdFindClass2(String pageSize, String pageNum, String classManagerId) {
+    public ResponseResult teacherIdFindClass2(String pageSize, String pageNum, String classId) {
+        ResponseResult responseResult=new ResponseResult();
+        PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+        SybidaStudentExample sybidaStudentExample=new SybidaStudentExample();
+        SybidaStudentExample.Criteria criteria = sybidaStudentExample.createCriteria();
+        criteria.andStudentClassIdEqualTo(Integer.valueOf(classId));
+        criteria.andStudentNull2EqualTo("1");
+        List<SybidaStudent> studentList= sybidaStudentMapper.selectByExample(sybidaStudentExample);
+        PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+        if (studentList.size()>0){
+            responseResult.setCode(1);
+            responseResult.setMessage("查询班级成功");
+            responseResult.setData(pageInfo);
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("查询班级失败");
+        }
+        return responseResult;
+    }
+//    public ResponseResult teacherIdFindClass2(String pageSize, String pageNum, String classManagerId) {
+//        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(classManagerId));
+//        Byte userAuthority = sybidaUser.getUserAuthority();
+//        System.out.println(userAuthority+"用户权限=========================================");
+//        ResponseResult responseResult = new ResponseResult();
+//        if (userAuthority == 0) {
+//            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+//            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//            criteria.andClassManagerIdEqualTo(Integer.valueOf(classManagerId));
+//            criteria.andClassNull1EqualTo("1");
+//            List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+//
+//            System.out.println(sybidaClassList+"符合条件班级==============");
+//            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+//            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+//            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+//            System.out.println(sybidaClassList.get(0).getClassId()+"====================");
+//            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+//            criteria1.andStudentNull2EqualTo("1");
+//            List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+//
+//            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+//
+//            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
+//
+//            if (studentList.size() > 0) {
+//                responseResult.setCode(1);
+//                responseResult.setMessage(classId);
+//                responseResult.setData(pageInfo);
+//                return responseResult;
+//            } else {
+//                responseResult.setCode(0);
+//                responseResult.setMessage("查询失败");
+//                return responseResult;
+//            }
+//
+//        }else if (userAuthority==1){
+//            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+//            SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//            criteria.andClassTeachIdEqualTo(Integer.valueOf(classManagerId));
+//            criteria.andClassNull1EqualTo("1");
+//            List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+//            System.out.println(sybidaClassList+"符合条件班级老师==============");
+//
+//            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
+//            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+//            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
+//            System.out.println(sybidaClassList.get(0).getClassId()+"===============老师=====");
+//            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
+//            criteria1.andStudentNull2EqualTo("1");
+//            List<SybidaStudent> studentList= sybidaStudentMapper.selectByExample(sybidaStudentExample);
+//            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+//
+//            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
+//
+//            if (studentList.size() > 0) {
+//                responseResult.setCode(1);
+//                responseResult.setMessage(classId);
+//                responseResult.setData(pageInfo);
+//                return responseResult;
+//            } else {
+//                responseResult.setCode(0);
+//                responseResult.setMessage("查询失败");
+//            }
+//            return responseResult;
+//        }else if (userAuthority==9){
+//
+//        }
+//        return null;
+//    }
+
+    @Override
+    public ResponseResult selectTeacherMutiClass(String classManagerId) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaClassExample sybidaClassExample = new SybidaClassExample();
         SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(classManagerId));
         Byte userAuthority = sybidaUser.getUserAuthority();
-        System.out.println(userAuthority+"用户权限=========================================");
-        ResponseResult responseResult = new ResponseResult();
-        if (userAuthority == 0) {
-            SybidaClassExample sybidaClassExample = new SybidaClassExample();
+        if (userAuthority==0){
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassManagerIdEqualTo(Integer.valueOf(classManagerId));
             criteria.andClassNull1EqualTo("1");
             List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
-            System.out.println(sybidaClassList+"符合条件班级==============");
-            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
-            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
-            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
-            System.out.println(sybidaClassList.get(0).getClassId()+"====================");
-            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
-            criteria1.andStudentNull2EqualTo("1");
-            List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-
-            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
-            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
-
-            if (studentList.size() > 0) {
+            if (sybidaClassList.size()>0){
                 responseResult.setCode(1);
-                responseResult.setMessage(classId);
-                responseResult.setData(pageInfo);
+                responseResult.setMessage("班级ID集合成功");
+                responseResult.setData(sybidaClassList);
                 return responseResult;
-            } else {
+            }else {
                 responseResult.setCode(0);
-                responseResult.setMessage("查询失败");
+                responseResult.setMessage("班级ID集合失败");
                 return responseResult;
             }
 
         }else if (userAuthority==1){
-
-            SybidaClassExample sybidaClassExample = new SybidaClassExample();
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassTeachIdEqualTo(Integer.valueOf(classManagerId));
             criteria.andClassNull1EqualTo("1");
             List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
-            System.out.println(sybidaClassList+"符合条件班级老师==============");
-
-            List<SybidaStudent> studentList=new ArrayList<>();
-
-            for (int i=0;i<sybidaClassList.size();i++){
-            PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
-            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
-            SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
-            System.out.println(sybidaClassList.get(i).getClassId()+"===============老师=====");
-            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(i).getClassId());
-            criteria1.andStudentNull2EqualTo("1");
-             studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-            }
-            PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
-            String classId = String.valueOf(sybidaClassList.get(0).getClassId());
-
-            if (studentList.size() > 0) {
+            if (sybidaClassList.size()>0){
                 responseResult.setCode(1);
-                responseResult.setMessage(classId);
-                responseResult.setData(pageInfo);
+                responseResult.setMessage("班级ID集合成功");
+                responseResult.setData(sybidaClassList);
                 return responseResult;
-            } else {
+            }else {
                 responseResult.setCode(0);
-                responseResult.setMessage("查询失败");
+                responseResult.setMessage("班级ID集合失败");
+                return responseResult;
             }
-            return responseResult;
         }
         return null;
     }
+
+
 }
