@@ -11,6 +11,7 @@ import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.redis.RedisUtil;
+import com.sy.register.DateUtil;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -213,20 +214,28 @@ public class TeacherServlet {
             }
         }
 
-        response.setContentType("application/vnd.ms-excel;");
-        response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
-        ExcelUtil.writeExcel(response, list);
-        System.out.println("能看到我吗===========================");
-        if (studentList.size() > 0) {
+//        response.setContentType("application/vnd.ms-excel;");
+//        response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
+//        ExcelUtil.writeExcel(response, list);
+//        System.out.println("能看到我吗===========================");
+//        if (studentList.size() > 0) {
+//            responseResult.setCode(1);
+//            responseResult.setMessage("下载成功");
+//            return responseResult;
+//        } else {
+//            responseResult.setCode(0);
+//            responseResult.setMessage("下载失败");
+//        }
+        if (list.size()>0){
             responseResult.setCode(1);
-            responseResult.setMessage("下载成功");
+            responseResult.setMessage("返回集合成功");
+            responseResult.setData(list);
             return responseResult;
-        } else {
+        }else {
             responseResult.setCode(0);
-            responseResult.setMessage("下载失败");
+            responseResult.setMessage("返回集合失败");
         }
-        responseResult.setData(list);
-        return responseResult;
+       return responseResult;
     }
 
 
