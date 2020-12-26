@@ -320,6 +320,16 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return sybidaStudentMapper.selectByExample(sybidaStudentExample);
     }
 
+    @Override
+    public ResponseResult selectStudentByName(String name) {
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaStudent> list = sybidaStudentMapper.selectStudentByName(name);
+        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("成功");
+        responseResult.setData(PageInfo);
+        return responseResult;
+    }
 
 
 }

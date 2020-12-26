@@ -30,6 +30,5 @@ public interface TeacherSerivce {
     List<SybidaStudent> selectStudentByClassId(String classId);
 
 
-
-
+    ResponseResult selectStudentByName(String name);
 }
