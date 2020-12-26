@@ -15,6 +15,26 @@ public class StudentVitae {
 
     private Date vitaeEvaluateAlterTime;
 
+    private String vitaeUrl;
+
+    private String vitaeAlterTime;
+
+    public String getVitaeAlterTime() {
+        return vitaeAlterTime;
+    }
+
+    public void setVitaeAlterTime(String vitaeAlterTime) {
+        this.vitaeAlterTime = vitaeAlterTime;
+    }
+
+    public String getVitaeUrl() {
+        return vitaeUrl;
+    }
+
+    public void setVitaeUrl(String vitaeUrl) {
+        this.vitaeUrl = vitaeUrl;
+    }
+
     private String vitaeEvaluateNull1;
 
     private String vitaeEvaluateNull2;
