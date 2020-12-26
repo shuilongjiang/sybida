@@ -143,7 +143,6 @@
         where student_id = #{studentId,jdbcType=INTEGER}
     </select>
 
-
     <select id="selectStudentByName" resultMap="BaseResultMap" parameterType="String">
         select *
         from sybida_student

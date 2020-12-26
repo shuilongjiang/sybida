@@ -121,9 +121,15 @@ public class StudentSerivceImp implements StudentSerivce {
     public ResponseResult selectEvaluateByVitaeId(int vitaeId) {
         ResponseResult responseResult = new ResponseResult();
         List<StudentVitae> studentVitaes = sybidaStudentMapper.selectEvaluateByVitaeId(vitaeId);
-        responseResult.setData(studentVitaes);
-        responseResult.setCode(1);
-        responseResult.setMessage("成功");
+        System.out.println(studentVitaes);
+        if (studentVitaes.size()==0) {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+        } else {
+            responseResult.setData(studentVitaes);
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+        }
         return responseResult;
     }
 }
