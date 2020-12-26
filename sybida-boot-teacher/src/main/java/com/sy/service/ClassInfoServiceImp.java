@@ -208,6 +208,7 @@ public class ClassInfoServiceImp implements ClassInfoService{
             List<SybidaStudent> studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
 
             PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+
             String classId = String.valueOf(sybidaClassList.get(0).getClassId());
 
             if (studentList.size() > 0) {
@@ -222,7 +223,6 @@ public class ClassInfoServiceImp implements ClassInfoService{
             }
 
         }else if (userAuthority==1){
-
             SybidaClassExample sybidaClassExample = new SybidaClassExample();
             SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
             criteria.andClassTeachIdEqualTo(Integer.valueOf(classManagerId));
@@ -230,18 +230,15 @@ public class ClassInfoServiceImp implements ClassInfoService{
             List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
             System.out.println(sybidaClassList+"符合条件班级老师==============");
 
-            List<SybidaStudent> studentList=new ArrayList<>();
-
-            for (int i=0;i<sybidaClassList.size();i++){
             PageHelper.startPage(Integer.valueOf(pageNum), Integer.valueOf(pageSize));
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             SybidaStudentExample.Criteria criteria1 = sybidaStudentExample.createCriteria();
-            System.out.println(sybidaClassList.get(i).getClassId()+"===============老师=====");
-            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(i).getClassId());
+            System.out.println(sybidaClassList.get(0).getClassId()+"===============老师=====");
+            criteria1.andStudentClassIdEqualTo(sybidaClassList.get(0).getClassId());
             criteria1.andStudentNull2EqualTo("1");
-             studentList = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-            }
+            List<SybidaStudent> studentList= sybidaStudentMapper.selectByExample(sybidaStudentExample);
             PageInfo<SybidaStudent> pageInfo = new PageInfo<>(studentList);
+
             String classId = String.valueOf(sybidaClassList.get(0).getClassId());
 
             if (studentList.size() > 0) {
@@ -254,6 +251,8 @@ public class ClassInfoServiceImp implements ClassInfoService{
                 responseResult.setMessage("查询失败");
             }
             return responseResult;
+        }else if (userAuthority==9){
+
         }
         return null;
     }
