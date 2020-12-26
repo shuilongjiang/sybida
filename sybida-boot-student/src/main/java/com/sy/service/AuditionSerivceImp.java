@@ -54,6 +54,8 @@ public class AuditionSerivceImp implements AuditionSerivce {
             sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(Integer.valueOf(userId));
             list = sybidaClassMapper.selectByExample(sybidaClassExample2);
 
+        }else if (9 == userAuthority){
+            list = sybidaClassMapper.selectByExample(null);
         }
 
         if (null != list && list.size() > 0) {
@@ -103,6 +105,8 @@ public class AuditionSerivceImp implements AuditionSerivce {
                 sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
                 classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
 
+            }else if (9 == userAuthority){
+                classlist1 = sybidaClassMapper.selectByExample(null);
             }
 
             if (null != classlist1 && classlist1.size() > 0) {

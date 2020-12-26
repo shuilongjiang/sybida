@@ -181,6 +181,8 @@ public class OfferSerivceImp implements OfferSerivce {
                 sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
                 classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
 
+            }else if (9 == userAuthority){
+                classlist1 = sybidaClassMapper.selectByExample(null);
             }
 
 
