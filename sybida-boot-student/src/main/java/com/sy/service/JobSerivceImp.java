@@ -76,7 +76,7 @@ public class JobSerivceImp implements JobSerivce {
     public ResponseResult selectstudentJobbyJobStudentId(Integer jobStudentId) {
         ResponseResult responseResult = new ResponseResult();
         JobForTeacher jobForTeacher = sybidaJobMapper.selectstudentJobbyJobStudentId(jobStudentId);
-        System.out.println(jobForTeacher);
+        System.out.println(jobForTeacher+"+-+-+-");
         responseResult.setData(jobForTeacher);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");
@@ -128,6 +128,8 @@ public class JobSerivceImp implements JobSerivce {
                 sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
                 classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
 
+            }else if (9 == userAuthority){
+                classlist1 = sybidaClassMapper.selectByExample(null);
             }
 
 

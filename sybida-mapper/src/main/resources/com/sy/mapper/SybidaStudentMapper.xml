@@ -142,6 +142,18 @@
         from sybida_student
         where student_id = #{studentId,jdbcType=INTEGER}
     </select>
+
+
+    <select id="selectStudentByName" resultMap="BaseResultMap" parameterType="String">
+        select *
+        from sybida_student
+        <where>
+            <if test="name != null">
+            student_name like concat('%', #{name}, '%')
+            </if>
+        </where>
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from sybida_student
     where student_id = #{studentId,jdbcType=INTEGER}
@@ -535,8 +547,9 @@ where  student_id = #{studentId}
 </update>
 
     <select id="selcetStudentVitaeById" resultType="com.sy.dto.StudentVitae">
- select sv.vitae_id,ss.study_aspect from sybida_vitae sv,sybida_study ss,sybida_student st WHERE sv.vitae_student_id = #{vitaeStudentId} and
-ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id
+ select sv.vitae_id,ss.study_aspect,sv.vitae_url,sv.vitae_alter_time from sybida_vitae sv,sybida_study ss,sybida_student st
+  WHERE sv.vitae_student_id = #{vitaeStudentId} and
+ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order by sv.vitae_alter_time desc
 </select>
 
     <select id="selectEvaluateByVitaeId" resultType="com.sy.dto.StudentVitae">

@@ -1,16 +1,13 @@
 package com.sy.pojo;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.stereotype.Component;
-
 import java.util.Date;
-
 
 public class SybidaOffer {
     private Integer offerId;
 
     private Integer offerStudentId;
+
+    private Integer offerStudyId;
 
     private String offerCompany;
 
@@ -18,21 +15,35 @@ public class SybidaOffer {
 
     private String offerAddress;
 
-    private Integer offerStudyId;
-
-    private Date offerDatetime;
-
     private String offerPracticeSalary;
 
-    private String offerReallySalary;
+    private String offerRegularSalary;
 
-    private Date offerHiredate;
+    private Date offerResponsetime;
+
+    private Date offerHiredata;
+
+    private Date offerPracticeEndtime;
+
+    private String offerPicture;
 
     private Date offerAlterTime;
+
+    private Byte offerIsexist;
+
+    private Byte offerPersonisjob;
+
+    private Byte offerIsjob;
 
     private String offerNull1;
 
     private String offerNull2;
+
+    private String offerNull3;
+
+    private String offerNull4;
+
+    private String offerNull5;
 
     public Integer getOfferId() {
         return offerId;
@@ -48,6 +59,14 @@ public class SybidaOffer {
 
     public void setOfferStudentId(Integer offerStudentId) {
         this.offerStudentId = offerStudentId;
+    }
+
+    public Integer getOfferStudyId() {
+        return offerStudyId;
+    }
+
+    public void setOfferStudyId(Integer offerStudyId) {
+        this.offerStudyId = offerStudyId;
     }
 
     public String getOfferCompany() {
@@ -74,24 +93,6 @@ public class SybidaOffer {
         this.offerAddress = offerAddress == null ? null : offerAddress.trim();
     }
 
-    public Integer getOfferStudyId() {
-        return offerStudyId;
-    }
-
-    public void setOfferStudyId(Integer offerStudyId) {
-        this.offerStudyId = offerStudyId;
-    }
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    public Date getOfferDatetime() {
-        return offerDatetime;
-    }
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public void setOfferDatetime(Date offerDatetime) {
-        this.offerDatetime = offerDatetime;
-    }
-
     public String getOfferPracticeSalary() {
         return offerPracticeSalary;
     }
@@ -100,22 +101,44 @@ public class SybidaOffer {
         this.offerPracticeSalary = offerPracticeSalary == null ? null : offerPracticeSalary.trim();
     }
 
-    public String getOfferReallySalary() {
-        return offerReallySalary;
+    public String getOfferRegularSalary() {
+        return offerRegularSalary;
     }
 
-    public void setOfferReallySalary(String offerReallySalary) {
-        this.offerReallySalary = offerReallySalary == null ? null : offerReallySalary.trim();
+    public void setOfferRegularSalary(String offerRegularSalary) {
+        this.offerRegularSalary = offerRegularSalary == null ? null : offerRegularSalary.trim();
     }
 
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-    public Date getOfferHiredate() {
-        return offerHiredate;
+    public Date getOfferResponsetime() {
+        return offerResponsetime;
     }
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    public void setOfferHiredate(Date offerHiredate) {
-        this.offerHiredate = offerHiredate;
+    public void setOfferResponsetime(Date offerResponsetime) {
+        this.offerResponsetime = offerResponsetime;
+    }
+
+    public Date getOfferHiredata() {
+        return offerHiredata;
+    }
+
+    public void setOfferHiredata(Date offerHiredata) {
+        this.offerHiredata = offerHiredata;
+    }
+
+    public Date getOfferPracticeEndtime() {
+        return offerPracticeEndtime;
+    }
+
+    public void setOfferPracticeEndtime(Date offerPracticeEndtime) {
+        this.offerPracticeEndtime = offerPracticeEndtime;
+    }
+
+    public String getOfferPicture() {
+        return offerPicture;
+    }
+
+    public void setOfferPicture(String offerPicture) {
+        this.offerPicture = offerPicture == null ? null : offerPicture.trim();
     }
 
     public Date getOfferAlterTime() {
@@ -124,6 +147,30 @@ public class SybidaOffer {
 
     public void setOfferAlterTime(Date offerAlterTime) {
         this.offerAlterTime = offerAlterTime;
+    }
+
+    public Byte getOfferIsexist() {
+        return offerIsexist;
+    }
+
+    public void setOfferIsexist(Byte offerIsexist) {
+        this.offerIsexist = offerIsexist;
+    }
+
+    public Byte getOfferPersonisjob() {
+        return offerPersonisjob;
+    }
+
+    public void setOfferPersonisjob(Byte offerPersonisjob) {
+        this.offerPersonisjob = offerPersonisjob;
+    }
+
+    public Byte getOfferIsjob() {
+        return offerIsjob;
+    }
+
+    public void setOfferIsjob(Byte offerIsjob) {
+        this.offerIsjob = offerIsjob;
     }
 
     public String getOfferNull1() {
@@ -140,5 +187,29 @@ public class SybidaOffer {
 
     public void setOfferNull2(String offerNull2) {
         this.offerNull2 = offerNull2 == null ? null : offerNull2.trim();
+    }
+
+    public String getOfferNull3() {
+        return offerNull3;
+    }
+
+    public void setOfferNull3(String offerNull3) {
+        this.offerNull3 = offerNull3 == null ? null : offerNull3.trim();
+    }
+
+    public String getOfferNull4() {
+        return offerNull4;
+    }
+
+    public void setOfferNull4(String offerNull4) {
+        this.offerNull4 = offerNull4 == null ? null : offerNull4.trim();
+    }
+
+    public String getOfferNull5() {
+        return offerNull5;
+    }
+
+    public void setOfferNull5(String offerNull5) {
+        this.offerNull5 = offerNull5 == null ? null : offerNull5.trim();
     }
 }

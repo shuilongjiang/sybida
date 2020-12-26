@@ -225,6 +225,66 @@ public class SybidaOfferExample {
             return (Criteria) this;
         }
 
+        public Criteria andOfferStudyIdIsNull() {
+            addCriterion("offer_study_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdIsNotNull() {
+            addCriterion("offer_study_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdEqualTo(Integer value) {
+            addCriterion("offer_study_id =", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdNotEqualTo(Integer value) {
+            addCriterion("offer_study_id <>", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdGreaterThan(Integer value) {
+            addCriterion("offer_study_id >", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("offer_study_id >=", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdLessThan(Integer value) {
+            addCriterion("offer_study_id <", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdLessThanOrEqualTo(Integer value) {
+            addCriterion("offer_study_id <=", value, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdIn(List<Integer> values) {
+            addCriterion("offer_study_id in", values, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdNotIn(List<Integer> values) {
+            addCriterion("offer_study_id not in", values, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdBetween(Integer value1, Integer value2) {
+            addCriterion("offer_study_id between", value1, value2, "offerStudyId");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferStudyIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("offer_study_id not between", value1, value2, "offerStudyId");
+            return (Criteria) this;
+        }
+
         public Criteria andOfferCompanyIsNull() {
             addCriterion("offer_company is null");
             return (Criteria) this;
@@ -435,126 +495,6 @@ public class SybidaOfferExample {
             return (Criteria) this;
         }
 
-        public Criteria andOfferStudyIdIsNull() {
-            addCriterion("offer_study_id is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdIsNotNull() {
-            addCriterion("offer_study_id is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdEqualTo(Integer value) {
-            addCriterion("offer_study_id =", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdNotEqualTo(Integer value) {
-            addCriterion("offer_study_id <>", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdGreaterThan(Integer value) {
-            addCriterion("offer_study_id >", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdGreaterThanOrEqualTo(Integer value) {
-            addCriterion("offer_study_id >=", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdLessThan(Integer value) {
-            addCriterion("offer_study_id <", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdLessThanOrEqualTo(Integer value) {
-            addCriterion("offer_study_id <=", value, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdIn(List<Integer> values) {
-            addCriterion("offer_study_id in", values, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdNotIn(List<Integer> values) {
-            addCriterion("offer_study_id not in", values, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdBetween(Integer value1, Integer value2) {
-            addCriterion("offer_study_id between", value1, value2, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferStudyIdNotBetween(Integer value1, Integer value2) {
-            addCriterion("offer_study_id not between", value1, value2, "offerStudyId");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeIsNull() {
-            addCriterion("offer_datetime is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeIsNotNull() {
-            addCriterion("offer_datetime is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeEqualTo(Date value) {
-            addCriterion("offer_datetime =", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeNotEqualTo(Date value) {
-            addCriterion("offer_datetime <>", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeGreaterThan(Date value) {
-            addCriterion("offer_datetime >", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("offer_datetime >=", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeLessThan(Date value) {
-            addCriterion("offer_datetime <", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeLessThanOrEqualTo(Date value) {
-            addCriterion("offer_datetime <=", value, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeIn(List<Date> values) {
-            addCriterion("offer_datetime in", values, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeNotIn(List<Date> values) {
-            addCriterion("offer_datetime not in", values, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeBetween(Date value1, Date value2) {
-            addCriterion("offer_datetime between", value1, value2, "offerDatetime");
-            return (Criteria) this;
-        }
-
-        public Criteria andOfferDatetimeNotBetween(Date value1, Date value2) {
-            addCriterion("offer_datetime not between", value1, value2, "offerDatetime");
-            return (Criteria) this;
-        }
-
         public Criteria andOfferPracticeSalaryIsNull() {
             addCriterion("offer_practice_salary is null");
             return (Criteria) this;
@@ -625,133 +565,323 @@ public class SybidaOfferExample {
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryIsNull() {
-            addCriterion("offer_really_salary is null");
+        public Criteria andOfferRegularSalaryIsNull() {
+            addCriterion("offer_regular_salary is null");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryIsNotNull() {
-            addCriterion("offer_really_salary is not null");
+        public Criteria andOfferRegularSalaryIsNotNull() {
+            addCriterion("offer_regular_salary is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryEqualTo(String value) {
-            addCriterion("offer_really_salary =", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryEqualTo(String value) {
+            addCriterion("offer_regular_salary =", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryNotEqualTo(String value) {
-            addCriterion("offer_really_salary <>", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryNotEqualTo(String value) {
+            addCriterion("offer_regular_salary <>", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryGreaterThan(String value) {
-            addCriterion("offer_really_salary >", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryGreaterThan(String value) {
+            addCriterion("offer_regular_salary >", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryGreaterThanOrEqualTo(String value) {
-            addCriterion("offer_really_salary >=", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryGreaterThanOrEqualTo(String value) {
+            addCriterion("offer_regular_salary >=", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryLessThan(String value) {
-            addCriterion("offer_really_salary <", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryLessThan(String value) {
+            addCriterion("offer_regular_salary <", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryLessThanOrEqualTo(String value) {
-            addCriterion("offer_really_salary <=", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryLessThanOrEqualTo(String value) {
+            addCriterion("offer_regular_salary <=", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryLike(String value) {
-            addCriterion("offer_really_salary like", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryLike(String value) {
+            addCriterion("offer_regular_salary like", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryNotLike(String value) {
-            addCriterion("offer_really_salary not like", value, "offerReallySalary");
+        public Criteria andOfferRegularSalaryNotLike(String value) {
+            addCriterion("offer_regular_salary not like", value, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryIn(List<String> values) {
-            addCriterion("offer_really_salary in", values, "offerReallySalary");
+        public Criteria andOfferRegularSalaryIn(List<String> values) {
+            addCriterion("offer_regular_salary in", values, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryNotIn(List<String> values) {
-            addCriterion("offer_really_salary not in", values, "offerReallySalary");
+        public Criteria andOfferRegularSalaryNotIn(List<String> values) {
+            addCriterion("offer_regular_salary not in", values, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryBetween(String value1, String value2) {
-            addCriterion("offer_really_salary between", value1, value2, "offerReallySalary");
+        public Criteria andOfferRegularSalaryBetween(String value1, String value2) {
+            addCriterion("offer_regular_salary between", value1, value2, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferReallySalaryNotBetween(String value1, String value2) {
-            addCriterion("offer_really_salary not between", value1, value2, "offerReallySalary");
+        public Criteria andOfferRegularSalaryNotBetween(String value1, String value2) {
+            addCriterion("offer_regular_salary not between", value1, value2, "offerRegularSalary");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateIsNull() {
-            addCriterion("offer_hiredate is null");
+        public Criteria andOfferResponsetimeIsNull() {
+            addCriterion("offer_responsetime is null");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateIsNotNull() {
-            addCriterion("offer_hiredate is not null");
+        public Criteria andOfferResponsetimeIsNotNull() {
+            addCriterion("offer_responsetime is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateEqualTo(Date value) {
-            addCriterion("offer_hiredate =", value, "offerHiredate");
+        public Criteria andOfferResponsetimeEqualTo(Date value) {
+            addCriterion("offer_responsetime =", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateNotEqualTo(Date value) {
-            addCriterion("offer_hiredate <>", value, "offerHiredate");
+        public Criteria andOfferResponsetimeNotEqualTo(Date value) {
+            addCriterion("offer_responsetime <>", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateGreaterThan(Date value) {
-            addCriterion("offer_hiredate >", value, "offerHiredate");
+        public Criteria andOfferResponsetimeGreaterThan(Date value) {
+            addCriterion("offer_responsetime >", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateGreaterThanOrEqualTo(Date value) {
-            addCriterion("offer_hiredate >=", value, "offerHiredate");
+        public Criteria andOfferResponsetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("offer_responsetime >=", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateLessThan(Date value) {
-            addCriterion("offer_hiredate <", value, "offerHiredate");
+        public Criteria andOfferResponsetimeLessThan(Date value) {
+            addCriterion("offer_responsetime <", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateLessThanOrEqualTo(Date value) {
-            addCriterion("offer_hiredate <=", value, "offerHiredate");
+        public Criteria andOfferResponsetimeLessThanOrEqualTo(Date value) {
+            addCriterion("offer_responsetime <=", value, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateIn(List<Date> values) {
-            addCriterion("offer_hiredate in", values, "offerHiredate");
+        public Criteria andOfferResponsetimeIn(List<Date> values) {
+            addCriterion("offer_responsetime in", values, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateNotIn(List<Date> values) {
-            addCriterion("offer_hiredate not in", values, "offerHiredate");
+        public Criteria andOfferResponsetimeNotIn(List<Date> values) {
+            addCriterion("offer_responsetime not in", values, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateBetween(Date value1, Date value2) {
-            addCriterion("offer_hiredate between", value1, value2, "offerHiredate");
+        public Criteria andOfferResponsetimeBetween(Date value1, Date value2) {
+            addCriterion("offer_responsetime between", value1, value2, "offerResponsetime");
             return (Criteria) this;
         }
 
-        public Criteria andOfferHiredateNotBetween(Date value1, Date value2) {
-            addCriterion("offer_hiredate not between", value1, value2, "offerHiredate");
+        public Criteria andOfferResponsetimeNotBetween(Date value1, Date value2) {
+            addCriterion("offer_responsetime not between", value1, value2, "offerResponsetime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataIsNull() {
+            addCriterion("offer_hiredata is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataIsNotNull() {
+            addCriterion("offer_hiredata is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataEqualTo(Date value) {
+            addCriterion("offer_hiredata =", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataNotEqualTo(Date value) {
+            addCriterion("offer_hiredata <>", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataGreaterThan(Date value) {
+            addCriterion("offer_hiredata >", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataGreaterThanOrEqualTo(Date value) {
+            addCriterion("offer_hiredata >=", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataLessThan(Date value) {
+            addCriterion("offer_hiredata <", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataLessThanOrEqualTo(Date value) {
+            addCriterion("offer_hiredata <=", value, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataIn(List<Date> values) {
+            addCriterion("offer_hiredata in", values, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataNotIn(List<Date> values) {
+            addCriterion("offer_hiredata not in", values, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataBetween(Date value1, Date value2) {
+            addCriterion("offer_hiredata between", value1, value2, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferHiredataNotBetween(Date value1, Date value2) {
+            addCriterion("offer_hiredata not between", value1, value2, "offerHiredata");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeIsNull() {
+            addCriterion("offer_practice_endtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeIsNotNull() {
+            addCriterion("offer_practice_endtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeEqualTo(Date value) {
+            addCriterion("offer_practice_endtime =", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeNotEqualTo(Date value) {
+            addCriterion("offer_practice_endtime <>", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeGreaterThan(Date value) {
+            addCriterion("offer_practice_endtime >", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("offer_practice_endtime >=", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeLessThan(Date value) {
+            addCriterion("offer_practice_endtime <", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeLessThanOrEqualTo(Date value) {
+            addCriterion("offer_practice_endtime <=", value, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeIn(List<Date> values) {
+            addCriterion("offer_practice_endtime in", values, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeNotIn(List<Date> values) {
+            addCriterion("offer_practice_endtime not in", values, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeBetween(Date value1, Date value2) {
+            addCriterion("offer_practice_endtime between", value1, value2, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPracticeEndtimeNotBetween(Date value1, Date value2) {
+            addCriterion("offer_practice_endtime not between", value1, value2, "offerPracticeEndtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureIsNull() {
+            addCriterion("offer_picture is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureIsNotNull() {
+            addCriterion("offer_picture is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureEqualTo(String value) {
+            addCriterion("offer_picture =", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureNotEqualTo(String value) {
+            addCriterion("offer_picture <>", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureGreaterThan(String value) {
+            addCriterion("offer_picture >", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureGreaterThanOrEqualTo(String value) {
+            addCriterion("offer_picture >=", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureLessThan(String value) {
+            addCriterion("offer_picture <", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureLessThanOrEqualTo(String value) {
+            addCriterion("offer_picture <=", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureLike(String value) {
+            addCriterion("offer_picture like", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureNotLike(String value) {
+            addCriterion("offer_picture not like", value, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureIn(List<String> values) {
+            addCriterion("offer_picture in", values, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureNotIn(List<String> values) {
+            addCriterion("offer_picture not in", values, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureBetween(String value1, String value2) {
+            addCriterion("offer_picture between", value1, value2, "offerPicture");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPictureNotBetween(String value1, String value2) {
+            addCriterion("offer_picture not between", value1, value2, "offerPicture");
             return (Criteria) this;
         }
 
@@ -812,6 +942,186 @@ public class SybidaOfferExample {
 
         public Criteria andOfferAlterTimeNotBetween(Date value1, Date value2) {
             addCriterion("offer_alter_time not between", value1, value2, "offerAlterTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistIsNull() {
+            addCriterion("offer_isexist is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistIsNotNull() {
+            addCriterion("offer_isexist is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistEqualTo(Byte value) {
+            addCriterion("offer_isexist =", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistNotEqualTo(Byte value) {
+            addCriterion("offer_isexist <>", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistGreaterThan(Byte value) {
+            addCriterion("offer_isexist >", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistGreaterThanOrEqualTo(Byte value) {
+            addCriterion("offer_isexist >=", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistLessThan(Byte value) {
+            addCriterion("offer_isexist <", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistLessThanOrEqualTo(Byte value) {
+            addCriterion("offer_isexist <=", value, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistIn(List<Byte> values) {
+            addCriterion("offer_isexist in", values, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistNotIn(List<Byte> values) {
+            addCriterion("offer_isexist not in", values, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistBetween(Byte value1, Byte value2) {
+            addCriterion("offer_isexist between", value1, value2, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsexistNotBetween(Byte value1, Byte value2) {
+            addCriterion("offer_isexist not between", value1, value2, "offerIsexist");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobIsNull() {
+            addCriterion("offer_personisjob is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobIsNotNull() {
+            addCriterion("offer_personisjob is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobEqualTo(Byte value) {
+            addCriterion("offer_personisjob =", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobNotEqualTo(Byte value) {
+            addCriterion("offer_personisjob <>", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobGreaterThan(Byte value) {
+            addCriterion("offer_personisjob >", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobGreaterThanOrEqualTo(Byte value) {
+            addCriterion("offer_personisjob >=", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobLessThan(Byte value) {
+            addCriterion("offer_personisjob <", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobLessThanOrEqualTo(Byte value) {
+            addCriterion("offer_personisjob <=", value, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobIn(List<Byte> values) {
+            addCriterion("offer_personisjob in", values, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobNotIn(List<Byte> values) {
+            addCriterion("offer_personisjob not in", values, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobBetween(Byte value1, Byte value2) {
+            addCriterion("offer_personisjob between", value1, value2, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferPersonisjobNotBetween(Byte value1, Byte value2) {
+            addCriterion("offer_personisjob not between", value1, value2, "offerPersonisjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobIsNull() {
+            addCriterion("offer_isjob is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobIsNotNull() {
+            addCriterion("offer_isjob is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobEqualTo(Byte value) {
+            addCriterion("offer_isjob =", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobNotEqualTo(Byte value) {
+            addCriterion("offer_isjob <>", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobGreaterThan(Byte value) {
+            addCriterion("offer_isjob >", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobGreaterThanOrEqualTo(Byte value) {
+            addCriterion("offer_isjob >=", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobLessThan(Byte value) {
+            addCriterion("offer_isjob <", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobLessThanOrEqualTo(Byte value) {
+            addCriterion("offer_isjob <=", value, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobIn(List<Byte> values) {
+            addCriterion("offer_isjob in", values, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobNotIn(List<Byte> values) {
+            addCriterion("offer_isjob not in", values, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobBetween(Byte value1, Byte value2) {
+            addCriterion("offer_isjob between", value1, value2, "offerIsjob");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferIsjobNotBetween(Byte value1, Byte value2) {
+            addCriterion("offer_isjob not between", value1, value2, "offerIsjob");
             return (Criteria) this;
         }
 
@@ -952,6 +1262,216 @@ public class SybidaOfferExample {
 
         public Criteria andOfferNull2NotBetween(String value1, String value2) {
             addCriterion("offer_null2 not between", value1, value2, "offerNull2");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3IsNull() {
+            addCriterion("offer_null3 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3IsNotNull() {
+            addCriterion("offer_null3 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3EqualTo(String value) {
+            addCriterion("offer_null3 =", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3NotEqualTo(String value) {
+            addCriterion("offer_null3 <>", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3GreaterThan(String value) {
+            addCriterion("offer_null3 >", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3GreaterThanOrEqualTo(String value) {
+            addCriterion("offer_null3 >=", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3LessThan(String value) {
+            addCriterion("offer_null3 <", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3LessThanOrEqualTo(String value) {
+            addCriterion("offer_null3 <=", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3Like(String value) {
+            addCriterion("offer_null3 like", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3NotLike(String value) {
+            addCriterion("offer_null3 not like", value, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3In(List<String> values) {
+            addCriterion("offer_null3 in", values, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3NotIn(List<String> values) {
+            addCriterion("offer_null3 not in", values, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3Between(String value1, String value2) {
+            addCriterion("offer_null3 between", value1, value2, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull3NotBetween(String value1, String value2) {
+            addCriterion("offer_null3 not between", value1, value2, "offerNull3");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4IsNull() {
+            addCriterion("offer_null4 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4IsNotNull() {
+            addCriterion("offer_null4 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4EqualTo(String value) {
+            addCriterion("offer_null4 =", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4NotEqualTo(String value) {
+            addCriterion("offer_null4 <>", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4GreaterThan(String value) {
+            addCriterion("offer_null4 >", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4GreaterThanOrEqualTo(String value) {
+            addCriterion("offer_null4 >=", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4LessThan(String value) {
+            addCriterion("offer_null4 <", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4LessThanOrEqualTo(String value) {
+            addCriterion("offer_null4 <=", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4Like(String value) {
+            addCriterion("offer_null4 like", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4NotLike(String value) {
+            addCriterion("offer_null4 not like", value, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4In(List<String> values) {
+            addCriterion("offer_null4 in", values, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4NotIn(List<String> values) {
+            addCriterion("offer_null4 not in", values, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4Between(String value1, String value2) {
+            addCriterion("offer_null4 between", value1, value2, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull4NotBetween(String value1, String value2) {
+            addCriterion("offer_null4 not between", value1, value2, "offerNull4");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5IsNull() {
+            addCriterion("offer_null5 is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5IsNotNull() {
+            addCriterion("offer_null5 is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5EqualTo(String value) {
+            addCriterion("offer_null5 =", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5NotEqualTo(String value) {
+            addCriterion("offer_null5 <>", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5GreaterThan(String value) {
+            addCriterion("offer_null5 >", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5GreaterThanOrEqualTo(String value) {
+            addCriterion("offer_null5 >=", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5LessThan(String value) {
+            addCriterion("offer_null5 <", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5LessThanOrEqualTo(String value) {
+            addCriterion("offer_null5 <=", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5Like(String value) {
+            addCriterion("offer_null5 like", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5NotLike(String value) {
+            addCriterion("offer_null5 not like", value, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5In(List<String> values) {
+            addCriterion("offer_null5 in", values, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5NotIn(List<String> values) {
+            addCriterion("offer_null5 not in", values, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5Between(String value1, String value2) {
+            addCriterion("offer_null5 between", value1, value2, "offerNull5");
+            return (Criteria) this;
+        }
+
+        public Criteria andOfferNull5NotBetween(String value1, String value2) {
+            addCriterion("offer_null5 not between", value1, value2, "offerNull5");
             return (Criteria) this;
         }
     }

@@ -117,6 +117,12 @@ public class TeacherServlet {
         return responseResult;
     }
 
+    @RequestMapping("selectStudentByName")
+    public ResponseResult selectStudentByName(String name) {
+        ResponseResult responseResult = teacherSerivce.selectStudentByName(name);
+        return responseResult;
+    }
+
     @RequestMapping(value = "/updatestudentinfo", method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult updateInfoStudent(@RequestParam("file") MultipartFile file, SybidaStudent object) {
