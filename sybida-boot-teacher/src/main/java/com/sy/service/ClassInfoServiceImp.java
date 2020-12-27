@@ -314,8 +314,20 @@ public class ClassInfoServiceImp implements ClassInfoService{
                 responseResult.setMessage("班级ID集合失败");
                 return responseResult;
             }
+        }else if (userAuthority==9){
+            List<SybidaClass> sybidaClassList = sybidaClassMapper.selectByExample(null);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                responseResult.setMessage("班级ID集合成功");
+                responseResult.setData(sybidaClassList);
+                return responseResult;
+        }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("班级ID集合失败");
+                return responseResult;
+            }
         }
-        return null;
+        return responseResult;
     }
 
 

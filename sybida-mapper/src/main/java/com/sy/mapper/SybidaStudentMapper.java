@@ -43,4 +43,6 @@ public interface SybidaStudentMapper {
     List<StudentVitae> selectEvaluateByVitaeId(Integer vitaeId);
 
     List<SybidaStudent> selectStudentByName(@Param("name") String name);
+
+    List<SybidaStudent>selectStudentByNameAndClass(@Param("name")String name,@Param("classId") String classId);
 }
