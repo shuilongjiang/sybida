@@ -562,7 +562,9 @@ ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order 
         SELECT a.*,b.class_num FROM `sybida_student` a JOIN sybida_class b on a.student_class_id = b.class_id
         where a.student_null2 != 0
     </select>
-
+    <select id="selectByIdList" resultType="com.sy.dto.SybidaStudentTotal">
+    select student_id,student_name,student_null1 from sybida_student where student_class_id=#{classId}
+</select>
 
 <!--    <select id="selectStudentByNameAndClass" resultMap="BaseResultMap" parameterType="String">-->
 <!--       select * from sybida_student where student_name like'%'#{name}'%' and student_class_id=#{classId}-->
