@@ -86,7 +86,6 @@ public class RegisterServlet {
      @RequestMapping("selectTeacher")
      public List<SybidaUser> selectTeacher(){
           List<SybidaUser> userList=registerService.selectTeacher();
-          System.out.println(userList+"========");
           return userList;
      }
      @RequestMapping("getCookValue")

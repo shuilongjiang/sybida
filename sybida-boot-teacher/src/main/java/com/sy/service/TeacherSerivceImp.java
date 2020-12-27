@@ -360,5 +360,23 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return responseResult;
     }
 
+    @Override
+    public ResponseResult updateLeval(String studentId, String stuLeaval) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaStudent sybidaStudent=new SybidaStudent();
+        sybidaStudent.setStudentId(Integer.valueOf(studentId));
+        sybidaStudent.setStudentNull1(stuLeaval);
+        int row= sybidaStudentMapper.updateByPrimaryKeySelective(sybidaStudent);
+        if (row==1){
+            responseResult.setCode(1);
+            responseResult.setMessage("修改成功");
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("修改失败");
+        }
+        return responseResult;
+    }
+
 
 }

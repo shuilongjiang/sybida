@@ -155,9 +155,16 @@ public class ClassInfoServlet {
     public ResponseResult selectTeacherMutiClass(String userId){
         redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
-        System.out.println(classManagerId+"999999999999999999999999999999");
         return classInfoService.selectTeacherMutiClass(classManagerId);
     }
+
+    @RequestMapping("selectuserbyidclass")
+    public ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass){
+        redisUtil.expire(userId,60);
+        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+        return classInfoService.selectUserByIdClass(classManagerId,pageNum,pageSize,selectClass);
+    }
+
 
 }
 
