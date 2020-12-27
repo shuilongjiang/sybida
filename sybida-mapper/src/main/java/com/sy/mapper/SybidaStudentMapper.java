@@ -1,6 +1,7 @@
 package com.sy.mapper;
 
 import com.sy.dto.StudentVitae;
+import com.sy.dto.SybidaStudentTotal;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentAndStudyAndClass;
@@ -43,4 +44,6 @@ public interface SybidaStudentMapper {
     List<StudentVitae> selectEvaluateByVitaeId(Integer vitaeId);
 
     List<SybidaStudent> selectStudentByName(@Param("name") String name);
+    //根据班级ID查询改班级的所有学生ID和姓名，和学生级别
+    List<SybidaStudentTotal> selectByIdList(Integer classId);
 }

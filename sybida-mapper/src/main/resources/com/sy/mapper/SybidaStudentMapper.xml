@@ -558,7 +558,9 @@ ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order 
         and st.teach_id=se.vitae_evaluate_user_id
     </select>
 
-
+<select id="selectByIdList" resultType="com.sy.dto.SybidaStudentTotal">
+    select student_id,student_name,student_null1 from sybida_student where student_class_id=#{classId}
+</select>
 <!--    <select id="selectStudentByNameAndClass" resultMap="BaseResultMap" parameterType="String">-->
 <!--        select *-->
 <!--        from sybida_student-->
