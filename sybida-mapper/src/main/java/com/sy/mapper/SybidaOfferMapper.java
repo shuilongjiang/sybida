@@ -29,4 +29,6 @@ public interface SybidaOfferMapper {
     int updateByPrimaryKeySelective(SybidaOffer record);
 
     int updateByPrimaryKey(SybidaOffer record);
+    int selectOfferNumByStudentId(Integer studentId);
+    int selectisJobNumByStudentId(Integer studentId);
 }

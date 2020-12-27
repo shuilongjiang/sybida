@@ -463,4 +463,10 @@
       offer_null5 = #{offerNull5,jdbcType=VARCHAR}
     where offer_id = #{offerId,jdbcType=INTEGER}
   </update>
+  <select id="selectOfferNumByStudentId" resultType="java.lang.Integer">
+        select count(0) from sybida_offer where offer_student_id=#{studentId}
+  </select>
+  <select id="selectisJobNumByStudentId" resultType="java.lang.Integer">
+        select count(0) from sybida_offer where offer_student_id=#{studentId} and offer_isjob =1
+  </select>
 </mapper>
