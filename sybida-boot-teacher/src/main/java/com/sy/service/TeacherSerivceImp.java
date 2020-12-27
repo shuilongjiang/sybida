@@ -2,11 +2,13 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sy.dto.StudentDto;
 import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
 import com.sy.redis.RedisOpsUtil;
+import com.sy.register.DateUtil;
 import com.sy.vo.ResponseResult;
 import org.apache.jasper.tagplugins.jstl.core.If;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +39,10 @@ public class TeacherSerivceImp implements TeacherSerivce {
     SybidaStudent sybidaStudent;
     @Autowired
     SybidaTeach sybidaTeach;
+    @Autowired
+    SybidaNewsMapper sybidaNewsMapper;
+    @Autowired
+    SybidaReceiveMapper sybidaReceiveMapper;
 
     @Transactional
     @Override
@@ -190,8 +196,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult selcetAllStudent(int pageSize, int pageNum) {
         ResponseResult responseResult = new ResponseResult();
         PageHelper.startPage(pageNum, pageSize);
-        List<SybidaStudent> list = sybidaStudentMapper.selectByExample(null);
-        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        List<StudentDto> list = sybidaStudentMapper.selcetAllStudent(null);
+        PageInfo<StudentDto> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("成功");
         responseResult.setData(PageInfo);
@@ -272,12 +278,35 @@ public class TeacherSerivceImp implements TeacherSerivce {
         if (affectedRows > 0) {
             responseResult.setCode(1);
             responseResult.setMessage("成功！");
+            SybidaNews sybidaNews = new SybidaNews();
+            sybidaNews.setNewsUserId(sybidaVitaeEvaluate.getVitaeEvaluateUserId());
+            SybidaTeach sybidaTeach=sybidaTeachMapper.selectByPrimaryKey(sybidaVitaeEvaluate.getVitaeEvaluateUserId());
+            SybidaVitae vitae= sybidaVitaeMapper.selectByPrimaryKey(sybidaVitaeEvaluate.getVitaeEvaluateId());
+            SybidaStudent student=sybidaStudentMapper.selectByPrimaryKey(vitae.getVitaeStudentId());
+            Date date = new Date();
+            String time = DateUtil.date2String(date,"yyyy年MM月dd日HH时mm分ss秒");
+            String news = "教师"+sybidaTeach.getTeachName()+",在"+time+"评价了"+student.getStudentName()+"的简历";
+            sybidaNews.setNewsTest(news);
+            sybidaNews.setNewsSendTime(date);
+            sybidaNews.setNewsAlterTime(date);
+            sybidaNews.setNewsNull1("1");
+            int affected = sybidaNewsMapper.insert(sybidaNews);
+             if(affected == 0){
+                 System.out.println("发送到SybidaNews失败！");
+            }else{
+                 SybidaReceive sybidaReceive = new SybidaReceive();
+                 sybidaReceive.setReceiveUserId(student.getStudentId());
+                 sybidaReceive.setReceiveNull1("1");
+                 sybidaReceive.setReceiveAlterTime(date);
+                 sybidaReceive.setReceiveIsRead((byte) 0);
+                 int receiveId = sybidaNews.getNewsId();
+                 sybidaReceive.setReceiveId(receiveId);
+                 sybidaReceiveMapper.insertSelective(sybidaReceive);
+             }
         } else {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-        sybidaVitaeEvaluate.setVitaeEvaluateAlterTime(new Date());
-        sybidaVitaeEvaluate.setVitaeEvaluateTime(new Date());
         return responseResult;
     }
 
@@ -323,8 +352,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Override
     public ResponseResult selectStudentByName(String name) {
         ResponseResult responseResult = new ResponseResult();
-        List<SybidaStudent> list = sybidaStudentMapper.selectStudentByName(name);
-        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        List<StudentDto> list = sybidaStudentMapper.selectStudentByName(name);
+        PageInfo<StudentDto> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("成功");
         responseResult.setData(PageInfo);
