@@ -11,11 +11,9 @@ public interface RegisterService {
 
     List<SybidaStudy> selectStudy();
 
-    List<SybidaTeach> selectTeacher();
+    List<SybidaUser> selectTeacher();
 
     ResponseResult inserSelectMulTable(List<RegisterExcel> registerExcels,PartStudent partStudent) throws Exception;
-
-    int createClass(PartStudent partStudent);
 
     List<SybidaClass> selectClassName(String name);
 }

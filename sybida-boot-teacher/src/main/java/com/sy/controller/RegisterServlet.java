@@ -84,9 +84,10 @@ public class RegisterServlet {
      }
 
      @RequestMapping("selectTeacher")
-     public List<SybidaTeach> selectTeacher(){
-          List<SybidaTeach> listTeacher=registerService.selectTeacher();
-          return listTeacher;
+     public List<SybidaUser> selectTeacher(){
+          List<SybidaUser> userList=registerService.selectTeacher();
+          System.out.println(userList+"========");
+          return userList;
      }
      @RequestMapping("getCookValue")
      public ResponseResult getCookValue(String userid){
@@ -120,26 +121,6 @@ public class RegisterServlet {
 
           }
           return responseResult;
-     }
-
-     @RequestMapping("testPhone")
-     public ResponseResult testPhone(String phone) {
-          ResponseResult responseResult=new ResponseResult();
-//          String phone = "13123456789";
-          String regex = "^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(17[013678])|(18[0,5-9]))\\d{8}$";
-          if(phone.length() != 11){
-          System.out.println("手机号应为11位数");
-           }else{
-          Pattern p = Pattern.compile(regex);
-          Matcher m = p.matcher(phone);
-          boolean isMatch = m.matches();
-          if(isMatch){
-               System.out.println("您的手机号" + phone + "是正确格式@——@");
-          } else {
-               System.out.println("您的手机号" + phone + "是错误格式！！！");
-          }
-        }
-          return null;
      }
 
 }

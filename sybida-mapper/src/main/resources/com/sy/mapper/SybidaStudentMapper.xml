@@ -143,13 +143,13 @@
         where student_id = #{studentId,jdbcType=INTEGER}
     </select>
 
-    <select id="selectStudentByName" resultMap="BaseResultMap" parameterType="String">
-        select *
-        from sybida_student
+    <select id="selectStudentByName" resultType="com.sy.dto.StudentDto" parameterType="String">
+        SELECT a.*,b.class_num FROM `sybida_student` a JOIN sybida_class b on a.student_class_id = b.class_id
         <where>
             <if test="name != null">
-            student_name like concat('%', #{name}, '%')
+            a.student_name like concat('%', #{name}, '%')
             </if>
+            and a.student_null2 != 0
         </where>
     </select>
 
@@ -558,16 +558,13 @@ ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order 
         and st.teach_id=se.vitae_evaluate_user_id
     </select>
 
-<select id="selectByIdList" resultType="com.sy.dto.SybidaStudentTotal">
-    select student_id,student_name,student_null1 from sybida_student where student_class_id=#{classId}
-</select>
+    <select id="selcetAllStudent" resultType="com.sy.dto.StudentDto" parameterType="com.sy.pojo.SybidaStudentExample">
+        SELECT a.*,b.class_num FROM `sybida_student` a JOIN sybida_class b on a.student_class_id = b.class_id
+        where a.student_null2 != 0
+    </select>
+
+
 <!--    <select id="selectStudentByNameAndClass" resultMap="BaseResultMap" parameterType="String">-->
-<!--        select *-->
-<!--        from sybida_student-->
-<!--        <where>-->
-<!--            <if test="name != null">-->
-<!--                student_name like concat('%', #{name}, '%')-->
-<!--            </if>-->
-<!--        </where>-->
+<!--       select * from sybida_student where student_name like'%'#{name}'%' and student_class_id=#{classId}-->
 <!--    </select>-->
 </mapper>

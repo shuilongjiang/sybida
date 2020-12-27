@@ -2,6 +2,7 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sy.dto.StudentDto;
 import com.sy.dto.StudentJobForTeacher;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
@@ -195,8 +196,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult selcetAllStudent(int pageSize, int pageNum) {
         ResponseResult responseResult = new ResponseResult();
         PageHelper.startPage(pageNum, pageSize);
-        List<SybidaStudent> list = sybidaStudentMapper.selectByExample(null);
-        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        List<StudentDto> list = sybidaStudentMapper.selcetAllStudent(null);
+        PageInfo<StudentDto> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("成功");
         responseResult.setData(PageInfo);
@@ -351,8 +352,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Override
     public ResponseResult selectStudentByName(String name) {
         ResponseResult responseResult = new ResponseResult();
-        List<SybidaStudent> list = sybidaStudentMapper.selectStudentByName(name);
-        PageInfo<SybidaStudent> PageInfo = new PageInfo<>(list);
+        List<StudentDto> list = sybidaStudentMapper.selectStudentByName(name);
+        PageInfo<StudentDto> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("成功");
         responseResult.setData(PageInfo);
