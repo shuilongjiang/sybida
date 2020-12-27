@@ -70,7 +70,7 @@ public class StudentSerivceImp implements StudentSerivce {
         int row = 0;
         int row2=0;
         for (int i = 0; i < list.size(); i++) {
-        sybidaUserMapper.selectByPrimaryKey(list.get(i));
+//        sybidaUserMapper.selectByPrimaryKey(list.get(i));
         SybidaStudent sybidaStudent=new SybidaStudent();
         sybidaStudent.setStudentId(list.get(i));
         sybidaStudent.setStudentNull2("0");
