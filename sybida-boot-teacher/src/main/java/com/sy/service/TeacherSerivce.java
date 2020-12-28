@@ -28,9 +28,6 @@ public interface TeacherSerivce {
     ResponseResult insertTeacher(SybidaUser sybidaUser);
     ResponseResult insertTeachtwo(SybidaTeach sybidaTeach);
     List<SybidaStudent> selectStudentByClassId(String classId);
-
-
     ResponseResult selectStudentByName(String name);
-
-    ResponseResult selectTeacherByPhoneNum(String phoneNum);
+    ResponseResult updateLeval(String studentId,String stuLeaval);
 }

@@ -4,7 +4,10 @@ import com.sy.dto.StudentDto;
 import com.sy.dto.StudentVitae;
 import com.sy.dto.SybidaStudentTotal;
 import com.sy.dto.VitaeLevelForTeacher;
-import com.sy.pojo.*;
+import com.sy.pojo.SybidaStudent;
+import com.sy.pojo.SybidaStudentAndStudyAndClass;
+import com.sy.pojo.SybidaStudentExample;
+import com.sy.pojo.SybidaVitae;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -47,5 +50,7 @@ public interface SybidaStudentMapper {
 
     //根据班级ID查询改班级的所有学生ID和姓名，和学生级别
     List<SybidaStudentTotal> selectByIdList(Integer classId);
+   //存储过程查询
+    SybidaStudentTotal selectTotalStuByIdProcess(Integer classId);
 
 }

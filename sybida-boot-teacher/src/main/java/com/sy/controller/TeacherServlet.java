@@ -233,18 +233,7 @@ public class TeacherServlet {
             }
         }
 
-//        response.setContentType("application/vnd.ms-excel;");
-//        response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
-//        ExcelUtil.writeExcel(response, list);
-//        System.out.println("能看到我吗===========================");
-//        if (studentList.size() > 0) {
-//            responseResult.setCode(1);
-//            responseResult.setMessage("下载成功");
-//            return responseResult;
-//        } else {
-//            responseResult.setCode(0);
-//            responseResult.setMessage("下载失败");
-//        }
+
         if (list.size()>0){
             responseResult.setCode(1);
             responseResult.setMessage("返回集合成功");
@@ -257,6 +246,10 @@ public class TeacherServlet {
        return responseResult;
     }
 
+    @RequestMapping("updateleval")
+    public ResponseResult updateLeval(String studentId,String stuLeaval){
+     return teacherSerivce.updateLeval(studentId,stuLeaval);
+    }
 
 }
 

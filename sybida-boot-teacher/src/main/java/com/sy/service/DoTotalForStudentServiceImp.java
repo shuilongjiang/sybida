@@ -38,7 +38,10 @@ public class DoTotalForStudentServiceImp implements DoTotalForStudentService {
         //根据学生ID的集合对学生是否就业查询
 
         for (int i = 0; i < sybidaStudentTotals.size(); i++) {
-            sybidaStudentTotals.get(i).setNum(i + 1);
+//            SybidaStudentTotal sybidaStudentTotal=sybidaStudentTotals.get(i);
+//            sybidaStudentTotal= sybidaStudentMapper.selectTotalStuByIdProcess(sybidaStudentTotals.get(i).getStudentId());
+//            System.out.println(sybidaStudentTotal);
+                        sybidaStudentTotals.get(i).setNum(i + 1);
             Integer stuid = sybidaStudentTotals.get(i).getStudentId();
             Integer isJob = sybidaOfferMapper.selectisJobNumByStudentId(stuid);
             if (isJob == 0) {

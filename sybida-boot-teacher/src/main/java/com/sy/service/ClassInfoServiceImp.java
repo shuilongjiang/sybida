@@ -330,5 +330,88 @@ public class ClassInfoServiceImp implements ClassInfoService{
         return responseResult;
     }
 
+    @Override
+    public ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass) {
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaClass> sybidaClassList;
+        SybidaClassExample sybidaClassExample = new SybidaClassExample();
+        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(userId));
+        Byte userAuthority = sybidaUser.getUserAuthority();
+        if (userAuthority == 0) {
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+                criteria.andClassManagerIdEqualTo(Integer.valueOf(userId));
+                criteria.andClassNull1EqualTo("1");
+                sybidaClassList= sybidaClassMapper.selectByExample(sybidaClassExample);
+            }else {
+                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+                criteria.andClassManagerIdEqualTo(Integer.valueOf(userId));
+                criteria.andClassNull1EqualTo("1");
+                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            }
+            PageInfo<SybidaClass> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
 
+
+        }else if (userAuthority==1){
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+                criteria.andClassTeachIdEqualTo(Integer.valueOf(userId));
+                criteria.andClassNull1EqualTo("1");
+                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            }else {
+                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+                criteria.andClassTeachIdEqualTo(Integer.valueOf(userId));
+                criteria.andClassNull1EqualTo("1");
+                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            }
+            PageInfo<SybidaClass> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
+
+        }else if (userAuthority==9){
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+                sybidaClassList = sybidaClassMapper.selectByExample(null);
+            }else {
+                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+            }
+            PageInfo<SybidaClass> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
+
+        }
+        return responseResult;
+    }
 }

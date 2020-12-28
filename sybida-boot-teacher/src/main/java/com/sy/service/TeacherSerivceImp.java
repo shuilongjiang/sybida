@@ -4,7 +4,6 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sy.dto.StudentDto;
 import com.sy.dto.StudentJobForTeacher;
-import com.sy.dto.TeachDto;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
@@ -244,14 +243,14 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Override
     public ResponseResult selectTeacherById(int userid) {
         ResponseResult responseResult = new ResponseResult();
-        TeachDto teachDto = sybidaTeachMapper.selcetTeachId(userid);
-        System.out.println(teachDto);
+        SybidaTeach sybidaTeach = sybidaTeachMapper.selectByPrimaryKey(userid);
+        System.out.println(sybidaTeach);
         if (sybidaTeach == null) {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
         } else {
             responseResult.setCode(1);
-            responseResult.setData(teachDto);
+            responseResult.setData(sybidaTeach);
             responseResult.setMessage("成功");
         }
         return responseResult;
@@ -264,7 +263,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
         if (affectedRows > 0) {
             responseResult.setMessage("成功");
             responseResult.setCode(1);
-
         }
         {
             responseResult.setCode(0);
@@ -363,13 +361,20 @@ public class TeacherSerivceImp implements TeacherSerivce {
     }
 
     @Override
-    public ResponseResult selectTeacherByPhoneNum(String phoneNum) {
-        ResponseResult responseResult = new ResponseResult();
-        List<SybidaTeach> list = sybidaTeachMapper.selectTeacherByPhoneNum(phoneNum);
-        PageInfo<SybidaTeach> PageInfo = new PageInfo<>(list);
-        responseResult.setCode(1);
-        responseResult.setMessage("成功");
-        responseResult.setData(PageInfo);
+    public ResponseResult updateLeval(String studentId, String stuLeaval) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaStudent sybidaStudent=new SybidaStudent();
+        sybidaStudent.setStudentId(Integer.valueOf(studentId));
+        sybidaStudent.setStudentNull1(stuLeaval);
+        int row= sybidaStudentMapper.updateByPrimaryKeySelective(sybidaStudent);
+        if (row==1){
+            responseResult.setCode(1);
+            responseResult.setMessage("修改成功");
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("修改失败");
+        }
         return responseResult;
     }
 
