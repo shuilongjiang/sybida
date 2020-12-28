@@ -38,4 +38,5 @@ public interface SybidaTeachMapper {
     List<SybidaTeach> selectTeacherByPhoneNum(@Param("phoneNum") String phoneNum);
 
     TeachDto selcetTeachId(Integer teachId);
+
 }
