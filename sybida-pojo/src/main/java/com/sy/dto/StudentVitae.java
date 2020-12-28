@@ -6,6 +6,7 @@ public class StudentVitae {
     private Integer vitaeEvaluateId;
 
     private String vitaeEvaluateComment;
+    private String vitaeLevel;
 
     private Integer vitaeEvaluateUserId;
 
@@ -18,6 +19,16 @@ public class StudentVitae {
     private String vitaeUrl;
 
     private String vitaeAlterTime;
+
+    private Byte vitaeIsRead;
+
+    public Byte getVitaeIsRead() {
+        return vitaeIsRead;
+    }
+
+    public void setVitaeIsRead(Byte vitaeIsRead) {
+        this.vitaeIsRead = vitaeIsRead;
+    }
 
     public String getVitaeAlterTime() {
         return vitaeAlterTime;
@@ -33,6 +44,14 @@ public class StudentVitae {
 
     public void setVitaeUrl(String vitaeUrl) {
         this.vitaeUrl = vitaeUrl;
+    }
+
+    public String getVitaeLevel() {
+        return vitaeLevel;
+    }
+
+    public void setVitaeLevel(String vitaeLevel) {
+        this.vitaeLevel = vitaeLevel;
     }
 
     private String vitaeEvaluateNull1;

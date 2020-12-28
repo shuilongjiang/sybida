@@ -546,7 +546,7 @@ where  student_id = #{studentId}
 </update>
 
     <select id="selcetStudentVitaeById" resultType="com.sy.dto.StudentVitae">
- select sv.vitae_id,ss.study_aspect,sv.vitae_url,sv.vitae_alter_time from sybida_vitae sv,sybida_study ss,sybida_student st
+ select sv.vitae_id,sv.vitae_level,ss.study_aspect,sv.vitae_url,sv.vitae_alter_time,sv.vitae_is_read from sybida_vitae sv,sybida_study ss,sybida_student st
   WHERE sv.vitae_student_id = #{vitaeStudentId} and
 ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order by sv.vitae_alter_time desc
     </select>
