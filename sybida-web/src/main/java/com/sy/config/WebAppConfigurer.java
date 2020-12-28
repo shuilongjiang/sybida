@@ -23,6 +23,7 @@ public class WebAppConfigurer implements WebMvcConfigurer {
         list.add("/login/**");
         list.add("/company/codeisenable");
         list.add("/company/insertcompany");
+        list.add("/dototal/**");
         return list;
     }
 }

@@ -465,6 +465,7 @@
   </update>
 
 
+
   <select id="selectOfferByOfferStudentIdForTeacher" resultType="com.sy.dto.OfferForTeacher">
        select sosc.*,ss.study_aspect
        from  sybida_study ss
@@ -485,5 +486,12 @@
                          inner join sybida_class sc  on sst.student_class_id=sc.class_id
                          where so.offer_id = #{offerId}) sosc
        on ss.study_id = sosc.offer_study_id
+  </select>
+
+  <select id="selectOfferNumByStudentId" resultType="java.lang.Integer">
+        select count(0) from sybida_offer where offer_student_id=#{studentId}
+  </select>
+  <select id="selectisJobNumByStudentId" resultType="java.lang.Integer">
+        select count(0) from sybida_offer where offer_student_id=#{studentId} and offer_isjob =1
   </select>
 </mapper>

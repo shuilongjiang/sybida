@@ -11,6 +11,7 @@ import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaUser;
 import com.sy.pojo.SybidaVitaeEvaluate;
 import com.sy.redis.RedisUtil;
+import com.sy.register.DateUtil;
 import com.sy.service.TeacherSerivce;
 import com.sy.vo.ResponseResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,14 +77,19 @@ public class TeacherServlet {
 
 
     @RequestMapping("insertvitaeevaluatelevel")
-    public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, int studentId) {
+    public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, String userid) {
         String comments = (null == comment) ? "暂无评价" : comment;
         String picUrls = (null == picUrl) ? "暂无图片" : picUrl;
+        redisUtil.expire(userid, 60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
         SybidaVitaeEvaluate sybidaVitaeEvaluate = new SybidaVitaeEvaluate();
         sybidaVitaeEvaluate.setVitaeEvaluateId(vitaeId);
         sybidaVitaeEvaluate.setVitaeEvaluateComment(comments);
         sybidaVitaeEvaluate.setVitaeEvaluatePicture(picUrls);
-        sybidaVitaeEvaluate.setVitaeEvaluateUserId(studentId);
+        sybidaVitaeEvaluate.setVitaeEvaluateUserId(Integer.valueOf(userId));
+        sybidaVitaeEvaluate.setVitaeEvaluateAlterTime(new Date());
+        sybidaVitaeEvaluate.setVitaeEvaluateTime(new Date());
+
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;
     }
@@ -157,10 +163,18 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectTeacherById(Integer.valueOf(userId));
         return responseResult;
     }
+
+
     @RequestMapping("selectteacherbyidone")
     public ResponseResult selectStudentByIdOne(Integer userid) {
 
         ResponseResult responseResult = teacherSerivce.selectTeacherById(userid);
+        return responseResult;
+    }
+
+    @RequestMapping("selectTeacherByPhoneNum")
+    public ResponseResult selectTeacherByPhoneNum(String phoneNum) {
+        ResponseResult responseResult = teacherSerivce.selectTeacherByPhoneNum(phoneNum);
         return responseResult;
     }
 
@@ -219,22 +233,23 @@ public class TeacherServlet {
             }
         }
 
-        response.setContentType("application/vnd.ms-excel;");
-        response.setHeader("Content-Disposition", "attachment;filename=" + "Student.xlsx");
-        ExcelUtil.writeExcel(response, list);
-        System.out.println("能看到我吗===========================");
-        if (studentList.size() > 0) {
+
+        if (list.size()>0){
             responseResult.setCode(1);
-            responseResult.setMessage("下载成功");
+            responseResult.setMessage("返回集合成功");
+            responseResult.setData(list);
             return responseResult;
-        } else {
+        }else {
             responseResult.setCode(0);
-            responseResult.setMessage("下载失败");
+            responseResult.setMessage("返回集合失败");
         }
-        responseResult.setData(list);
-        return responseResult;
+       return responseResult;
     }
 
+    @RequestMapping("updateleval")
+    public ResponseResult updateLeval(String studentId,String stuLeaval){
+     return teacherSerivce.updateLeval(studentId,stuLeaval);
+    }
 
 }
 

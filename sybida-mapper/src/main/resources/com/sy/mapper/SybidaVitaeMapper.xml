@@ -322,7 +322,7 @@
     where vitae_id = #{vitaeId,jdbcType=INTEGER}
   </update>
   <select id="selectAllVitaeForTeacher" resultType="com.sy.dto.VitaeLevelForTeacher">
-    select sv.*,ssy.study_aspect,sst.student_name
+    select sv.*,ssy.study_aspect,sst.student_name,sst.student_null1
     from sybida_vitae sv,sybida_student sst,sybida_study ssy
     where sv.vitae_student_id=sst.student_id
     and sv.vitae_study_id=ssy.study_id

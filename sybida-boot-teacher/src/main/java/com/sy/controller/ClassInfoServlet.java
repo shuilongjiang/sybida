@@ -134,16 +134,37 @@ public class ClassInfoServlet {
         return  classInfoService.teacherIdFindClass(pageSize,pageNum,classManagerId);
     }
 
-    @RequestMapping("teacheridfindclass2")
-    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String userId){
-        System.out.println(pageNum+"//////////////////////////");
-        System.out.println(pageSize+"````````````````````````````````````````````````");
-        System.out.println(userId+"----------------------------------");
+//    @RequestMapping("teacheridfindclass2")
+//    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String userId){
+//        System.out.println(pageNum+"//////////////////////////");
+//        System.out.println(pageSize+"````````````````````````````````````````````````");
+//        System.out.println(userId+"----------------------------------");
+//        redisUtil.expire(userId,60);
+//        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+//        System.out.println(classManagerId+"================================");
+//        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
+//    }
+
+        @RequestMapping("teacheridfindclass2")
+    public ResponseResult teacherIdFindClass2(String pageSize,String pageNum,String classId){
+        System.out.println(classId+"================================");
+        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classId);
+    }
+
+    @RequestMapping("selectteachermuticlass")
+    public ResponseResult selectTeacherMutiClass(String userId){
         redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
-        System.out.println(classManagerId+"================================");
-        return  classInfoService.teacherIdFindClass2(pageSize,pageNum,classManagerId);
+        return classInfoService.selectTeacherMutiClass(classManagerId);
     }
+
+    @RequestMapping("selectuserbyidclass")
+    public ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass){
+        redisUtil.expire(userId,60);
+        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+        return classInfoService.selectUserByIdClass(classManagerId,pageNum,pageSize,selectClass);
+    }
+
 
 }
 
