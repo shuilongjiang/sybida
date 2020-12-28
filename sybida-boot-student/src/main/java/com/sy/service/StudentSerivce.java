@@ -23,4 +23,6 @@ public interface StudentSerivce {
 
     ResponseResult selectEvaluateByVitaeId(int vitaeId);
 
+    ResponseResult selectstudentByUserid(int userId);
+
 }

@@ -573,4 +573,10 @@ ss.study_id = st.student_study_id and sv.vitae_student_id = st.student_id order 
 <!--    <select id="selectStudentByNameAndClass" resultMap="BaseResultMap" parameterType="String">-->
 <!--       select * from sybida_student where student_name like'%'#{name}'%' and student_class_id=#{classId}-->
 <!--    </select>-->
+
+    <select id="selectByUserId" resultType="com.sy.dto.StudentPersonalInformation">
+        select sst.*,sc.class_num,ss.study_aspect
+        from sybida_student sst,sybida_class sc ,sybida_study ss
+        where sst.student_id = #{studentId} and sst.student_class_id = sc.class_id and sst.student_study_id=ss.study_id
+    </select>
 </mapper>

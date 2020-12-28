@@ -3,6 +3,7 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sy.dto.StudentPersonalInformation;
 import com.sy.dto.StudentVitae;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.SybidaStudentMapper;
@@ -129,6 +130,21 @@ public class StudentSerivceImp implements StudentSerivce {
             responseResult.setData(studentVitaes);
             responseResult.setCode(1);
             responseResult.setMessage("成功");
+        }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectstudentByUserid(int userId) {
+        ResponseResult responseResult = new ResponseResult();
+        StudentPersonalInformation studentPersonalInformation = sybidaStudentMapper.selectByUserId(userId);
+        if (studentPersonalInformation==null){
+            responseResult.setCode(0);
+            responseResult.setMessage("查询失败");
+        }else {
+            responseResult.setData(studentPersonalInformation);
+            responseResult.setCode(1);
+            responseResult.setMessage("查询成功");
         }
         return responseResult;
     }

@@ -59,4 +59,12 @@ public class StudentServlet {
         return responseResult;
     }
 
+    @RequestMapping("selectstudentByUserid")
+    public  ResponseResult selectstudentByUserid(String userid){
+        redisUtil.expire(userid,60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        ResponseResult responseResult = studentSerivce.selectstudentByUserid(Integer.valueOf(userId));
+        return  responseResult;
+    }
+
 }

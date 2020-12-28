@@ -1,9 +1,6 @@
 package com.sy.mapper;
 
-import com.sy.dto.StudentDto;
-import com.sy.dto.StudentVitae;
-import com.sy.dto.SybidaStudentTotal;
-import com.sy.dto.VitaeLevelForTeacher;
+import com.sy.dto.*;
 import com.sy.pojo.SybidaStudent;
 import com.sy.pojo.SybidaStudentAndStudyAndClass;
 import com.sy.pojo.SybidaStudentExample;
@@ -52,5 +49,8 @@ public interface SybidaStudentMapper {
     List<SybidaStudentTotal> selectByIdList(Integer classId);
    //存储过程查询
     SybidaStudentTotal selectTotalStuByIdProcess(Integer classId);
+
+    StudentPersonalInformation selectByUserId(Integer studentId);
+
 
 }
