@@ -165,7 +165,10 @@ public class ClassInfoServlet {
         return classInfoService.selectUserByIdClass(classManagerId,pageNum,pageSize,selectClass);
     }
 
-
+    @RequestMapping("selectTeacher")
+   public ResponseResult selectTeacher(){
+      return classInfoService.selectTeacher();
+   }
 }
 
 
