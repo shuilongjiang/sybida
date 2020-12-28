@@ -414,4 +414,20 @@ public class ClassInfoServiceImp implements ClassInfoService{
         }
         return responseResult;
     }
+
+    @Override
+    public ResponseResult selectTeacher() {
+        ResponseResult responseResult=new ResponseResult();
+      List<SybidaTeach> teachList=  sybidaTeachMapper.selectByExample(null);
+      if(teachList.size()>0){
+          responseResult.setCode(1);
+          responseResult.setMessage("成功");
+          responseResult.setData(teachList);
+          return responseResult;
+      }else {
+          responseResult.setCode(0);
+          responseResult.setMessage("失败");
+      }
+        return responseResult;
+    }
 }
