@@ -61,7 +61,6 @@ public class DoTotalForStudentServiceImp implements DoTotalForStudentService {
             SybidaVitaeExample example1 = new SybidaVitaeExample();
             example1.createCriteria().andVitaeStudentIdEqualTo(stuid).andVitaeLevelEqualTo("1");
             sybidaStudentTotals.get(i).setNullOne(  String.valueOf(sybidaVitaeMapper.countByExample(example1)));
-
         }
         layuiData.setData(sybidaStudentTotals);
         return layuiData;

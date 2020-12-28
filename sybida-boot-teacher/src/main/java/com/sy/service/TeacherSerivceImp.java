@@ -49,8 +49,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Override
     public ResponseResult selectPage(int pageSize, int pageNum, String teacherStudy1) {
         ResponseResult responseResult = new ResponseResult();
-
-
         List<SybidaTeach> list;
         PageHelper.startPage(pageNum, pageSize);
         if ("-1".equals(teacherStudy1)) {
@@ -67,7 +65,9 @@ public class TeacherSerivceImp implements TeacherSerivce {
         PageInfo<SybidaTeach> pageInfo = new PageInfo<>(list);
         for (int i = 0; i < list.size(); i++) {
             Integer id = list.get(i).getTeachStudyId();
+            System.out.println(list.get(i)+"====");
             SybidaStudy s = sybidaStudyMapper.selectByPrimaryKey(id);
+            System.out.println("---"+s.getStudyAspect());
             list.get(i).setTeachNull2(s.getStudyAspect());
         }
         responseResult.setData(pageInfo);
