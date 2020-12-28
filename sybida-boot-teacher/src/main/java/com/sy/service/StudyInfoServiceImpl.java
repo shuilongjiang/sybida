@@ -96,4 +96,22 @@ public class StudyInfoServiceImpl implements StudyInfoService{
         return sybidaStudy;
     }
 
+    @Override
+    public ResponseResult addStudy(String studyAspect, String studyIntroduce) {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaStudy sybidaStudy=new SybidaStudy();
+        sybidaStudy.setStudyAspect(studyAspect);
+        sybidaStudy.setStudyIntroduce(studyIntroduce);
+        int row= sybidaStudyMapper.insertSelective(sybidaStudy);
+         if (row==1){
+             responseResult.setCode(1);
+             responseResult.setMessage("插入成功");
+             return  responseResult;
+         }else {
+             responseResult.setCode(0);
+             responseResult.setMessage("插入失败");
+         }
+        return responseResult;
+    }
+
 }

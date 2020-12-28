@@ -113,11 +113,13 @@ public class CompanyServiceImp implements CompanyService{
 
     @Override
     public ResponseResult deleteOneCompany(String companyId) {
+        System.out.println(companyId+"===================");
         ResponseResult responseResult =new ResponseResult();
         SybidaCompany sybidaCompany=new SybidaCompany();
         sybidaCompany.setCompanyId(Integer.valueOf(companyId));
         sybidaCompany.setCompanyNull1("0");
       int row= sybidaCompanyMapper.updateByPrimaryKeySelective(sybidaCompany);
+        System.out.println(row+"-----------------------------");
       if (row>0){
           responseResult.setCode(1);
           responseResult.setMessage("删除成功");

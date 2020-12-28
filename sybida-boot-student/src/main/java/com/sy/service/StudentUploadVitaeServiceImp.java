@@ -65,6 +65,7 @@ public class StudentUploadVitaeServiceImp implements StudentUploadVitaeService {
         sybidaVitae.setVitaeIsNew(1);
         sybidaVitae.setVitaeUrl(filename);
         sybidaVitae.setVitaeIsRead((byte) 0);
+        sybidaVitae.setVitaeLevel("0");
         sybidaVitaeMapper.insert(sybidaVitae);
         return 1;
     }
