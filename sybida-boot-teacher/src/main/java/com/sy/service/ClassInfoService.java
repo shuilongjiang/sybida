@@ -38,4 +38,5 @@ public interface ClassInfoService {
     ResponseResult selectTeacherMutiClass(String classManagerId);
     ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass);
     ResponseResult selectTeacher();
+    ResponseResult selectmanager();
 }

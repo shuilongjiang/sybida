@@ -418,7 +418,10 @@ public class ClassInfoServiceImp implements ClassInfoService{
     @Override
     public ResponseResult selectTeacher() {
         ResponseResult responseResult=new ResponseResult();
-      List<SybidaTeach> teachList=  sybidaTeachMapper.selectByExample(null);
+        SybidaUserExample sybidaUserExample=new SybidaUserExample();
+        SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
+        criteria.andUserAuthorityEqualTo((byte)1);
+        List<SybidaUser> teachList=  sybidaUserMapper.selectByExample(sybidaUserExample);
       if(teachList.size()>0){
           responseResult.setCode(1);
           responseResult.setMessage("成功");
@@ -428,6 +431,25 @@ public class ClassInfoServiceImp implements ClassInfoService{
           responseResult.setCode(0);
           responseResult.setMessage("失败");
       }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectmanager() {
+        ResponseResult responseResult=new ResponseResult();
+        SybidaUserExample sybidaUserExample=new SybidaUserExample();
+        SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
+        criteria.andUserAuthorityEqualTo((byte)0);
+        List<SybidaUser> teachList=  sybidaUserMapper.selectByExample(sybidaUserExample);
+        if(teachList.size()>0){
+            responseResult.setCode(1);
+            responseResult.setMessage("成功");
+            responseResult.setData(teachList);
+            return responseResult;
+        }else {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+        }
         return responseResult;
     }
 }

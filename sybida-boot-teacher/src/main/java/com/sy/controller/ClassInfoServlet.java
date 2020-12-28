@@ -169,6 +169,11 @@ public class ClassInfoServlet {
    public ResponseResult selectTeacher(){
       return classInfoService.selectTeacher();
    }
+
+    @RequestMapping("selectmanager")
+    public ResponseResult selectmanager(){
+        return classInfoService.selectmanager();
+    }
 }
 
 
