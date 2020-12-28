@@ -463,6 +463,31 @@
       offer_null5 = #{offerNull5,jdbcType=VARCHAR}
     where offer_id = #{offerId,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="selectOfferByOfferStudentIdForTeacher" resultType="com.sy.dto.OfferForTeacher">
+       select sosc.*,ss.study_aspect
+       from  sybida_study ss
+       right outer join (select so.*,sst.student_name,sst.student_sex,sc.class_num
+                         from sybida_offer so
+                         inner join sybida_student sst on so.offer_student_id=sst.student_id
+                         inner join sybida_class sc  on sst.student_class_id=sc.class_id
+                         where so.offer_student_id = #{offerStudentId} and so.offer_isexist = 1) sosc
+       on ss.study_id = sosc.offer_study_id
+  </select>
+
+  <select id="selectstudentOfferbyOfferId" resultType="com.sy.dto.OfferForTeacher">
+       select sosc.*,ss.study_aspect
+       from  sybida_study ss
+       right outer join (select so.*,sst.student_name,sst.student_sex,sc.class_num
+                         from sybida_offer so
+                         inner join sybida_student sst on so.offer_student_id=sst.student_id
+                         inner join sybida_class sc  on sst.student_class_id=sc.class_id
+                         where so.offer_id = #{offerId}) sosc
+       on ss.study_id = sosc.offer_study_id
+  </select>
+
   <select id="selectOfferNumByStudentId" resultType="java.lang.Integer">
         select count(0) from sybida_offer where offer_student_id=#{studentId}
   </select>
