@@ -30,6 +30,15 @@ public class VitaeLevelForTeacher {
     private String studentName;
 
     private String studyAspect;
+    private String StudentNull1;
+
+    public String getStudentNull1() {
+        return StudentNull1;
+    }
+
+    public void setStudentNull1(String studentNull1) {
+        StudentNull1 = studentNull1;
+    }
 
     public Integer getVitaeId() {
         return vitaeId;

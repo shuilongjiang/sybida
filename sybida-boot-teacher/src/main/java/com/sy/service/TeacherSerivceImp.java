@@ -146,9 +146,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
 
         List<VitaeLevelForTeacher> list = sybidaVitaeMapper.selectAllVitaeForTeacher();
 //        List<SybidaVitae> list = sybidaVitaeMapper.selectByExample(null);
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
         PageInfo<VitaeLevelForTeacher> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功");
@@ -240,21 +237,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         return responseResult;
     }
 
-    @Override
-    public ResponseResult selectTeacherById(int userid) {
-        ResponseResult responseResult = new ResponseResult();
-        SybidaTeach sybidaTeach = sybidaTeachMapper.selectByPrimaryKey(userid);
-        System.out.println(sybidaTeach);
-        if (sybidaTeach == null) {
-            responseResult.setCode(0);
-            responseResult.setMessage("失败");
-        } else {
-            responseResult.setCode(1);
-            responseResult.setData(sybidaTeach);
-            responseResult.setMessage("成功");
-        }
-        return responseResult;
-    }
+
 
     @Override
     public ResponseResult updateTeacherInfo(SybidaTeach object) {
@@ -270,10 +253,27 @@ public class TeacherSerivceImp implements TeacherSerivce {
 
         return responseResult;
     }
-
+    @Override
+    public ResponseResult selectTeacherById(int userid) {
+        ResponseResult responseResult = new ResponseResult();
+        TeachDto teachDto = sybidaTeachMapper.selcetTeachId(userid);
+        if (sybidaTeach == null) {
+            responseResult.setCode(0);
+            responseResult.setMessage("失败");
+        } else {
+            responseResult.setCode(1);
+            responseResult.setData(teachDto);
+            responseResult.setMessage("成功");
+        }
+        return responseResult;
+    }
     @Override
     public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
         ResponseResult responseResult = new ResponseResult();
+        SybidaVitae record=new SybidaVitae();
+        record.setVitaeId(sybidaVitaeEvaluate.getVitaeEvaluateId());
+        record.setVitaeIsRead((byte) 1);
+        sybidaVitaeMapper.updateByPrimaryKeySelective(record);
         int affectedRows = sybidaVitaeEvaluateMapper.insert(sybidaVitaeEvaluate);
         if (affectedRows > 0) {
             responseResult.setCode(1);
