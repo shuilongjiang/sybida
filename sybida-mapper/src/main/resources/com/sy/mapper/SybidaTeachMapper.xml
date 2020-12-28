@@ -307,10 +307,7 @@
   </update>
     <update id="updateTeacherInfo" parameterType="com.sy.pojo.SybidaTeach">
    update sybida_teach set
-teach_sex = #{teachSex},
 teach_wechat  = #{teachWechat},
-teach_study_id  = #{teachStudyId},
-teach_tel  = #{teachTel},
 teach_photo  = #{teachPhoto},
 teach_qq = #{teachQq}
 where  teach_id = #{teachId}

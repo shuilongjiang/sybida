@@ -153,6 +153,7 @@ public class TeacherServlet {
             String photoUrl = Qnyutil.uploadFile(file);
             object.setTeachPhoto(photoUrl);
         }
+        System.out.println(object);
         ResponseResult responseResult = teacherSerivce.updateTeacherInfo(object);
         return responseResult;
 
