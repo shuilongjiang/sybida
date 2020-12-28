@@ -12,4 +12,5 @@ public interface StudyInfoService {
     ResponseResult deleteAllStudy(List<Integer> list);
     ResponseResult updateStudy(SybidaStudy sybidaStudy);
     SybidaStudy showOneStudy(String studyId);
+    ResponseResult addStudy(String studyAspect,String studyIntroduce);
 }

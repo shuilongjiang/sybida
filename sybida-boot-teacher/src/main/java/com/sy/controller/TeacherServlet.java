@@ -78,7 +78,7 @@ public class TeacherServlet {
 
 
     @RequestMapping("insertvitaeevaluatelevel")
-    public ResponseResult insertVitaeEvaluateLevel(String comment, String picUrl, int vitaeId, String userid) {
+    public ResponseResult insertvitaeevaluatelevel(String comment, String picUrl, int vitaeId, String userid,String vitaeEvaluateNull1) {
         String comments = (null == comment) ? "暂无评价" : comment;
         String picUrls = (null == picUrl) ? "暂无图片" : picUrl;
         redisUtil.expire(userid, 60);
@@ -90,6 +90,7 @@ public class TeacherServlet {
         sybidaVitaeEvaluate.setVitaeEvaluateUserId(Integer.valueOf(userId));
         sybidaVitaeEvaluate.setVitaeEvaluateAlterTime(new Date());
         sybidaVitaeEvaluate.setVitaeEvaluateTime(new Date());
+        sybidaVitaeEvaluate.setVitaeEvaluateNull1(vitaeEvaluateNull1);
 
         ResponseResult responseResult = teacherSerivce.insertVitaeEvaluateLevel(sybidaVitaeEvaluate);
         return responseResult;

@@ -18,9 +18,28 @@ public class SybidaStudentTotal {
     private String haveJob;
     //合格简历
     private String isVeryGood;
-    private String NullOne;
-    private String NullTwo;
-    private String NullThree;
+    private String nullOne;
+    private String nullTwo;
+    private String nullThree;
+
+    @Override
+    public String toString() {
+        return "SybidaStudentTotal{" +
+                "num=" + num +
+                ", studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", studentNull1='" + studentNull1 + '\'' +
+                ", uploadNum=" + uploadNum +
+                ", evaNum=" + evaNum +
+                ", offerNum=" + offerNum +
+                ", auditionNum=" + auditionNum +
+                ", haveJob='" + haveJob + '\'' +
+                ", isVeryGood='" + isVeryGood + '\'' +
+                ", nullOne='" + nullOne + '\'' +
+                ", nullTwo='" + nullTwo + '\'' +
+                ", nullThree='" + nullThree + '\'' +
+                '}';
+    }
 
     public Integer getNum() {
         return num;
@@ -103,45 +122,26 @@ public class SybidaStudentTotal {
     }
 
     public String getNullOne() {
-        return NullOne;
+        return nullOne;
     }
 
     public void setNullOne(String nullOne) {
-        NullOne = nullOne;
+        this.nullOne = nullOne;
     }
 
     public String getNullTwo() {
-        return NullTwo;
+        return nullTwo;
     }
 
     public void setNullTwo(String nullTwo) {
-        NullTwo = nullTwo;
+        this.nullTwo = nullTwo;
     }
 
     public String getNullThree() {
-        return NullThree;
+        return nullThree;
     }
 
     public void setNullThree(String nullThree) {
-        NullThree = nullThree;
-    }
-
-    @Override
-    public String toString() {
-        return "SybidaStudentTotal{" +
-                "num=" + num +
-                ", studentId=" + studentId +
-                ", studentName='" + studentName + '\'' +
-                ", studentNull1='" + studentNull1 + '\'' +
-                ", uploadNum=" + uploadNum +
-                ", evaNum=" + evaNum +
-                ", offerNum=" + offerNum +
-                ", auditionNum=" + auditionNum +
-                ", haveJob='" + haveJob + '\'' +
-                ", isVeryGood='" + isVeryGood + '\'' +
-                ", NullOne='" + NullOne + '\'' +
-                ", NullTwo='" + NullTwo + '\'' +
-                ", NullThree='" + NullThree + '\'' +
-                '}';
+        this.nullThree = nullThree;
     }
 }

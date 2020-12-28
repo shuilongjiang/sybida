@@ -53,4 +53,8 @@ public class StudyInfoServlet {
     public ResponseResult updateStudy(SybidaStudy sybidaStudy){
       return studyInfoService.updateStudy(sybidaStudy);
     }
+    @RequestMapping("addstudy")
+    public ResponseResult addStudy(String studyAspect,String studyIntroduce){
+        return studyInfoService.addStudy(studyAspect,studyIntroduce);
+    }
 }

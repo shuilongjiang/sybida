@@ -114,6 +114,13 @@ public class OfferServlet {
         return responseResult;
     }
 
+    @RequestMapping("updateSybidaOfferCancelJob")
+    public ResponseResult updateSybidaOfferCancelJob(String offerId){
+        System.out.println(offerId);
+        ResponseResult responseResult = offerSerivce.updateSybidaOfferCancelJob(Integer.valueOf(offerId));
+        return responseResult;
+    }
+
 
 
 
