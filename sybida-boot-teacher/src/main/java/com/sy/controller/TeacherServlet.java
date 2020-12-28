@@ -44,6 +44,7 @@ public class TeacherServlet {
     //按学习方向查询老师的全部信息，并进行分页
     public ResponseResult selectByPage(String pageSize, String pageNum, String teacherStudy) {
         ResponseResult responseResult = teacherSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum), teacherStudy);
+        System.out.println(123);
         return responseResult;
     }
 
