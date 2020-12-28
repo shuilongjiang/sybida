@@ -273,6 +273,8 @@ public class TeacherSerivceImp implements TeacherSerivce {
         ResponseResult responseResult = new ResponseResult();
         SybidaVitae record=new SybidaVitae();
         record.setVitaeId(sybidaVitaeEvaluate.getVitaeEvaluateId());
+        System.out.println(sybidaVitaeEvaluate.getVitaeEvaluateNull1());
+        record.setVitaeLevel(sybidaVitaeEvaluate.getVitaeEvaluateNull1());
         record.setVitaeIsRead((byte) 1);
         sybidaVitaeMapper.updateByPrimaryKeySelective(record);
         int affectedRows = sybidaVitaeEvaluateMapper.insert(sybidaVitaeEvaluate);
