@@ -1,5 +1,8 @@
 package com.sy.pojo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class SybidaOffer {
@@ -108,27 +111,27 @@ public class SybidaOffer {
     public void setOfferRegularSalary(String offerRegularSalary) {
         this.offerRegularSalary = offerRegularSalary == null ? null : offerRegularSalary.trim();
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getOfferResponsetime() {
         return offerResponsetime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setOfferResponsetime(Date offerResponsetime) {
         this.offerResponsetime = offerResponsetime;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getOfferHiredata() {
         return offerHiredata;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setOfferHiredata(Date offerHiredata) {
         this.offerHiredata = offerHiredata;
     }
-
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getOfferPracticeEndtime() {
         return offerPracticeEndtime;
     }
-
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     public void setOfferPracticeEndtime(Date offerPracticeEndtime) {
         this.offerPracticeEndtime = offerPracticeEndtime;
     }
