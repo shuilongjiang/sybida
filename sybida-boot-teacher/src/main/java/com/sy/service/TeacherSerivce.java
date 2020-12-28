@@ -31,4 +31,6 @@ public interface TeacherSerivce {
 
 
     ResponseResult selectStudentByName(String name);
+
+    ResponseResult selectTeacherByPhoneNum(String phoneNum);
 }
