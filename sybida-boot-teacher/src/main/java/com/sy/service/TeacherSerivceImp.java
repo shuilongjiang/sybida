@@ -261,10 +261,12 @@ public class TeacherSerivceImp implements TeacherSerivce {
         if (sybidaTeach == null) {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
+
         } else {
             responseResult.setCode(1);
             responseResult.setData(teachDto);
             responseResult.setMessage("成功");
+
         }
         return responseResult;
     }
@@ -293,7 +295,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
             sybidaNews.setNewsSendTime(date);
             sybidaNews.setNewsAlterTime(date);
             sybidaNews.setNewsNull1("1");
-            sybidaNews.setNewsReadPeople(1);
+            sybidaNews.setNewsReadPeople(0);
             int affected = sybidaNewsMapper.insert(sybidaNews);
              if(affected == 0){
                  System.out.println("发送到SybidaNews失败！");
