@@ -1,5 +1,7 @@
 package com.sy.mapper;
 
+import com.sy.dto.AuditionForTeacher;
+import com.sy.dto.OfferForTeacher;
 import com.sy.pojo.SybidaOffer;
 import com.sy.pojo.SybidaOfferExample;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +31,9 @@ public interface SybidaOfferMapper {
     int updateByPrimaryKeySelective(SybidaOffer record);
 
     int updateByPrimaryKey(SybidaOffer record);
+
+    List<OfferForTeacher> selectOfferByOfferStudentIdForTeacher(Integer offerStudentId);
+
+    OfferForTeacher selectstudentOfferbyOfferId(Integer offerId);
+
 }
