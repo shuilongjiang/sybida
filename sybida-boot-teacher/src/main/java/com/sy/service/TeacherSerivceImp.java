@@ -4,6 +4,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sy.dto.StudentDto;
 import com.sy.dto.StudentJobForTeacher;
+import com.sy.dto.TeachDto;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
@@ -377,6 +378,15 @@ public class TeacherSerivceImp implements TeacherSerivce {
         }
         return responseResult;
     }
-
+    @Override
+    public ResponseResult selectTeacherByPhoneNum(String phoneNum) {
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaTeach> list = sybidaTeachMapper.selectTeacherByPhoneNum(phoneNum);
+        PageInfo<SybidaTeach> PageInfo = new PageInfo<>(list);
+        responseResult.setCode(1);
+        responseResult.setMessage("成功");
+        responseResult.setData(PageInfo);
+        return responseResult;
+    }
 
 }
