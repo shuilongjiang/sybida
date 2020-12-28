@@ -293,6 +293,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
             sybidaNews.setNewsSendTime(date);
             sybidaNews.setNewsAlterTime(date);
             sybidaNews.setNewsNull1("1");
+            sybidaNews.setNewsReadPeople(1);
             int affected = sybidaNewsMapper.insert(sybidaNews);
              if(affected == 0){
                  System.out.println("发送到SybidaNews失败！");
