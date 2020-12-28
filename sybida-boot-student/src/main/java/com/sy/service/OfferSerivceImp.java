@@ -174,7 +174,6 @@ public class OfferSerivceImp implements OfferSerivce {
         SybidaOfferExample sybidaOfferExample = new SybidaOfferExample();
         sybidaOfferExample.createCriteria().andOfferIdEqualTo(offerId);
         int row1 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer, sybidaOfferExample);
-        System.out.println(row1+"修改几条OfferIsjob================");
 
         SybidaOffer sybidaOffer1 = sybidaOfferMapper.selectByPrimaryKey(offerId);
         Integer offerStudentId = sybidaOffer1.getOfferStudentId();
@@ -183,7 +182,36 @@ public class OfferSerivceImp implements OfferSerivce {
         SybidaOfferExample sybidaOfferExample2 = new SybidaOfferExample();
         sybidaOfferExample2.createCriteria().andOfferStudentIdEqualTo(offerStudentId);
         int row2 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer2, sybidaOfferExample2);
-        System.out.println(row2+"修改几条OfferPersonisjob=============");
+
+        ResponseResult responseResult = new ResponseResult();
+        if (row2> 0) {
+            responseResult.setCode(1);
+            responseResult.setMessage("修改成功");
+        } else {
+            responseResult.setCode(0);
+            responseResult.setMessage("修改失败");
+        }
+        return responseResult;
+    }
+
+
+
+    @Transactional
+    @Override
+    public ResponseResult updateSybidaOfferCancelJob(Integer offerId) {
+        SybidaOffer sybidaOffer3 = new SybidaOffer();
+        sybidaOffer3.setOfferIsjob((byte) 0);
+        SybidaOfferExample sybidaOfferExample3 = new SybidaOfferExample();
+        sybidaOfferExample3.createCriteria().andOfferIdEqualTo(offerId);
+        int row1 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer3, sybidaOfferExample3);
+
+        SybidaOffer sybidaOffer4 = sybidaOfferMapper.selectByPrimaryKey(offerId);
+        Integer offerStudentId2 = sybidaOffer4.getOfferStudentId();
+        SybidaOffer sybidaOffer5 = new SybidaOffer();
+        sybidaOffer5.setOfferPersonisjob((byte) 0);
+        SybidaOfferExample sybidaOfferExample4 = new SybidaOfferExample();
+        sybidaOfferExample4.createCriteria().andOfferStudentIdEqualTo(offerStudentId2);
+        int row2 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer5, sybidaOfferExample4);
 
         ResponseResult responseResult = new ResponseResult();
         if (row2> 0) {
