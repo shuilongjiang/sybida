@@ -30,4 +30,6 @@ public interface TeacherSerivce {
     List<SybidaStudent> selectStudentByClassId(String classId);
     ResponseResult selectStudentByName(String name);
     ResponseResult updateLeval(String studentId,String stuLeaval);
+    ResponseResult selectTeacherByPhoneNum(String phoneNum);
+
 }
