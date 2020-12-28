@@ -1,5 +1,6 @@
 package com.sy.mapper;
 
+import com.sy.dto.TeachDto;
 import com.sy.dto.VitaeLevelForTeacher;
 import com.sy.pojo.SybidaTeach;
 import com.sy.pojo.SybidaTeachExample;
@@ -33,5 +34,9 @@ public interface SybidaTeachMapper {
     int updateByPrimaryKey(SybidaTeach record);
 
     int updateTeacherInfo(SybidaTeach object);
+
+    List<SybidaTeach> selectTeacherByPhoneNum(@Param("phoneNum") String phoneNum);
+
+    TeachDto selcetTeachId(Integer teachId);
 
 }

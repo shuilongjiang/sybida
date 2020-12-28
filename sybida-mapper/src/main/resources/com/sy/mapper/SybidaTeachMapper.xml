@@ -316,6 +316,19 @@ teach_qq = #{teachQq}
 where  teach_id = #{teachId}
   </update>
 
+<select id="selectTeacherByPhoneNum" parameterType="String" resultType="com.sy.pojo.SybidaTeach">
+    SELECT * FROM sybida_teach
+    <where>
+        <if test="phoneNum != null">
+            and teach_tel = #{phoneNum,jdbcType=VARCHAR}
+        </if>
+    </where>
+</select>
 
+    <select id="selcetTeachId" parameterType="Integer" resultType="com.sy.dto.TeachDto">
+        select a.*,b.study_aspect
+        FROM sybida_teach a JOIN sybida_study b on a.teach_study_id = b.study_id
+        WHERE a.teach_id = #{userId}
+    </select>
 
 </mapper>

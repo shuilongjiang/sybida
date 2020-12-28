@@ -163,10 +163,18 @@ public class TeacherServlet {
         ResponseResult responseResult = teacherSerivce.selectTeacherById(Integer.valueOf(userId));
         return responseResult;
     }
+
+
     @RequestMapping("selectteacherbyidone")
     public ResponseResult selectStudentByIdOne(Integer userid) {
 
         ResponseResult responseResult = teacherSerivce.selectTeacherById(userid);
+        return responseResult;
+    }
+
+    @RequestMapping("selectTeacherByPhoneNum")
+    public ResponseResult selectTeacherByPhoneNum(String phoneNum) {
+        ResponseResult responseResult = teacherSerivce.selectTeacherByPhoneNum(phoneNum);
         return responseResult;
     }
 
