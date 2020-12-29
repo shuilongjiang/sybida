@@ -33,7 +33,7 @@ public interface SybidaStudentMapper {
 
     int updateByPrimaryKey(int record);
 
-    List<SybidaStudentAndStudyAndClass> selectByExampleSelective(SybidaStudent sybidaStudent);
+//    List<SybidaStudentAndStudyAndClass> selectByExampleSelective(SybidaStudent sybidaStudent);
 
    int updateStudentInfo(SybidaStudent object);
 
