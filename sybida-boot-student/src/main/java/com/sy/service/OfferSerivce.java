@@ -19,4 +19,5 @@ public interface OfferSerivce {
     ResponseResult deleteAllStudentOffer(List<Integer> list);
     ResponseResult updateSybidaOfferIsJob(Integer offerId);
     ResponseResult updateSybidaOfferCancelJob(Integer offerId);
+
 }

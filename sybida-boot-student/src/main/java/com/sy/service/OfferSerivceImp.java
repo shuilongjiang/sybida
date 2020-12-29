@@ -30,6 +30,8 @@ public class OfferSerivceImp implements OfferSerivce {
     SybidaUserMapper sybidaUserMapper;
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
+    @Autowired
+    SybidaClassMapper sybidaClassMapper;
 
     @Transactional
     @Override
@@ -234,6 +236,9 @@ public class OfferSerivceImp implements OfferSerivce {
         }
         return responseResult;
     }
+
+
+
 
 
 }
