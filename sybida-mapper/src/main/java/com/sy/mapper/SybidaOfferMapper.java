@@ -38,4 +38,7 @@ public interface SybidaOfferMapper {
 
     int selectOfferNumByStudentId(Integer studentId);
     int selectisJobNumByStudentId(Integer studentId);
+
+    List<OfferForTeacher> selectOfferByStudentIdForTeacher(Integer offerStudentId);
+
 }

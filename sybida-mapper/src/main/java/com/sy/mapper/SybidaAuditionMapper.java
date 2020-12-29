@@ -35,5 +35,9 @@ public interface SybidaAuditionMapper {
 
     AuditionForTeacher selectstudentInterviewbyauditionId(Integer auditionId);
 
+    List<AuditionForTeacher> selectAuditionByStudentIdForTeacher(Integer auditionStudentId);
+
+
+
 
 }

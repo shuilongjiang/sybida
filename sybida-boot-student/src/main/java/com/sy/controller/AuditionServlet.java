@@ -21,6 +21,9 @@ public class AuditionServlet {
     AuditionSerivce auditionSerivce;
     @Autowired
     RedisUtil redisUtil;
+
+
+    @Transactional
     @RequestMapping("selectClass")
     //根据用户ID查询班级信息
     public ResponseResult selectByClass(String userid) {
@@ -33,16 +36,8 @@ public class AuditionServlet {
 
 
 
-    @RequestMapping("selectpage")
-    //按用户id和班级id查询学生的面试登记，并进行分页
-    public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
-        redisUtil.expire(userid,60);
-        String userId = String.valueOf(redisUtil.getObj(userid));
-        return  auditionSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
 
-    }
-
-
+    @Transactional
     @RequestMapping("selectstudentInterviewbyauditionId")
     //按auditionId查询学生的面试登记，并进行分页
     public ResponseResult selectstudentInterviewbyauditionId(String auditionId) {
@@ -53,7 +48,7 @@ public class AuditionServlet {
 
 
 
-
+    @Transactional
     @RequestMapping("selectAllClass")
     //根据用户ID查询班级信息
     public ResponseResult selectAllClass() {
@@ -62,7 +57,7 @@ public class AuditionServlet {
     }
 
 
-
+    @Transactional
     @RequestMapping("selectStudentById")
     public ResponseResult selectStudentById(String userid) {
 //        System.out.println(userid+"===============");
@@ -73,7 +68,7 @@ public class AuditionServlet {
     }
 
 
-
+    @Transactional
     @RequestMapping("selectClassByClassId")
     public ResponseResult selectClassByClassId(String classId) {
         System.out.println(classId);
@@ -116,7 +111,6 @@ public class AuditionServlet {
     //根据学生用户id查面试经历表并进行分页
     @RequestMapping("selectpageStudentAudition")
     public ResponseResult selectpageStudentAudition(String pageSize, String pageNum,String userid) {
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         return  auditionSerivce.selectpageStudentAudition(Integer.valueOf(pageSize), Integer.valueOf(pageNum),Integer.valueOf(userId));
 
@@ -130,8 +124,19 @@ public class AuditionServlet {
     public ResponseResult updateSybidaAudition(SybidaAudition audition){
         audition.setAuditionAlterTime(new Date());
         ResponseResult responseResult = auditionSerivce.updateSybidaAudition(audition);
+
         return responseResult;
     }
+
+    @Transactional
+    @RequestMapping("selectpage2")
+    //按用户id和班级id查询学生的面试登记，并进行分页
+    public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        return  auditionSerivce.selectPage2(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
+
+    }
+
 
 
 }
