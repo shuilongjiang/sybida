@@ -45,6 +45,9 @@ public class OfferServlet {
             sybidaoffer.setOfferPicture(photoUrl);
         }
 
+        System.out.println(sybidaoffer.getOfferStudentId()+"OfferStudentId");
+
+
         sybidaoffer.setOfferAlterTime(new Date());;
         sybidaoffer.setOfferIsexist((byte) 1);
         sybidaoffer.setOfferPersonisjob((byte) 0);

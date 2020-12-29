@@ -53,6 +53,7 @@ public class OfferSerivceImp implements OfferSerivce {
     @Override
     public ResponseResult addSybidaOffer(SybidaOffer sybidaOffer) {
         ResponseResult responseResult = new ResponseResult();
+        System.out.println("__+_+_+_+_+");
         int affectedRows = sybidaOfferMapper.insertSelective(sybidaOffer);
         if (affectedRows > 0) {
             responseResult.setCode(1);
@@ -61,6 +62,7 @@ public class OfferSerivceImp implements OfferSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
+        System.out.println("__+_+_+_+_+");
         return responseResult;
 
     }
