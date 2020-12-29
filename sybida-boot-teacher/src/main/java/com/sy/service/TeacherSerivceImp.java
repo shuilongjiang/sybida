@@ -2,10 +2,7 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.sy.dto.StudentDto;
-import com.sy.dto.StudentJobForTeacher;
-import com.sy.dto.TeachDto;
-import com.sy.dto.VitaeLevelForTeacher;
+import com.sy.dto.*;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
 import com.sy.redis.RedisOpsUtil;
@@ -153,6 +150,15 @@ public class TeacherSerivceImp implements TeacherSerivce {
         responseResult.setData(PageInfo);
         return responseResult;
 
+    }
+
+    @Override
+    public LayuiDataforallteacher selectAllVitaeForTeacher(String classId) {
+        LayuiDataforallteacher layuiData=new LayuiDataforallteacher();
+        List<VitaeLevelForTeacher> list = sybidaVitaeMapper.selectAllVitaeForTeacher(Integer.valueOf(classId));
+        layuiData.setData(list);
+        layuiData.setCount(list.size());
+        return layuiData;
     }
 
 

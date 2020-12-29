@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.qiniu.util.Json;
 import com.sy.QNY.Qnyutil;
 import com.sy.basepath.BasePath;
+import com.sy.dto.LayuiDataforallteacher;
 import com.sy.dto.StudentExcel;
 import com.sy.dto.util.ExcelUtil;
 import com.sy.pojo.SybidaStudent;
@@ -74,6 +75,10 @@ public class TeacherServlet {
         int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
         ResponseResult responseResult = teacherSerivce.selectAllVitae(pageSizes, currPage,classId);
         return responseResult;
+    }
+    @RequestMapping("selectallvitaeforallteacher")
+    public LayuiDataforallteacher selectAllVitaeForTeacher(String classId) {
+       return teacherSerivce.selectAllVitaeForTeacher(classId);
     }
 
 
