@@ -57,26 +57,17 @@ public class CompanyServiceImp implements CompanyService{
         int row=0;
         ResponseResult responseResult=new ResponseResult();
         String userId=sybidaCompany.getCompanyNull2();
-        redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
-        System.out.println(classManagerId+"=================");
         Integer markId=sybidaCompany.getCompanyMarkId();
-        System.out.println(markId+"==================markId");
         if (markId==0){
             sybidaCompany.setCompanyUserId(Integer.valueOf(classManagerId));
             row= sybidaCompanyMapper.insertSelective(sybidaCompany);
         }else {
-            System.out.println(markId+"马克");
             SybidaCompanyMark sybidaCompanyMark = sybidaCompanyMarkMapper.selectMark(markId);
-            System.out.println(sybidaCompanyMark+"整个集合");
             Integer teacherId=Integer.valueOf(sybidaCompanyMark.getMarkTeacherId());
-            System.out.println(teacherId+"============teacherId");
             sybidaCompany.setCompanyUserId(teacherId);
-            System.out.println(sybidaCompany.getCompanyUserId()+"================酷酷酷");
             row= sybidaCompanyMapper.insertSelective(sybidaCompany);
         }
-
-
        if (row==1){
            responseResult.setCode(1);
            responseResult.setMessage("插入成功");
@@ -113,13 +104,11 @@ public class CompanyServiceImp implements CompanyService{
 
     @Override
     public ResponseResult deleteOneCompany(String companyId) {
-        System.out.println(companyId+"===================");
         ResponseResult responseResult =new ResponseResult();
         SybidaCompany sybidaCompany=new SybidaCompany();
         sybidaCompany.setCompanyId(Integer.valueOf(companyId));
         sybidaCompany.setCompanyNull1("0");
       int row= sybidaCompanyMapper.updateByPrimaryKeySelective(sybidaCompany);
-        System.out.println(row+"-----------------------------");
       if (row>0){
           responseResult.setCode(1);
           responseResult.setMessage("删除成功");
@@ -167,8 +156,6 @@ public class CompanyServiceImp implements CompanyService{
       }
       return responseResult;
     }
-
-
     @Transactional
     @Override
     public ResponseResult selectCompanyByCompanyId(Integer companyId) {

@@ -35,14 +35,12 @@ public class CompanyServlet {
             responseResult.setCode(0);
         }else {
             responseResult.setCode(1);
-
         }
     return responseResult;
     }
     @RequestMapping("ecode")
     public ResponseResult ecode(String userid){
         String userId= String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userid,60);
         ResponseResult responseResult=companyService.ecode(userId);
         redisUtil.setObj("TwoCode::"+responseResult.getMessage(),"二维码",60*24*7);
         return  responseResult;
@@ -51,16 +49,12 @@ public class CompanyServlet {
     @RequestMapping(value ="insertcompany",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult insertCompany(@RequestParam("file") MultipartFile file, SybidaCompany sybidaCompany){
-
         if(file.isEmpty()){
         }else {
             System.out.println("上传成功");
             String photoUrl= Qnyutil.uploadFile(file);
             sybidaCompany.setCompanyPicture(photoUrl);
         }
-
-
-
         sybidaCompany.setCompanyAlterTime(new Date());
         sybidaCompany.setCompanyNull1("1");
         return companyService.insertCompany(sybidaCompany);
@@ -84,13 +78,10 @@ public class CompanyServlet {
     public ResponseResult selectTeacherName(String companyUserId){
        return companyService.selectTeacherName(companyUserId);
     }
-
-
     @RequestMapping("selectCompanyByCompanyId")
     public ResponseResult selectCompanyByCompanyId(String companyId){
         return companyService.selectCompanyByCompanyId(Integer.valueOf(companyId));
     }
-
     @RequestMapping("selectbycompanyname")
     public ResponseResult selectByCompanyName(String stuName){
         return  companyService.selectByCompanyName(stuName);

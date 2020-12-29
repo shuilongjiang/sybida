@@ -34,7 +34,6 @@ public class TopicManReceiver {
         System.out.println("我是消息队列");
         Date data = new Date();
         String UserId= String.valueOf(redisUtil.getObj(messageInfo.getUserId()));
-        redisUtil.expire(messageInfo.getUserId(),60);
         SybidaNews sybidaNews=new SybidaNews();
         sybidaNews.setNewsNull1("1");
         sybidaNews.setNewsReadPeople(0);

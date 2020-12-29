@@ -17,38 +17,30 @@ import java.util.concurrent.TimeUnit;
 public class LoginServlet{
     @Autowired
     LoginService loginService;
-
     @RequestMapping("loginpeople")
     public ResponseResult loginpeople(HttpServletRequest request){
         return loginService.loginpeople(request);
     }
-
     @RequestMapping("logincheck")
     public ResponseResult login(HttpServletRequest request,String phone , String psw){
         return loginService.login(request,phone,psw);
     }
-
     @RequestMapping("resetpsw")
     public ResponseResult  resetPsw(String account,String verifycode){
         return loginService.resetPsw(account,verifycode);
     }
-
     @RequestMapping("changepsd")
     public  ResponseResult changePsd(String userId,String psd){
        return loginService.changePsd(userId,psd);
     }
-
     @RequestMapping("oldChangePsd")
     public  ResponseResult oldChangePsd(String userId,String oldpsd){
         return loginService.oldChangePsd(userId,oldpsd);
     }
-
-
     @RequestMapping("checkphone")
     public ResponseResult  checkPhone(String phone){
         return loginService.checkPhone(phone);
     }
-
     @RequestMapping("exitlogin")
     public void  exitLogin(String userid){
          loginService.exitLogin(userid);

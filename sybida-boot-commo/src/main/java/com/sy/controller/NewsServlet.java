@@ -30,40 +30,32 @@ public class NewsServlet {
     @RequestMapping("hadsendmessage")
     public ResponseResult hadSendMessage(String userid,String pagesize,String pagenum){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
         return newsService.hadSendMessage(userId,Integer.valueOf(pagesize),Integer.valueOf(pagenum));
     }
-
-
     @RequestMapping("hadSendmessagecount")
     public ResponseResult messageSendCount(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
         return newsService.messageSendCount(userId);
     }
     @RequestMapping("receivemessagecount")
     public ResponseResult receiveMessageCount(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
         return newsService.receiveMessageCount(userId);
     }
     @RequestMapping("receivemessage")
     public ResponseResult receiveMessage(String userid,String pagesize,String pagenum){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userId,60);
         return newsService.receiveMessage(Integer.valueOf(userId),Integer.valueOf(pagesize),Integer.valueOf(pagenum));
     }
 
     @RequestMapping("delectonereceive")
     public ResponseResult delectOneReceive(String receiveId,String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userid,60);
         return  newsService.delectOneReceive(receiveId,userId);
     }
     @RequestMapping("isread")
     public ResponseResult isRead(String receiveId,String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userid,60);
         return  newsService.isRead(receiveId,userId);
     }
 
@@ -79,7 +71,6 @@ public class NewsServlet {
     public ResponseResult deleteAllReceive(@RequestBody MessageInfo messageInfo) {
         String userid=messageInfo.getUserId();
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userid,60);
         List<Integer> list=messageInfo.getList();
         return newsService.deleteAllReceive(list,userId);
     }
@@ -87,7 +78,6 @@ public class NewsServlet {
     @RequestMapping("selectallstudentbyclass")
     public ResponseResult selectAllStudentByClass(String userid){
         String userId = String.valueOf(redisUtil.getObj(userid));
-        redisUtil.expire(userid,60);
         List<SybidaClass> sybidaClasses = newsService.selectClass();
         ResponseResult responseResult=new ResponseResult();
         responseResult.setData(newsService.selectStudentOfclass(Integer.parseInt(userId),sybidaClasses));

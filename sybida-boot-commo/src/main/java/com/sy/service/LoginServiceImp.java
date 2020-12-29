@@ -106,7 +106,6 @@ public class LoginServiceImp implements LoginService{
         sybidaUser.setUserNote(0);
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
         sybidaUserExample.createCriteria().andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
-        redisOpsUtil.expire(userId,60);
         int row=sybidaUserMapper.updateByExampleSelective(sybidaUser,sybidaUserExample);
        if(row>0){
            responseResult.setCode(1);
@@ -123,7 +122,6 @@ public class LoginServiceImp implements LoginService{
         SybidaUserExample sybidaUserExample=new SybidaUserExample();
         SybidaUserExample.Criteria criteria = sybidaUserExample.createCriteria();
         criteria.andUserIdEqualTo(Integer.parseInt(String.valueOf(redisOpsUtil.get(userId))));
-        redisOpsUtil.expire(userId,60);
         criteria.andUserPasswordEqualTo(oldpsd);
         List<SybidaUser> userList=sybidaUserMapper.selectByExample(sybidaUserExample);
         if (userList.size()>0) {

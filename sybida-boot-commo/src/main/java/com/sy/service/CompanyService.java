@@ -13,7 +13,6 @@ public interface CompanyService {
     ResponseResult deleteOneCompany(String companyId);
     ResponseResult deleteAllCompany(List<Integer> list);
     ResponseResult selectTeacherName(String companyUserId);
-
     ResponseResult selectCompanyByCompanyId(Integer companyUserId);
     public ResponseResult selectByCompanyName(String stuName);
 }
