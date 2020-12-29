@@ -45,7 +45,6 @@ public class TeacherServlet {
     //按学习方向查询老师的全部信息，并进行分页
     public ResponseResult selectByPage(String pageSize, String pageNum, String teacherStudy) {
         ResponseResult responseResult = teacherSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum), teacherStudy);
-        System.out.println(123);
         return responseResult;
     }
 
@@ -86,7 +85,6 @@ public class TeacherServlet {
     public ResponseResult insertvitaeevaluatelevel(String comment, String picUrl, int vitaeId, String userid,String vitaeEvaluateNull1) {
         String comments = (null == comment) ? "暂无评价" : comment;
         String picUrls = (null == picUrl) ? "暂无图片" : picUrl;
-        redisUtil.expire(userid, 60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         SybidaVitaeEvaluate sybidaVitaeEvaluate = new SybidaVitaeEvaluate();
         sybidaVitaeEvaluate.setVitaeEvaluateId(vitaeId);
@@ -166,7 +164,6 @@ public class TeacherServlet {
 
     @RequestMapping("selectteacherbyid")
     public ResponseResult selectStudentById(String userid) {
-        redisUtil.expire(userid, 60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = teacherSerivce.selectTeacherById(Integer.valueOf(userId));
         return responseResult;
@@ -175,7 +172,6 @@ public class TeacherServlet {
 
     @RequestMapping("selectteacherbyidone")
     public ResponseResult selectStudentByIdOne(Integer userid) {
-
         ResponseResult responseResult = teacherSerivce.selectTeacherById(userid);
         return responseResult;
     }
@@ -195,8 +191,6 @@ public class TeacherServlet {
         sybidaUser.setUserNote(userNote);
         sybidaUser.setUserAuthority(userAuthority);
         ResponseResult responseResult = teacherSerivce.insertTeacher(sybidaUser);
-        System.out.println(sybidaUser);
-
         if (responseResult.getCode() == 1) {
             SybidaTeach sybidaTeach = new SybidaTeach();
             sybidaTeach.setTeachId(sybidaUser.getUserId());

@@ -169,11 +169,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult selectStudentJob(int pageSize, int pageNum) {
         ResponseResult responseResult = new ResponseResult();
         PageHelper.startPage(pageNum, pageSize);
-
         List<StudentJobForTeacher> list = sybidaJobMapper.selectStudentJob();
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
         PageInfo<StudentJobForTeacher> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功");
@@ -212,7 +208,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     public ResponseResult selcetStudentById(int id) {
         ResponseResult responseResult = new ResponseResult();
         SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(id);
-        System.out.println(sybidaStudent);
         if (sybidaStudent == null) {
             responseResult.setCode(0);
             responseResult.setMessage("error");
@@ -228,8 +223,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
     @Override
     public ResponseResult updateInfoStudent(SybidaStudent object) {
         ResponseResult responseResult = new ResponseResult();
-//        SybidaStudent sybidaStudent = new SybidaStudent();
-
         int affectedRows = sybidaStudentMapper.updateStudentInfo(object);
         if (affectedRows > 0) {
             responseResult.setCode(1);
@@ -239,8 +232,6 @@ public class TeacherSerivceImp implements TeacherSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-
-        System.out.println(object);
         return responseResult;
     }
 
@@ -285,7 +276,7 @@ public class TeacherSerivceImp implements TeacherSerivce {
         int row=sybidaVitaeEvaluateMapper.deleteByExample(example);
         SybidaVitae record=new SybidaVitae();
         record.setVitaeId(sybidaVitaeEvaluate.getVitaeEvaluateId());
-        System.out.println(sybidaVitaeEvaluate.getVitaeEvaluateNull1());
+
         record.setVitaeLevel(sybidaVitaeEvaluate.getVitaeEvaluateNull1());
         record.setVitaeIsRead((byte) 1);
         sybidaVitaeMapper.updateByPrimaryKeySelective(record);

@@ -35,7 +35,6 @@ public class HotPanServiceImpl implements HotPanService {
     @Cacheable(key="#p0")
     @Override
     public   Set<ZSetOperations.TypedTuple<Object>> selectHotList(String key) {
-        System.out.println("+++++++++++++++++");
         List<HotList> listHotList=sybidaJobMapper.selectHotList();
         System.out.println(listHotList);
         //将数据
@@ -51,9 +50,9 @@ public class HotPanServiceImpl implements HotPanService {
         redisTemplate.expire("hotpan::key",6, TimeUnit. MINUTES);
         Set<ZSetOperations.TypedTuple<String>> tuples = redisTemplate.boundZSetOps("hotpan::key").reverseRangeWithScores(0L, 300000L);
         for (ZSetOperations.TypedTuple<String> tuple : tuples) {
-            System.out.println(tuple.getValue() + " : " + tuple.getScore());
+
         }
-        System.out.println("ghjk"+tuples+"============852456===========");
+
         return set;
     }
 

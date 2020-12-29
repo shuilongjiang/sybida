@@ -91,9 +91,7 @@ public class StudyInfoServiceImpl implements StudyInfoService{
 
     @Override
     public SybidaStudy showOneStudy(String studyId) {
-        System.out.println(studyId+"=================");
      SybidaStudy sybidaStudy= sybidaStudyMapper.selectByPrimaryKey(Integer.valueOf(studyId));
-
         return sybidaStudy;
     }
 
