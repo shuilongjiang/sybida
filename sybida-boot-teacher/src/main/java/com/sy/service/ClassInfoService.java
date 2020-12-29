@@ -39,4 +39,5 @@ public interface ClassInfoService {
     ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass);
     ResponseResult selectTeacher();
     ResponseResult selectmanager();
+    ResponseResult selectUserByIdClass2(String userId,String pageNum,String pageSize,String selectClass);
 }
