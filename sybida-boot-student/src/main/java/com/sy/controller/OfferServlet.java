@@ -44,14 +44,6 @@ public class OfferServlet {
             String photoUrl = Qnyutil.uploadFile(file);
             sybidaoffer.setOfferPicture(photoUrl);
         }
-
-        System.out.println(sybidaoffer.getOfferStudentId()+"OfferStudentId");
-
-
-        sybidaoffer.setOfferAlterTime(new Date());;
-        sybidaoffer.setOfferIsexist((byte) 1);
-        sybidaoffer.setOfferPersonisjob((byte) 0);
-        sybidaoffer.setOfferIsjob((byte) 0);
         ResponseResult responseResult = offerSerivce.addSybidaOffer(sybidaoffer);
         return responseResult;
     }

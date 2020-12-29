@@ -53,7 +53,18 @@ public class OfferSerivceImp implements OfferSerivce {
     @Override
     public ResponseResult addSybidaOffer(SybidaOffer sybidaOffer) {
         ResponseResult responseResult = new ResponseResult();
-        System.out.println("__+_+_+_+_+");
+        SybidaOfferExample sybidaOfferExample = new SybidaOfferExample();
+        sybidaOfferExample.createCriteria().andOfferStudentIdEqualTo(sybidaOffer.getOfferStudentId()).andOfferIsjobEqualTo((byte) 1);
+        List<SybidaOffer> sybidaOffers = sybidaOfferMapper.selectByExample(sybidaOfferExample);
+        if (sybidaOffers.size()>0){
+            sybidaOffer.setOfferPersonisjob((byte) 1);
+        }else {
+            sybidaOffer.setOfferPersonisjob((byte) 0);
+        }
+        sybidaOffer.setOfferIsjob((byte) 0);
+        sybidaOffer.setOfferAlterTime(new Date());;
+        sybidaOffer.setOfferIsexist((byte) 1);
+
         int affectedRows = sybidaOfferMapper.insertSelective(sybidaOffer);
         if (affectedRows > 0) {
             responseResult.setCode(1);
@@ -62,9 +73,7 @@ public class OfferSerivceImp implements OfferSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-        System.out.println("__+_+_+_+_+");
         return responseResult;
-
     }
 
     @Transactional
@@ -225,5 +234,6 @@ public class OfferSerivceImp implements OfferSerivce {
         }
         return responseResult;
     }
+
 
 }
