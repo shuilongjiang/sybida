@@ -288,4 +288,31 @@
       class_null2 = #{classNull2,jdbcType=VARCHAR}
     where class_id = #{classId,jdbcType=INTEGER}
   </update>
+
+
+
+  <select id="classAndStudyTeacher" parameterType="com.sy.dto.TendencyParam" resultType="com.sy.dto.ClassAndStudyTeacher">
+    select sc.*,st1.teach_name t_name,st2.teach_name m_name,ss.study_aspect
+    from sybida_class sc,sybida_study ss,sybida_teach st1,sybida_teach st2
+    where sc.class_study_id = ss.study_id and sc.class_teach_id = st1.teach_id and sc.class_manager_id = st2.teach_id
+    <trim>
+      <choose>
+        <when test="tName!=null">
+          and st1.teach_id=#{tName}
+        </when>
+        <when test="mName != null">
+          and st2.teach_id=#{mName}
+        </when>
+        <when test="classNull1 != null">
+          and class_null1=#{classNull1}
+        </when>
+        <when test="classNull1 != null">
+          and class_study_id=#{studyId}
+        </when>
+        <!--<otherwise>.....</otherwise>-->
+      </choose>
+    </trim>
+  </select>
+
 </mapper>
+
