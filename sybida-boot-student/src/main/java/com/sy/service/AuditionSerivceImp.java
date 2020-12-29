@@ -39,9 +39,24 @@ public class AuditionSerivceImp implements AuditionSerivce {
     @Override
     public ResponseResult selectClass(String userId) {
         ResponseResult responseResult = new ResponseResult();
-        SybidaClassExample sybidaClassExample = new SybidaClassExample();
-        sybidaClassExample.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userId));
-        List<SybidaClass> list = sybidaClassMapper.selectByExample(sybidaClassExample);
+        List<SybidaClass> list = new ArrayList<>();
+
+        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(userId));
+        Byte userAuthority = sybidaUser.getUserAuthority();
+        //根据权限去查询名下存在的班级
+        if (1 == userAuthority) {
+            SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
+            sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(Integer.valueOf(userId));
+            list = sybidaClassMapper.selectByExample(sybidaClassExample1);
+        } else if (0 == userAuthority){
+            SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
+            sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(Integer.valueOf(userId));
+            list = sybidaClassMapper.selectByExample(sybidaClassExample2);
+        }  else if (9 == userAuthority){
+            list = sybidaClassMapper.selectByExample(null);
+        }
+
+
         if (null != list && list.size() > 0) {
             responseResult.setCode(1);
         } else {
