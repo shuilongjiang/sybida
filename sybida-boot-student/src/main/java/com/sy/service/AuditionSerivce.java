@@ -10,19 +10,8 @@ import java.util.List;
 public interface AuditionSerivce {
 
     ResponseResult selectClass(String userId);
-
-
-
-    //    ResponseResult selectPage(int pageSize, int pageNum, String studentStudy);
-    ResponseResult selectPage(int pageSize, int pageNum, String classNum,int userid);
-
-
-
-
+    ResponseResult selectPage2(int pageSize, int pageNum, String classNum,int userid);
     ResponseResult selectstudentInterviewbyauditionId(int auditionId);
-
-
-
     ResponseResult selectAllClass();
     ResponseResult selectStudentById(String userId);
     ResponseResult selectClassByClassId(String classId);

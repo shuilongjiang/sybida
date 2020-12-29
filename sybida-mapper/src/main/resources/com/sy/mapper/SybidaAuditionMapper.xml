@@ -73,8 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    audition_id, audition_student_id, audition_site, audition_time, audition_situation, 
-    audition_study_id, audition_finish, audition_firm, audition_alter_time, audition_null1, 
+    audition_id, audition_student_id, audition_site, audition_time, audition_situation,
+    audition_study_id, audition_finish, audition_firm, audition_alter_time, audition_null1,
     audition_null2
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sy.pojo.SybidaAuditionExample" >
@@ -92,7 +92,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from sybida_audition
     where audition_id = #{auditionId,jdbcType=INTEGER}
@@ -108,13 +108,13 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.sy.pojo.SybidaAudition" >
-    insert into sybida_audition (audition_id, audition_student_id, audition_site, 
-      audition_time, audition_situation, audition_study_id, 
-      audition_finish, audition_firm, audition_alter_time, 
+    insert into sybida_audition (audition_id, audition_student_id, audition_site,
+      audition_time, audition_situation, audition_study_id,
+      audition_finish, audition_firm, audition_alter_time,
       audition_null1, audition_null2)
-    values (#{auditionId,jdbcType=INTEGER}, #{auditionStudentId,jdbcType=INTEGER}, #{auditionSite,jdbcType=VARCHAR}, 
-      #{auditionTime,jdbcType=TIMESTAMP}, #{auditionSituation,jdbcType=VARCHAR}, #{auditionStudyId,jdbcType=INTEGER}, 
-      #{auditionFinish,jdbcType=VARCHAR}, #{auditionFirm,jdbcType=CHAR}, #{auditionAlterTime,jdbcType=TIMESTAMP}, 
+    values (#{auditionId,jdbcType=INTEGER}, #{auditionStudentId,jdbcType=INTEGER}, #{auditionSite,jdbcType=VARCHAR},
+      #{auditionTime,jdbcType=TIMESTAMP}, #{auditionSituation,jdbcType=VARCHAR}, #{auditionStudyId,jdbcType=INTEGER},
+      #{auditionFinish,jdbcType=VARCHAR}, #{auditionFirm,jdbcType=CHAR}, #{auditionAlterTime,jdbcType=TIMESTAMP},
       #{auditionNull1,jdbcType=VARCHAR}, #{auditionNull2,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sy.pojo.SybidaAudition" >
@@ -240,16 +240,16 @@
   <update id="updateByExample" parameterType="map" >
     update sybida_audition
     set audition_id = #{record.auditionId,jdbcType=INTEGER},
-      audition_student_id = #{record.auditionStudentId,jdbcType=INTEGER},
-      audition_site = #{record.auditionSite,jdbcType=VARCHAR},
-      audition_time = #{record.auditionTime,jdbcType=TIMESTAMP},
-      audition_situation = #{record.auditionSituation,jdbcType=VARCHAR},
-      audition_study_id = #{record.auditionStudyId,jdbcType=INTEGER},
-      audition_finish = #{record.auditionFinish,jdbcType=VARCHAR},
-      audition_firm = #{record.auditionFirm,jdbcType=CHAR},
-      audition_alter_time = #{record.auditionAlterTime,jdbcType=TIMESTAMP},
-      audition_null1 = #{record.auditionNull1,jdbcType=VARCHAR},
-      audition_null2 = #{record.auditionNull2,jdbcType=VARCHAR}
+    audition_student_id = #{record.auditionStudentId,jdbcType=INTEGER},
+    audition_site = #{record.auditionSite,jdbcType=VARCHAR},
+    audition_time = #{record.auditionTime,jdbcType=TIMESTAMP},
+    audition_situation = #{record.auditionSituation,jdbcType=VARCHAR},
+    audition_study_id = #{record.auditionStudyId,jdbcType=INTEGER},
+    audition_finish = #{record.auditionFinish,jdbcType=VARCHAR},
+    audition_firm = #{record.auditionFirm,jdbcType=CHAR},
+    audition_alter_time = #{record.auditionAlterTime,jdbcType=TIMESTAMP},
+    audition_null1 = #{record.auditionNull1,jdbcType=VARCHAR},
+    audition_null2 = #{record.auditionNull2,jdbcType=VARCHAR}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -320,6 +320,14 @@
        inner join sybida_student sst on sa.audition_student_id=sst.student_id
        inner join sybida_class sc  on sst.student_class_id=sc.class_id
        where sa.audition_id = #{auditionId}
+  </select>
+
+  <select id="selectAuditionByStudentIdForTeacher" resultType="com.sy.dto.AuditionForTeacher">
+       select sa.*,sst.student_name,sst.student_sex,sc.class_num
+       from sybida_audition sa
+       inner join sybida_student sst on sa.audition_student_id=sst.student_id
+       inner join sybida_class sc  on sst.student_class_id=sc.class_id
+       where sa.audition_null1 = 1 and sa.audition_student_id = #{auditionStudentId}
   </select>
 
 

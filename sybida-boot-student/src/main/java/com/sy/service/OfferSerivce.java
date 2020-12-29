@@ -19,7 +19,6 @@ public interface OfferSerivce {
     ResponseResult deleteAllStudentOffer(List<Integer> list);
     ResponseResult updateSybidaOfferIsJob(Integer offerId);
     ResponseResult updateSybidaOfferCancelJob(Integer offerId);
-    ResponseResult selectPage(int pageSize, int pageNum, String classNum,int userid);
-
+    ResponseResult selectPage2(int pageSize, int pageNum, String classNum,int userid);
 
 }
