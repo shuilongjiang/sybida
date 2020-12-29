@@ -270,9 +270,13 @@ public class TeacherSerivceImp implements TeacherSerivce {
         }
         return responseResult;
     }
+
     @Override
     public ResponseResult insertVitaeEvaluateLevel(SybidaVitaeEvaluate sybidaVitaeEvaluate) {
         ResponseResult responseResult = new ResponseResult();
+        SybidaVitaeEvaluateExample example=new SybidaVitaeEvaluateExample();
+        example.createCriteria().andVitaeEvaluateIdEqualTo(sybidaVitaeEvaluate.getVitaeEvaluateId());
+        int row=sybidaVitaeEvaluateMapper.deleteByExample(example);
         SybidaVitae record=new SybidaVitae();
         record.setVitaeId(sybidaVitaeEvaluate.getVitaeEvaluateId());
         System.out.println(sybidaVitaeEvaluate.getVitaeEvaluateNull1());

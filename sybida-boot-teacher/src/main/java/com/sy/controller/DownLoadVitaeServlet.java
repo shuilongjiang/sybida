@@ -32,10 +32,13 @@ public class DownLoadVitaeServlet {
             String FilePath="http://qldlxgj0k.hn-bkt.clouddn.com/"+allanme.substring(0,allanme.indexOf("="));
             map.put(FilePath,FileName);
         }
-
-
        String QnyName = downLoadVitaeService.downloadVitaeZip(map);
        redisUtil.setObj("zipdownload::"+QnyName, DateUtil.date2String(new Date()));
         return QnyName;
+    }
+    @RequestMapping("selectevaforvitae")
+    public ResponseResult selectEvaForVitae(String vitaeId){
+        System.out.println(vitaeId+"+++++++");
+        return downLoadVitaeService.selectEvaForVitae(vitaeId);
     }
 }

@@ -6,4 +6,5 @@ import java.util.Map;
 
 public interface DownLoadVitaeService {
     String  downloadVitaeZip(Map<String , String> map);
+    ResponseResult selectEvaForVitae(String vitaeId);
 }
