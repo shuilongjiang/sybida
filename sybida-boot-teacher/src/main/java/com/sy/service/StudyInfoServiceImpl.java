@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -102,6 +103,7 @@ public class StudyInfoServiceImpl implements StudyInfoService{
         SybidaStudy sybidaStudy=new SybidaStudy();
         sybidaStudy.setStudyAspect(studyAspect);
         sybidaStudy.setStudyIntroduce(studyIntroduce);
+        sybidaStudy.setStudyAlterTime(new Date());
         int row= sybidaStudyMapper.insertSelective(sybidaStudy);
          if (row==1){
              responseResult.setCode(1);
