@@ -31,6 +31,7 @@ public class ClassInfoServlet {
         return responseResult;
     }
 
+
     @RequestMapping("selectClass")
     public List<SybidaClass> selectClass(){
         List<SybidaClass> listClass=classInfoService.selectClass();
@@ -158,11 +159,19 @@ public class ClassInfoServlet {
         return classInfoService.selectTeacherMutiClass(classManagerId);
     }
 
+
     @RequestMapping("selectuserbyidclass")
     public ResponseResult selectUserByIdClass(String userId,String pageNum,String pageSize,String selectClass){
         redisUtil.expire(userId,60);
         String classManagerId = String.valueOf(redisUtil.getObj(userId));
         return classInfoService.selectUserByIdClass(classManagerId,pageNum,pageSize,selectClass);
+    }
+
+    @RequestMapping("selectuserbyidclass2")
+    public ResponseResult selectUserByIdClass2(String userId,String pageNum,String pageSize,String selectClass){
+        redisUtil.expire(userId,60);
+        String classManagerId = String.valueOf(redisUtil.getObj(userId));
+        return classInfoService.selectUserByIdClass2(classManagerId,pageNum,pageSize,selectClass);
     }
 
     @RequestMapping("selectTeacher")

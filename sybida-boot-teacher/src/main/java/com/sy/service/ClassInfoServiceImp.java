@@ -2,10 +2,13 @@ package com.sy.service;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sy.dto.ClassAndStudyTeacher;
 import com.sy.dto.ShowClassInfo;
+import com.sy.dto.TendencyParam;
 import com.sy.mapper.*;
 import com.sy.pojo.*;
 import com.sy.vo.ResponseResult;
+import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,6 +53,8 @@ public class ClassInfoServiceImp implements ClassInfoService{
             responseResult.setData(pageInfo);
             return responseResult;
     }
+
+
     @Transactional
     @Override
     public ResponseResult selectByclassName(String className) {
@@ -449,6 +454,106 @@ public class ClassInfoServiceImp implements ClassInfoService{
         }else {
             responseResult.setCode(0);
             responseResult.setMessage("失败");
+        }
+        return responseResult;
+    }
+
+    @Override
+    public ResponseResult selectUserByIdClass2(String userId, String pageNum, String pageSize, String selectClass) {
+        ResponseResult responseResult = new ResponseResult();
+        List<ClassAndStudyTeacher> sybidaClassList;
+        SybidaClassExample sybidaClassExample = new SybidaClassExample();
+        SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(Integer.valueOf(userId));
+        Byte userAuthority = sybidaUser.getUserAuthority();
+        if (userAuthority == 0) {
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+                TendencyParam tendencyParam=new TendencyParam();
+                tendencyParam.setClassNull1("1");
+                tendencyParam.setmName(Integer.valueOf(userId));
+                sybidaClassList= sybidaClassMapper.classAndStudyTeacher(tendencyParam);
+            }else {
+//                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//                criteria.andClassManagerIdEqualTo(Integer.valueOf(userId));
+//                criteria.andClassNull1EqualTo("1");
+//                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+                TendencyParam tendencyParam=new TendencyParam();
+                tendencyParam.setClassNull1("1");
+                tendencyParam.setmName(Integer.valueOf(userId));
+                tendencyParam.setStudyId(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.classAndStudyTeacher(tendencyParam);
+            }
+            PageInfo<ClassAndStudyTeacher> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
+
+
+        }else if (userAuthority==1){
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+//                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//                criteria.andClassTeachIdEqualTo(Integer.valueOf(userId));
+//                criteria.andClassNull1EqualTo("1");
+//                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+                TendencyParam tendencyParam=new TendencyParam();
+                tendencyParam.setClassNull1("1");
+                tendencyParam.settName(Integer.valueOf(userId));
+                sybidaClassList= sybidaClassMapper.classAndStudyTeacher(tendencyParam);
+            }else {
+//                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//                criteria.andClassTeachIdEqualTo(Integer.valueOf(userId));
+//                criteria.andClassNull1EqualTo("1");
+//                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+//                sybidaClassList = sybidaClassMapper.selectByExample(sybidaClassExample);
+                TendencyParam tendencyParam=new TendencyParam();
+                tendencyParam.setClassNull1("1");
+                tendencyParam.settName(Integer.valueOf(userId));
+                tendencyParam.setStudyId(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.classAndStudyTeacher(tendencyParam);
+            }
+            PageInfo<ClassAndStudyTeacher> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
+
+        }else if (userAuthority==9){
+            PageHelper.startPage(Integer.valueOf(pageNum),Integer.valueOf(pageSize));
+            if ("-1".equals(selectClass)) {
+                sybidaClassList = sybidaClassMapper.classAndStudyTeacher(null);
+            }else {
+//                SybidaClassExample.Criteria criteria = sybidaClassExample.createCriteria();
+//                criteria.andClassIdEqualTo(Integer.valueOf(selectClass));
+                TendencyParam tendencyParam=new TendencyParam();
+                tendencyParam.setStudyId(Integer.valueOf(selectClass));
+                sybidaClassList = sybidaClassMapper.classAndStudyTeacher(tendencyParam);
+            }
+            PageInfo<ClassAndStudyTeacher> pageInfo = new PageInfo<>(sybidaClassList);
+            if (sybidaClassList.size()>0){
+                responseResult.setCode(1);
+                //设置导航页数
+                responseResult.setData(pageInfo);
+                return responseResult;
+            }else {
+                responseResult.setCode(0);
+                responseResult.setMessage("查询失败");
+                return  responseResult;
+            }
+//
         }
         return responseResult;
     }

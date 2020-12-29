@@ -1,5 +1,7 @@
 package com.sy.mapper;
 
+import com.sy.dto.ClassAndStudyTeacher;
+import com.sy.dto.TendencyParam;
 import com.sy.pojo.SybidaClass;
 import com.sy.pojo.SybidaClassExample;
 import org.apache.ibatis.annotations.Param;
@@ -29,4 +31,7 @@ public interface SybidaClassMapper {
     int updateByPrimaryKeySelective(SybidaClass record);
 
     int updateByPrimaryKey(SybidaClass record);
+
+    List<ClassAndStudyTeacher> classAndStudyTeacher(TendencyParam tendencyParam);
+
 }
