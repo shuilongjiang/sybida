@@ -82,12 +82,9 @@ public class OfferSerivceImp implements OfferSerivce {
     @Override
     public ResponseResult selectpageStudentOffer(int pageSize, int pageNum, int userid) {
         ResponseResult responseResult = new ResponseResult();
-
         List<OfferForTeacher> list;
         PageHelper.startPage(pageNum, pageSize);
-
         list = sybidaOfferMapper.selectOfferByOfferStudentIdForTeacher(userid);
-
         PageInfo<OfferForTeacher> pageInfo = new PageInfo<>(list);
         responseResult.setData(pageInfo);
         responseResult.setCode(1);
@@ -112,7 +109,6 @@ public class OfferSerivceImp implements OfferSerivce {
     public ResponseResult updateSybidaOffer(SybidaOffer sybidaOffer){
         ResponseResult responseResult = new ResponseResult();
         int affectedRows = sybidaOfferMapper.updateByPrimaryKeySelective(sybidaOffer);
-
         if (affectedRows > 0) {
             responseResult.setCode(1);
             responseResult.setMessage("成功！");
@@ -120,7 +116,6 @@ public class OfferSerivceImp implements OfferSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-        System.out.println(sybidaOffer);
         return responseResult;
     }
 
@@ -178,7 +173,6 @@ public class OfferSerivceImp implements OfferSerivce {
         }
         return responseResult;
     }
-
     @Transactional
     @Override
     public ResponseResult updateSybidaOfferIsJob(Integer offerId) {
@@ -187,7 +181,6 @@ public class OfferSerivceImp implements OfferSerivce {
         SybidaOfferExample sybidaOfferExample = new SybidaOfferExample();
         sybidaOfferExample.createCriteria().andOfferIdEqualTo(offerId);
         int row1 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer, sybidaOfferExample);
-
         SybidaOffer sybidaOffer1 = sybidaOfferMapper.selectByPrimaryKey(offerId);
         Integer offerStudentId = sybidaOffer1.getOfferStudentId();
         SybidaOffer sybidaOffer2 = new SybidaOffer();
@@ -195,7 +188,6 @@ public class OfferSerivceImp implements OfferSerivce {
         SybidaOfferExample sybidaOfferExample2 = new SybidaOfferExample();
         sybidaOfferExample2.createCriteria().andOfferStudentIdEqualTo(offerStudentId);
         int row2 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer2, sybidaOfferExample2);
-
         ResponseResult responseResult = new ResponseResult();
         if (row2> 0) {
             responseResult.setCode(1);
@@ -217,7 +209,6 @@ public class OfferSerivceImp implements OfferSerivce {
         SybidaOfferExample sybidaOfferExample3 = new SybidaOfferExample();
         sybidaOfferExample3.createCriteria().andOfferIdEqualTo(offerId);
         int row1 = sybidaOfferMapper.updateByExampleSelective(sybidaOffer3, sybidaOfferExample3);
-
         SybidaOffer sybidaOffer4 = sybidaOfferMapper.selectByPrimaryKey(offerId);
         Integer offerStudentId2 = sybidaOffer4.getOfferStudentId();
         SybidaOffer sybidaOffer5 = new SybidaOffer();
@@ -280,8 +271,6 @@ public class OfferSerivceImp implements OfferSerivce {
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(classList1.get(0).getClassId());
             studentList1 = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-
-
             for (int i = 0; i < studentList1.size(); i++) {
                 oneStudentOfferList = sybidaOfferMapper.selectOfferByStudentIdForTeacher(studentList1.get(i).getStudentId());
                 for (int j = 0; j < oneStudentOfferList.size(); j++) {

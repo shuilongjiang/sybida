@@ -30,14 +30,11 @@ public class JobServlet {
     @ResponseBody
     public ResponseResult addSybidaJob(@RequestParam("file") MultipartFile file,SybidaJob sybidaJob){
        if (file.isEmpty()){
-
        }else {
            sybidaJob.setJobAlterTime(new Date());
            String photoUrl = Qnyutil.uploadFile(file);
            sybidaJob.setJobPicture(photoUrl);
-
        }
-
         sybidaJob.setJobAlterTime(new Date());
         sybidaJob.setJobNull1("1");
         ResponseResult responseResult = jobSerivce.addSybidaJob(sybidaJob);
@@ -49,8 +46,6 @@ public class JobServlet {
     @RequestMapping("selectSybidaJobByStudentId")
     @ResponseBody
     public ResponseResult selectSybidaJobByStudentId(Integer jobStudentId){
-
-
         return jobSerivce.selectSybidaJobByStudentId(jobStudentId);
     }
 
@@ -61,7 +56,6 @@ public class JobServlet {
     @RequestMapping("selectstudentJobbyJobStudentId")
     //按userid查询学生的job登记
     public ResponseResult selectstudentJobbyJobStudentId(String userid) {
-        redisUtil.expire(userid,60);
         String jobStudentId = String.valueOf(redisUtil.getObj(userid));
         return  jobSerivce.selectstudentJobbyJobStudentId(Integer.valueOf(jobStudentId));
 
@@ -73,14 +67,12 @@ public class JobServlet {
     @ResponseBody
     public ResponseResult updateSybidaJob(@RequestParam("file") MultipartFile file,SybidaJob sybidaJob){
         if (file.isEmpty()){
-
         }else {
             sybidaJob.setJobAlterTime(new Date());
             String photoUrl = Qnyutil.uploadFile(file);
             sybidaJob.setJobPicture(photoUrl);
 
         }
-
         sybidaJob.setJobAlterTime(new Date());
         ResponseResult responseResult = jobSerivce.updateSybidaJob(sybidaJob);
         return responseResult;
@@ -90,17 +82,14 @@ public class JobServlet {
     @RequestMapping("selectpage")
     //按用户id和班级id查询学生的offer登记，并进行分页
     public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         return  jobSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
-
     }
 
 
     @RequestMapping("deleteStudentJob")
     //根据教师ID进行删除教师表，删除用户表，
     public ResponseResult deleteStudentJob(Integer deleteJobId) {
-
         return jobSerivce.deleteStudentJob(deleteJobId);
     }
 
@@ -110,15 +99,11 @@ public class JobServlet {
         return jobSerivce.deleteAllStudentJob(list);
     }
 
-
-
     @Transactional
     @RequestMapping("selectstudentJobbyJobId")
     //按offerid查询学生的offer登记，并进行分页
     public ResponseResult selectstudentJobbyJobId(String jobId) {
-
         return  jobSerivce.selectstudentJobbyJobId(Integer.valueOf(jobId));
-
     }
 
 

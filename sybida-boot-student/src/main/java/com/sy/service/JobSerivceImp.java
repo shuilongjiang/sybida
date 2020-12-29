@@ -20,10 +20,8 @@ import java.util.List;
 
 @Service
 public class JobSerivceImp implements JobSerivce {
-
     @Autowired
     SybidaJobMapper sybidaJobMapper;
-
     @Autowired
     RedisOpsUtil redisOpsUtil;
 
@@ -48,7 +46,6 @@ public class JobSerivceImp implements JobSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-        System.out.println(sybidaJob+"!!!!!!!!!+++++++++++");
         return responseResult;
 
     }
@@ -59,7 +56,6 @@ public class JobSerivceImp implements JobSerivce {
         SybidaJobExample sybidaJobExample = new SybidaJobExample();
         sybidaJobExample.createCriteria().andJobStudentIdEqualTo(jobStudentId);
         List<SybidaJob> sybidaJobList = sybidaJobMapper.selectByExample(sybidaJobExample);
-
         ResponseResult responseResult = new ResponseResult();
         if(null != sybidaJobList && sybidaJobList.size()>0){
             responseResult.setCode(0);
@@ -76,7 +72,6 @@ public class JobSerivceImp implements JobSerivce {
     public ResponseResult selectstudentJobbyJobStudentId(Integer jobStudentId) {
         ResponseResult responseResult = new ResponseResult();
         JobForTeacher jobForTeacher = sybidaJobMapper.selectstudentJobbyJobStudentId(jobStudentId);
-        System.out.println(jobForTeacher+"+-+-+-");
         responseResult.setData(jobForTeacher);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");
@@ -95,7 +90,6 @@ public class JobSerivceImp implements JobSerivce {
             responseResult.setCode(0);
             responseResult.setMessage("失败!");
         }
-        System.out.println(sybidaJob);
         return responseResult;
     }
 
@@ -111,10 +105,7 @@ public class JobSerivceImp implements JobSerivce {
         List<SybidaClass> classlist1 = null;
         List<JobForTeacher> jobList1 = null;
         List<JobForTeacher> jobList2 = new ArrayList<>();
-
         PageHelper.startPage(pageNum, pageSize);
-
-
         if ("-1".equals(classNum)) {
             SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(userid);
             Byte userAuthority = sybidaUser.getUserAuthority();
@@ -122,25 +113,19 @@ public class JobSerivceImp implements JobSerivce {
                 SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
                 sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(userid);
                 classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample1);
-
             } else if (0 == userAuthority){
                 SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
                 sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
                 classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
-
             }else if (9 == userAuthority){
                 classlist1 = sybidaClassMapper.selectByExample(null);
             }
-
-
             if (null != classlist1 && classlist1.size() > 0) {
                 responseResult.setCode(1);
             } else {
                 responseResult.setCode(0);
                 return responseResult;
             }
-
-
             for (int i = 0; i < classlist1.size(); i++) {
                 SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
                 sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(classlist1.get(i).getClassId());
@@ -149,17 +134,12 @@ public class JobSerivceImp implements JobSerivce {
                     studentList2.add(studentList1.get(j));
                 }
             }
-
-
             for (int i = 0; i < studentList2.size(); i++) {
                 jobList1 = sybidaJobMapper.selectJobByJobStudentIdForTeacher(studentList2.get(i).getStudentId());
                 for (int j = 0; j < jobList1.size(); j++) {
                     jobList2.add(jobList1.get(j));
                 }
             }
-
-
-
         }else{
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(Integer.valueOf(classNum));
@@ -204,7 +184,6 @@ public class JobSerivceImp implements JobSerivce {
     @Transactional
     @Override
     public ResponseResult deleteStudentJob(Integer deleteJobId) {
-
         SybidaJob sybidaJob = new SybidaJob();
         sybidaJob.setJobId(deleteJobId);
         sybidaJob.setJobNull1("0");
@@ -253,8 +232,6 @@ public class JobSerivceImp implements JobSerivce {
         responseResult.setData(jobForTeacher);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");
-        System.out.println(responseResult+"====================");
-        System.out.println(responseResult.getData().toString());
         return responseResult;
     }
 

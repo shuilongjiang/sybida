@@ -24,12 +24,9 @@ public class OfferServlet {
     OfferSerivce offerSerivce;
     @Autowired
     RedisUtil redisUtil;
-
-
     @RequestMapping("selectStudyAspect")
     //查询Offer学习方向
     public ResponseResult selectStudyAspect() {
-
         return  offerSerivce.selectStudyAspect();
 
     }
@@ -39,7 +36,6 @@ public class OfferServlet {
     @ResponseBody
     public ResponseResult addSybidaJob(@RequestParam("file") MultipartFile file, SybidaOffer sybidaoffer){
         if (file.isEmpty()){
-
         }else {
             String photoUrl = Qnyutil.uploadFile(file);
             sybidaoffer.setOfferPicture(photoUrl);
@@ -52,33 +48,27 @@ public class OfferServlet {
     //根据学生用户id查Offer记录表并进行分页
     @RequestMapping("selectpageStudentOffer")
     public ResponseResult selectpageStudentOffer(String pageSize, String pageNum,String userid) {
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         return  offerSerivce.selectpageStudentOffer(Integer.valueOf(pageSize), Integer.valueOf(pageNum),Integer.valueOf(userId));
-
     }
 
 
     @RequestMapping("selectstudentOfferbyOfferId")
     //按offerid查询学生的offer登记，并进行分页
     public ResponseResult selectstudentOfferbyOfferId(String offerId) {
-
         return  offerSerivce.selectstudentOfferbyOfferId(Integer.valueOf(offerId));
-
     }
 
     @RequestMapping(value = "/updateSybidaOffer",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult updateSybidaOffer(@RequestParam("file") MultipartFile file, SybidaOffer sybidaoffer){
         if (file.isEmpty()){
-
         }else {
             String photoUrl = Qnyutil.uploadFile(file);
             sybidaoffer.setOfferPicture(photoUrl);
         }
         sybidaoffer.setOfferAlterTime(new Date());
         ResponseResult responseResult = offerSerivce.updateSybidaOffer(sybidaoffer);
-
         return responseResult;
     }
 
@@ -91,7 +81,6 @@ public class OfferServlet {
     @RequestMapping("deleteStudentOffer")
     //根据OfferId删除Offer
     public ResponseResult deleteStudentOffer(Integer deleteOfferId) {
-
         return offerSerivce.deleteStudentOffer(deleteOfferId);
     }
 
@@ -104,14 +93,12 @@ public class OfferServlet {
 
     @RequestMapping("updateSybidaOfferIsJob")
     public ResponseResult updateSybidaOfferIsJob(String offerId){
-        System.out.println(offerId);
         ResponseResult responseResult = offerSerivce.updateSybidaOfferIsJob(Integer.valueOf(offerId));
         return responseResult;
     }
 
     @RequestMapping("updateSybidaOfferCancelJob")
     public ResponseResult updateSybidaOfferCancelJob(String offerId){
-        System.out.println(offerId);
         ResponseResult responseResult = offerSerivce.updateSybidaOfferCancelJob(Integer.valueOf(offerId));
         return responseResult;
     }
@@ -120,14 +107,9 @@ public class OfferServlet {
     @RequestMapping("selectpage2")
     //按用户id和班级id查询学生的offer登记，并进行分页
     public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         return  offerSerivce.selectPage2(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
 
     }
-
-
-
-
 
 }

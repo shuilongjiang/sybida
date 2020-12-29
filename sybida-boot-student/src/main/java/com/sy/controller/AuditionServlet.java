@@ -27,8 +27,6 @@ public class AuditionServlet {
     @RequestMapping("selectClass")
     //根据用户ID查询班级信息
     public ResponseResult selectByClass(String userid) {
-//        System.out.println(userid+"=================");
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = auditionSerivce.selectClass(userId);
         return responseResult;
@@ -41,7 +39,6 @@ public class AuditionServlet {
     @RequestMapping("selectstudentInterviewbyauditionId")
     //按auditionId查询学生的面试登记，并进行分页
     public ResponseResult selectstudentInterviewbyauditionId(String auditionId) {
-
         return  auditionSerivce.selectstudentInterviewbyauditionId(Integer.valueOf(auditionId));
 
     }
@@ -60,8 +57,6 @@ public class AuditionServlet {
     @Transactional
     @RequestMapping("selectStudentById")
     public ResponseResult selectStudentById(String userid) {
-//        System.out.println(userid+"===============");
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = auditionSerivce.selectStudentById(userId);
         return responseResult;
@@ -71,7 +66,6 @@ public class AuditionServlet {
     @Transactional
     @RequestMapping("selectClassByClassId")
     public ResponseResult selectClassByClassId(String classId) {
-        System.out.println(classId);
         ResponseResult responseResult = auditionSerivce.selectClassByClassId(classId);
         return responseResult;
     }
@@ -82,11 +76,9 @@ public class AuditionServlet {
     @RequestMapping(value = "/addSybidaAudition",method = RequestMethod.POST)
     @ResponseBody
     public ResponseResult addSybidaAudition(SybidaAudition object){
-//        object.setAuditionAlterTime(new Date());
         object.setAuditionAlterTime(new Date());
         object.setAuditionNull1("1");
         ResponseResult responseResult = auditionSerivce.addSybidaAudition(object);
-
         return responseResult;
     }
 
@@ -95,7 +87,6 @@ public class AuditionServlet {
     @RequestMapping("deleteStudentAudition")
     //根据教师ID进行删除教师表，删除用户表，
     public ResponseResult deleteStudentAudition(Integer deleteAuditionId) {
-
         return auditionSerivce.deleteStudentAudition(deleteAuditionId);
     }
 
@@ -124,7 +115,6 @@ public class AuditionServlet {
     public ResponseResult updateSybidaAudition(SybidaAudition audition){
         audition.setAuditionAlterTime(new Date());
         ResponseResult responseResult = auditionSerivce.updateSybidaAudition(audition);
-
         return responseResult;
     }
 

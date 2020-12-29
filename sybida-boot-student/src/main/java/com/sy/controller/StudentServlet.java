@@ -24,7 +24,6 @@ public class StudentServlet {
 
     @RequestMapping("selectstudentbyid")
     public  ResponseResult selectStudentById(String userid){
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = studentSerivce.selectstudentbyid(Integer.valueOf(userId));
         return  responseResult;
@@ -47,7 +46,6 @@ public class StudentServlet {
 
     @RequestMapping("selectstudentvitae")
     public ResponseResult selectStudentVitae(String userid){
-        redisUtil.expire(userid, 60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = studentSerivce.selcetStudentVitaeById(Integer.valueOf(userId));
         return responseResult;
@@ -61,7 +59,6 @@ public class StudentServlet {
 
     @RequestMapping("selectstudentByUserid")
     public  ResponseResult selectstudentByUserid(String userid){
-        redisUtil.expire(userid,60);
         String userId = String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult = studentSerivce.selectstudentByUserid(Integer.valueOf(userId));
         return  responseResult;

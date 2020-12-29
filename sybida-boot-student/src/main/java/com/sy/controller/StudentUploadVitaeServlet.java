@@ -18,7 +18,6 @@ public class StudentUploadVitaeServlet {
     RedisUtil redisUtil;
     @RequestMapping(value ="uploadvitae", method = RequestMethod.POST)
     public ResponseResult UploadVitae(@RequestParam("file") MultipartFile file, String userid,String studyid){
-        redisUtil.expire(userid,60);
         String userId= String.valueOf(redisUtil.getObj(userid));
         ResponseResult responseResult=new ResponseResult();
         String filename = Qnyutil.uploadFile(file);
@@ -34,9 +33,7 @@ public class StudentUploadVitaeServlet {
     }
     @RequestMapping("personalvitae")
     public ResponseResult personalVitae(String userid,String isDelete){
-        redisUtil.expire(userid,60);
         String userId= String.valueOf(redisUtil.getObj(userid));
-
         return studentUploadVitaeService.personalVitae(userId,isDelete);
     }
 }

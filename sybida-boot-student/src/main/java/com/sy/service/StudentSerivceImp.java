@@ -34,7 +34,6 @@ public class StudentSerivceImp implements StudentSerivce {
     public ResponseResult selectstudentbyid(int userId) {
         ResponseResult responseResult = new ResponseResult();
         SybidaStudent sybidaStudent = sybidaStudentMapper.selectByPrimaryKey(userId);
-        System.out.println(sybidaStudent+"******");
         if (sybidaStudent==null){
             responseResult.setCode(0);
             responseResult.setMessage("查询失败");
@@ -71,7 +70,6 @@ public class StudentSerivceImp implements StudentSerivce {
         int row = 0;
         int row2=0;
         for (int i = 0; i < list.size(); i++) {
-//        sybidaUserMapper.selectByPrimaryKey(list.get(i));
         SybidaStudent sybidaStudent=new SybidaStudent();
         sybidaStudent.setStudentId(list.get(i));
         sybidaStudent.setStudentNull2("0");
@@ -122,7 +120,6 @@ public class StudentSerivceImp implements StudentSerivce {
     public ResponseResult selectEvaluateByVitaeId(int vitaeId) {
         ResponseResult responseResult = new ResponseResult();
         List<StudentVitae> studentVitaes = sybidaStudentMapper.selectEvaluateByVitaeId(vitaeId);
-        System.out.println(studentVitaes);
         if (studentVitaes.size()==0) {
             responseResult.setCode(0);
             responseResult.setMessage("失败");

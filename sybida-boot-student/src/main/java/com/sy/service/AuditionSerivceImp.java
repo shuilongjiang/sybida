@@ -72,7 +72,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
         responseResult.setData(auditionForTeacher);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");
-        System.out.println(responseResult+"====================");
         return responseResult;
 
     }
@@ -92,7 +91,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
         } else {
             responseResult.setCode(0);
         }
-        System.out.println(list+"==============////////////========================");
         return responseResult;
     }
 
@@ -112,7 +110,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
     public ResponseResult selectClassByClassId(String classId) {
         ResponseResult responseResult = new ResponseResult();
         SybidaClass sybidaClass = sybidaClassMapper.selectByPrimaryKey(Integer.valueOf(classId));
-//        System.out.println(sybidaClass.getClassNum()+"=========++++++++++++++++++++");
         responseResult.setData(sybidaClass);
         responseResult.setCode(1);
         responseResult.setMessage("查询成功！");
@@ -167,9 +164,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
         int row = 0;
         for (int i = 0; i < list.size(); i++) {
             SybidaAudition sybidaAudition = new SybidaAudition();
-
-//            System.out.println(list.get(i)+"********....");
-
             sybidaAudition.setAuditionId(list.get(i));
             sybidaAudition.setAuditionNull1("0");
             sybidaAudition.setAuditionAlterTime(new Date());
@@ -186,19 +180,13 @@ public class AuditionSerivceImp implements AuditionSerivce {
     }
 
 
-
-
-
     @Transactional
     @Override
     public ResponseResult selectpageStudentAudition(int pageSize, int pageNum, int userid) {
         ResponseResult responseResult = new ResponseResult();
-
         List<AuditionForTeacher> list;
         PageHelper.startPage(pageNum, pageSize);
-
         list = sybidaAuditionMapper.selectAuditionByauditionStudentIdForTeacher(userid);
-
         PageInfo<AuditionForTeacher> pageInfo = new PageInfo<>(list);
         responseResult.setData(pageInfo);
         responseResult.setCode(1);
@@ -214,7 +202,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
     public ResponseResult updateSybidaAudition(SybidaAudition sybidaAudition){
         ResponseResult responseResult = new ResponseResult();
         int affectedRows = sybidaAuditionMapper.updateByPrimaryKeySelective(sybidaAudition);
-
         if (affectedRows > 0) {
             responseResult.setCode(1);
             responseResult.setMessage("成功！");
@@ -241,7 +228,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
         if ("-1".equals(classNum)) {
             SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(userid);
             Byte userAuthority = sybidaUser.getUserAuthority();
-
             //根据权限去查询名下存在的班级
             if (1 == userAuthority) {
                 SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
@@ -251,7 +237,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
                 SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
                 sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(Integer.valueOf(userid));
                 classList1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
-
             }  else if (9 == userAuthority){
                 classList1 = sybidaClassMapper.selectByExample(null);
             }
@@ -267,8 +252,6 @@ public class AuditionSerivceImp implements AuditionSerivce {
             SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
             sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(classList1.get(0).getClassId());
             studentList1 = sybidaStudentMapper.selectByExample(sybidaStudentExample);
-
-
             for (int i = 0; i < studentList1.size(); i++) {
                 oneStudentAuditionList = sybidaAuditionMapper.selectAuditionByStudentIdForTeacher(studentList1.get(i).getStudentId());
                 for (int j = 0; j < oneStudentAuditionList.size(); j++) {
