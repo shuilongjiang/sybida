@@ -44,11 +44,6 @@ public class OfferServlet {
             String photoUrl = Qnyutil.uploadFile(file);
             sybidaoffer.setOfferPicture(photoUrl);
         }
-
-        sybidaoffer.setOfferAlterTime(new Date());;
-        sybidaoffer.setOfferIsexist((byte) 1);
-        sybidaoffer.setOfferPersonisjob((byte) 0);
-        sybidaoffer.setOfferIsjob((byte) 0);
         ResponseResult responseResult = offerSerivce.addSybidaOffer(sybidaoffer);
         return responseResult;
     }
@@ -120,6 +115,17 @@ public class OfferServlet {
         ResponseResult responseResult = offerSerivce.updateSybidaOfferCancelJob(Integer.valueOf(offerId));
         return responseResult;
     }
+
+
+    @RequestMapping("selectpage")
+    //按用户id和班级id查询学生的offer登记，并进行分页
+    public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
+        redisUtil.expire(userid,60);
+        String userId = String.valueOf(redisUtil.getObj(userid));
+        return  offerSerivce.selectPage(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
+
+    }
+
 
 
 

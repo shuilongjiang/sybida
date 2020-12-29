@@ -30,6 +30,8 @@ public class OfferSerivceImp implements OfferSerivce {
     SybidaUserMapper sybidaUserMapper;
     @Autowired
     SybidaStudyMapper sybidaStudyMapper;
+    @Autowired
+    SybidaClassMapper sybidaClassMapper;
 
     @Transactional
     @Override
@@ -53,6 +55,18 @@ public class OfferSerivceImp implements OfferSerivce {
     @Override
     public ResponseResult addSybidaOffer(SybidaOffer sybidaOffer) {
         ResponseResult responseResult = new ResponseResult();
+        SybidaOfferExample sybidaOfferExample = new SybidaOfferExample();
+        sybidaOfferExample.createCriteria().andOfferStudentIdEqualTo(sybidaOffer.getOfferStudentId()).andOfferIsjobEqualTo((byte) 1);
+        List<SybidaOffer> sybidaOffers = sybidaOfferMapper.selectByExample(sybidaOfferExample);
+        if (sybidaOffers.size()>0){
+            sybidaOffer.setOfferPersonisjob((byte) 1);
+        }else {
+            sybidaOffer.setOfferPersonisjob((byte) 0);
+        }
+        sybidaOffer.setOfferIsjob((byte) 0);
+        sybidaOffer.setOfferAlterTime(new Date());;
+        sybidaOffer.setOfferIsexist((byte) 1);
+
         int affectedRows = sybidaOfferMapper.insertSelective(sybidaOffer);
         if (affectedRows > 0) {
             responseResult.setCode(1);
@@ -62,7 +76,6 @@ public class OfferSerivceImp implements OfferSerivce {
             responseResult.setMessage("失败!");
         }
         return responseResult;
-
     }
 
     @Transactional
@@ -223,5 +236,109 @@ public class OfferSerivceImp implements OfferSerivce {
         }
         return responseResult;
     }
+
+
+    @Transactional
+    @Override
+    public ResponseResult selectPage(int pageSize, int pageNum, String classNum, int userid) {
+
+        ResponseResult responseResult = new ResponseResult();
+        List<SybidaStudent> studentList1 = null;
+        List<SybidaStudent> studentList2 = new ArrayList<>();
+        List<SybidaClass> classlist1 = null;
+        List<OfferForTeacher> offerList1 = null;
+        List<OfferForTeacher> offerList2 = new ArrayList<>();
+
+        PageHelper.startPage(pageNum, pageSize);
+
+
+        if ("-1".equals(classNum)) {
+            SybidaUser sybidaUser = sybidaUserMapper.selectByPrimaryKey(userid);
+            Byte userAuthority = sybidaUser.getUserAuthority();
+            if (1 == userAuthority){
+                SybidaClassExample sybidaClassExample1 = new SybidaClassExample();
+                sybidaClassExample1.createCriteria().andClassTeachIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample1);
+
+            } else if (0 == userAuthority){
+                SybidaClassExample sybidaClassExample2 = new SybidaClassExample();
+                sybidaClassExample2.createCriteria().andClassManagerIdEqualTo(userid);
+                classlist1 = sybidaClassMapper.selectByExample(sybidaClassExample2);
+
+            }else if (9 == userAuthority){
+                classlist1 = sybidaClassMapper.selectByExample(null);
+            }
+
+
+            if (null != classlist1 && classlist1.size() > 0) {
+                responseResult.setCode(1);
+            } else {
+                responseResult.setCode(0);
+                return responseResult;
+            }
+
+
+            for (int i = 0; i < classlist1.size(); i++) {
+                SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+                sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(classlist1.get(i).getClassId());
+                studentList1 = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+                for (int j = 0; j < studentList1.size(); j++) {
+                    studentList2.add(studentList1.get(j));
+                }
+            }
+
+
+            for (int i = 0; i < studentList2.size(); i++) {
+                offerList1 = sybidaOfferMapper.selectOfferByOfferStudentIdForTeacher(studentList2.get(i).getStudentId());
+                for (int j = 0; j < offerList1.size(); j++) {
+                    offerList2.add(offerList1.get(j));
+                }
+            }
+
+
+
+        }else{
+            SybidaStudentExample sybidaStudentExample = new SybidaStudentExample();
+            sybidaStudentExample.createCriteria().andStudentClassIdEqualTo(Integer.valueOf(classNum));
+            studentList1 = sybidaStudentMapper.selectByExample(sybidaStudentExample);
+            for (int j = 0; j < studentList1.size(); j++) {
+                studentList2.add(studentList1.get(j));
+            }
+
+            for (int i = 0; i < studentList2.size(); i++) {
+                offerList1 = sybidaOfferMapper.selectOfferByOfferStudentIdForTeacher(studentList2.get(i).getStudentId());
+                for (int j = 0; j < offerList1.size(); j++) {
+                    offerList2.add(offerList1.get(j));
+                }
+            }
+
+
+        }
+
+
+        //手动分页
+        //创建Page类
+        Page page = new Page(pageNum, pageSize);
+//为Page类中的total属性赋值
+        int total = offerList2.size();
+        page.setTotal(total);
+//计算当前需要显示的数据下标起始值
+        int startIndex = (pageNum - 1) * pageSize;
+        int endIndex = Math.min(startIndex + pageSize,total);
+//从链表中截取需要显示的子链表，并加入到Page
+        page.addAll(offerList2.subList(startIndex,endIndex));
+//以Page创建PageInfo
+        PageInfo pageInfo = new PageInfo<>(page);
+//将数据传回前端
+        responseResult.setData(pageInfo);
+        responseResult.setCode(1);
+        responseResult.setMessage("查询成功！");
+        return responseResult;
+
+    }
+
+
+
+
 
 }
