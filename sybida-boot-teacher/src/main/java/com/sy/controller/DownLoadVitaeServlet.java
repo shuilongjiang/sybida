@@ -38,7 +38,6 @@ public class DownLoadVitaeServlet {
     }
     @RequestMapping("selectevaforvitae")
     public ResponseResult selectEvaForVitae(String vitaeId){
-        System.out.println(vitaeId+"+++++++");
         return downLoadVitaeService.selectEvaForVitae(vitaeId);
     }
 }
