@@ -17,7 +17,6 @@ public class WebAppConfigurer implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
     registry.addInterceptor(loginInterceptor).addPathPatterns("/**").excludePathPatterns(urlPass());
     }
-
     public List<String> urlPass(){
         List<String> list = new ArrayList<>();
         list.add("/login/**");
