@@ -33,7 +33,7 @@ public interface SybidaVitaeMapper {
 
     int updateByPrimaryKey(SybidaVitae record);
 
-    List<VitaeLevelForTeacher> selectAllVitaeForTeacher();
+    List<VitaeLevelForTeacher> selectAllVitaeForTeacher(Integer classId);
 
 
 }

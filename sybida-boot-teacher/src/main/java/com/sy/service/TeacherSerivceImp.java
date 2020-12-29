@@ -140,12 +140,12 @@ public class TeacherSerivceImp implements TeacherSerivce {
 
     @Transactional
     @Override
-    public ResponseResult selectAllVitae(int pageSize, int pageNum) {
+    public ResponseResult selectAllVitae(int pageSize, int pageNum,String classId) {
 
         ResponseResult responseResult = new ResponseResult();
         PageHelper.startPage(pageNum, pageSize);
 
-        List<VitaeLevelForTeacher> list = sybidaVitaeMapper.selectAllVitaeForTeacher();
+        List<VitaeLevelForTeacher> list = sybidaVitaeMapper.selectAllVitaeForTeacher(Integer.valueOf(classId));
 //        List<SybidaVitae> list = sybidaVitaeMapper.selectByExample(null);
         PageInfo<VitaeLevelForTeacher> PageInfo = new PageInfo<>(list);
         responseResult.setCode(1);

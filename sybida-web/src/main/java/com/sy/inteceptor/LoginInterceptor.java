@@ -33,7 +33,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (null != token) {
            Object userId = redisOpsUtil.get(token);
            if(null!=userId){
-               redisOpsUtil.expire(token,60);
+               redisOpsUtil.expire(token,10);
                return true;
            }else{
                response.getOutputStream().print("-1000");

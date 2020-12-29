@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class VitaeLevelForTeacher {
     private Integer vitaeId;
+    private String   studentPhone;
 
     private Integer vitaeStudentId;
 
@@ -31,6 +32,14 @@ public class VitaeLevelForTeacher {
 
     private String studyAspect;
     private String StudentNull1;
+
+    public String getStudentPhone() {
+        return studentPhone;
+    }
+
+    public void setStudentPhone(String studentPhone) {
+        this.studentPhone = studentPhone;
+    }
 
     public String getStudentNull1() {
         return StudentNull1;
@@ -156,6 +165,7 @@ public class VitaeLevelForTeacher {
     public String toString() {
         return "VitaeLevelForTeacher{" +
                 "vitaeId=" + vitaeId +
+                ", studentPhone='" + studentPhone + '\'' +
                 ", vitaeStudentId=" + vitaeStudentId +
                 ", vitaeStudyId=" + vitaeStudyId +
                 ", vitaeLevel='" + vitaeLevel + '\'' +
@@ -169,6 +179,7 @@ public class VitaeLevelForTeacher {
                 ", vitaeNull2='" + vitaeNull2 + '\'' +
                 ", studentName='" + studentName + '\'' +
                 ", studyAspect='" + studyAspect + '\'' +
+                ", StudentNull1='" + StudentNull1 + '\'' +
                 '}';
     }
 }

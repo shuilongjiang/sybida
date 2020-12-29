@@ -69,10 +69,10 @@ public class TeacherServlet {
     }
 
     @RequestMapping("selectallvitae")
-    public ResponseResult selectAllVitae(String pageSize, String pageNum) {
+    public ResponseResult selectAllVitae(String pageSize, String pageNum,String classId) {
         int currPage = (null == pageNum) ? 1 : Integer.parseInt(pageNum);
         int pageSizes = (null == pageSize) ? 6 : Integer.parseInt(pageSize);
-        ResponseResult responseResult = teacherSerivce.selectAllVitae(pageSizes, currPage);
+        ResponseResult responseResult = teacherSerivce.selectAllVitae(pageSizes, currPage,classId);
         return responseResult;
     }
 

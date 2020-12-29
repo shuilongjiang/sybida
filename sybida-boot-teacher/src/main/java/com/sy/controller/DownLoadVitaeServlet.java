@@ -23,12 +23,11 @@ public class DownLoadVitaeServlet {
     @Autowired
     DownLoadVitaeService downLoadVitaeService;
     @RequestMapping("downloadvitaezip")
-
     public String  downloadVitaeZip(@RequestBody List<String> list){
         Map<String ,String> map=new HashMap<>();
         for (int i = 0; i < list.size(); i++) {
             String allanme=list.get(i);
-            String FileName=allanme.substring(allanme.indexOf("=")+1)+"工程师";
+            String FileName=allanme.substring(allanme.indexOf("=")+1);
             String FilePath="http://qldlxgj0k.hn-bkt.clouddn.com/"+allanme.substring(0,allanme.indexOf("="));
             map.put(FilePath,FileName);
         }
