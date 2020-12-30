@@ -22,5 +22,5 @@ public interface SybidaVitaeEvaluateMapper {
 
     int updateByExample(@Param("record") SybidaVitaeEvaluate record, @Param("example") SybidaVitaeEvaluateExample example);
 
-
+    List<SybidaVitaeEvaluate> selectComment(Integer userid);
 }

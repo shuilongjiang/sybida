@@ -39,4 +39,8 @@ public class DownLoadVitaeServlet {
     public ResponseResult selectEvaForVitae(String vitaeId){
         return downLoadVitaeService.selectEvaForVitae(vitaeId);
     }
+    @RequestMapping("selectcomment")
+    public ResponseResult selectComment(String userid){
+        return  downLoadVitaeService.selectComment(userid);
+    }
 }

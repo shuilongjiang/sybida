@@ -7,6 +7,7 @@ import com.sy.vo.ResponseResult;
 import com.sy.zipdownload.ZipDownload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -33,6 +34,19 @@ public class DownLoadVitaeServiceImp implements DownLoadVitaeService{
              responseResult.setCode(0);
              responseResult.setData("");
          }
+        return responseResult;
+    }
+
+    @Transactional
+    @Override
+    public ResponseResult selectComment(String userid) {
+        ResponseResult responseResult=new ResponseResult();
+        List<SybidaVitaeEvaluate> sybidaVitaeEvaluate=sybidaVitaeEvaluateMapper.selectComment(Integer.valueOf(userid));
+        if(null!=sybidaVitaeEvaluate&&sybidaVitaeEvaluate.size()>0){
+        responseResult.setMessage(sybidaVitaeEvaluate.get(0).getVitaeEvaluateComment());
+        }else{
+            responseResult.setMessage("");
+        }
         return responseResult;
     }
 }
