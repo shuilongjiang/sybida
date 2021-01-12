@@ -54,7 +54,7 @@ public class RegisterTeacherServiceImp implements RegisterTeacherService{
         sybidaTeach.setTeachName(name);
         sybidaTeach.setTeachNull1("1");
         sybidaTeach.setTeachStudyId(Integer.valueOf(studyId)+1);
-        sybidaTeach.setTeachPhoto("defaultpicture4.jpg");
+        sybidaTeach.setTeachPhoto("defaultpicture.jpg");
         sybidaTeach.setTeachAlterTime(new Date());
         sybidaTeach.setTeachTel(phone);
         int rowTeacher=sybidaTeachMapper.insertSelective(sybidaTeach);
