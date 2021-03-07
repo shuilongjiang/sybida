@@ -22,6 +22,5 @@ public class SybidaApplication {
     public static void main(String[] args) {
         SpringApplication.run(SybidaApplication.class, args);
         logger.trace("启动--------------------------");
-
     }
 }
