@@ -21,6 +21,7 @@ public class DownLoadVitaeServiceImp implements DownLoadVitaeService{
     @Autowired
     SybidaVitaeEvaluateMapper sybidaVitaeEvaluateMapper;
     @Override
+
     public ResponseResult selectEvaForVitae(String vitaeId) {
         ResponseResult responseResult=new ResponseResult();
         SybidaVitaeEvaluateExample example =new SybidaVitaeEvaluateExample();
