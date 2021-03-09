@@ -38,7 +38,7 @@ public class ZipDownload {
                 zip.createNewFile();
             }
             //创建zip文件输出流
-            ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip));
+             ZipOutputStream zos = new ZipOutputStream(new FileOutputStream(zip));
             Integer result=zipFile(map, zos);
             zos.close();
             if(result==1){

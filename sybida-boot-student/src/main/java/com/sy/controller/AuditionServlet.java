@@ -124,7 +124,6 @@ public class AuditionServlet {
     public ResponseResult selectByPageuserid(String pageSize, String pageNum, String classNum,String userid) {
         String userId = String.valueOf(redisUtil.getObj(userid));
         return  auditionSerivce.selectPage2(Integer.valueOf(pageSize), Integer.valueOf(pageNum),classNum,Integer.valueOf(userId));
-
     }
 
 

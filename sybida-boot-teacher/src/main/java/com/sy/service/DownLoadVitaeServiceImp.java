@@ -22,7 +22,6 @@ public class DownLoadVitaeServiceImp implements DownLoadVitaeService{
     SybidaVitaeEvaluateMapper sybidaVitaeEvaluateMapper;
     @Override
     public ResponseResult selectEvaForVitae(String vitaeId) {
-
         ResponseResult responseResult=new ResponseResult();
         SybidaVitaeEvaluateExample example =new SybidaVitaeEvaluateExample();
         example.createCriteria().andVitaeEvaluateIdEqualTo(Integer.valueOf(vitaeId));
@@ -36,7 +35,6 @@ public class DownLoadVitaeServiceImp implements DownLoadVitaeService{
          }
         return responseResult;
     }
-
     @Transactional
     @Override
     public ResponseResult selectComment(String userid) {

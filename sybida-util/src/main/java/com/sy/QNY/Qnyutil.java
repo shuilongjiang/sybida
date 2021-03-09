@@ -19,7 +19,7 @@ public class Qnyutil {
     public  static String ACCESS_KEY = "Un1EOwmWYXv7TkPknS0KV_rB5dWuLpdmttUsYdq_";
     public  static String SECRET_KEY = "XLkBLlpcE9Ej3aWPg11jfcCx2pRSi7sWmw2ewRQV";
     // 要上传的空间
-    public  static String bucketname = "sybida";
+    public  static String bucketname = "sybida01";
     // 密钥配置
     public  static Auth auth = Auth.create(ACCESS_KEY, SECRET_KEY);
     // 构造一个带指定Zone对象的配置类,不同的七云牛存储区域调用不同的zone
