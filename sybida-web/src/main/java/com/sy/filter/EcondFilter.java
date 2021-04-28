@@ -34,7 +34,7 @@ public class EcondFilter implements Filter {
         } else {
             chain.doFilter(request, response);
         }
-
+//对于一些跨域请求，会先发一个OPTIONS请求（预检请求），来看目的站点是否接受，以确保请求对于目的站点服务器是安全的。
 
 
     }

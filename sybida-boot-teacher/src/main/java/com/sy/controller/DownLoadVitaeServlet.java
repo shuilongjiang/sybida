@@ -28,7 +28,7 @@ public class DownLoadVitaeServlet {
         for (int i = 0; i < list.size(); i++) {
             String allanme=list.get(i);
             String FileName=allanme.substring(allanme.indexOf("=")+1);
-            String FilePath="http://qplmfptlp.hn-bkt.clouddn.com/"+allanme.substring(0,allanme.indexOf("="));
+            String FilePath="http://qs3nifwt7.hn-bkt.clouddn.com/"+allanme.substring(0,allanme.indexOf("="));
             map.put(FilePath,FileName);
         }
        String QnyName = downLoadVitaeService.downloadVitaeZip(map);

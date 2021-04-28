@@ -37,9 +37,7 @@ public class RegisterServlet {
      public ResponseResult registerStudent(@RequestParam("file") MultipartFile file, PartStudent partStudent) {
           ResponseResult responseResult=new ResponseResult();
           String rdSpeed = null;
-          if (!file.isEmpty()) {
-               System.out.println("文件上传成功");
-          }
+
           List<RegisterExcel> receive = null;
           Set<String> set = new HashSet<String>();
           try {
@@ -52,7 +50,6 @@ public class RegisterServlet {
                responseResult.setMessage("文件格式不符合要求");
                return responseResult;
           }
-
          for(int i=0;i<receive.size();i++){
               set.add(receive.get(i).getPhone());
          }

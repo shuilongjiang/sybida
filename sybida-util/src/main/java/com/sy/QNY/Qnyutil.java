@@ -27,7 +27,7 @@ public class Qnyutil {
     // ...其他参数参考类注释
     public  static UploadManager uploadManager = new UploadManager(cfg);
     // 测试域名，只有30天有效期
-    private static String QINIU_IMAGE_DOMAIN = "http://qldlxgj0k.hn-bkt.clouddn.com/";
+    private static String QINIU_IMAGE_DOMAIN = "http://qs3nifwt7.hn-bkt.clouddn.com/";
     // 简单上传，使用默认策略，只需要设置上传的空间名就可以了
     public static String getUpToken() {
         return auth.uploadToken(bucketname);
